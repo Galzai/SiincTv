@@ -63,7 +63,7 @@ function UserSigning(props){
     const handleSignup =()=>{
         clearErrors();
         clearInputs();
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
+        firebaseApp.auth().createUserWithEmailAndPassword(email, password)
             .catch(err => {
                 switch(err.code){
                     case "auth/email-already-in-use":
@@ -93,7 +93,15 @@ function UserSigning(props){
                         passwordError={passwordError}
                         handleSignIn={handleSignIn}
                     />}
-                    {(!showLogin()) && <Signup/>}
+                    {(!showLogin()) && <Signup
+                        email={email}
+                        emailError={emailError}
+                        setEmail={setEmail}
+                        password={password}
+                        setPassword={setPassword}
+                        passwordError={passwordError}
+                        handleSignup={handleSignup}
+                    />}
                 </h2>
             </div>
 
