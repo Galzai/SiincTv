@@ -1,6 +1,7 @@
-import React from "react";
-
-function Signup(props) {
+/*
+ * This components will be used for user login
+ */
+function SignIn(props) {
     const {
         email,
         emailError,
@@ -8,14 +9,13 @@ function Signup(props) {
         password,
         setPassword,
         passwordError,
-        handleSignup
+        handleSignIn
     } = props;
 
-
     return (
-        <section className={"signup"}>
+        <section className={"signIn"}>
             <div className="signinContainer">
-                <label>Username</label>
+                <label>Email</label>
                 <input type="text" autoFocus required value={email}
                        onChange={e => setEmail(e.target.value)}
                 />
@@ -26,11 +26,11 @@ function Signup(props) {
                 />
                 <p className="errorMsg">{passwordError}</p>
                 <div className="btnContainer">
-                    <button onClick={handleSignup}>Sign up</button>
+                    <button onClick={handleSignIn}>Sign in</button>
                 </div>
             </div>
         </section>
     );
 }
 
-export default Signup;
+export default SignIn;
