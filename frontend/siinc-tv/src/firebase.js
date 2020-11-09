@@ -1,5 +1,6 @@
 import firebase from "firebase/app"
 import "firebase/auth"
+import 'firebase/analytics';
 
 var firebaseConfig = {
     apiKey: "AIzaSyCCh_3ko1IsjZdtWIibJuiKL9N7sMJ_Lt4",
@@ -12,6 +13,7 @@ var firebaseConfig = {
     measurementId: "G-0FT6NQR4SN"
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig)
 
+const firebaseApp = firebase.initializeApp(firebaseConfig)
+firebase.analytics();
 export default firebaseApp

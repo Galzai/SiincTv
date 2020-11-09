@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import React from 'react'
 import Modal from 'react-modal'
-import UserSigning from './components/UserSigning/user_signing';
+import UserSigning from './components/UserSigning/userSigning';
 import reportWebVitals from './reportWebVitals';
 
 
@@ -20,7 +20,6 @@ function ModalTest(){
     // Example for a hook , we now also have a setter function
     const [showRegistration, setShowRegistration] = React.useState(false);
 
-
     // These three functions handle modal related stuff
     function openRegistration(){
         setShowRegistration(true);
@@ -38,7 +37,7 @@ function ModalTest(){
                 style = {customStyles}
                 contentLabel={"example"}
                 >
-                <UserSigning type={'sign-in'}></UserSigning>
+                <UserSigning type={'signIn'}></UserSigning>
             </Modal>
         </div>
     )
