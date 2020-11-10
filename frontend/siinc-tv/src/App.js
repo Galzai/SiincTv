@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import SigningModal from "./components/userSigning/signingModal";
 import UserProvider from "./userProvider";
 import UserContext from "./userContext";
-import firebaseApp from "./firebase";
 
 function App(){
 
@@ -10,8 +9,10 @@ function App(){
         <UserProvider>
             <UserContext.Consumer>
                 {context =>(
-                    <SigningModal getUser={context.user}
-                    setUser={context.setUser}
+                    <SigningModal
+                        user={context.user}
+                        setUser={context.setUser}
+                        refreshUserData={context.refreshUserData}
                     />
                 )}
             </UserContext.Consumer>

@@ -4,6 +4,8 @@ function Signup(props) {
 
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const {
+        userName,
+        setUserName,
         email,
         emailError,
         setEmail,
@@ -21,6 +23,11 @@ function Signup(props) {
         <section className={"signup"}>
             <div className="signupContainer">
                 <label>Username</label>
+                <input type="text" autoFocus required value={userName}
+                       onChange={e => setUserName(e.target.value)}
+                />
+                <p></p>
+                <label>Email</label>
                 <input type="text" autoFocus required value={email}
                        onChange={e => setEmail(e.target.value)}
                 />
