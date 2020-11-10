@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Modal from 'react-modal'
 import UserSigning from './userSigning';
 import UserContext from "../../userContext";
-import firebaseApp from "../../firebase";
+import userActions from "../../user/userActions"
 
 const customStyles = {
     content : {
@@ -17,8 +17,10 @@ const customStyles = {
 
 function SigningModal(props){
     // Example for a hook , we now also have a setter function
+    // const context = React.useContext(UserContext)
+    const user = props.user;
     const setUser = props.setUser;
-
+    const refreshUserData = props.refreshUserData;
     const [showRegistration, setShowRegistration] = useState(false);
     // These two functions handle showing/hiding modal
     function openRegistration(){
@@ -30,18 +32,18 @@ function SigningModal(props){
 
     // occurs after every render
     useEffect(() =>{
-        const listener = firebaseApp.auth().onAuthStateChanged((user)=>{
-            setUser(user);
-        })
-        return ()=>listener();
-
+        const userfetcher = async()=>{
+            const userDataResponse = await userActions.getUser();
+            setUser(userDataResponse);
+        }
+        userfetcher();
     },[]);
 
     return(
         <UserContext.Consumer>
             {context => (
                 <div>
-                    {context.user && <><h1>{context.user.metadata.lastSignInTime}</h1>
+                    {context.user && <><h1>{context.user.username}</h1>
                         <h2>{context.user.email}</h2></>
                     }
                     {!context.user && <button onClick={openRegistration}>Signup/login</button>}

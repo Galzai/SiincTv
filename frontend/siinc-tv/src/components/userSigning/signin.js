@@ -3,9 +3,9 @@
  */
 function SignIn(props) {
     const {
-        email,
+        userName,
         emailError,
-        setEmail,
+        setUserName,
         password,
         setPassword,
         passwordError,
@@ -15,9 +15,9 @@ function SignIn(props) {
     return (
         <section className={"signIn"}>
             <div className="signinContainer">
-                <label>Email</label>
-                <input type="text" autoFocus required value={email}
-                       onChange={e => setEmail(e.target.value)}
+                <label>Username</label>
+                <input type="text" autoFocus required value={userName}
+                       onChange={e => setUserName(e.target.value)}
                 />
                 <p className="errorMsg">{emailError}</p>
                 <label>Password</label>

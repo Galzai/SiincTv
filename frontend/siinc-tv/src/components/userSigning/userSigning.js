@@ -4,14 +4,14 @@
 import React, {useState} from 'react';
 import SignIn from './signin'
 import Signup from './signup'
-import firebaseApp from "../../firebase";
+import userActions from "../../user/userActions"
 
 function UserSigning(props) {
 
     // Our hooks
     const [type, setType] = useState(props.type);
-    const user = props.user;
     const setUser = props.setUser;
+    const [userName, setUserName] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
@@ -43,39 +43,28 @@ function UserSigning(props) {
     // This function handles sign in attempts
     const handleSignIn = () => {
         clearErrors();
-        firebaseApp.auth().signInWithEmailAndPassword(email, password)
-            .catch(err => {
-                switch (err.code) {
-                    case "auth/invalid-email":
-                    case "auth/user-disabled":
-                    case "auth/user-not-found" :
-                        setEmailError(err.message)
-                        break;
-                    case "auth/wrong-password":
-                        setPasswordError(err.message)
-                        break
-                }
-            });
-        setUser(firebaseApp.auth().currentUser);
+
+        const userFetcher = async()=>{
+            const response = await  userActions.signinWithUsernameAndPassword(userName, password);
+            const userDataResponse = await userActions.getUser();
+            setUser(userDataResponse);
+        }
+        userFetcher();
+
     }
 
     // This function handles sign up attempts
     const handleSignup = () => {
         clearErrors();
         clearInputs();
-        firebaseApp.auth().createUserWithEmailAndPassword(email, password)
-            .catch(err => {
-                switch (err.code) {
-                    case "auth/email-already-in-use":
-                    case "auth/invalid-email":
-                        setEmailError(err.message)
-                        break;
-                    case "auth/weak-password":
-                        setPasswordError(err.message)
-                        break
-                }
-            });
-        setUser(firebaseApp.auth().currentUser);
+        const userFetcher = async()=>{
+            const createResponse = await userActions.createNewUser(userName, email, password);
+            const loginResponse = await  userActions.signinWithUsernameAndPassword(userName, password);
+            const userDataResponse = await userActions.getUser();
+            setUser(userDataResponse);
+        }
+        userFetcher();
+
     }
 
     return (
@@ -86,8 +75,8 @@ function UserSigning(props) {
             </h1>
             <h2>
                 {showLogin() && <SignIn
-                    email={email}
-                    emailError={emailError}
+                    userName={userName}
+                    setUserName={setUserName}
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
@@ -95,6 +84,8 @@ function UserSigning(props) {
                     handleSignIn={handleSignIn}
                 />}
                 {(!showLogin()) && <Signup
+                    userName={userName}
+                    setUserName={setUserName}
                     email={email}
                     emailError={emailError}
                     setEmail={setEmail}
