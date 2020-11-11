@@ -4,7 +4,7 @@ const TWITCH_CONFIG = {
 }
 
 const GOOGLE_CONFIG = {
-    clientId:"735353026558-nknb0ii5ovjuurih5rkj910fhivsg875.apps.googleusercontent.com",
+    clientID:"735353026558-nknb0ii5ovjuurih5rkj910fhivsg875.apps.googleusercontent.com",
     clientSecret:"t5RPYT1otUXQA5APhFzwrGsG"
 }
 

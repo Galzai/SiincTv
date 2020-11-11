@@ -1,3 +1,5 @@
+const { default: userActions } = require("../../user/userActions");
+
 /*
  * This components will be used for user login
  */
@@ -11,6 +13,7 @@ function SignIn(props) {
         passwordError,
         handleSignIn
     } = props;
+
 
     return (
         <section className={"signIn"}>
@@ -28,6 +31,9 @@ function SignIn(props) {
                 <div className="btnContainer">
                     <button onClick={handleSignIn}>Sign in</button>
                 </div>
+            </div>
+            <div className="authContainer">
+                <button onClick={userActions.authenicateTwitch}>Sign in with twitch</button>
             </div>
         </section>
     );

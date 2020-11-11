@@ -62,6 +62,10 @@ const userActions ={
             url:'http://localhost:4000/check_username'
         })
         return result.data;
+    },
+
+    authenicateTwitch:  function(){
+        window.location.assign('http://localhost:4000/auth/twitch');
     }
        
 };
