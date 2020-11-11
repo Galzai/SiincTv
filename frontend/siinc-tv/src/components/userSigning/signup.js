@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import userActions from "../../user/userActions"
 
 function Signup(props) {
@@ -22,6 +22,11 @@ function Signup(props) {
 
     const [availableUserName,setAvailableUserName]=useState(false);
     const [firstRender, setFirstRender]=useState(true);
+
+    // Used for getting errors after clicking signup
+    let prevEmail = useRef('');
+    let prevEmailState = useRef(false);
+
     // Validates the password and updates it's errors
     const isPasswordConfirmed=()=>{
         if(!(passwordConfirmation === password)){
@@ -47,14 +52,19 @@ function Signup(props) {
 
     // Validates the email and updates it's errors
     const checkFormEmail=()=>{
-        // We check the email is valid by regular expression
-        let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(!regEmail.test(email)){
-            setEmailError('Invalid Email');
-            return false;
-        }
-        setEmailError('');
-        return true;
+        if(email !== prevEmail.current){
+            prevEmail.current = email;
+            // We check the email is valid by regular expression
+            let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if(!regEmail.test(email)){
+                setEmailError('Invalid Email');
+                return false;
+            }
+            setEmailError('');
+            return true;
+            }
+        return prevEmailState.current;
+
     }
 
     // Validates the user name and updates it's errors
@@ -66,8 +76,6 @@ function Signup(props) {
             if(userName.length < 3 ){
                 const curError = "Username must be at least 3 characters long.";
                 // Make sure to not update states to identical values
-                console.log(curError);
-                console.log(userNameError);
                 if(curError !== userNameError){
                     setUserNameError(curError);
                 }
@@ -103,12 +111,12 @@ function Signup(props) {
     const formValid=()=>{
         // Changing states of another object while rendering causes an error, so we wait on the first render
         if(!firstRender){
-        console.log("for is valid");
-        checkUsername();
-        let emailValid = checkFormEmail();
-        let passwordConfirmed = isPasswordConfirmed();
-        // Note this is bitwise on purpose, we want all the functions to be called
-        return (availableUserName && emailValid && passwordConfirmed);
+            checkUsername();
+            let emailValid = checkFormEmail();
+            prevEmailState.current = emailValid;
+            let passwordConfirmed = isPasswordConfirmed();
+            // Note this is bitwise on purpose, we want all the functions to be called
+            return (availableUserName && emailValid && passwordConfirmed);
         }
         setFirstRender(false);
         return false;

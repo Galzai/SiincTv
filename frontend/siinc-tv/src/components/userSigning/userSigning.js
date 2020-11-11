@@ -87,7 +87,7 @@ function UserSigning(props) {
             const createResponse = await userActions.createNewUser(userName, email, password);
             console.log(createResponse);
             if(createResponse === "auth/email_exists"){
-
+                console.log("email exists");
                 setEmailError("This email is already linked to an account");
                 return;
             }

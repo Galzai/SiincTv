@@ -6,7 +6,6 @@ import axios from 'axios';
 const userActions ={
 
     createNewUser: async function(regUsername, regEmail, regPassword){
-        console.log('request new user')
         const result = await axios({
             method:'POST',
             data:{
@@ -21,7 +20,6 @@ const userActions ={
     },
 
     signinWithUsernameAndPassword: async function(regUsername, regPassword){
-        console.log('request')
         const result = await axios({
             method:'POST',
             data:{
@@ -35,7 +33,6 @@ const userActions ={
     },
 
     signOut: async function(){
-        console.log("calling sign out");
         const result = await axios({
             method:'POST',
             data:{},
@@ -46,7 +43,6 @@ const userActions ={
     },
     
     getUser: async function(){
-        console.log("calling get user");
         const result = await axios({
             method:'GET',
             data:{},
@@ -57,7 +53,6 @@ const userActions ={
     },
 
     checkUsernameExists: async function(regUsername){
-        console.log('request')
         const result = await axios({
             method:'POST',
             data:{
