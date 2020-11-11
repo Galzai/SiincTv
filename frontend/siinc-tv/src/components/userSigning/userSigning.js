@@ -17,11 +17,11 @@ function UserSigning(props) {
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [hasAccount, SetHasAccount] = useState(false);
+    const curType = props.type;
 
     // Sets type of form to display
     const showLogin = () => {
-        return type === 'signIn';
+        return (type === 'signIn');
     }
 
     const clearEmail = () => {
@@ -35,10 +35,22 @@ function UserSigning(props) {
     const clearInputs = () => {
         setPassword('');
         setEmail('');
+        setUserName('');
     }
     const clearErrors = () => {
         setEmailError('');
         setPasswordError('');
+    }
+
+    const setSignIn=()=>{
+        clearErrors();
+        clearInputs();
+        setType('signIn');
+    }
+    const setSignup=()=>{
+        clearErrors();
+        clearInputs();
+        setType('signup');
     }
 
     // This function handles sign in attempts
@@ -69,8 +81,8 @@ function UserSigning(props) {
     return (
         <div>
             <h1>
-                <button name='signInBtn' onClick={() => setType('signIn')}>Login</button>
-                <button name='signupBtn' onClick={() => setType('signup')}>Sign-up</button>
+                <button name='signInBtn' onClick={setSignIn}>Login</button>
+                <button name='signupBtn' onClick={setSignup}>Sign-up</button>
             </h1>
             <h2>
                 {showLogin() && <SignIn
