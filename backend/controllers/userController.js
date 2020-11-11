@@ -1,6 +1,7 @@
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
+const e = require("express");
 
 exports.user_login = function(req, res, next){
     passport.authenticate("local", (err, user, info) => {
@@ -48,3 +49,16 @@ exports.user_login = function(req, res, next){
     console.log(req.user);
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
   };
+
+  // Check if a username exists in the DB
+  exports.check_username_exists = function(req, res){
+    User.findOne({username: req.body.username},
+        async function(err, doc){
+            if (err){
+                console.log("error occured");
+            }
+            // user exists
+            if (doc) res.send(true);
+            else res.send(false);
+        });
+  }

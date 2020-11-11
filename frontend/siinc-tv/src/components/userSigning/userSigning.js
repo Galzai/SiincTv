@@ -12,6 +12,7 @@ function UserSigning(props) {
     const [type, setType] = useState(props.type);
     const setUser = props.setUser;
     const [userName, setUserName] = useState('');
+    const [userNameError, setUserNameError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
@@ -86,6 +87,8 @@ function UserSigning(props) {
                 {(!showLogin()) && <Signup
                     userName={userName}
                     setUserName={setUserName}
+                    userNameError={userNameError}
+                    setUserNameError={setUserNameError}
                     email={email}
                     emailError={emailError}
                     setEmailError={setEmailError}

@@ -44,6 +44,19 @@ const userActions ={
             url:'http://localhost:4000/user'
         });
         return result.data;
+    },
+
+    checkUsernameExists: async function(regUsername){
+        console.log('request')
+        const result = await axios({
+            method:'POST',
+            data:{
+                username: regUsername,
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/check_username'
+        })
+        return result.data;
     }
        
 };
