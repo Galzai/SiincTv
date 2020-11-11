@@ -39,8 +39,21 @@ exports.user_login = function(req, res, next){
      }, async function(err, doc){
       if (err){
           console.log("error occured");
+          throw err;
       }
-      if (doc) res.send("User Already Exists");
+      if (doc){
+        if(doc.email === req.body.email){
+            console.log("here");
+            res.send("auth/email_exists");
+        }
+
+        else
+        {
+            console.log("here2");
+            res.send("auth/username_exists");
+        }
+      }
+
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10); // encrypt the password
   

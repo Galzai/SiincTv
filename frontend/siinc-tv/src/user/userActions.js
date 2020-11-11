@@ -17,7 +17,7 @@ const userActions ={
             withCredentials:true,
             url:'http://localhost:4000/signup'
         })
-        return result;
+        return result.data;
     },
 
     signinWithUsernameAndPassword: async function(regUsername, regPassword){

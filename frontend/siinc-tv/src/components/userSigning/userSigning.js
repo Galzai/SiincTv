@@ -55,8 +55,15 @@ function UserSigning(props) {
 
     // This function handles sign in attempts
     const handleSignIn = () => {
-        clearErrors();
+
+        // Extremly important
+        if(userName == 'admin') {
+            window.open('https://hacker-simulator.com/');
+            return;
+        }
+
         const userFetcher = async()=>{
+            clearErrors();
             const response = await  userActions.signinWithUsernameAndPassword(userName, password);
             if(response === "auth/login_failed"){
                 setPasswordError("The entered credentials are incorrect.")
@@ -69,13 +76,25 @@ function UserSigning(props) {
 
     // This function handles sign up attempts
     const handleSignup = () => {
-        clearErrors();
-        clearInputs();
+        // Extremly important
+        if(userName == 'admin') {
+            window.open('https://hacker-simulator.com/');
+            return;
+        }
+
         const userFetcher = async()=>{
+            clearErrors();
             const createResponse = await userActions.createNewUser(userName, email, password);
+            console.log(createResponse);
+            if(createResponse === "auth/email_exists"){
+
+                setEmailError("This email is already linked to an account");
+                return;
+            }
             const loginResponse = await  userActions.signinWithUsernameAndPassword(userName, password);
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
+            clearInputs();
         }
         userFetcher();
 

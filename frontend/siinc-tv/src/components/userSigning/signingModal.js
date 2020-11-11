@@ -22,8 +22,10 @@ function SigningModal(props){
     const setUser = props.setUser;
     const refreshUserData = props.refreshUserData;
     const [showRegistration, setShowRegistration] = useState(false);
-    // These two functions handle showing/hiding modal
 
+    // We set the app element to root
+    Modal.setAppElement('#root');
+    // These two functions handle showing/hiding modal
     function openRegistration(){
         setShowRegistration(true);
     }
@@ -41,7 +43,7 @@ function SigningModal(props){
         const userfetcher = async()=>{
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
-        }
+        };
         userfetcher();
     },[]);
 
