@@ -18,7 +18,12 @@
     "express-session": "^1.17.1",
     "mongoose": "^5.10.13",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-facebook": "^3.0.0",
+    "passport-google": "^0.3.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-twitch": "^1.0.3",
+    "passport-twitch.js": "^0.0.9"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
