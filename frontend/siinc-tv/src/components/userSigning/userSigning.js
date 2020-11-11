@@ -12,15 +12,16 @@ function UserSigning(props) {
     const [type, setType] = useState(props.type);
     const setUser = props.setUser;
     const [userName, setUserName] = useState('');
+    const [userNameError, setUserNameError] = useState('');
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    const [hasAccount, SetHasAccount] = useState(false);
+    const curType = props.type;
 
     // Sets type of form to display
     const showLogin = () => {
-        return type === 'signIn';
+        return (type === 'signIn');
     }
 
     const clearEmail = () => {
@@ -34,34 +35,66 @@ function UserSigning(props) {
     const clearInputs = () => {
         setPassword('');
         setEmail('');
+        setUserName('');
     }
     const clearErrors = () => {
         setEmailError('');
         setPasswordError('');
     }
 
+    const setSignIn=()=>{
+        clearErrors();
+        clearInputs();
+        setType('signIn');
+    }
+    const setSignup=()=>{
+        clearErrors();
+        clearInputs();
+        setType('signup');
+    }
+
     // This function handles sign in attempts
     const handleSignIn = () => {
-        clearErrors();
+
+        // Extremly important
+        if(userName == 'admin') {
+            window.open('https://hacker-simulator.com/');
+            return;
+        }
 
         const userFetcher = async()=>{
+            clearErrors();
             const response = await  userActions.signinWithUsernameAndPassword(userName, password);
+            if(response === "auth/login_failed"){
+                setPasswordError("The entered credentials are incorrect.")
+            }
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
         }
         userFetcher();
-
     }
 
     // This function handles sign up attempts
     const handleSignup = () => {
-        clearErrors();
-        clearInputs();
+        // Extremly important
+        if(userName == 'admin') {
+            window.open('https://hacker-simulator.com/');
+            return;
+        }
+
         const userFetcher = async()=>{
+            clearErrors();
             const createResponse = await userActions.createNewUser(userName, email, password);
+            console.log(createResponse);
+            if(createResponse === "auth/email_exists"){
+                console.log("email exists");
+                setEmailError("This email is already linked to an account");
+                return;
+            }
             const loginResponse = await  userActions.signinWithUsernameAndPassword(userName, password);
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
+            clearInputs();
         }
         userFetcher();
 
@@ -70,8 +103,8 @@ function UserSigning(props) {
     return (
         <div>
             <h1>
-                <button name='signInBtn' onClick={() => setType('signIn')}>Login</button>
-                <button name='signupBtn' onClick={() => setType('signup')}>Sign-up</button>
+                <button name='signInBtn' onClick={setSignIn}>Login</button>
+                <button name='signupBtn' onClick={setSignup}>Sign-up</button>
             </h1>
             <h2>
                 {showLogin() && <SignIn
@@ -86,12 +119,16 @@ function UserSigning(props) {
                 {(!showLogin()) && <Signup
                     userName={userName}
                     setUserName={setUserName}
+                    userNameError={userNameError}
+                    setUserNameError={setUserNameError}
                     email={email}
                     emailError={emailError}
+                    setEmailError={setEmailError}
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
                     passwordError={passwordError}
+                    setPasswordError={setPasswordError}
                     handleSignup={handleSignup}
                 />}
             </h2>

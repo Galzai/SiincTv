@@ -6,7 +6,6 @@ import axios from 'axios';
 const userActions ={
 
     createNewUser: async function(regUsername, regEmail, regPassword){
-        console.log('request new user')
         const result = await axios({
             method:'POST',
             data:{
@@ -17,11 +16,10 @@ const userActions ={
             withCredentials:true,
             url:'http://localhost:4000/signup'
         })
-        return result;
+        return result.data;
     },
 
     signinWithUsernameAndPassword: async function(regUsername, regPassword){
-        console.log('request')
         const result = await axios({
             method:'POST',
             data:{
@@ -31,18 +29,38 @@ const userActions ={
             withCredentials:true,
             url:'http://localhost:4000/signin'
         })
-        return result;
+        return result.data;
+    },
+
+    signOut: async function(){
+        const result = await axios({
+            method:'POST',
+            data:{},
+            withCredentials:true,
+            url:'http://localhost:4000/signout'
+        });
+        return result.data;
     },
     
     getUser: async function(){
-        console.log("calling get user");
         const result = await axios({
             method:'GET',
-            data:{
-            },
+            data:{},
             withCredentials:true,
             url:'http://localhost:4000/user'
         });
+        return result.data;
+    },
+
+    checkUsernameExists: async function(regUsername){
+        const result = await axios({
+            method:'POST',
+            data:{
+                username: regUsername,
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/check_username'
+        })
         return result.data;
     }
        
