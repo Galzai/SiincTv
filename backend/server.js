@@ -7,7 +7,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const router = require("./routes/routes");
-//----------------------------------------- END OF IMPORTS---------------------------------------------------
+
 mongoose.connect(
   "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&w=majority",
   {
@@ -24,7 +24,7 @@ mongoose.connection.on('error', function(err) {
     console.error('MongoDB error: %s', err);
 });
 
-// Middleware
+//--------------------------Middleware---------------------------------------------------------  TODO:: REFACTOR
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -45,10 +45,9 @@ app.use(
 app.use(cookieParser("siinctvsecretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passport/passportConfig")(passport);
+require("./passportConfigs/passportSetup")(passport);
 
-//----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
-
+//-------------------------------------------------------------------------------------------
 app.use('/',router);
 
 //Start Server

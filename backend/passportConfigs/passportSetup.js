@@ -1,11 +1,16 @@
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
-const localStrategy = require("passport-local").Strategy;
+
+//all our strategies
+const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const TwitchStrategy = require("passport-twitch.js").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 // Used for authenticating users, passport is passed to not create new instance
 module.exports = function (passport) {
   passport.use(
-    new localStrategy((username, password, done) => {
+    new LocalStrategy((username, password, done) => {
       User.findOne({ username: username }, (err, user) => {
         if (err) throw err;
         if (!user) return done(null, false);
