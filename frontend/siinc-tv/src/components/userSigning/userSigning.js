@@ -58,6 +58,9 @@ function UserSigning(props) {
         clearErrors();
         const userFetcher = async()=>{
             const response = await  userActions.signinWithUsernameAndPassword(userName, password);
+            if(response === "auth/login_failed"){
+                setPasswordError("The entered credentials are incorrect.")
+            }
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
         }

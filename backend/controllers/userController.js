@@ -5,13 +5,18 @@ const e = require("express");
 
 exports.user_login = function(req, res, next){
     passport.authenticate("local", (err, user, info) => {
-      if (err) throw err;
-      if (!user) res.send("No User Exists");
+      if (err){
+          console.log(err);
+          throw err;
+      }
+      if (!user){
+        res.send("auth/login_failed");
+      }
       else {
         req.logIn(user, (err) => {
           if (err) throw err;
-          res.send("Successfully Authenticated");
-          console.log(req.user);
+          res.send("auth/login_success");
+          console.log(info);
         });
       }
     })(req, res, next);
