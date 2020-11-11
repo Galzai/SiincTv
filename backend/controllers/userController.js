@@ -42,13 +42,11 @@ exports.user_login = function(req, res, next){
       }
       if (doc){
         if(doc.email === req.body.email){
-            console.log("here");
             res.send("auth/email_exists");
         }
 
         else
         {
-            console.log("here2");
             res.send("auth/username_exists");
         }
       }
@@ -93,11 +91,6 @@ exports.user_login = function(req, res, next){
 
   // Callback for twitch authentication
   exports.twitch_auth_callback = function(req,res, next){
-    passport.authenticate("twitch.js", { failureRedirect: "http://localhost:3000/" })(req, res, next)
-    , function(req, res,next) {
-      // Successful authentication, redirect home.
-      res.redirect("http://localhost:3000/");
-  
-    }
+    passport.authenticate("twitch.js", { failureRedirect: "http://localhost:3000/" ,successRedirect:"http://localhost:3000/" })(req, res, next)
 };
 

@@ -65,7 +65,7 @@ const userActions ={
     },
 
     authenicateTwitch:  function(){
-        window.location.assign('http://localhost:4000/auth/twitch');
+        window.location.assign('http://localhost:4000/auth/twitch/');
     }
        
 };
