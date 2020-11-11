@@ -33,13 +33,23 @@ const userActions ={
         })
         return result;
     },
+
+    signOut: async function(){
+        console.log("calling sign out");
+        const result = await axios({
+            method:'POST',
+            data:{},
+            withCredentials:true,
+            url:'http://localhost:4000/signout'
+        });
+        return result.data;
+    },
     
     getUser: async function(){
         console.log("calling get user");
         const result = await axios({
             method:'GET',
-            data:{
-            },
+            data:{},
             withCredentials:true,
             url:'http://localhost:4000/user'
         });

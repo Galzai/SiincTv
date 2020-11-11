@@ -48,10 +48,9 @@ app.use(passport.session());
 require("./passport/passportConfig")(passport);
 
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
-//TODO: Refactor to to use routes correctly
-// Routes
+
 app.use('/',router);
-//----------------------------------------- END OF ROUTES---------------------------------------------------
+
 //Start Server
 app.listen(4000, () => {
   console.log("Server Has Started");

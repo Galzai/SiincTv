@@ -17,7 +17,12 @@ exports.user_login = function(req, res, next){
     })(req, res, next);
   };
   
-  
+  exports.logout = function(req,res){
+    console.log("user requested sign out");
+    req.logout();
+    res.send(req.user);
+}
+
   // we first try to check if a user with the same username exists, otherwise we allow registration
   exports.user_signup = function(req, res){
 

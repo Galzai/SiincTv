@@ -23,11 +23,17 @@ function SigningModal(props){
     const refreshUserData = props.refreshUserData;
     const [showRegistration, setShowRegistration] = useState(false);
     // These two functions handle showing/hiding modal
+
     function openRegistration(){
         setShowRegistration(true);
     }
     function closeRequest(){
         setShowRegistration(false);
+    }
+
+    function signOut(){
+        userActions.signOut();
+        setUser(null);
     }
 
     // occurs after every render
@@ -47,6 +53,7 @@ function SigningModal(props){
                         <h2>{context.user.email}</h2></>
                     }
                     {!context.user && <button onClick={openRegistration}>Signup/login</button>}
+                    {context.user && <button onClick={signOut}>Signout</button>}
                     {!context.user && <Modal
                         isOpen={showRegistration}
                         onRequestClose={closeRequest}
