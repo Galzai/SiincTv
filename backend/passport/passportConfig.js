@@ -1,4 +1,4 @@
-const User = require("../controllers/user");
+const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const localStrategy = require("passport-local").Strategy;
 
@@ -21,13 +21,17 @@ module.exports = function (passport) {
     })
   );
 
+
   passport.serializeUser((user, cb) => {
     cb(null, user.id);
   });
+
   passport.deserializeUser((id, cb) => {
     User.findOne({ _id: id }, (err, user) => {
+      // We only return relevant data
       const userInformation = {
         username: user.username,
+        email: user.email
       };
       cb(err, userInformation);
     });

@@ -88,10 +88,12 @@ function UserSigning(props) {
                     setUserName={setUserName}
                     email={email}
                     emailError={emailError}
+                    setEmailError={setEmailError}
                     setEmail={setEmail}
                     password={password}
                     setPassword={setPassword}
                     passwordError={passwordError}
+                    setPasswordError={setPasswordError}
                     handleSignup={handleSignup}
                 />}
             </h2>

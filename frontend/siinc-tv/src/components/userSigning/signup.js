@@ -7,16 +7,37 @@ function Signup(props) {
         userName,
         setUserName,
         email,
+        setEmailError,
         emailError,
         setEmail,
         password,
         setPassword,
         passwordError,
+        setPasswordError,
         handleSignup
     } = props;
 
-    const IsPasswordConfirmed=()=>{
-        return passwordConfirmation === password;
+    const isPasswordConfirmed=()=>{
+        if(!(passwordConfirmation === password)){
+            setPasswordError("Passwords dont match");
+            return false;
+        }
+        if(password.length < 6 ){
+            setPasswordError("Password must be at least 6 characters long");
+            return false;
+        }
+        setPasswordError('');
+        return true;
+    }
+
+    const checkFormEmail=()=>{
+        let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(!regEmail.test(email)){
+            setEmailError('Invalid Email');
+            return false;
+        }
+        setEmailError('');
+        return true;
     }
 
     return (
@@ -41,10 +62,10 @@ function Signup(props) {
                 <input type="text" autoFocus required value={passwordConfirmation}
                        onChange={e => setPasswordConfirmation(e.target.value)}
                 />
-                {(!IsPasswordConfirmed()) &&<p className="errorMsg">Passwords dont match.</p>}
+                {(!(checkFormEmail() && isPasswordConfirmed())) &&<p className="errorMsg">{passwordError}</p>}
                 <div className="btnContainer">
                     <div className="btnContainer">
-                        <button disabled={!IsPasswordConfirmed()} onClick={handleSignup}>Sign up</button>
+                        <button disabled={!isPasswordConfirmed()} onClick={handleSignup}>Sign up</button>
                     </div>
                 </div>
             </div>
