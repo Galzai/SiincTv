@@ -44,14 +44,12 @@ function UserSigning(props) {
     // This function handles sign in attempts
     const handleSignIn = () => {
         clearErrors();
-
         const userFetcher = async()=>{
             const response = await  userActions.signinWithUsernameAndPassword(userName, password);
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
         }
         userFetcher();
-
     }
 
     // This function handles sign up attempts
