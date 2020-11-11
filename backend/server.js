@@ -2,13 +2,11 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const passport = require("passport");
-const passportLocal = require("passport-local").Strategy;
 const cookieParser = require("cookie-parser");
-const bcrypt = require("bcryptjs");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
-const User = require("./user");
+const router = require("./routes/routes");
 //----------------------------------------- END OF IMPORTS---------------------------------------------------
 mongoose.connect(
   "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&w=majority",
@@ -47,51 +45,12 @@ app.use(
 app.use(cookieParser("siinctvsecretcode"));
 app.use(passport.initialize());
 app.use(passport.session());
-require("./passportConfig")(passport);
+require("./passport/passportConfig")(passport);
 
 //----------------------------------------- END OF MIDDLEWARE---------------------------------------------------
 //TODO: Refactor to to use routes correctly
 // Routes
-app.post("/signin", (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
-    if (err) throw err;
-    if (!user) res.send("No User Exists");
-    else {
-      req.logIn(user, (err) => {
-        if (err) throw err;
-        res.send("Successfully Authenticated");
-        console.log(req.user);
-      });
-    }
-  })(req, res, next);
-});
-
-
-// we first try to check if a user with the same username exists, otherwise we allow registration
-app.post("/signup", (req, res) => {
-    console.log("signup request occured")
-  User.findOne({ username: req.body.username }, async function(err, doc){
-    if (err){
-        console.log("error occured");
-    }
-    if (doc) res.send("User Already Exists");
-    if (!doc) {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10); // encrypt the password
-
-      const newUser = new User({
-        username: req.body.username,
-        password: hashedPassword,
-      });
-      await newUser.save();
-      res.send("User Created");
-    }
-  });
-});
-
-app.get("/user", (req, res) => {
-  console.log(req.user);
-  res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
-});
+app.use('/',router);
 //----------------------------------------- END OF ROUTES---------------------------------------------------
 //Start Server
 app.listen(4000, () => {
