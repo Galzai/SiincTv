@@ -10,12 +10,13 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passportConfigs = require('./passportConfigs.js');
 const { response } = require("express");
 const { json } = require("body-parser");
-const { GOOGLE_CONFIG } = require("./passportConfigs.js");
+const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
 
 // our Models
 const {User} = require("../models/user");
 const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
+const {FacebookData} = require("../models/user");
 
 // Used for authenticating users, passport is passed to not create new instance
 module.exports = function (passport) {
@@ -105,7 +106,7 @@ passport.use(new GoogleStrategy({
         console.log("error occured");
         throw err;
       }
-      // If we find a user with the existing twitch id we just sign in
+      // If we find a user with the existing google id we just sign in
       if(doc){
         console.log(profile.id);
         console.log("found user:", doc);
@@ -136,6 +137,56 @@ passport.use(new GoogleStrategy({
     }
 ));
 
+// Facebook strategy
+passport.use(new FacebookStrategy({
+  clientID: FACEBOOK_CONFIG.clientID,
+  clientSecret: FACEBOOK_CONFIG.clientSecret,
+  callbackURL: "/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'name', 'link', 'picture.type(large)']
+},
+   // Facebook auth callback function
+  async function(accessToken ,refreshToken ,profile, done){
+    console.log("Facebook profile :", profile);
+    // We try to see if we have an existing user with this id
+    User.findOne({facebookId: profile.id},
+      // findOne callback function
+      async function(err, doc){
+      if(err){
+        console.log("error occured");
+        throw err;
+      }
+      // If we find a user with the existing facebook id we just sign in
+      if(doc){
+        console.log(profile.id);
+        console.log("found user:", doc);
+        return done(null, doc);
+      }
+      //Otherwise we create a new user
+      else{
+        const newFacebookData = new FacebookData({
+          displayName: profile.displayName,
+          profileUrl: profile.profileUrl,
+          name: profile.name,
+          photos: profile.photos
+        });
+        console.log("facebook doc", newFacebookData);
+        const newUser = new User({
+          username: profile.displayName,
+          facebookId: profile.id,
+          facebookData:newFacebookData
+        });
+        console.log("total doc", newUser);
+        // we save and finish
+        await newUser.save();
+        console.log("Added new user");
+        return done(null, newUser);
+         }
+        }      
+      );
+    }
+));
+
+
 
   passport.serializeUser((user, cb) => {
     cb(null, user.id);
@@ -150,7 +201,8 @@ passport.use(new GoogleStrategy({
         twitchId: user.twitchId,
         googleId: user.googleId,
         twitchData: user.twitchData,
-        googleData: user.googleData
+        googleData: user.googleData,
+        facebookData: user.facebookData
       };
       cb(err, userInformation);
     });

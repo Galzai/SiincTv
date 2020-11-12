@@ -32,4 +32,10 @@ router.get('/auth/google',userController.google_auth);
 //Get request google callback
 router.get('/auth/google/callback', userController.google_auth_callback);
 
+// GET request to authenticate google user
+router.get('/auth/facebook',userController.facebook_auth);
+
+//Get request google callback
+router.get('/auth/facebook/callback', userController.facebook_auth_callback);
+
 module.exports = router;
