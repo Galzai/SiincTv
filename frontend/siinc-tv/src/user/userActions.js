@@ -64,8 +64,14 @@ const userActions ={
         return result.data;
     },
 
+    // External authenticaiton redirects
+    
     authenicateTwitch:  function(){
         window.location.assign('http://localhost:4000/auth/twitch/');
+    },
+
+    authenicateGoogle:  function(){
+        window.location.assign('http://localhost:4000/auth/google/');
     }
        
 };
