@@ -33,7 +33,9 @@ function SignIn(props) {
                 </div>
             </div>
             <div className="authContainer">
-                <button onClick={userActions.authenicateTwitch}>Sign in with twitch</button>
+                <button class="twitchLogin" onClick={userActions.authenicateTwitch}>Sign in with Twitch</button>
+                <button class="googleLogin" onClick={userActions.authenicateGoogle}>Sign in with Google</button>
+                <button class="facebookLogin" onClick={userActions.authenicateFacebook}>Sign in with Facebook</button>
             </div>
         </section>
     );

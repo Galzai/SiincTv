@@ -1,4 +1,3 @@
-const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 //all our strategies
@@ -11,6 +10,13 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const passportConfigs = require('./passportConfigs.js');
 const { response } = require("express");
 const { json } = require("body-parser");
+const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
+
+// our Models
+const {User} = require("../models/user");
+const {GoogleData} = require("../models/user");
+const {TwitchData} = require("../models/user");
+const {FacebookData} = require("../models/user");
 
 // Used for authenticating users, passport is passed to not create new instance
 module.exports = function (passport) {
@@ -38,14 +44,15 @@ module.exports = function (passport) {
     {
       clientID: passportConfigs.TWITCH_CONFIG.clientID,
       clientSecret: passportConfigs.TWITCH_CONFIG.clientSecret,
-      callbackURL: "/auth/twitch/callback",
+      callbackURL: "/auth/twitch/callback"
     },
+    // Twitch auth callback function
     function(accessToken, refreshToken, profile , done){
-      console.log("access token :", accessToken);
-      console.log("refreshToken :", refreshToken);
-      console.log("profile :", profile);
+      console.log("Twitch profile :", profile);
       // We try to see if we have an existing user with this id
-      User.findOne({twitchId: profile.id},async function(err, doc){
+      User.findOne({twitchId: profile.id},
+        // findOne callback function
+        async function(err, doc){
         if(err){
           console.log("error occured");
           throw err;
@@ -58,16 +65,18 @@ module.exports = function (passport) {
         }
         //Otherwise we create a new user
         else{
+
+          const newTwitchData = new TwitchData({
+            login: profile.login,
+            display_name: profile.display_name,
+            description: profile.description,
+            profile_image_url: profile.profile_image_url,
+            view_count: profile.view_count
+          });
           const newUser = new User({
             username: profile.display_name,
             twitchId: profile.id,
-            twitchData:{
-              login: profile.login,
-              display_name: profile.display_name,
-              description: profile.description,
-              profile_image_url: profile.profile_image_url,
-              view_count: profile.view_count
-            }
+            twitchData:newTwitchData
           });
           // we save and finish
           await newUser.save();
@@ -78,7 +87,107 @@ module.exports = function (passport) {
         );
       }
     ));
-    
+  
+// Google strategy
+passport.use(new GoogleStrategy({
+  clientID: GOOGLE_CONFIG.clientID,
+  clientSecret: GOOGLE_CONFIG.clientSecret,
+  callbackURL: "/auth/google/callback",
+  scope: ['profile', 'email']
+},
+   // Google auth callback function
+  async function(accessToken ,refreshToken ,profile, done){
+    console.log("Google profile :", profile);
+    // We try to see if we have an existing user with this id
+    User.findOne({googleId: profile.id},
+      // findOne callback function
+      async function(err, doc){
+      if(err){
+        console.log("error occured");
+        throw err;
+      }
+      // If we find a user with the existing google id we just sign in
+      if(doc){
+        console.log(profile.id);
+        console.log("found user:", doc);
+        return done(null, doc);
+      }
+      //Otherwise we create a new user
+      else{
+        const newGoogleData = new GoogleData({
+          displayName: profile.displayName,
+          name: profile.name,
+          emails: profile.emails,
+          photos: profile.photos
+        });
+        console.log("google doc", newGoogleData);
+        const newUser = new User({
+          username: profile.displayName,
+          googleId: profile.id,
+          googleData:newGoogleData
+        });
+        console.log("total doc", newUser);
+        // we save and finish
+        await newUser.save();
+        console.log("Added new user");
+        return done(null, newUser);
+         }
+        }      
+      );
+    }
+));
+
+// Facebook strategy
+passport.use(new FacebookStrategy({
+  clientID: FACEBOOK_CONFIG.clientID,
+  clientSecret: FACEBOOK_CONFIG.clientSecret,
+  callbackURL: "/auth/facebook/callback",
+  profileFields: ['id', 'displayName', 'name', 'link', 'picture.type(large)']
+},
+   // Facebook auth callback function
+  async function(accessToken ,refreshToken ,profile, done){
+    console.log("Facebook profile :", profile);
+    // We try to see if we have an existing user with this id
+    User.findOne({facebookId: profile.id},
+      // findOne callback function
+      async function(err, doc){
+      if(err){
+        console.log("error occured");
+        throw err;
+      }
+      // If we find a user with the existing facebook id we just sign in
+      if(doc){
+        console.log(profile.id);
+        console.log("found user:", doc);
+        return done(null, doc);
+      }
+      //Otherwise we create a new user
+      else{
+        const newFacebookData = new FacebookData({
+          displayName: profile.displayName,
+          profileUrl: profile.profileUrl,
+          name: profile.name,
+          photos: profile.photos
+        });
+        console.log("facebook doc", newFacebookData);
+        const newUser = new User({
+          username: profile.displayName,
+          facebookId: profile.id,
+          facebookData:newFacebookData
+        });
+        console.log("total doc", newUser);
+        // we save and finish
+        await newUser.save();
+        console.log("Added new user");
+        return done(null, newUser);
+         }
+        }      
+      );
+    }
+));
+
+
+
   passport.serializeUser((user, cb) => {
     cb(null, user.id);
   });
@@ -90,13 +199,10 @@ module.exports = function (passport) {
         username: user.username,
         email: user.email,
         twitchId: user.twitchId,
-        twitchData: {
-          display_name: user.twitchData.display_name,
-          description: user.twitchDatadescription,
-          profile_image_url: user.twitchDataprofile_image_url,
-          view_count:user.twitchDataview_count
-        }
-
+        googleId: user.googleId,
+        twitchData: user.twitchData,
+        googleData: user.googleData,
+        facebookData: user.facebookData
       };
       cb(err, userInformation);
     });
