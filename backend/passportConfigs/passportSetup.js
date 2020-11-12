@@ -13,7 +13,7 @@ const { json } = require("body-parser");
 const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
 
 // our Models
-const {User} = require("../models/user");
+var {User} = require("../models/user");
 const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
 const {FacebookData} = require("../models/user");
