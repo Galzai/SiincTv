@@ -4,14 +4,21 @@ import UserSigning from './userSigning';
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions"
 
+// React modal doesn't play nice with css modules
 const customStyles = {
     content : {
+        overflowX             : 'hidden',
         top                   : '50%',
         left                  : '50%',
         right                 : 'auto',
         bottom                : 'auto',
+        width                 : 'fit-content',
+        height                : 'fit-content',
         marginRight           : '-50%',
-        transform             : 'translate(-50%, -50%)'
+        transform             : 'translate(-50%, -50%)',
+        backgroundColor       : '#3C096C',
+        borderRadius          : '20px',
+        padding               : '0px'
     }
 };
 

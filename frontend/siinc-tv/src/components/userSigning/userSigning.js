@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import SignIn from './signin'
 import Signup from './signup'
 import userActions from "../../user/userActions"
+import style from './userSigning.module.css'
 
 function UserSigning(props) {
 
@@ -101,11 +102,14 @@ function UserSigning(props) {
     }
 
     return (
-        <div>
-            <h1>
-                <button name='signInBtn' onClick={setSignIn}>Login</button>
-                <button name='signupBtn' onClick={setSignup}>Sign-up</button>
-            </h1>
+        <div className={style.signingBox}>
+            <div className={style.titleBox}>
+                <div className={style.titleDiv}>Come and join us!</div>
+            </div>
+            <div className={style.selectorBar}>
+                <button className={style.selectorButton} name='signInBtn' onClick={setSignIn}>Login</button>
+                <button className={style.selectorButton} name='signupBtn' onClick={setSignup}>Sign-up</button>
+            </div>
             <h2>
                 {showLogin() && <SignIn
                     userName={userName}
