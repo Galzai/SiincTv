@@ -40,8 +40,10 @@ function SignIn(props) {
                 </div>
                 <div className={signing.signInButtonDiv}>
                     <button className={signing.signInButton} onClick={handleSignIn}>Sign in</button>
-                </div>  
+                </div>
+
                 <div className={signing.authDiv}>
+                <h2 className={signing.line}><span className={signing.lineClear}>Or</span></h2>
                     <button className={signing.twitchAuth} onClick={userActions.authenicateTwitch}>Sign in with Twitch</button>
                     <button className={signing.googleAuth} onClick={userActions.authenicateGoogle}>Sign in with Google</button>
                     <button className={signing.facebookAuth} onClick={userActions.authenicateFacebook}>Sign in with Facebook</button>
