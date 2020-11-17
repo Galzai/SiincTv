@@ -1,19 +1,20 @@
 .signInDiv
 {
-    position: relative;
+    top: 135px;
+    position: absolute;
     width: 600px;
 }
 
 .usernameDiv
 {
     position: relative;
-    top: 50px;
+    top: 25px;
 }
 
 .passwordDiv
 {
     position: relative;
-    top: 75px;
+    top: 70px;
 }
 
 .formText
@@ -35,7 +36,8 @@
 }
 
 .inputDiv
-{
+{ 
+
     top:10px;
     position:relative;
     width: 100%;
@@ -65,7 +67,6 @@
 .inputBox:focus
 {
     box-shadow: 0px 1px 4px #AFAFAF;
-    outline-style:dashed;
     outline-width: 0ch;
     border-radius: 14px;
 }
@@ -94,14 +95,14 @@
 .secretInputBox:focus
 {
     box-shadow: 0px 1px 4px #AFAFAF;
-    outline-style:dashed;
     outline-width: 0ch;
     border-radius: 14px;
 }
 
 .signInButtonDiv
 {
-    top:50px;
+    height: 5px;
+    top:80px;
     position: relative;
     justify-content: center;
     display: flex;
@@ -115,7 +116,7 @@
     position: relative;
     height: 38px;
     width:94%;
-    top: 75px;
+    top: 90px;
     background: #8D31D8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
@@ -130,7 +131,7 @@
 
 .authDiv
 {
-    top:120px;
+    top:175px;
     position: relative;
     display:block;
     width: 100%;
@@ -259,4 +260,16 @@
     color: #BAA3C8;
      background:#3C096C; 
      padding:0 10px; 
+ }
+
+ .errorMessage
+ {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    color: #BAA3C8;
+    position: absolute;
+    float:bottom;
+    right:20px;
  }

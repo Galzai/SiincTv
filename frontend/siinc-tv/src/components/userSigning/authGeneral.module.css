@@ -45,6 +45,7 @@
 
 .selectorButton
 {
+
     top: 30px;
     left:20px;
     width:80px;
@@ -95,9 +96,4 @@
 {
     border:none;
     background-color: #8D31D8;
-}
-
-.logo
-{
-    transform: scale("");
 }

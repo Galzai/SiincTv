@@ -1,5 +1,6 @@
 import React, {useState, useRef} from "react";
 import userActions from "../../user/userActions"
+import style from './auth.module.css'
 
 function Signup(props) {
 
@@ -124,18 +125,25 @@ function Signup(props) {
 
     }
     return (
-        <section className={"signup"}>
+        <section className={style.signInDiv}>
             <div className="signupContainer">
-                <label>Username</label>
-                <input type="text" autoFocus required value={userName}
-                       onChange={e => setUserName(e.target.value)}
-                />
-                <p>{userNameError}</p>
-                <label>Email</label>
-                <input type="text" autoFocus required value={email}
-                       onChange={e => setEmail(e.target.value)}
-                />
-                <p className="errorMsg">{emailError}</p>
+                <div className={style.usernameDiv}>
+                    <label className={style.formText}>Username</label>
+                    <div className={style.inputDiv}>
+                    <input className={style.inputBox} autoFocus required value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                    />
+                    </div>
+                    <p className={style.errorMessage}>{userNameError}</p>
+                </div>
+                <div>
+                    <label>Email</label>
+                    <input type="text" autoFocus required value={email}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                    <p className="errorMsg">{emailError}</p>
+                </div>
+
                 <label>Password</label>
                 <input type="text" autoFocus required value={password}
                        onChange={e => setPassword(e.target.value)}

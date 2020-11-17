@@ -1,12 +1,12 @@
-/*
- * This components will be used to hold the signIn/signup components
- */
 import React, {useState} from 'react';
 import SignIn from './signin'
 import Signup from './signup'
 import userActions from "../../user/userActions"
-import style from './userSigning.module.css'
+import style from './authGeneral.module.css'
 
+/*
+ * This components will be used to hold the signIn/signup components
+ */
 function UserSigning(props) {
 
     // Our hooks
