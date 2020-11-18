@@ -196,8 +196,8 @@ passport.use(new FacebookStrategy({
     User.findOne({ _id: id }, (err, user) => {
       // We only return relevant data
       const userInformation = {
+        _id: user._id,
         username: user.username,
-        email: user.email,
         twitchId: user.twitchId,
         googleId: user.googleId,
         twitchData: user.twitchData,

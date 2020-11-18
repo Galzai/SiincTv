@@ -1,0 +1,107 @@
+.createStreamBox{
+    position:relative;
+    width: 1225px;
+    height: 1000px;
+    background-color:#10002B;
+}
+.createStreamForm
+{
+    margin-left: 38px;
+}
+
+.titleLine{
+    height: 0px;
+    color: #F0D6FF;
+    border: 1px solid #F0D6FF;
+    transform: rotate(180deg);
+}
+
+.titleLabel{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 47px;
+    display: flex;
+    align-items: flex-end;
+    color: #F0D6FF;
+}
+
+.fieldLabel{
+    position: relative;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 29px;
+    display: flex;
+    align-items: flex-end;
+    color: #F0D6FF;
+}
+
+.fieldText{
+    position: relative;
+    top:10px;
+    width: 613px;
+    height: 38px;
+    border:none;
+    background: #EFEFEF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+}
+
+.fieldText:focus
+{
+    box-shadow: 0px 1px 4px #AFAFAF;
+    outline-width: 0ch;
+}
+
+.descriptionText{
+    top:10px;
+    position:relative;
+    width: 613px;
+    height: 120px;
+    border:none;
+    background: #EFEFEF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+}
+
+.descriptionText:focus
+{
+    box-shadow: 0px 1px 4px #AFAFAF;
+    outline-width: 0ch;
+    border-radius:2px;
+}
+
+.checkbox
+{
+    position: relative;
+    border:2px;
+    left:5px;
+    top:1px;
+    background-color:#10002B;
+    width: 24px;
+    height: 24px;
+    display:inline-block;
+    position: relative;
+}
+
+.checkboxDiv{
+    top:30px;
+    position: relative;
+    display: block;
+    text-align:inline;
+    margin-bottom:15px;
+}
+
+.fieldDiv{
+    display: block;
+    position:relative;
+    top:15px;
+}
+
+.participants{
+    position:relative;
+    top:20px;
+}

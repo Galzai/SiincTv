@@ -59,7 +59,8 @@ function SigningModal(props){
             {context => (
                 <div>
                     {context.user && <><h1>{context.user.username}</h1>
-                        <h2>{context.user.email}</h2></>
+                        <h2>{context.user.email}</h2>
+                        <h2>{context.user._id}</h2></>
                     }
                     {!context.user && <button onClick={openRegistration}>Signup/login</button>}
                     {context.user && <button onClick={signOut}>Signout</button>}
