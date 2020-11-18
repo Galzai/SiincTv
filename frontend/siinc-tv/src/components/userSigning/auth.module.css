@@ -1,6 +1,7 @@
 .signInDiv
 {
-    position: relative;
+    top: 135px;
+    position: absolute;
     width: 600px;
 }
 
@@ -10,20 +11,36 @@
     top: 25px;
 }
 
+.emailDiv
+{
+    position: relative;
+    top: 70px;
+}
+
 .passwordDiv
 {
     position: relative;
-    top: 50px;
+    top: 70px;
 }
 
+.signUpPasswordDiv
+{
+    position: relative;
+    top: 115px;
+}
 
+.confirmPasswordDiv
+{
+    position: relative;
+    top: 160px;
+}
 
 .formText
 {
 
     position: relative;
     text-align:center;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     left: 20px;
     top:10px;
@@ -37,7 +54,8 @@
 }
 
 .inputDiv
-{
+{ 
+
     top:10px;
     position:relative;
     width: 100%;
@@ -54,7 +72,7 @@
     background: #EFEFEF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -67,7 +85,6 @@
 .inputBox:focus
 {
     box-shadow: 0px 1px 4px #AFAFAF;
-    outline-style:dashed;
     outline-width: 0ch;
     border-radius: 14px;
 }
@@ -82,7 +99,7 @@
     background: #EFEFEF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 22px;
@@ -96,14 +113,14 @@
 .secretInputBox:focus
 {
     box-shadow: 0px 1px 4px #AFAFAF;
-    outline-style:dashed;
     outline-width: 0ch;
     border-radius: 14px;
 }
 
 .signInButtonDiv
 {
-    top:50px;
+    height: 5px;
+    top:80px;
     position: relative;
     justify-content: center;
     display: flex;
@@ -117,27 +134,61 @@
     position: relative;
     height: 38px;
     width:94%;
-    top: 50px;
+    top: 90px;
     background: #8D31D8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
     color: #F0D6FF;
+    cursor:pointer;
+}
+
+.signInButton:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
+}
+
+.signUpButton
+{
+    display:block;
+    border:none;
+    position: relative;
+    height: 38px;
+    width:94%;
+    top: 175px;
+    background: #8D31D8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    color: #F0D6FF;
+    cursor:pointer;
+}
+
+.signUpButton:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
 
 .authDiv
 {
-    top:100px;
+    top:175px;
     position: relative;
     display:block;
     width: 100%;
     align-items: center;
     text-align:center;
     justify-content: center;
+    
 }
 
 .googleAuth
@@ -151,13 +202,25 @@
     top: 50px;
     margin-left: 20px;
     background: #EFEFEF;
+    background-image: url("../../assets/google-icon.svg");
+    background-repeat: no-repeat;
+    background-size:28px 28px;
+    background-position-x: 30%;
+    background-position-y: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     color: #AFAFAF;
+    cursor:pointer;
+}
+
+.googleAuth:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
 
 .twitchAuth
@@ -171,13 +234,26 @@
     top: 50px;
     margin-left: 20px;
     background: #EFEFEF;
+    background-image: url("../../assets/TwitchGlitchPurple.svg");
+    background-repeat: no-repeat;
+    background-size:28px 28px;
+    background-position-x: 30%;
+    background-position-y: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     color: #3C096C;
+    cursor:pointer;
+    align-items: center;
+}
+
+.twitchAuth:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
 
 .facebookAuth
@@ -190,13 +266,59 @@
     width:94%;
     top: 50px;
     margin-left: 20px;
-    background: #EFEFEF;;
+    background: #3B5998;
+    background-image: url("../../assets/facebook-icon.png");
+    background-repeat: no-repeat;
+    background-size:28px 28px;
+    background-position-x: 30%;
+    background-position-y: 50%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    font-family: Roboto;
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
-    color: #3B5998;
-    ;
+    color: #EFEFEF;
+    cursor:pointer;
 }
+
+.facebookAuth:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
+}
+
+.line{
+    position: relative;
+    display:block;
+    top: 40px;
+    width: 93%; 
+    left: 20px;
+    text-align: center; 
+    border-bottom: 2px solid #26044C; 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+    font-family: 'Roboto', sans-serif;
+ } 
+ 
+.lineClear{ 
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    color: #BAA3C8;
+     background:#3C096C; 
+     padding:0 10px; 
+ }
+
+ .errorMessage
+ {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    color: #BAA3C8;
+    position: absolute;
+    float:bottom;
+    right:20px;
+ }

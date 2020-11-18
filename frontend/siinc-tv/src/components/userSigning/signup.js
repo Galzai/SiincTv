@@ -1,5 +1,6 @@
 import React, {useState, useRef} from "react";
 import userActions from "../../user/userActions"
+import style from './auth.module.css'
 
 function Signup(props) {
 
@@ -124,32 +125,50 @@ function Signup(props) {
 
     }
     return (
-        <section className={"signup"}>
+        <section className={style.signInDiv}>
             <div className="signupContainer">
-                <label>Username</label>
-                <input type="text" autoFocus required value={userName}
-                       onChange={e => setUserName(e.target.value)}
-                />
-                <p>{userNameError}</p>
-                <label>Email</label>
-                <input type="text" autoFocus required value={email}
-                       onChange={e => setEmail(e.target.value)}
-                />
-                <p className="errorMsg">{emailError}</p>
-                <label>Password</label>
-                <input type="text" autoFocus required value={password}
-                       onChange={e => setPassword(e.target.value)}
-                />
-                <p className="errorMsg">{passwordError}</p>
-                <label>Confirm Password</label>
-                <input type="text" autoFocus required value={passwordConfirmation}
-                       onChange={e => setPasswordConfirmation(e.target.value)}
-                />
-                {<p className="errorMsg">{passwordError}</p>}
-                <div className="btnContainer">
-                    <div className="btnContainer">
-                        <button disabled={!formValid()} onClick={handleSignup}>Sign up</button>
+                <div className={style.usernameDiv}>
+                    <label className={style.formText}>Username</label>
+                    <div className={style.inputDiv}>
+                    <input className={style.inputBox} autoFocus required value={userName}
+                        onChange={e => setUserName(e.target.value)}
+                    />
+                        <p className={style.errorMessage}>{userNameError}</p>
                     </div>
+                </div>
+               
+                <div className={style.emailDiv}>
+                    <label className={style.formText}>Email</label>
+                        <div className={style.inputDiv}>
+                        <input className={style.inputBox} type="text" autoFocus required value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                        <p className={style.errorMessage}>{emailError}</p>
+                    </div>
+                </div>
+
+                <div className={style.signUpPasswordDiv}>
+                    <label className={style.formText} >Password</label>
+                    <div className={style.inputDiv}>
+                    <input className={style.secretInputBox} type="text" autoFocus required value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <p className={style.errorMessage}>{passwordError}</p>
+                    </div>
+                </div>
+
+                <div className={style.confirmPasswordDiv}>
+                    <label className={style.formText} >Confirm Password</label>
+                    <div className={style.inputDiv}>
+                        <input className={style.secretInputBox} type="text" autoFocus required value={passwordConfirmation}
+                            onChange={e => setPasswordConfirmation(e.target.value)}
+                        />
+                        {<p className={style.errorMessage}>{passwordError}</p>}
+                    </div>
+                </div>
+
+                <div className={style.signInButtonDiv}>
+                    <button className={style.signUpButton} disabled={!formValid()} onClick={handleSignup}>Sign up</button>
                 </div>
             </div>
         </section>

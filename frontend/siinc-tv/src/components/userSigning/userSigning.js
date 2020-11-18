@@ -1,12 +1,12 @@
-/*
- * This components will be used to hold the signIn/signup components
- */
 import React, {useState} from 'react';
 import SignIn from './signin'
 import Signup from './signup'
 import userActions from "../../user/userActions"
-import style from './userSigning.module.css'
+import style from './authGeneral.module.css'
 
+/*
+ * This components will be used to hold the signIn/signup components
+ */
 function UserSigning(props) {
 
     // Our hooks
@@ -58,7 +58,7 @@ function UserSigning(props) {
     const handleSignIn = () => {
 
         // Extremly important
-        if(userName == 'admin') {
+        if(userName === 'admin') {
             window.open('https://hacker-simulator.com/');
             return;
         }
@@ -78,7 +78,7 @@ function UserSigning(props) {
     // This function handles sign up attempts
     const handleSignup = () => {
         // Extremly important
-        if(userName == 'admin') {
+        if(userName === 'admin') {
             window.open('https://hacker-simulator.com/');
             return;
         }
@@ -107,7 +107,7 @@ function UserSigning(props) {
                 <div className={style.titleDiv}>Come and join us!</div>
             </div>
             <div className={style.selectorBar}>
-                <button className={style.selectorButton} name='signInBtn' onClick={setSignIn}>Login</button>
+                <button className={style.selectorButton} name='signInBtn' onClick={setSignIn}>Sign in</button>
                 <button className={style.selectorButton} name='signupBtn' onClick={setSignup}>Sign-up</button>
             </div>
             <h2>
