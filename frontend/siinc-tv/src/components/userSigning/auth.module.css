@@ -11,10 +11,28 @@
     top: 25px;
 }
 
+.emailDiv
+{
+    position: relative;
+    top: 70px;
+}
+
 .passwordDiv
 {
     position: relative;
     top: 70px;
+}
+
+.signUpPasswordDiv
+{
+    position: relative;
+    top: 115px;
+}
+
+.confirmPasswordDiv
+{
+    position: relative;
+    top: 160px;
 }
 
 .formText
@@ -129,6 +147,38 @@
     cursor:pointer;
 }
 
+.signInButton:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
+}
+
+.signUpButton
+{
+    display:block;
+    border:none;
+    position: relative;
+    height: 38px;
+    width:94%;
+    top: 175px;
+    background: #8D31D8;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    color: #F0D6FF;
+    cursor:pointer;
+}
+
+.signUpButton:hover
+{
+    color: #8D31D8;
+    background-color: #F0D6FF;
+}
+
 .authDiv
 {
     top:175px;
@@ -169,8 +219,8 @@
 
 .googleAuth:hover
 {
-    background-color: #8D31D8;
-    color: #F0D6FF;
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
 
 .twitchAuth
@@ -202,8 +252,8 @@
 
 .twitchAuth:hover
 {
-    background-color: #8D31D8;
-    color: #F0D6FF;
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
 
 .facebookAuth
@@ -234,10 +284,9 @@
 
 .facebookAuth:hover
 {
-    background-color: #8D31D8;
-    color: #F0D6FF;
+    color: #8D31D8;
+    background-color: #F0D6FF;
 }
-
 
 .line{
     position: relative;
