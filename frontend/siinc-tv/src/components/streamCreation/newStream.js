@@ -1,6 +1,8 @@
 import React, {useState, useRef} from "react";
 import style from './newStream.module.css'
 import CreateableInputOnly from "../selectors/createableInputOnly";
+import StreamDatePicker from "./streamDatePicker";
+import TeamBlock from "./teamBlock";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
@@ -17,19 +19,20 @@ function NewStream(props){
     const [inviteOnly, setInviteOnly]=useState(false);
     const [tags, setTags]=useState([]);
     const [date, setDate]=useState(new Date().toLocaleString());
-    const [streamGroups, setsSreamGroups]=useState([]);
+    const [streamGroups, setStreamGroups]=useState([]);
+    const [description, setDescription]=useState('');
     const [currentTag, setCurrentTag] = useState("");
 
-// We use this to style or selector   
+// We use this to style our selector   
 const customTagStyle={
     control: styles=>({...styles, width:613, marginTop:10, borderRadius:14, height:40, minHeight: 40}),
     valueContainer: styles=>({...styles, height:40, minHeight: 40}),
     indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),
-    input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center'}),
-    placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',textAlign:'center'}),
+    input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
+    placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',
+    textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     multiValue: styles=>({...styles, bottom:20, height:30, backgroundColor:'#8D31D8', borderRadius:14}),
     multiValueLabel: styles=>({...styles, height:30, fontSize:18, top:15, color:'#F0D6FF', fontFamily:'Roboto'})
-
 };
 
     /**
@@ -39,12 +42,25 @@ const customTagStyle={
         setPrivateStream(!privateStream);
     };
 
-       /**
+    /**
      * @brief sets the value of inviteOnly
      */
     const inviteOnlyCheckboxOnChange=()=>{
         setInviteOnly(!inviteOnly);
     };
+
+    /**
+     * @brief handles new stream form submission
+     */
+    const submissionHandler=()=>{
+
+        console.log(name);
+        console.log(date);
+        console.log(tags);
+        console.log(inviteOnly);
+        console.log(privateStream);
+        console.log(description);
+    }
 
     return(
         <div className={style.createStreamBox}>
@@ -57,7 +73,7 @@ const customTagStyle={
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Stream Title:</label>
-                        <input className={style.fieldText} type="text"/>
+                        <input className={style.fieldText}  onChange={e => setName(e.target.value)} type="text" value={name}/>
                     </div>
 
                     <div className={style.checkboxDiv}>
@@ -68,17 +84,17 @@ const customTagStyle={
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Tags:</label>
-                    <CreateableInputOnly style={customTagStyle}/>
+                    <CreateableInputOnly style={customTagStyle} updateTags={setTags}/>
                     </div>
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Description:</label>
-                        <input className={style.descriptionText} type="text"/>
+                        <input className={style.descriptionText}  onChange={e => setDescription(e.target.value)} type="text" value={description}/>
                     </div>
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Start Time:</label>
-                        <input type="text"/>
+                        <StreamDatePicker updateDate={setDate}/>
                     </div>
                     
 
@@ -88,16 +104,20 @@ const customTagStyle={
                     <hr className={style.titleLine}/>
                     
                     <div className={style.checkboxDiv}>
-                    <label className={style.fieldLabel}>Invite Only?</label>
+                    <label className={style.fieldLabel}>Invite Only?
                         <input className={style.checkbox} type="checkbox" checked={inviteOnly} onChange={inviteOnlyCheckboxOnChange}></input>
+                        </label>
                     </div>
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Teams:</label>
-                    <input type="text"/> 
+                        <TeamBlock
+                        streamGroups={streamGroups}
+                        setStreamGroups={setStreamGroups}/> 
                     </div>
 
                 </div>
+                <button className={style.submitButton} onClick={submissionHandler}>Submit</button>
             </div>
         </div>
     );

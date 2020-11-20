@@ -17,7 +17,8 @@ export default class CreatableInputOnly extends Component{
     this.state = {
       inputValue: '',
       value: [],
-      style: props.style
+      style: props.style,
+      updateTags: props.updateTags
     };
   }
 
@@ -47,12 +48,14 @@ export default class CreatableInputOnly extends Component{
             inputValue: '',
             value: [createOption(inputValue)],
           });
+          this.state.updateTags(this.state.value);
         }
         else{
           this.setState({
             inputValue: '',
             value: [...value, createOption(inputValue)],
           });
+          this.state.updateTags(this.state.value);
         }
 
         event.preventDefault();
