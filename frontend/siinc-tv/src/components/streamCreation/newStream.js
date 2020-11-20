@@ -22,10 +22,15 @@ function NewStream(props){
 
 // We use this to style or selector   
 const customTagStyle={
-    control: styles=>({...styles, width:613, marginTop:10})
+    control: styles=>({...styles, width:613, marginTop:10, borderRadius:14, height:40, minHeight: 40}),
+    valueContainer: styles=>({...styles, height:40, minHeight: 40}),
+    indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),
+    input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center'}),
+    placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',textAlign:'center'}),
+    multiValue: styles=>({...styles, bottom:20, height:30, backgroundColor:'#8D31D8', borderRadius:14}),
+    multiValueLabel: styles=>({...styles, height:30, fontSize:18, top:15, color:'#F0D6FF', fontFamily:'Roboto'})
 
 };
-
 
     /**
      * @brief sets the value of privateStrean
