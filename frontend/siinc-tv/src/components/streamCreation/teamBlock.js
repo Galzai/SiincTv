@@ -2,6 +2,16 @@ import React, {useState, useRef} from "react";
 import update from 'immutability-helper';
 import FriendFinder from "../selectors/friendFinder";
 
+
+/**
+ * @brief This is a utility function for generating keys
+ * 
+ * @param {*} pre 
+ */
+const generateKey = (pre) => {
+    return `${ pre }_${ new Date().getTime() }`;
+}
+
 // We use this to style our selector   
 const customTagStyle={
     control: styles=>({...styles, width:580, marginTop:10, borderRadius:14, height:40, minHeight: 40}),
@@ -23,71 +33,62 @@ const customTagStyle={
 function TeamBlock(props){
     const streamGroups = props.streamGroups;
     const setStreamGroups = props.setStreamGroups;
-    const [teams, setTeams] = useState([]);
-    const [numOfTeams, setNumOfTeams]=useState(0);
-
-    /**
-     * @brief used for mapping subgroups to their team finder
-     * 
-     * @param {*} group the group mapped to the finder
-     * @param {*} index the index of the group
-     */
-    const updateTeamMap=(group, index)=>
-            <div>
-            <FriendFinder
-                styles={customTagStyle}
-                group={group}
-                // Updates the specific group in the index
-                setGroup={(newGroup)=>{
-                    console.log(newGroup);
-                    const updatedStreamGroups=update(streamGroups, {$splice: [[index, 1, newGroup]]});
-                    setStreamGroups(updatedStreamGroups);   
-                }}
-            />
-                <button onClick={()=>{deleteGroup(index)}}>-</button>
-            </div>
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     /**
      * @brief adds a new group, if the number of groups exceeds 4 it does not allow to add a new group
      */
-    const addGroup=()=>{
-        if(numOfTeams > 3)
+    const addGroup =()=>{
+        if(streamGroups.length > 3)
         {
             console.log("Maxmium number of groups exceeded")
             return;
         }
-        setNumOfTeams(numOfTeams + 1);
-        streamGroups.push([]);
-        console.log(streamGroups);
-        // Teams is always set to map between the group to its selector
-        setTeams(streamGroups.map(updateTeamMap));
+        const newKey = generateKey('G_');
+        const newGroups = [...streamGroups,{key: newKey, group:[]}];
+        setStreamGroups(newGroups);
+        console.log(newGroups);
     }
 
 /**
  * @brief deletes a group in certain index
  * 
- * @param {*} index the index of the group
+ * @param {*} key the key of the group
  */
-    const deleteGroup=(index)=>{
-        console.log(index);
-        const streamGroupsCopy = streamGroups;
-        if(index > -1)
-        {
-            streamGroups.splice(index, 1);
-            teams.splice(index, 1)
-            console.log(streamGroups);
-            setNumOfTeams(numOfTeams - 1);
-            setTeams(streamGroups.map(updateTeamMap));
-
-        }
-
+    const deleteGroup=(key)=>{
+        console.log(key);
+        const index = streamGroups.findIndex(g => g.key === key);
+        streamGroups.splice(index, 1);
+        setStreamGroups(streamGroups);
+        console.log(streamGroups);
+        forceUpdate()
     }
+
     return(
         <div>
-            {teams}
-            {(numOfTeams  < 4) && <button onClick={addGroup}>+</button>}
-        </div>
-
+        {streamGroups.map((group)=>{
+            if(group === null) return;
+            console.log(group.key)
+            return(
+                <div key={group.key + "d"}>
+                <FriendFinder key={group.key}
+                    styles={customTagStyle}
+                    group={group}
+                    // Updates the specific group in the index
+                    setGroup={(newGroup)=>{
+                        console.log(newGroup);
+                        const index = streamGroups.findIndex(g => g.key === group.key) 
+                        const updatedStreamGroups = update(streamGroups, {$splice: [[index, 1, newGroup]]});
+                        setStreamGroups(updatedStreamGroups)
+                        forceUpdate();   
+                    }}
+                />
+                    <button key={group.key + "b"} onClick={()=>{deleteGroup(group.key)}}>-</button>
+                </div>
+            );})}
+            {(streamGroups.length  < 4) && <button onClick={addGroup}>+</button>}
+            </div>
     );
 }
 export default TeamBlock;

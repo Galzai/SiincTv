@@ -13,7 +13,7 @@ function FriendFinder(props){
     const setGroup = props.setGroup;
 
     const onChange=(value)=>{
-        setGroup(value);
+        setGroup({key: group.key, group: value});
         console.log(value);
     };
     return(
