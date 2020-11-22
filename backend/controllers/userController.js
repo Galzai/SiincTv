@@ -60,7 +60,7 @@ exports.user_login = function(req, res, next){
           password: hashedPassword,
         });
         await newUser.save();
-        res.send("User Created");
+        res.send("auth/user_created");
       }
     });
   };

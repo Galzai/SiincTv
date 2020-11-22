@@ -4,6 +4,7 @@ var router = express.Router()
 
 // our controllers
 var userController = require('../controllers/userController')
+var streamController = require('../controllers/streamController')
 
 // POST request to sign in
 router.post('/signin',userController.user_login);
@@ -23,19 +24,22 @@ router.post('/check_username',userController.check_username_exists);
 // GET request to authenticate twitch user
 router.get('/auth/twitch',userController.twitch_auth);
 
-//Get request Twitch callback
+// GET request Twitch callback
 router.get('/auth/twitch/callback', userController.twitch_auth_callback);
 
 // GET request to authenticate google user
 router.get('/auth/google',userController.google_auth);
 
-//Get request google callback
+// GET request google callback
 router.get('/auth/google/callback', userController.google_auth_callback);
 
 // GET request to authenticate google user
 router.get('/auth/facebook',userController.facebook_auth);
 
-//Get request google callback
+// GET request google callback
 router.get('/auth/facebook/callback', userController.facebook_auth_callback);
+
+// POST request create stream
+router.post('/user/createstream', streamController.createStream);
 
 module.exports = router;
