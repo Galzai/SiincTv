@@ -40,25 +40,27 @@ export default class CreatableInputOnly extends Component{
       case 'Tab':
 
         console.group('Value Added');
+        console.log(inputValue);
         console.log(value);
         console.groupEnd();
         if(this.state.value === null)
         {
           this.setState({
-            inputValue: '',
             value: [createOption(inputValue)],
+            inputValue: '',
           });
-          this.state.updateTags(this.state.value);
+          this.state.updateTags([createOption(inputValue)]);
         }
         else{
           this.setState({
-            inputValue: '',
             value: [...value, createOption(inputValue)],
+            inputValue: '',
           });
-          this.state.updateTags(this.state.value);
+          this.state.updateTags([...value, createOption(inputValue)]);
         }
 
         event.preventDefault();
+        console.log(value);
     }
   };
   render() {

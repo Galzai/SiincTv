@@ -54,12 +54,19 @@ const customTagStyle={
      */
     const submissionHandler=()=>{
 
-        console.log(name);
-        console.log(date);
-        console.log(tags);
-        console.log(inviteOnly);
-        console.log(privateStream);
-        console.log(description);
+        const submissionData =
+        {
+            name:name,
+            privateStream:privateStream,
+            inviteOnly:inviteOnly,
+            tags:tags,
+            date:date,
+            streamGroups:streamGroups,
+            description:description
+        }
+        streamActions.createNewStream(submissionData);
+        //TODO: Redirect to created stream page if completed succesfully
+
     }
 
     return(

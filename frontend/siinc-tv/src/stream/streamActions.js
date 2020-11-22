@@ -10,8 +10,10 @@ const streamActions={
             method:'POST',
             data:streamData,
             withCredentials:true,
-            url:'http://localhost:4000//user/createstream'
+            url:'http://localhost:4000/user/createstream'
         })
         return result.data;
     }
 }
+
+export default streamActions;

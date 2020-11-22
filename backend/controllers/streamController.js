@@ -10,13 +10,21 @@ const { UpComingEventData } = require("../models/user");
  * @param {*} res 
  */
 exports.createStream = function(req, res){
+    //------------------- Temporary test-------------------
+    console.log("StreamData: " , JSON.stringify(req.body));
+    console.log("StreamData: " , req.body.streamGroup);
+    res.send("stream/logged");
+    return;
+       //------------------- Temporary test------------------- 
     // We can't allow stream creation for a non logged in user
     if(!req.user){
-        req.send('user/not_logged_in')
+        res.send('user/not_logged_in')
         return(done, done);
     }
     const data = req.body;
     console.log("StreamData: " ,data);
+    // Temporary test
+    res.send("stream/logged");
     // Create the new stream data
     let streamData = new StreamData({
         creator : creator,
