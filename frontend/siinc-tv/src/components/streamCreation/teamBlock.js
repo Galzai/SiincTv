@@ -1,4 +1,5 @@
 import React, {useState, useRef} from "react";
+import style from './newStream.module.css'
 import update from 'immutability-helper';
 import FriendFinder from "../selectors/friendFinder";
 
@@ -23,7 +24,8 @@ const customTagStyle={
     multiValue: styles=>({...styles, bottom:20, height:30, backgroundColor:'#8D31D8', borderRadius:14}),
     multiValueLabel: styles=>({...styles, height:30, fontSize:18, top:15, color:'#F0D6FF', fontFamily:'Roboto'}),
     menu:styles=>({...styles, width:580, borderRadius:14}),
-    menuList:styles=>({...styles, width:580, borderRadius:14})
+    menuList:styles=>({...styles, width:580, borderRadius:14, fontFamily:'Roboto',
+    fontWeight: 'normal', color: '#AFAFAF'}),
 };
 
 /**
@@ -71,7 +73,7 @@ function TeamBlock(props){
             if(group === null) return;
             console.log(group.key)
             return(
-                <div key={group.key + "d"}>
+                <div className={style.teamDiv} key={group.key + "d"}>
                 <FriendFinder key={group.key}
                     styles={customTagStyle}
                     group={group}
@@ -84,10 +86,12 @@ function TeamBlock(props){
                         forceUpdate();   
                     }}
                 />
-                    <button key={group.key + "b"} onClick={()=>{deleteGroup(group.key)}}>-</button>
+                    <button className={style.removeTeamButton} key={group.key + "b"} onClick={()=>{deleteGroup(group.key)}}/>
                 </div>
             );})}
-            {(streamGroups.length  < 4) && <button onClick={addGroup}>+</button>}
+            <div className={style.addTeamDiv}>
+            {(streamGroups.length  < 4) && <button className={style.addTeamButton} onClick={addGroup}/>}
+            </div>
             </div>
     );
 }

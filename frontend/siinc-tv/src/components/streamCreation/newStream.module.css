@@ -1,7 +1,7 @@
 .createStreamBox{
     position:relative;
     width: 689px;
-    height: 1000px;
+    height: 1100px;
     background-color:#10002B;
 }
 .createStreamForm
@@ -69,11 +69,19 @@
     position:relative;
     width: 613px;
     height: 120px;
-    border:none;
     background: #EFEFEF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
     margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 14px;
+    text-align: top;
+    color: #AFAFAF;
+    padding-left: 8px;
+    padding-top: 8px;
 }
 
 .descriptionText:focus
@@ -93,6 +101,7 @@
     height: 24px;
     display:inline-block;
     position: relative;
+    cursor:pointer;
 }
 
 .checkboxDiv{
@@ -112,16 +121,18 @@
 .participants{
     position:relative;
     top:40px;
+    height: 520px;
 }
 
 .submitButton{
+    position:absolute;
     display:block;
     border:none;
     position: relative;
     height: 38px;
     width:100px;
     left:513px;
-    top: 90px;
+    bottom: 0px;
     background: #8D31D8;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
@@ -132,4 +143,57 @@
     line-height: 21px;
     color: #F0D6FF;
     cursor:pointer;
+}
+
+.teamDiv
+{
+    position: relative;
+    display: block;
+    text-align:inline-block;
+    width:100%
+}
+.removeTeamButton{
+    border:none;
+    left: 600px;
+    bottom:30px;
+    width:20px;
+    height:10px;
+    position: relative;
+    display:inline-block;
+    cursor:pointer;
+    border-radius:2px;
+}
+
+.removeTeamButton:hover
+{
+    color: #8D31D8;
+    background-color: #8D31D8;
+}
+
+
+.addTeamButton{
+    border:none;
+    mask-image: url("../../assets/add-team.svg");
+    position: relative;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    mask-size: 100%;
+    height: 30px;
+    width:30px;
+    left:8px;
+    top:8px;
+    top:0px;
+    cursor:pointer;
+}
+
+.addTeamButton:hover
+{
+    color: #8D31D8;
+    background-color: #8D31D8;
+}
+
+.addTeamDiv{
+    position:relative;
+    height: 80px;
+    top: 3px;
 }

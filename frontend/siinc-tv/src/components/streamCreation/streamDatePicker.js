@@ -3,6 +3,7 @@ import setMinutes from "date-fns/setMinutes";
 import React, {useState, useRef} from "react";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import "./datepickerStyle.css"
 
 /**
  * @brief Used for date selection on stream scheueling
@@ -28,13 +29,13 @@ function StreamDatePicker(props){
     };
 
     return (
-      <DatePicker
-        selected={startDate}
-        onChange={onChangeHandler}
-        showTimeSelect
-        dateFormat="MMMM d, yyyy h:mm:aa"
-        timeIntervals={15}
-      />
+        <DatePicker
+          selected={startDate}
+          onChange={onChangeHandler}
+          showTimeSelect
+          dateFormat="MMMM d, yyyy h:mm:aa"
+          timeIntervals={15}
+        />
     );
   };
 

@@ -89,7 +89,7 @@ const customTagStyle={
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Description:</label>
-                        <input className={style.descriptionText}  onChange={e => setDescription(e.target.value)} type="text" value={description}/>
+                        <textarea className={style.descriptionText}  onChange={e => setDescription(e.target.value)} type="text" value={description}/>
                     </div>
 
                     <div className={style.fieldDiv}>
