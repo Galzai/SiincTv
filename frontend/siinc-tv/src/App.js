@@ -9,14 +9,16 @@ function App(){
     return(
         <UserProvider>
             <UserContext.Consumer>
-                {context=>(<NewStream user={context.user}/>)}
-                {/* {context =>(
-                    <SigningModal
+                {context=>(
+                <div>
+                <SigningModal
                         user={context.user}
                         setUser={context.setUser}
                         refreshUserData={context.refreshUserData}
-                    />
-                )} */}
+                />
+                <NewStream user={context.user}/>
+
+                </div>)}
             </UserContext.Consumer>
 
         </UserProvider>

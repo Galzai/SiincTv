@@ -1,5 +1,6 @@
 const passport = require("passport");
-const {User, StreamData, StreamerData} = require("../models/streamModels");
+const {StreamData, StreamerData} = require("../models/streamModels");
+const {User} = require("../models/user");
 const e = require("express");
 const { UpComingEventData } = require("../models/user");
 
@@ -10,30 +11,24 @@ const { UpComingEventData } = require("../models/user");
  * @param {*} res 
  */
 exports.createStream = function(req, res){
-    //------------------- Temporary test-------------------
+
     console.log("StreamData: " , JSON.stringify(req.body));
-    console.log("StreamData: " , req.body.streamGroup);
-    res.send("stream/logged");
-    return;
-       //------------------- Temporary test------------------- 
+    console.log("User is: ",req.user)
     // We can't allow stream creation for a non logged in user
     if(!req.user){
         res.send('user/not_logged_in')
-        return(done, done);
+        console.log("no user");
     }
     const data = req.body;
-    console.log("StreamData: " ,data);
-    // Temporary test
-    res.send("stream/logged");
+    
     // Create the new stream data
     let streamData = new StreamData({
-        creator : creator,
         date : data.date,
         name : data.name,
         status : "Scheduled",
         privateStream : data.privateStream ,
-        joinOnly : data.joinOnly,
-        tags : data.tags,
+        joinOnly : data.inviteOnly,
+        tags : data.tags.map(tag=>tag.value),
         date: data.date,
         registeredViewers : null,
         numOfViewers: 0
@@ -41,28 +36,34 @@ exports.createStream = function(req, res){
     });
    // set the creator object
     streamData.creator = new StreamerData({
-        memberId : data.user._id,
-        displayName : data.user.displayName,
+        memberId : req.user._id,
+        displayName : req.user.username,
         // TODO: User image
     });
 
-    // Write the groups
-    for(group in data.streamGroup){
-        streamData.streamGroups.push(group);
-    }
+    // We need to change the format of groups from the received format to the one we store
+    // We map every group to a group of StreamerData
+    const streamGroups = data.streamGroups.map(streamGroup=>streamGroup.group.map(
+        member=>new StreamerData({
+            // Note: member id and userImage will need to change frontend side when friends are implemented
+            // memberId: member.memberId,
+            displayName: member.value,
+            // userImage: member.userImage
+        })));
+    streamData.streamGroups = streamGroups;
 
-
+    console.log("Stream model : ", streamData);
     // Save the new streamData
     streamData.save();
 
     // Update the user's current events
-    User.UpdateOne(
-        {"_id": data.user._id},
+    User.updateOne(
+        {"_id": req.user._id},
         {$push : {"upcomingEvents":  
          {name : data.name,
         date: data.date,
-        eventId: date._id }
-        }});
+        eventId: streamData._id }
+        }}).then(obj=>{console.log("Object modified", obj)});
     console.log("Saved StreamData: " ,streamData);
     res.send("stream/created");
     
