@@ -3,6 +3,16 @@ import UserContext from "../../userContext";
 import style from './navprofilemenu.module.css';
 import userActions from "../../user/userActions" 
 
+/*-----------------------------   Icons   -------------------------------*/
+import MyChannelIcon from "../../assets/NavBar/NavProfileMyChannel.png"
+import FriendsIcon from "../../assets/NavBar/NavProfileFriends.png"
+import FavoritesIcon from "../../assets/NavBar/NavProfileFavorites.png"
+import SubscribedIcon from "../../assets/NavBar/NavProfileSubscribed.png"
+import SettingsIcon from "../../assets/NavBar/NavProfileSettings.png"
+import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.png"
+/*-----------------------------------------------------------------------*/
+
+
 export function NavProfileMenuHeader() {
     const userContext = useContext(UserContext);
 
@@ -106,7 +116,7 @@ export function NavProfileMenuMyChannelLink() {
     return(
         <div className={style.navProfileMenuMyChannelDiv}>
             <div className={style.navProfileMenuMyChannelIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={MyChannelIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
@@ -122,7 +132,7 @@ export function NavProfileMenuFriendsLink() {
     return(
         <div className={style.navProfileMenuFriendsDiv}>
             <div className={style.navProfileMenuFriendsIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={FriendsIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
@@ -137,7 +147,7 @@ export function NavProfileMenuFavoritesLink() {
     return(
         <div className={style.navProfileMenuFavoritesDiv}>
             <div className={style.navProfileMenuFavoritesIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={FavoritesIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
@@ -152,7 +162,7 @@ export function NavProfileMenuSubscribedLink() {
     return(
         <div className={style.navProfileMenuSubscribedDiv}>
             <div className={style.navProfileMenuSubscribedIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={SubscribedIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
@@ -167,7 +177,7 @@ export function NavProfileMenuMySettingsLink() {
     return(
         <div className={style.navProfileMenuSettingsDiv}>
             <div className={style.navProfileMenuSettingsIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={SettingsIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
@@ -189,7 +199,7 @@ export function NavProfileMenuLogout() {
     return(
         <div className={style.navProfileMenuLogoutDiv} onClick={()=>signOut()}>
             <div className={style.navProfileMenuLogoutIcon}>
-                <img src="https://cdn4.iconfinder.com/data/icons/vectory-bonus-3/40/channel_news-512.png"
+                <img src={LogOutIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>

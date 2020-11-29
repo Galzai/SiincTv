@@ -204,8 +204,8 @@
 .navProfileMenuFriendsIcon
 {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 14px;
 }
 .navProfileMenuFriendsText
 {
@@ -226,8 +226,8 @@
 .navProfileMenuFavoritesIcon
 {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 19px;
 }
 .navProfileMenuFavoritesText
 {
@@ -248,8 +248,8 @@
 .navProfileMenuSubscribedIcon
 {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 20px;
 }
 .navProfileMenuSubscribedText
 {
@@ -269,8 +269,8 @@
 .navProfileMenuSettingsIcon
 {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
 }
 .navProfileMenuSettingsText
 {

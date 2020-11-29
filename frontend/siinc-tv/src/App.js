@@ -1,28 +1,54 @@
-import React, {useEffect, useState} from 'react'
-import SigningModal from "./components/userSigning/signingModal";
-import NewStream from "./components/streamCreation/newStream";
+import React, {useState} from 'react'
 import UserProvider from "./userProvider";
-import UserContext from "./userContext";
-//----------test--------------
+import useWindowDimensions from "./useWindowDimensions.js";
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import HomePage from "./Pages/home.js";
+import CreateStreamPage from "./Pages/createSteam.js";
 import NavigationBar from "./components/NavigationBar/navigationBar";
-//---------------------------
+import SideBar from "./components/SideBar/sideBar.js";
+import "./app.css"
 
 function App(){
+    const window = useWindowDimensions();
+    const [width, setWidth] = useState(window.width); 
+    const [height, setHeight] = useState(window.height); 
+
+    if( width != window.width ) {
+        setWidth(window.width);
+        console.log("width = " + window.width);
+    }
+    if( height != window.height ) {
+        setHeight(window.height);
+        console.log("heigeht = " + window.height);
+    }
+
+    const wrapperStyle = {
+        container : {
+            width: window.width*0.997,
+            height: window.height,
+            backgroundColor: "#10002B",
+            overflow: "auto",
+        }
+    }
 
     return(
-        <div style={{height:"2000px"}}>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"100%", height:"100%"}}></img>
+        <div style={wrapperStyle.container}>
         <UserProvider>
-            <UserContext.Consumer>
-                {context=>(
-                <div>
- 
-                <NewStream user={context.user}/>
-
-                </div>)}
-            </UserContext.Consumer>
-
-            <NavigationBar></NavigationBar>
+            <Router>
+            <SideBar></SideBar>
+                <NavigationBar></NavigationBar>
+                
+                <div style={{paddingLeft:"204px", paddingTop:"52px"}}>
+                <Switch>
+                    <Route exact path="/">
+                        <HomePage></HomePage>
+                    </Route>
+                    <Route path="/create_stream">
+                        <CreateStreamPage></CreateStreamPage>         
+                    </Route>
+                </Switch>
+                </div>
+            </Router>
         </UserProvider>
         </div>
     )

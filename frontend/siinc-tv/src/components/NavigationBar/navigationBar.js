@@ -1,18 +1,37 @@
 import style from './navbar.module.css';
 import UserNavComponent from "./userNavComponent.js";
+import NavSearchComponent from "./navSearchComponent.js"
+import {useContext} from "react"
+import UserContext from "../../userContext";
+import { Link } from "react-router-dom";
+
+function NavCreateStreamButton(props) {
+    return(
+         <Link to="/create_stream">         
+             <div className={style.navCreateStreamButton}>
+             </div> 
+        </Link> 
+    );  
+}
+
+function NavSiincHome(props) {
+    return(
+        <Link to="/">         
+            <div className={style.siincIcon}></div>
+        </Link>    
+    )
+}
 
 function NavigationBar() {
+    const userContext = useContext(UserContext)
 
     return(
         <div>
             <div className={style.navigationBar}>
-                <div className={style.navItem}><img src="https://www.shareicon.net/data/32x32/2016/01/09/700633_stars_512x512.png"></img></div>
-                <div className={style.navItem}>siinc</div>
-                <div className={style.navItem}><img src="https://www.shareicon.net/data/32x32/2016/01/09/700633_stars_512x512.png"></img></div>
-                <div className={style.navItem}><textarea defaultValue="search"></textarea></div>
-                <div className={style.navItem}>profile : </div>
-                <div className={style.navItem}><img src="https://www.shareicon.net/data/32x32/2016/01/09/700633_stars_512x512.png"></img></div>
-               <UserNavComponent></UserNavComponent>
+                <NavSiincHome></NavSiincHome>
+                {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
+                <NavSearchComponent></NavSearchComponent>
+                <UserNavComponent></UserNavComponent>
                 
             </div>
         </div>

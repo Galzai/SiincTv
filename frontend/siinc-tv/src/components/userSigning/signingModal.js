@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import UserSigning from './userSigning';
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions"
+import style from "../NavigationBar/navbar.module.css"
 
 // React modal doesn't play nice with css modules
 const customStyles = {
@@ -29,6 +30,7 @@ function SigningModal(props){
     const setUser = props.setUser;
     const refreshUserData = props.refreshUserData;
     const [showRegistration, setShowRegistration] = useState(false);
+    const [signinType, setSigninType] = useState('signIn');
 
     // We set the app element to root
     Modal.setAppElement('#root');
@@ -58,24 +60,25 @@ function SigningModal(props){
         <UserContext.Consumer>
             {context => (
                 <div>
-                    {context.user && <><h1>{context.user.username}</h1>
-                        <h2>{context.user.email}</h2>
-                        <h2>{context.user._id}</h2></>
+                    {!context.user && 
+                        <div>
+                            <div onClick={()=>{setSigninType('signIn');openRegistration()}} className={style.signInButton}>Sign In</div>
+                            <div className={style.navBarSeperator} style={{right:"140px"}}></div>
+                            <div onClick={()=>{setSigninType('signUp');openRegistration()}} className={style.signUpButton}>Sign Up</div>
+                            <Modal
+                                isOpen={showRegistration}
+                                onRequestClose={closeRequest}
+                                style = {customStyles}
+                                contentLabel={"example"}
+                            >
+                                <UserSigning
+                                    user={context.user}
+                                    setUser={context.setUser}
+                                    type={signinType}>
+                                </UserSigning>
+                            </Modal>
+                        </div>
                     }
-                    {!context.user && <button onClick={openRegistration} style={props.styles}>Signup/login</button>}
-                    {context.user && <button onClick={signOut} style={props.styles}>Signout</button>}
-                    {!context.user && <Modal
-                        isOpen={showRegistration}
-                        onRequestClose={closeRequest}
-                        style = {customStyles}
-                        contentLabel={"example"}
-                    >
-                        <UserSigning
-                            user={context.user}
-                            setUser={context.setUser}
-                            type={'signIn'}>
-                        </UserSigning>
-                    </Modal>}
                 </div>
             )}
 
