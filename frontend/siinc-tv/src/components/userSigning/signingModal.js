@@ -62,8 +62,8 @@ function SigningModal(props){
                         <h2>{context.user.email}</h2>
                         <h2>{context.user._id}</h2></>
                     }
-                    {!context.user && <button onClick={openRegistration}>Signup/login</button>}
-                    {context.user && <button onClick={signOut}>Signout</button>}
+                    {!context.user && <button onClick={openRegistration} style={props.styles}>Signup/login</button>}
+                    {context.user && <button onClick={signOut} style={props.styles}>Signout</button>}
                     {!context.user && <Modal
                         isOpen={showRegistration}
                         onRequestClose={closeRequest}

@@ -1,0 +1,310 @@
+.navProfileMenuPic
+{
+    position: absolute;
+    left: 4.12%;
+    right: 76.86%;
+    top: 4.89%;
+    bottom: 83.12%;
+    width: 42px;
+    height: 42px;
+}
+
+.navProfileMenuStatusText
+{
+    position: absolute;
+    width: 31px;
+    height: 12px;
+    left: 50px;
+    top: 42px;
+    margin: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.navProfileMenuOnlineStatusIndicator
+{
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    top: 25%;
+    left: 105%;
+    background: #06fa06;
+    box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    
+}
+
+.navProfileMenuNameText
+{
+    position: absolute;
+    width: 100px;
+    height: 18px;
+    left: 50px;
+    top: 22px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 18px;
+    display: flex;
+    
+}
+
+.navProfileMenuOnlineText
+{
+    position: absolute;
+    width: 35px;
+    height: 14px;
+    left: 8px;
+    top: 63px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.navProfileMenuToggleButtonContainer
+{
+    position: absolute;
+    right: 8.33%;
+    top: 20.77%;
+    width: 20px;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.navProfileMenuToggleButtonContainer:hover
+{
+    cursor: pointer;
+}
+
+.navProfileMenuToggleButtonEnabled
+{
+    width: 100%;
+    height: 100%;
+    background-color: green;
+}
+
+.navProfileMenuToggleButtonDisabled
+{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.navProfileMenuToggleButtonCircle
+{
+    position: absolute;
+    width: 40%;
+    height: 80%;
+    background: rgba(199, 125, 255, 0.75);
+    top: 10%;
+    border-radius: 50%;
+}
+
+
+.navProfileMenuRankingText
+{
+    position: absolute;
+    width: 45px;
+    height: 14px;
+    left: 8px;
+    top: 82px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.navProfileMenuBreak
+{
+    position: absolute;
+    width: 141px;
+    height: 1px;
+    left: 5px;
+    background-color: #756885;
+    border-radius: 70px;   
+}
+
+.navProfileMenuStarContainer
+{
+    position: absolute;
+    width: 50px;
+    height: 10px;
+    right: 8.33%;
+    top: 85px;
+}
+.navProfileMenuRankLeftHalf
+{
+    background: yellow;
+    float: left;
+    height: 10px;
+    width: 5px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+.navProfileMenuRankRightHalf
+{
+    background: yellow;
+    float: left;
+    height: 10px;
+    width: 5px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.navProfileMenuMyChannelDiv, .navProfileMenuFriendsDiv, .navProfileMenuFavoritesDiv, .navProfileMenuSubscribedDiv, .navProfileMenuSettingsDiv, .navProfileMenuLogoutDiv
+{
+    position: absolute;
+    width: 80%;
+    height: 7%;
+    border-radius: 5px;
+}
+.navProfileMenuMyChannelDiv:hover, .navProfileMenuFriendsDiv:hover, .navProfileMenuFavoritesDiv:hover, .navProfileMenuSubscribedDiv:hover, .navProfileMenuSettingsDiv:hover, .navProfileMenuLogoutDiv:hover
+{
+    background: rgba(120, 120, 120, 0.20);
+    cursor: pointer;
+}
+.navProfileMenuMyChannelText, .navProfileMenuFriendsText, .navProfileMenuFavoritesText, .navProfileMenuSubscribedText, .navProfileMenuSettingsText, .navProfileMenuLogoutText
+{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    top: 4px;
+    left: 33px;
+}
+
+.navProfileMenuMyChannelIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuMyChannelText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuMyChannelDiv
+{
+    position: absolute;
+    left: 5%;
+    top: 33.8%;   
+}
+
+
+.navProfileMenuFriendsIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuFriendsText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuFriendsDiv
+{
+    position: absolute;
+    left: 5%;
+    top: 44.8%;   
+}
+
+
+.navProfileMenuFavoritesIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuFavoritesText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuFavoritesDiv
+{
+    position: absolute;
+    left: 5%;
+    top: 52.9%;
+}
+
+
+.navProfileMenuSubscribedIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuSubscribedText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuSubscribedDiv
+{
+    left: 5%;
+    top: 61.4%;
+}
+
+
+.navProfileMenuSettingsIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuSettingsText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuSettingsDiv
+{
+    position: absolute;
+    left: 5%;
+    top: 72.7%;
+}
+
+
+.navProfileMenuLogoutIcon
+{
+    position: absolute;
+    width: 18px;
+    height: 18px;
+}
+.navProfileMenuLogoutText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 14px;
+}
+.navProfileMenuLogoutDiv
+{
+    position: absolute;
+    left: 5%;
+    top: 84%;
+}
