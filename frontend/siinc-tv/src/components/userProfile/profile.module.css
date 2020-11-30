@@ -1,0 +1,445 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Roboto;
+    font-size: 16px;
+    background: #11002c;
+    color: #e3cbf3;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.b:hover {
+    opacity: 0.9;
+}
+
+a {
+    display: inline-block;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+
+.currentStream{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.titleMatch{
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.matchPeople{
+    margin-bottom: 5px;
+    margin-top: 0px;
+    
+}
+
+
+.profilePhoto {
+    margin-top: 10px;
+    height: 160px;
+    width: 160px;
+    border-radius: 160px;
+}
+
+.streamThumbnail{
+    margin-top: 5px;
+    width: 40%;
+}
+
+.aboutContent {
+    margin-left: 20px;
+    font-family: Roboto;
+}
+
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+p {
+    line-height: 27px;
+}
+
+section {
+    overflow: hidden;
+}
+
+.content{
+    font-size: 20px;
+}
+
+
+
+span {
+    display: inline-block;
+}
+
+label {
+    display: inline-block;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.firstDiv {
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+.name {
+    font-size: 38px;
+    position: relative;
+    top: 6px;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.online {
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: #2aa72c;
+    margin: 0px 10px;
+}
+
+.live {
+    color: white;
+    padding: 2px 11px;
+    font-size: 14px;
+    background: #d63729;
+    border-radius: 12px;
+    font-family: Roboto;
+    cursor: pointer;
+}
+
+.star {
+    float: right;
+    margin-top: 16px;
+}
+
+.starImg {
+    height: 20px;
+    width: 20px;
+    margin-left: 5px;
+}
+
+.number {
+    font-size: 18px;
+    margin-left: 20px;
+    font-family: Roboto;
+}
+
+.addFavorites{
+    height: 20px;
+    width: 20px;
+    border:none;
+    float: left;
+    background-color: #e3cbf3;
+    margin-right: 5px;
+    background-image: url("../../assets/blackstar.png");
+    background-repeat: no-repeat;
+}
+
+.subscribe{
+    height: 20px;
+    width: 20px;
+    border:none;
+    float: left;
+    background-color: #e3cbf3;
+    margin-right: 5px;
+    background-image: url("../../assets/sublogo.png");
+    background-repeat: no-repeat;
+}
+
+.addFriends{
+    height: 20px;
+    width: 20px;
+    border:none;
+    float: left;
+    background-color: #e3cbf3;
+    margin-right: 5px;
+    background-image: url("../../assets/userlogo.png");
+    background-repeat: no-repeat;
+}
+
+.secondDiv .btns {
+    float: right;
+}
+
+    .secondDiv .btns a {
+        background: #e3cbf3;
+        color: #11002c;
+        padding: 7px 15px;
+        border-radius: 12px;
+        margin-left: 4px;
+        text-decoration: none;
+        /* font-family: Roboto-Bold; */
+        font-size: 15px;
+    }
+
+.pointsSpan {
+    display: inline;
+    margin-left: 20px;
+    font-family: Roboto;
+    font-size: 18px;
+}
+
+.pointsLabel {
+    background: #8f30d7;
+    padding: 3px 12px;
+    border-radius: 19px;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.pointsLabel:hover {
+    cursor: pointer;
+}
+
+.catagory{ 
+    display: block;
+    font-family: Roboto;
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.catagoryLabel {
+    background: #8f30d7;
+    padding: 3px 12px;
+    border-radius: 19px;
+    font-size: 13px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.catagoryLabel:hover {
+    cursor: pointer;
+}
+
+.tabList {
+    border-bottom: 1px solid #e3cbf3;
+}
+
+.tabListBtn {
+    display: inline;
+    font-size: 17px;
+    /* font-family: Roboto-Medium; */
+    padding: 3px 12px;
+    border: none;
+    background-color: #11002c;
+    color: #e3cbf3;
+    cursor: pointer;
+}
+/* 
+.tabListBtn:hover {
+    cursor: pointer;
+    background: #8f30d7;
+    padding: 3px 12px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border: none;
+} */
+
+.tabListBtn:focus {
+    background: #8f30d7;
+    padding: 3px 12px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    border: none;
+    outline:none;
+}
+
+
+
+
+/**/
+.div-10 {
+    width: 10%;
+    float: left;
+}
+
+.div20 {
+    width: 20%;
+    float: left;
+}
+
+.div-30 {
+    width: 30%;
+    float: left;
+}
+
+.div-33 {
+    width: 33%;
+    float: left;
+}
+
+.div-40 {
+    width: 40%;
+    float: left;
+}
+
+.div-50 {
+    width: 50%;
+    float: left;
+}
+
+.div60 {
+    width: 60%;
+    float: left;
+}
+
+.div-70 {
+    width: 70%;
+    float: left;
+}
+
+.div80 {
+    width: 80%;
+    float: left;
+}
+
+.div-90 {
+    width: 90%;
+    float: left;
+}
+
+.div100 {
+    width: 100%;
+    float: left;
+}
+
+
+@media(min-width:768px) {
+    .container {
+        width: 91%;
+        margin: 0 auto;
+    }
+}
+
+
+@media(min-width:1200px) {
+    .container {
+        width: 1135px;
+        margin: 0 auto;
+        display: block;
+    }
+}
+/**/
+@media(max-width:767px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+
+    h2 {
+        font-size: 24px;
+    }
+
+
+    .container {
+        width: 95%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .div-10 {
+        width: 100%;
+    }
+
+    .div-20 {
+        width: 100%;
+    }
+
+    .div-30 {
+        width: 100%;
+    }
+
+    .div-33 {
+        width: 100%;
+    }
+
+    .div-40 {
+        width: 100%;
+    }
+
+    .div-50 {
+        width: 100%;
+    }
+
+    .div-60 {
+        width: 100%;
+    }
+
+    .div-70 {
+        width: 100%;
+    }
+
+    .div-80 {
+        width: 100%;
+    }
+
+    .div-90 {
+        width: 100%;
+    }
+
+    .div-100 {
+        width: 100%;
+    }
+
+    .secondDiv .btns {
+        margin: 10px 0px;
+    }
+
+        .secondDiv .btns a {
+            margin-bottom: 10px;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+    .name {
+        font-size: 24px;
+    }
+
+    .star {
+        display: block;
+        float: none;
+    }
+
+    hr {
+        display: none;
+    }
+
+    .profile {
+        width: 200px;
+        margin: 0 auto;
+    }
+}
+
+
+@media(min-width:768px) and (max-width:991px) {
+    .name {
+        font-size: 30px;
+    }
+}
+
