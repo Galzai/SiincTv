@@ -10,28 +10,8 @@ function HomePage(props) {
             height="378"
             width="620">
         </iframe>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            <img src="https://img.icons8.com/material/4ac144/256/user-male.png" style={{width:"500px", height:"500px"}}></img>
-            
-
         </div>
+        
     )
 }
 
