@@ -1,0 +1,13 @@
+.streamSelectorBar{
+    display:inline-block;
+    position:relative;
+    width: 845px;
+    height: 145.13px;
+}
+
+.streamSelector{
+    display:inline-block;
+    position:relative;
+    width: 264px;
+    height: 145.13px;
+}
