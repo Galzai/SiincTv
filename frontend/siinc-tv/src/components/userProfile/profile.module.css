@@ -7,10 +7,6 @@ body {
     color: #e3cbf3;
 }
 
-.text-center {
-    text-align: center;
-}
-
 .clearfix {
     clear: both;
 }
@@ -27,7 +23,7 @@ a {
     margin-top: 40px;
 }
 
-.currentStream{
+.headStream{
     margin-top: 10px;
     margin-bottom: 10px;
     font-size: 30px;
@@ -48,6 +44,7 @@ a {
 
 .profilePhoto {
     margin-top: 10px;
+    margin-left:70px;
     height: 160px;
     width: 160px;
     border-radius: 160px;
@@ -187,7 +184,7 @@ label {
         color: #11002c;
         padding: 7px 15px;
         border-radius: 12px;
-        margin-left: 4px;
+        margin-left: 10px;
         text-decoration: none;
         /* font-family: Roboto-Bold; */
         font-size: 15px;
@@ -273,7 +270,7 @@ label {
 
 
 /**/
-.div-10 {
+.div10 {
     width: 10%;
     float: left;
 }
@@ -283,22 +280,22 @@ label {
     float: left;
 }
 
-.div-30 {
+.div30 {
     width: 30%;
     float: left;
 }
 
-.div-33 {
+.div33 {
     width: 33%;
     float: left;
 }
 
-.div-40 {
+.div40 {
     width: 40%;
     float: left;
 }
 
-.div-50 {
+.div50 {
     width: 50%;
     float: left;
 }
@@ -308,7 +305,7 @@ label {
     float: left;
 }
 
-.div-70 {
+.div70 {
     width: 70%;
     float: left;
 }
@@ -318,7 +315,7 @@ label {
     float: left;
 }
 
-.div-90 {
+.div90 {
     width: 90%;
     float: left;
 }
@@ -328,118 +325,7 @@ label {
     float: left;
 }
 
-
-@media(min-width:768px) {
-    .container {
-        width: 91%;
-        margin: 0 auto;
-    }
+.container {
+    width: 95%;
+    margin: 0 auto;
 }
-
-
-@media(min-width:1200px) {
-    .container {
-        width: 1135px;
-        margin: 0 auto;
-        display: block;
-    }
-}
-/**/
-@media(max-width:767px) {
-
-    h1 {
-        font-size: 32px;
-    }
-
-
-    h2 {
-        font-size: 24px;
-    }
-
-
-    .container {
-        width: 95%;
-        margin: 0 auto;
-        display: block;
-    }
-
-    .div-10 {
-        width: 100%;
-    }
-
-    .div-20 {
-        width: 100%;
-    }
-
-    .div-30 {
-        width: 100%;
-    }
-
-    .div-33 {
-        width: 100%;
-    }
-
-    .div-40 {
-        width: 100%;
-    }
-
-    .div-50 {
-        width: 100%;
-    }
-
-    .div-60 {
-        width: 100%;
-    }
-
-    .div-70 {
-        width: 100%;
-    }
-
-    .div-80 {
-        width: 100%;
-    }
-
-    .div-90 {
-        width: 100%;
-    }
-
-    .div-100 {
-        width: 100%;
-    }
-
-    .secondDiv .btns {
-        margin: 10px 0px;
-    }
-
-        .secondDiv .btns a {
-            margin-bottom: 10px;
-            font-size: 13px;
-            margin-top: 10px;
-        }
-
-    .name {
-        font-size: 24px;
-    }
-
-    .star {
-        display: block;
-        float: none;
-    }
-
-    hr {
-        display: none;
-    }
-
-    .profile {
-        width: 200px;
-        margin: 0 auto;
-    }
-}
-
-
-@media(min-width:768px) and (max-width:991px) {
-    .name {
-        font-size: 30px;
-    }
-}
-

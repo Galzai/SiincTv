@@ -131,14 +131,10 @@ function Profile(props) {
                     </div>
                 </div>
             </div>
-            <div className={style.mt40}>
-                <div className={style.container}>
-                    <div className={style.div100}>
-                        {showDisplay()==='about' && <About userOnline = {userOnline}/>}
-                        {showDisplay()==='schedule' && <Schedule userName = {userName}/>}
-                        {showDisplay()==='friends' && <Friends userName = {userName} />}
-                    </div>
-                </div>
+            <div className={style.container}>
+                {showDisplay()==='about' && <About userOnline = {userOnline}/>}
+                {showDisplay()==='schedule' && <Schedule userName = {userName}/>}
+                {showDisplay()==='friends' && <Friends userName = {userName} />}
             </div>
         </div>
     );
