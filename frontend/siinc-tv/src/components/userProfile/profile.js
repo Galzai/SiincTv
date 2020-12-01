@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import style from './profile.module.css'
 
 import Friends from './friends'
 import AboutOffline from './aboutOffline'
 import AboutOnline from './aboutOnline'
 import Schedule from './schedule'
+import UserContext from "../../userContext";
 
 import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
@@ -16,7 +17,8 @@ import purpleStar from '../../assets/purpelstar.png'; //todo
 function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
-    const userName = props.userName;
+    const userContext = useContext(UserContext);
+    const userName = (userContext.user) ? userContext.user.username : "Null";//props.userName;
     const userOnline = 'true';  //todo
     const userStreaming = 'true'; //todo
     const userRating  = 3 ;  //todo

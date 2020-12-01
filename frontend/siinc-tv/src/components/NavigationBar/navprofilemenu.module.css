@@ -308,3 +308,9 @@
     left: 5%;
     top: 84%;
 }
+
+.link
+{
+    text-decoration: none;
+    color: inherit;
+}

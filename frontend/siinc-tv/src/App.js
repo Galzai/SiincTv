@@ -7,6 +7,7 @@ import StreamMock from "./Pages/streamMock.js";
 import CreateStreamPage from "./Pages/createSteam.js";
 import NavigationBar from "./components/NavigationBar/navigationBar";
 import SideBar from "./components/SideBar/sideBar.js";
+import Profile from "./components/userProfile/profile.js"
 import "./app.css"
 
 function App(){
@@ -49,6 +50,9 @@ function App(){
                     </Route>
                     <Route exact path="/mock_stream_id">
                         <StreamMock></StreamMock>
+                    </Route>
+                    <Route path="/my_channel">
+                        <Profile></Profile>
                     </Route>
                 </Switch>
                 </div>
