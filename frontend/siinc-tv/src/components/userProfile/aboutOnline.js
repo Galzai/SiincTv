@@ -7,7 +7,7 @@ function AboutOnline(props) {
     
     const userName = props.userName;
     const currentLables = ['Label 1','Labe 2','Label 3'] //todo
-    const prevStreams = ['Title Match 2','Title Match 3','Title Match 4'] //todo
+    const prevStreams = ['Stream 1','Stream2','Stream3'] //todo
 
 
     function CurrentStream(){
@@ -15,9 +15,9 @@ function AboutOnline(props) {
         <div>
             <img className={style.streamThumbnail} src={streamPlaceHolder}/>
             <h3 className={style.titleMatch}>
-                Title Match 1
+                Stream 1
             </h3>
-            <p className={style.matchPeople}>{userName} and User B vs V2</p>
+            <p className={style.matchPeople}>{userName} and user1 </p>
             <div className={style.points}> 
                 <div className={style.catagory}> Category </div>
                 {currentLables.map((value, index) => {
@@ -37,9 +37,9 @@ function AboutOnline(props) {
             <div className={style.div60}>
                 <div className={style.content}>
                     <h3 className={style.titleMatch}>
-                        Title Match 3
+                        Stream 3
                     </h3>
-                    <p>User B vs V2</p>
+                    <p>{userName}, user2 and 2 more...</p>
                     <p>Category</p>
                     <div>
                             {currentLables.map((value, index) => {
