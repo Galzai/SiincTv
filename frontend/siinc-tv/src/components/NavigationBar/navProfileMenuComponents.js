@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import UserContext from "../../userContext";
 import style from './navprofilemenu.module.css';
 import userActions from "../../user/userActions" 
+import { Link } from "react-router-dom";
 
 /*-----------------------------   Icons   -------------------------------*/
 import MyChannelIcon from "../../assets/NavBar/NavProfileMyChannel.png"
@@ -114,6 +115,7 @@ export function NavProfileMenuRanking() {
 export function NavProfileMenuMyChannelLink() {
 
     return(
+        <Link to="/my_channel" className={style.link} underline="none">
         <div className={style.navProfileMenuMyChannelDiv}>
             <div className={style.navProfileMenuMyChannelIcon}>
                 <img src={MyChannelIcon}
@@ -124,6 +126,7 @@ export function NavProfileMenuMyChannelLink() {
                 MyChannel
             </div>
         </div>
+        </Link>
     );
     
 }
