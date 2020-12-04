@@ -15,6 +15,7 @@ function StreamViewBox(props){
         <LiveStream key={currentStreamer}
             userName={currentStreamer}
             dimensions={{width: "845", height:"463"}}
+            muted={false}
          ></LiveStream>
          <StreamSelectorBar
             currentStreamer={currentStreamer}

@@ -2,23 +2,25 @@
     display:inline-block;
     position:relative;
     width: 875px;
-    height: 145.13px;
+    height: 220.13px;
+    white-space: nowrap;
 }
 
 .streamSelector{
-    display:inline-block;
     position:relative;
     width: 264px;
-    height: 145.13px;
+    height: 220px;
     margin-right: 27px;
     cursor:pointer;
+    float:left;
 }
 
 .streamSelectorButton{
-    display:relative;
+    float:left;
     position:relative;
     width: 129px;
-    height: 20.13px;
-    margin-left:67.5px;
+    height:20.13px;
+    left:67.5px;
+    top:2px;
     cursor:pointer;
 }
