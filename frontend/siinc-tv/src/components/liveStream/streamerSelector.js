@@ -10,8 +10,8 @@ import LiveStream from "./liveStream";
 function StreamSelector(props){
 
     const [streamer, setStreamer] = useState(props.streamer);
-    const setCurrentStreamer = useState(setCurrentStreamer);
-    const currentStreamer = useState(currentStreamer);
+    const setCurrentStreamer = props.setCurrentStreamer;
+    const currentStreamer = useState(props.currentStreamer);
 
     // Replaces the main streamer with this streamer
     const selectAsMainStream=()=>{
