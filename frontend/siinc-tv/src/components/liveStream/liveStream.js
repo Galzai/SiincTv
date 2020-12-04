@@ -7,16 +7,20 @@ function LiveStream(props){
     const [userName, setUserName] = useState(props.userName);
     const [dimensions, setDimension] = useState(props.dimensions);
     const [streamSrc, setStreamSrc] = useState(srcPre + props.userName + srcPost);
+    const [muted, setMuted] = useState(props.muted);
 
     return(
 
         <iframe style ={{marginRight:"27px"}}
             src={streamSrc}
             frameBorder="0" 
-            allowFullScreen="true" 
+            allowFullScreen={true}
             scrolling="no" 
             height={dimensions.height}
-            width={dimensions.width}>
+            width={dimensions.width}
+            muted={muted}
+            >
+
         </iframe>
     );
 }
