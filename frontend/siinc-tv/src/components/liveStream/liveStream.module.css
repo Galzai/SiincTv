@@ -45,6 +45,7 @@
 
 .StreamBox{
     width: 890px;
+    height: 1440px;
 }
 
 .streamerCircle
@@ -67,8 +68,26 @@
 }
 
 .streamers{
-    width:900px;
+    width:875px;
     height:60px;
     overflow: auto;
     white-space:nowrap;
+}
+
+.descriptionDiv{
+    width:875px;
+    height:300px
+}
+
+.textStyle{
+    position: relative;
+    border:none;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 14px;
+    padding-left: 0px;
+    color: #F0D6FF;
+    overflow: hidden;
 }

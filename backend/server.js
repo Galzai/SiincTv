@@ -24,34 +24,41 @@ mongoose.connection.on('error', function(err) {
     console.error('MongoDB error: %s', err);
 });
 
-//--------------------------Middleware---------------------------------------------------------  TODO:: REFACTOR
+//--------------------------Middleware--------------------------------------------------------- \\
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  cors({
-    origin: "http://localhost:3000", // <-- location of the react app were connecting to
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
 
+var corsInf = cors({
+  origin: "http://localhost:3000", // <-- location of the react app were connecting to
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+});
+app.use(corsInf);
+
+
+// set a session for reusability
+var expressSession =   session({
+  secret: "siinctvsecretcode",
+  resave: true,
+  saveUninitialized: true,
+})
 // The secret is used to compute the hash for the session to sign cookies iwth
-app.use(
-  session({
-    secret: "siinctvsecretcode",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
-app.use(cookieParser("siinctvsecretcode"));
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(expressSession)
+.use(cookieParser("siinctvsecretcode"))
+.use(passport.initialize())
+.use(passport.session());
 require("./passportConfigs/passportSetup")(passport);
 
 //-------------------------------------------------------------------------------------------
 app.use('/',router);
 
 //Start Server
-app.listen(4000, () => {
-  console.log("Server Has Started");
-});
+const server = app.listen(4000, () => {
+  console.log("Server Has Started");});
+
+// pass the session and server to socketIo
+require('./sockets/sockets').initializeSocket(server, expressSession, corsInf);
+
+
+
+
