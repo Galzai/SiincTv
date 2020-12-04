@@ -1,3 +1,3 @@
 export const streamGroupsMock = [
-"thehalfwayhouse", "comicsexplained", "starlitedrivein", "mashonly"
+[{userName:"thehalfwayhouse"}, {userName:"comicsexplained"}, {userName:"starlitedrivein"}, {userName:"mashonly"}]
 ];
