@@ -11,7 +11,7 @@ function StreamSelector(props){
 
     const [streamer, setStreamer] = useState(props.streamer);
     const setCurrentStreamer = props.setCurrentStreamer;
-    const currentStreamer = useState(props.currentStreamer);
+    const currentStreamer = props.currentStreamer;
 
     // Replaces the main streamer with this streamer
     const selectAsMainStream=()=>{
@@ -20,11 +20,14 @@ function StreamSelector(props){
     }
 
     return(
-      <div onClick={selectAsMainStream}>
+      <div className={style.streamSelector}>
         <LiveStream style={{display:"relative", marginRight:"10px"}}
             userName={streamer}
             dimensions={{width: "264", height:"145.13"}}
          />
+         <button className={style.streamSelectorButton} onClick={selectAsMainStream}>
+           Set as main
+         </button>
         </div>
     );
 }

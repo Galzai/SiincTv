@@ -1,7 +1,7 @@
 .streamSelectorBar{
     display:inline-block;
     position:relative;
-    width: 845px;
+    width: 875px;
     height: 145.13px;
 }
 
@@ -10,4 +10,15 @@
     position:relative;
     width: 264px;
     height: 145.13px;
+    margin-right: 27px;
+    cursor:pointer;
+}
+
+.streamSelectorButton{
+    display:relative;
+    position:relative;
+    width: 129px;
+    height: 20.13px;
+    margin-left:67.5px;
+    cursor:pointer;
 }

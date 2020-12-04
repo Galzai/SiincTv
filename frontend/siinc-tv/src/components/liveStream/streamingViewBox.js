@@ -12,7 +12,7 @@ function StreamViewBox(props){
 
     return(
         <div>
-        <LiveStream
+        <LiveStream key={currentStreamer}
             userName={currentStreamer}
             dimensions={{width: "845", height:"463"}}
          ></LiveStream>
