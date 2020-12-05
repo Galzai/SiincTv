@@ -7,8 +7,11 @@ import LiveStreamPage from "./Pages/liveStreamPage.js";
 import CreateStreamPage from "./Pages/createSteam.js";
 import NavigationBar from "./components/NavigationBar/navigationBar";
 import SideBar from "./components/SideBar/sideBar.js";
+<<<<<<< HEAD
 import {streamDataMock} from "./mocks/mockStreamData"
+=======
 import Profile from "./components/userProfile/profile.js"
+>>>>>>> main
 import "./app.css"
 
 function App(){

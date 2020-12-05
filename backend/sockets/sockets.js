@@ -14,9 +14,15 @@ module.exports.initializeSocket =  function(io){
         }
         const id = (socket.request.session.passport.user);
         const  user = await User.findById(id);
+        if(user == null)
+        {
+            console.log("cant connect unlogged user to chat")
+            return;    
+        }
 
         // Try and get the user from the db
         console.log(user);
+
 
         // var userId = socket
         const { roomId } = socket.handshake.query;

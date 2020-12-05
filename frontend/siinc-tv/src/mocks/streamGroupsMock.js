@@ -1,6 +1,6 @@
 export const streamGroupsMock = [
-[{userName:"varinio_h", image:"https://lh3.googleusercontent.com/proxy/XAVWY5kuLk4AjG73E-q7lSuN5am9fmisM67-D8PRJm1lqa9fLNj--571bM4by9KqrmsosmczbeiXQMWSL7lQmWmUIachPovb5hdaQlkxJ_ec3AG_l9gS"} 
-, {userName:"comicsexplained", image:"https://lh3.googleusercontent.com/proxy/XAVWY5kuLk4AjG73E-q7lSuN5am9fmisM67-D8PRJm1lqa9fLNj--571bM4by9KqrmsosmczbeiXQMWSL7lQmWmUIachPovb5hdaQlkxJ_ec3AG_l9gS"}
-, {userName:"starlitedrivein", image:"https://lh3.googleusercontent.com/proxy/XAVWY5kuLk4AjG73E-q7lSuN5am9fmisM67-D8PRJm1lqa9fLNj--571bM4by9KqrmsosmczbeiXQMWSL7lQmWmUIachPovb5hdaQlkxJ_ec3AG_l9gS"}
-, {userName:"mashonly", image:"https://lh3.googleusercontent.com/proxy/XAVWY5kuLk4AjG73E-q7lSuN5am9fmisM67-D8PRJm1lqa9fLNj--571bM4by9KqrmsosmczbeiXQMWSL7lQmWmUIachPovb5hdaQlkxJ_ec3AG_l9gS"}
-,{userName:"thehalfwayhouse", image:"https://lh3.googleusercontent.com/proxy/XAVWY5kuLk4AjG73E-q7lSuN5am9fmisM67-D8PRJm1lqa9fLNj--571bM4by9KqrmsosmczbeiXQMWSL7lQmWmUIachPovb5hdaQlkxJ_ec3AG_l9gS"} ]];
+[{userName:"varinio_h", image:"https://i.imgur.com/3jykKJ3.jpg"} 
+, {userName:"comicsexplained", image:"https://i.imgur.com/3jykKJ3.jpg"}
+, {userName:"starlitedrivein", image:"https://i.imgur.com/3jykKJ3.jpg"}
+, {userName:"mashonly", image:"https://i.imgur.com/3jykKJ3.jpg"}
+,{userName:"thehalfwayhouse", image:"https://i.imgur.com/3jykKJ3.jpg"} ]];
