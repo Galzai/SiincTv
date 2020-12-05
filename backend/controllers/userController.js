@@ -66,7 +66,6 @@ exports.user_login = function(req, res, next){
   };
   
   exports.get_user = function(req, res){
-    console.log(req.user);
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
   };
 
