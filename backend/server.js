@@ -7,6 +7,11 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const router = require("./routes/routes");
+const MongoStore = require('connect-mongo')(session);
+// Socket io stuff
+const socketio = require('socket.io');
+
+// const passportSocketIo = require('passport.socketio')
 
 mongoose.connect(
   "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&w=majority",
@@ -36,13 +41,19 @@ var corsInf = cors({
 app.use(corsInf);
 
 
+// our session store on mogo
+const mongoStore = new MongoStore({mongooseConnection: mongoose.connection });
+
 // set a session for reusability
-var expressSession =   session({
+var expressSession = session({
   secret: "siinctvsecretcode",
   resave: true,
   saveUninitialized: true,
+  store: mongoStore
 })
-// The secret is used to compute the hash for the session to sign cookies iwth
+
+
+// The secret is used to compute the hash for the session to sign cookies with
 app.use(expressSession)
 .use(cookieParser("siinctvsecretcode"))
 .use(passport.initialize())
@@ -56,8 +67,13 @@ app.use('/',router);
 const server = app.listen(4000, () => {
   console.log("Server Has Started");});
 
-// pass the session and server to socketIo
-require('./sockets/sockets').initializeSocket(server, expressSession, corsInf);
+
+const io = socketio(server, {cors: {corsInf}});
+io.use(function(socket, next) {
+  expressSession(socket.request, socket.request.res || {}, next);
+});
+
+require('./sockets/sockets').initializeSocket(io);
 
 
 

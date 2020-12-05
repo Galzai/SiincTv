@@ -1,34 +1,39 @@
-// Socket io stuff
-const socketio = require('socket.io');
 
+const {User} = require("../models/user");
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
 
 // This is called to initialize the socket
-module.exports.initializeSocket = function(server, sessionMiddleware, corsInf){
-    var io = socketio(server, {cors: {corsInf}});
-    io.use(function(socket, next){
-        // Wrap the express middleware
-        sessionMiddleware(socket.request, {}, next);
-    }).on("connection", function(socket){
-            var userId = socket
-            console.log("Your User ID is", userId);
-            const { roomId } = socket.handshake.query;
+module.exports.initializeSocket =  function(io){
 
-            socket.join(roomId);
+    io.on("connection", async function(socket){
 
-                        // Join a conversation
+        if(socket.request.session.passport == null)
+        {
+            console.log("cant connect unlogged user to chat")
+            return;
+        }
+        const id = (socket.request.session.passport.user);
+        const  user = await User.findById(id);
 
-            // Listen for new messages
-            socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-                io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-                console.log("NewMessage");
-            });
+        // Try and get the user from the db
+        console.log(user);
 
-            // Leave the room if the user closes the socket
-            socket.on("disconnect", () => {
-                console.log("disconnected")
-                socket.leave(roomId);
-            });
+        // var userId = socket
+        const { roomId } = socket.handshake.query;
+        // Join a conversation
+        socket.join(roomId);
+
+        // Listen for new messages
+        socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+            io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+            console.log("NewMessage");
+        });
+
+        // Leave the room if the user closes the socket
+        socket.on("disconnect", () => {
+            console.log("disconnected");
+            socket.leave(roomId);
+        });
         });
 
 

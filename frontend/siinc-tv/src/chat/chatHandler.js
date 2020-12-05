@@ -12,7 +12,9 @@ const ChatHandler = (roomId) => {
     
     // Creates a WebSocket connection
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+      withCredentials: true,
       query: { roomId },
+      transports: ['websocket']
     });
     
     // Listens for incoming messages

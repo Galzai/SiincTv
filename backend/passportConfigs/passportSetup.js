@@ -48,7 +48,6 @@ module.exports = function (passport) {
     },
     // Twitch auth callback function
     function(accessToken, refreshToken, profile , done){
-      console.log("Twitch profile :", profile);
       // We try to see if we have an existing user with this id
       User.findOne({twitchId: profile.id},
         // findOne callback function
@@ -60,7 +59,6 @@ module.exports = function (passport) {
         // If we find a user with the existing twitch id we just sign in
         if(doc){
           console.log(profile.id);
-          console.log("found user:", doc);
           return done(null, doc);
         }
         //Otherwise we create a new user
@@ -97,7 +95,6 @@ passport.use(new GoogleStrategy({
 },
    // Google auth callback function
   async function(accessToken ,refreshToken ,profile, done){
-    console.log("Google profile :", profile);
     // We try to see if we have an existing user with this id
     User.findOne({googleId: profile.id},
       // findOne callback function
@@ -108,8 +105,6 @@ passport.use(new GoogleStrategy({
       }
       // If we find a user with the existing google id we just sign in
       if(doc){
-        console.log(profile.id);
-        console.log("found user:", doc);
         return done(null, doc);
       }
       //Otherwise we create a new user
@@ -120,13 +115,11 @@ passport.use(new GoogleStrategy({
           emails: profile.emails,
           photos: profile.photos
         });
-        console.log("google doc", newGoogleData);
         const newUser = new User({
           username: profile.displayName,
           googleId: profile.id,
           googleData:newGoogleData
         });
-        console.log("total doc", newUser);
         // we save and finish
         await newUser.save();
         console.log("Added new user");
@@ -146,7 +139,6 @@ passport.use(new FacebookStrategy({
 },
    // Facebook auth callback function
   async function(accessToken ,refreshToken ,profile, done){
-    console.log("Facebook profile :", profile);
     // We try to see if we have an existing user with this id
     User.findOne({facebookId: profile.id},
       // findOne callback function
@@ -158,7 +150,6 @@ passport.use(new FacebookStrategy({
       // If we find a user with the existing facebook id we just sign in
       if(doc){
         console.log(profile.id);
-        console.log("found user:", doc);
         return done(null, doc);
       }
       //Otherwise we create a new user
@@ -169,13 +160,11 @@ passport.use(new FacebookStrategy({
           name: profile.name,
           photos: profile.photos
         });
-        console.log("facebook doc", newFacebookData);
         const newUser = new User({
           username: profile.displayName,
           facebookId: profile.id,
           facebookData:newFacebookData
         });
-        console.log("total doc", newUser);
         // we save and finish
         await newUser.save();
         console.log("Added new user");
