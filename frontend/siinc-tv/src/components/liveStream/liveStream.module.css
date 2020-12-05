@@ -1,3 +1,18 @@
+.streamPage{
+
+}
+
+
+.StreamBox{
+    float:left;
+    width: 890px;
+    height: 1440px;
+}
+
+.chatBox{
+    margin-left: 5%;
+}
+
 .streamSelectorBar{
     display:inline-block;
     position:relative;
@@ -41,11 +56,6 @@
     display: block;
     text-align: left !important;
     clear:left;
-}
-
-.StreamBox{
-    width: 890px;
-    height: 1440px;
 }
 
 .streamerCircle

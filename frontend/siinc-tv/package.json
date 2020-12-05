@@ -13,6 +13,7 @@
     "react": "^17.0.1",
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
+    "react-expanding-textarea": "^2.2.4",
     "react-indiana-drag-scroll": "^1.8.0",
     "react-modal": "^3.11.2",
     "react-multi-carousel": "^2.5.5",

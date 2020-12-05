@@ -1,0 +1,89 @@
+.chatContainer
+{
+    text-align: left;
+    padding-left: 0px;
+    margin: 0px;
+    display: inline-block;
+    position: relative;
+    z-index: 10;
+    width: 362px;
+    height: 100%;
+    top: 0px;
+    right: 15px;
+    background-color: #3C096C;
+    border-radius: 14px;
+ 
+}
+
+.messagesContainer
+{
+    padding-left: 0px;
+    text-align: left;
+    top: 800px;
+    height: 900px;
+ 
+}
+
+.messagesList
+{
+    list-style-type: none;
+    list-style-position: inside;
+    padding-left: 0px;
+    text-align: left;
+ 
+}
+
+.myMessage
+{
+    list-style-type: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    padding-right: 2px;
+    word-wrap: break-word;
+    font-size: 18px;
+    padding-left: 0px;
+    line-height: 21px;
+    color: #8b60c4;
+}
+
+.otherMessage
+{
+    list-style-type: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 21px;
+    color: #F0D6FF;
+}
+
+
+.messageTextArea{
+    width: 90%;
+    color: #AFAFAF;
+    position:relative;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    list-style-type: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 22px;
+    color: #3C096C;
+    background: #EFEFEF;
+    columns: 1;
+    border:none;
+    border-radius: 14px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    bottom: 20px;
+    left:15px;
+}
+
+.messageTextArea:focus, input:focus{
+    outline:none;
+    border-radius: 14px;
+    border: 2px solid rgb(40, 197, 218);
+}
+
