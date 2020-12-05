@@ -3,10 +3,11 @@ import UserProvider from "./userProvider";
 import useWindowDimensions from "./useWindowDimensions.js";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./Pages/home.js";
-import Stream from "./Pages/stream.js";
+import LiveStreamPage from "./Pages/liveStreamPage.js";
 import CreateStreamPage from "./Pages/createSteam.js";
 import NavigationBar from "./components/NavigationBar/navigationBar";
 import SideBar from "./components/SideBar/sideBar.js";
+import {streamDataMock} from "./mocks/mockStreamData"
 import "./app.css"
 
 function App(){
@@ -48,7 +49,9 @@ function App(){
                         <CreateStreamPage></CreateStreamPage>         
                     </Route>
                     <Route exact path="/mock_stream_id">
-                        <Stream></Stream>
+                        <LiveStreamPage
+                        streamData={streamDataMock}
+                        ></LiveStreamPage>
                     </Route>
                 </Switch>
                 </div>

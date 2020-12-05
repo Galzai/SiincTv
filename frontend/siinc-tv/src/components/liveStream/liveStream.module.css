@@ -11,6 +11,8 @@
 
 .chatBox{
     margin-left: 5%;
+    float:left;
+    height: 1440px;
 }
 
 .streamSelectorBar{
