@@ -1,0 +1,43 @@
+.createStreamBox{
+    position:relative;
+    width: 689px;
+    height: 1100px;
+    background-color:#10002B;
+}
+.createStreamForm
+{
+    margin-left: 38px;
+}
+
+.titleLabel{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 47px;
+    display: flex;
+    align-items: flex-end;
+    color: #F0D6FF;
+}
+
+.streamLabel{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 47px;
+    display: flex;
+    align-items: flex-end;
+    color: #F0D6FF;
+}
+
+.descriptionLabel{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 47px;
+    display: flex;
+    align-items: flex-end;
+    color: #F0D6FF;
+}

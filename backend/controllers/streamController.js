@@ -3,6 +3,7 @@ const {StreamData, StreamerData} = require("../models/streamModels");
 const {User} = require("../models/user");
 const e = require("express");
 const { UpComingEventData } = require("../models/user");
+const mongoose = require('mongoose');
 
 /**
  * @brief creates a new stream
@@ -69,5 +70,36 @@ exports.createStream = function(req, res){
     
     //TODO: Will redirect to the newly created stream page
     // res.redirect();
+
+}
+
+/**
+ * @brief finds stream data by id
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.findStreamById = function(req, res){
+    
+    console.log('The id of the stream is: ', req.body);
+
+    if(!req.body){
+        res.send('/no_stream_available');
+        console.log('There is no stream with this id');
+    }
+
+    //The body is the id of the stream in the db
+    const id = req.body;
+    
+    StreamData.findById(id,
+        async function(err, doc){
+            if (err){
+                console.log("Couldn't find this id");
+            }
+            // id exists
+            if (doc) res.send(doc);
+            else res.send(false);
+        }
+    );
 
 }

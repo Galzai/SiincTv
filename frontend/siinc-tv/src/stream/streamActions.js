@@ -13,7 +13,18 @@ const streamActions={
             url:'http://localhost:4000/user/createstream'
         })
         return result.data;
+    },
+
+    findStreamById: async function(streamId){
+        const result = await axios({
+            method: 'POST',
+            data: {streamId},
+            withCredentials:true,
+            url:'http://localhost:4000/user/stream_data'
+        })
+        return result.data;
     }
+
 }
 
 export default streamActions;
