@@ -22,7 +22,7 @@ function StreamSelector(props){
     return(
       <div className={style.streamSelector}>
         <LiveStream style={{display:"relative", marginRight:"10px"}}
-            displayName={streamer}
+            displayName={streamer.displayName}
             dimensions={{width: "264", height:"145.13"}}
             muted={true}
          />

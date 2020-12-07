@@ -40,7 +40,7 @@ function StreamSelectorBar(props){
         if(streamer.displayName !== currentStreamer.displayName)
         {
             return <StreamSelector key={streamer.displayName} className={style.streamSelector}
-                streamer={streamer.displayName}
+                streamer={streamer}
                 setCurrentStreamer={setCurrentStreamer}
                 currentStreamer={currentStreamer}
             />         
