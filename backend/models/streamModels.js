@@ -40,6 +40,7 @@ const streamData = new mongoose.Schema({
     joinOnly : Boolean,
     tags : [{type: String}],
     date: Date,
+    description:String,
     streamGroups: [{type: mongoose.Schema.Types.Mixed, ref: 'StreamGroup'}] ,
     registeredViewers : [{type: mongoose.Schema.Types.ObjectId}],
     numOfViewers: Number

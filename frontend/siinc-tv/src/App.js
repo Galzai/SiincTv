@@ -3,7 +3,7 @@ import UserProvider from "./userProvider";
 import useWindowDimensions from "./useWindowDimensions.js";
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./Pages/home.js";
-import LiveStreamPage from "./Pages/liveStreamPage.js";
+import StreamPage from "./Pages/streamPage.js";
 import CreateStreamPage from "./Pages/createSteam.js";
 import NavigationBar from "./components/NavigationBar/navigationBar";
 import SideBar from "./components/SideBar/sideBar.js";
@@ -22,7 +22,7 @@ function App(){
     }
     if( height != window.height ) {
         setHeight(window.height);
-        console.log("heigeht = " + window.height);
+        console.log("height = " + window.height);
     }
 
     const wrapperStyle = {
@@ -49,10 +49,7 @@ function App(){
                     <Route path="/create_stream">
                         <CreateStreamPage></CreateStreamPage>         
                     </Route>
-                    <Route exact path="/mock_stream_id">
-                        <LiveStreamPage
-                        streamData={streamDataMock}
-                        ></LiveStreamPage>
+                    <Route path="/stream_pages/:id" component={StreamPage}>
                     </Route>
                     <Route path="/my_channel">
                         <Profile></Profile>

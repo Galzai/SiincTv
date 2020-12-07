@@ -30,6 +30,7 @@ exports.createStream = function(req, res){
         joinOnly : data.inviteOnly,
         tags : data.tags.map(tag=>tag.value),
         date: data.date,
+        description:data.description,
         registeredViewers : null,
         numOfViewers: 0
     
@@ -69,5 +70,33 @@ exports.createStream = function(req, res){
     
     //TODO: Will redirect to the newly created stream page
     // res.redirect();
+}
+
+/**
+ * @brief finds stream data by id
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.getStreamById = function(req, res){
+    
+    console.log('stream id is: ', req.body);
+
+    if(!req.body){
+        res.send('stream/invalid_id');
+        console.log('There is no stream with this id');
+    }
+    const id = req.body.streamId;
+    console.log(id);
+    StreamData.findById(id,
+        async function(err, doc){
+            if (err){
+                console.log("Couldn't find this id");
+            }
+            // id exists
+            if (doc) res.send(doc);
+            else res.send('stream/invalid_id');
+        }
+    );
 
 }

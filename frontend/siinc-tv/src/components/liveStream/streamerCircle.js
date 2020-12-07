@@ -9,10 +9,10 @@ import ReactTooltip from 'react-tooltip';
 function StreamerCircle(props){
 
     const streamer = props.streamer;
-    const imgSrc = ( streamer.image ) ? streamer.image : "https://img.icons8.com/material/4ac144/256/user-male.png"
+    const imgSrc = ( streamer.userImage ) ? streamer.userImage : "https://img.icons8.com/material/4ac144/256/user-male.png"
     ;
     return(
-        <div data-tip={streamer.userName} className={style.streamerCircleDiv}>
+        <div data-tip={streamer.displayName} className={style.streamerCircleDiv}>
         <ReactTooltip />  
         <img className={style.streamerCircle}
             src={imgSrc} 
