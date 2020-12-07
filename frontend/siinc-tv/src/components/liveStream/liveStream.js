@@ -4,7 +4,7 @@ const srcPre = "https://player.twitch.tv/?channel=";
 const srcPost = "&parent=localhost" 
 function LiveStream(props){
 
-    const [userName, setUserName] = useState(props.displayName);
+    const [displayName, setUserName] = useState(props.displayName);
     const [dimensions, setDimension] = useState(props.dimensions);
     const [streamSrc, setStreamSrc] = useState(srcPre + props.displayName + srcPost);
     const [muted, setMuted] = useState(props.muted);

@@ -25,7 +25,7 @@ function LivetreamPage(props) {
         {
             return(
             <div>
-                <text>"Oh No, there is no stream with such id!"</text>
+                <h1>Oh No, there is no stream with such id! = (</h1>
             </div>);
         }
         // We select what type of page to display depending on the status
@@ -36,8 +36,18 @@ function LivetreamPage(props) {
                 return <LiveStreamPage
                     streamData={streamData}
                 />
-            default:
-                return <text>Not yet supported</text>
+                case 'Scheduled':
+                    return(
+                        <div>
+                        <h1>Scheduled stream page - under construction</h1>
+                        <h1>Stream Name:</h1>
+                        <h1>{streamData.name}</h1>
+                        <h1>Stream date:</h1>
+                        <h1>{streamData.date}</h1>
+                        </div>
+                    );
+
+
         }
 
     };
