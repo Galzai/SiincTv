@@ -66,7 +66,7 @@ exports.createStream = function(req, res){
         eventId: streamData._id }
         }}).then(obj=>{console.log("Object modified", obj)});
     console.log("Saved StreamData: " ,streamData);
-    res.send("stream/created");
+    res.send(streamData._id);
     
     //TODO: Will redirect to the newly created stream page
     // res.redirect();

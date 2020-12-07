@@ -12,7 +12,8 @@ const streamActions={
             withCredentials:true,
             url:'http://localhost:4000/user/createstream'
         })
-        return result.data;
+        // Redirect to create page
+        window.location.href = 'http://localhost:3000/stream_pages/' + result.data;
     },
 
     getStreamById: async function(streamId){
