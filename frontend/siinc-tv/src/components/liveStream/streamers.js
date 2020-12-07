@@ -19,7 +19,7 @@ function Streamers(props){
     const flatGroups = flatten(streamGroups);
     const streamCircles = flatGroups.map(streamer=>{
             return <StreamerCircle
-            key={streamer.userName}
+            key={streamer.displayName}
             streamer={streamer}
             />         
     } )

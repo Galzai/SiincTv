@@ -42,4 +42,7 @@ router.get('/auth/facebook/callback', userController.facebook_auth_callback);
 // POST request create stream
 router.post('/user/createstream', streamController.createStream);
 
+// POST request gettreamById
+router.post('/user/find_stream_data', streamController.getStreamById);
+
 module.exports = router;

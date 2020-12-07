@@ -37,10 +37,10 @@ function StreamSelectorBar(props){
     const streamGroups = props.streamGroups;
     const streamers = flatten(streamGroups);
     const streamSelectors = streamers.map(streamer=>{
-        if(streamer.userName !== currentStreamer)
+        if(streamer.displayName !== currentStreamer.displayName)
         {
-            return <StreamSelector key={streamer.userName} className={style.streamSelector}
-                streamer={streamer.userName}
+            return <StreamSelector key={streamer.displayName} className={style.streamSelector}
+                streamer={streamer.displayName}
                 setCurrentStreamer={setCurrentStreamer}
                 currentStreamer={currentStreamer}
             />         
