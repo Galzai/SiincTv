@@ -9,7 +9,6 @@ function LivetreamPage(props) {
 
     const displayStream=()=>{
 
-
         const getStreamData= async ()=>{
             setStreamData(await streamActions.getStreamById(props.match.params.id));
         } 
@@ -32,7 +31,6 @@ function LivetreamPage(props) {
         console.log(streamData.status)
         switch(streamData.status){
             case 'Live':
-
                 return <LiveStreamPage
                     streamData={streamData}
                 />
@@ -46,8 +44,6 @@ function LivetreamPage(props) {
                         <h1>{streamData.date}</h1>
                         </div>
                     );
-
-
         }
 
     };

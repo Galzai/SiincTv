@@ -10,6 +10,7 @@ import SideBar from "./components/SideBar/sideBar.js";
 import {streamDataMock} from "./mocks/mockStreamData"
 import Profile from "./components/userProfile/profile.js"
 import "./app.css"
+import SearchPage from './Pages/searchPage';
 
 function App(){
     const window = useWindowDimensions();
@@ -18,11 +19,9 @@ function App(){
 
     if( width != window.width ) {
         setWidth(window.width);
-        console.log("width = " + window.width);
     }
     if( height != window.height ) {
         setHeight(window.height);
-        console.log("height = " + window.height);
     }
 
     const wrapperStyle = {
@@ -45,6 +44,9 @@ function App(){
                 <Switch >
                     <Route exact path="/">
                         <HomePage></HomePage>
+                    </Route>
+                    <Route exact path="/search">
+                        <SearchPage></SearchPage>
                     </Route>
                     <Route path="/create_stream">
                         <CreateStreamPage></CreateStreamPage>         

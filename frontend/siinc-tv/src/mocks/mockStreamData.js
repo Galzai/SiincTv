@@ -19,5 +19,6 @@ export const streamDataMock = {
     test stream description test stream description test stream description\n\
     test stream description test stream description test stream description\n\
     ",
+    tags:["Random", "Assorted", "For testing"]
 
 };
