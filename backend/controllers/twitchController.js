@@ -66,6 +66,11 @@ exports.getAllStreamGroupsStreams = function(req, res)
             
             const streamGroups = req.body.streamGroups;
             let requestString = "";
+            if(!streamGroups)
+            { 
+                res.send('/stream/no_users');
+                return;
+            }
             streamGroups.forEach((group)=>{
                 group.forEach((streamer)=>{
                     requestString += `user_login=${streamer.displayName}&`

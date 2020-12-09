@@ -1,10 +1,11 @@
 
 import {streamDataMock} from "../mocks/mockStreamData";
-const { default: streamActions } = require("../stream/streamActions");
+import LiveStreamPreview from "../components/previews/liveStreamPreview";
+
 function SearchPage(props) {
     return(
         <div>
-            <button onClick={()=>{streamActions.getAllStreamGroupsStreams(streamDataMock.streamGroups)}}>Click me boy</button>
+            <LiveStreamPreview streamData ={streamDataMock}/>
         </div>       
     )
 }
