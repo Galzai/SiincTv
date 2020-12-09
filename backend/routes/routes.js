@@ -5,6 +5,8 @@ var router = express.Router()
 // our controllers
 var userController = require('../controllers/userController')
 var streamController = require('../controllers/streamController')
+var twitchController = require('../controllers/twitchController')
+
 
 // POST request to sign in
 router.post('/signin',userController.user_login);
@@ -44,5 +46,8 @@ router.post('/user/createstream', streamController.createStream);
 
 // POST request gettreamById
 router.post('/user/find_stream_data', streamController.getStreamById);
+
+// POST request gettreamById
+router.post('/twitch/find_channel', twitchController.getUserByUserName);
 
 module.exports = router;
