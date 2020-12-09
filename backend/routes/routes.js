@@ -48,6 +48,6 @@ router.post('/user/createstream', streamController.createStream);
 router.post('/user/find_stream_data', streamController.getStreamById);
 
 // POST request gettreamById
-router.post('/twitch/find_channel', twitchController.getUserByUserName);
+router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 
 module.exports = router;

@@ -19,11 +19,9 @@ function App(){
 
     if( width != window.width ) {
         setWidth(window.width);
-        console.log("width = " + window.width);
     }
     if( height != window.height ) {
         setHeight(window.height);
-        console.log("height = " + window.height);
     }
 
     const wrapperStyle = {

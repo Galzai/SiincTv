@@ -1,9 +1,10 @@
 
+import {streamDataMock} from "../mocks/mockStreamData";
 const { default: streamActions } = require("../stream/streamActions");
 function SearchPage(props) {
     return(
         <div>
-            <button onClick={()=>{streamActions.getTwitchUserDataByName('thehalfwayhouse')}}>Click me boy</button>
+            <button onClick={()=>{streamActions.getAllStreamGroupsStreams(streamDataMock.streamGroups)}}>Click me boy</button>
         </div>       
     )
 }

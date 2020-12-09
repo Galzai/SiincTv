@@ -3,6 +3,7 @@
  */
 
 const axios = require('axios');
+const { request } = require('express');
 const passportConfigs = require('./../passportConfigs/passportConfigs.js');
 
 let accessToken = "NO TOKEN";
@@ -34,8 +35,11 @@ const validateTwitchAuth = async function(){
 // This must be called before any call to the twitch API that requires authentication!
 const getTwitchAuth = async function(){
 
+    // We validate that we are authenticated
     let result = await validateTwitchAuth();
+    // If we are not we try and get a token
     result = result ? "Validated" : await refreshTwitchAuth();
+    // We check if we managed to get validated, if not we return an error status
     if(result != "Validated")
     {
         result = await validateTwitchAuth();
@@ -46,30 +50,42 @@ const getTwitchAuth = async function(){
 
 
 // We first try to get twitch authentication
-exports.getUserByUserName = function(req, res)
+exports.getAllStreamGroupsStreams = function(req, res)
 {
     // Make sure we have an auth key
     getTwitchAuth().then((result)=>{
+        // We only try and access if we have a validated token
         if(result != "Validated")
         {
             res.send('/stream/access_denied');
             return;
         }
 
-        console.log("Token 2 = " + accessToken.access_token)
-
         const getUserAsync =async ()=> {
-            const streamId = req.body.streamId
+            // We expect to get the streamGroup and create a request for all the data from it
+            
+            const streamGroups = req.body.streamGroups;
+            let requestString = "";
+            streamGroups.forEach((group)=>{
+                group.forEach((streamer)=>{
+                    requestString += `user_login=${streamer.displayName}&`
+                });
+            });
+            if(requestString == "")
+            { 
+                res.send('/stream/no_users');
+                return;
+            }
             const result = await axios({
                 method: 'GET',
                 headers: {
                     "Client-ID": passportConfigs.TWITCH_CONFIG.clientID,
                     "Authorization": "Bearer " + accessToken.access_token
                   },
-                url:'https://api.twitch.tv/helix/search/channels?query=' + streamId
+                url:`https://api.twitch.tv/helix/streams?${requestString}`
             }).catch((e)=>{console.log(e.response)}).then((result)=>{
                 if(result && result.data && result.data.data){
-                    res.send(result.data.data[0]);
+                    res.send(result.data.data);
                     return;
                 }
                 res.send('/stream/no_user');

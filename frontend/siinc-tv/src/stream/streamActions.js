@@ -26,11 +26,11 @@ const streamActions={
         return result.data;
     },
 
-    getTwitchUserDataByName: async function(streamId){
+    getAllStreamGroupsStreams: async function(streamGroups){
         const result = await axios({
             method: 'POST',
-            data:{streamId},
-            url:'http://localhost:4000/twitch/find_channel'
+            data:{streamGroups},
+            url:'http://localhost:4000/twitch/get_streams'
         });
         console.log(result.data)
         return result.data;
