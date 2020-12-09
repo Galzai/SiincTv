@@ -1,20 +1,29 @@
-import React, {useState, useRef} from "react";
+import React, {useState} from "react";
 import { HoverSlideshow } from "react-hover-slideshow";
+import style from './previews.module.css'
+import Streamers from "../liveStream/streamers";
 const { default: streamActions } = require("../../stream/streamActions");
 
-const height = "400";
-const width = "300"
+
+const height = "199";
+const width = "362"
 function LiveStreamPreview(props){
     
     const streamData = props.streamData;
     const [streamPreviews, setStreamPreviews] = useState([]);
+    const labels = (streamData.tags == null) ?  null : streamData.tags.map((tag)=>{
+        return(
+            <span className={style.label}
+            key={tag}>
+                {tag}
+            </span>
+        )
+    })
     displayPreviewImage();
     // We need to get the previews asynchrounisly and then update the preview
     function displayPreviewImage(){
-        console.log(streamPreviews);
         if(streamPreviews.length === 0 )
         {
-            console.log(streamPreviews);
             streamActions.getAllStreamGroupsStreams(streamData.streamGroups).then(
                 (twitchStreamResponse)=>{
                     setStreamPreviews(twitchStreamResponse.map(
@@ -26,16 +35,31 @@ function LiveStreamPreview(props){
         }
     }
 
+
     return(
-        <div>
-            <HoverSlideshow
-				aria-label={streamData.name}
-				images={streamPreviews}
-				width="400px"
-				height="300px"
-			/>
+        <div className={style.previewBox}>
+            <div>
+                <HoverSlideshow
+                    aria-label={streamData.name}
+                    images={streamPreviews}
+                    width={`${width}px`}
+                    height={`${height}px`}               
+                />
+            </div>
+        <h2 className={style.previewTitle}>{streamData.name}</h2>
+        <div className={style.streamers}>
+
+        <Streamers
+            streamGroups={streamData.streamGroups}
+            />
+        </div>
+        <div className={style.labels}>
+        {labels}
+        </div>
+            
         </div>
     );
+
 }
 
 export default LiveStreamPreview;
