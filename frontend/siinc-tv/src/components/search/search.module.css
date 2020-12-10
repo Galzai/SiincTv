@@ -1,0 +1,11 @@
+.hackyOffPageElement {
+    position: absolute;
+    bottom: -20px;
+    display: block;
+    height: 10px;
+    width: 10px;
+  }
+  
+  .searchResults{
+      height: 500px;
+  }

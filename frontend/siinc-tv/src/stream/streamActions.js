@@ -32,9 +32,18 @@ const streamActions={
             data:{streamGroups},
             url:'http://localhost:4000/twitch/get_streams'
         });
-        console.log(result.data)
         return result.data;
     },
+
+    searchStreams: async function(searchString, page, status){
+        const result = await axios({
+            method: 'POST',
+            data:{searchString, page, status},
+            url:'http://localhost:4000/search/streams'
+        });
+        return result.data;
+    },
+
 
 }
 

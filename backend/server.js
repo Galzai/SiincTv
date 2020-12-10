@@ -11,8 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 // Socket io stuff
 const socketio = require('socket.io');
 
-// const passportSocketIo = require('passport.socketio')
-
+mongoose.set('useCreateIndex', true)
 mongoose.connect(
   "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&w=majority",
   {

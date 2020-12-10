@@ -98,5 +98,39 @@ exports.getStreamById = function(req, res){
             else res.send('stream/invalid_id');
         }
     );
+}
 
+/**
+ * @brief searches for streams, split to pages
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.searchStreams = function(req, res){
+    const page = req.body.page;
+    const searchString = req.body.searchString
+    const status = req.body.status;
+    console.log("page ", page);
+    console.log("searcString", searchString)
+
+    const PAGE_SIZE = 20;                   // Similar to 'limit'
+    const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+    StreamData.find({$and: [
+        { $text : { $search : searchString}},
+        {status: status}]},
+        { score : { $meta: "textScore" }},
+
+    ).limit(PAGE_SIZE).skip(skip).exec(
+    async function(err, result){
+        if (err){;
+            console.log(err)
+            console.log("stream/no_results");
+        }
+        // id exists
+        console.log(result);
+        if (result) res.send(result);
+        else res.send('stream/no_results');
+    }
+   
+    )  
 }
