@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { withRouter } from 'react-router-dom';
 import { HoverSlideshow } from "react-hover-slideshow";
 import style from './previews.module.css'
 import Streamers from "../liveStream/streamers";
@@ -8,7 +9,6 @@ const { default: streamActions } = require("../../stream/streamActions");
 const height = "199";
 const width = "362"
 function LiveStreamPreview(props){
-    
     const streamData = props.streamData;
     const [streamPreviews, setStreamPreviews] = useState([]);
     const labels = (streamData.tags == null) ?  null : streamData.tags.map((tag)=>{
@@ -35,9 +35,12 @@ function LiveStreamPreview(props){
         }
     }
 
+    function handleRedirect() {
+        props.history.push(`/stream_pages/${streamData._id}`);
+      }
 
     return(
-        <div className={style.previewBox}>
+        <div className={style.previewBox} onClick={handleRedirect}>
             <div>
                 <HoverSlideshow
                     aria-label={streamData.name}
@@ -62,4 +65,4 @@ function LiveStreamPreview(props){
 
 }
 
-export default LiveStreamPreview;
+export default withRouter(LiveStreamPreview);

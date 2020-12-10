@@ -44,10 +44,15 @@ router.get('/auth/facebook/callback', userController.facebook_auth_callback);
 // POST request create stream
 router.post('/user/createstream', streamController.createStream);
 
-// POST request gettreamById
+// POST request getStreamById
 router.post('/user/find_stream_data', streamController.getStreamById);
 
-// POST request gettreamById
+// POST request searchStreams
+router.post('/search/streams', streamController.searchStreams);
+
+// POST request getAllStreamGroupsStreams
 router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
+
+
 
 module.exports = router;

@@ -44,8 +44,11 @@ const streamData = new mongoose.Schema({
     streamGroups: [{type: mongoose.Schema.Types.Mixed, ref: 'StreamGroup'}] ,
     registeredViewers : [{type: mongoose.Schema.Types.ObjectId}],
     numOfViewers: Number
-
   });
+  // This is necessery for quick text search
+  streamData.index({name: 'text', tags: 'text', description: 'text'}, 
+  {name: 'Search index', weights: {name: 10, tags: 8, description: 5}});
+
   const StreamData =  mongoose.model("StreamData", streamData );
 
   module.exports = {

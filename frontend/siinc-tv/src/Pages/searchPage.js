@@ -1,11 +1,16 @@
 
 import {streamDataMock} from "../mocks/mockStreamData";
-import LiveStreamPreview from "../components/previews/liveStreamPreview";
+import StreamSearchResults from "../components/search/streamSearchResults";
+import StreamActions from '../stream/streamActions';
 
 function SearchPage(props) {
+    const searchString = props.match.params.searchString;
     return(
         <div>
-            <LiveStreamPreview streamData ={streamDataMock}/>
+            <StreamSearchResults
+            searchString={searchString}
+            status={"Live"}
+            />
         </div>       
     )
 }

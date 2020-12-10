@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import UserProvider from "./userProvider";
 import useWindowDimensions from "./useWindowDimensions.js";
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import { createBrowserHistory } from "history";
+import { Router as Router, Route, Switch} from "react-router-dom";
 import HomePage from "./Pages/home.js";
 import StreamPage from "./Pages/streamPage.js";
 import CreateStreamPage from "./Pages/createSteam.js";
@@ -12,6 +13,8 @@ import Profile from "./components/userProfile/profile.js"
 import "./app.css"
 import SearchPage from './Pages/searchPage';
 
+
+const history = createBrowserHistory();
 function App(){
     const window = useWindowDimensions();
     const [width, setWidth] = useState(window.width); 
@@ -36,17 +39,15 @@ function App(){
     return(
         <div style={wrapperStyle.container}>
         <UserProvider>
-            <Router>
+            <Router history={history}>
             <SideBar></SideBar>
-                <NavigationBar></NavigationBar>
-                
+                <NavigationBar></NavigationBar>        
                 <div style={{paddingLeft:"350px", paddingTop:"129px"}}>
                 <Switch >
                     <Route exact path="/">
                         <HomePage></HomePage>
                     </Route>
-                    <Route exact path="/search">
-                        <SearchPage></SearchPage>
+                    <Route path="/search/:searchString" component={SearchPage}>
                     </Route>
                     <Route path="/create_stream">
                         <CreateStreamPage></CreateStreamPage>         

@@ -1,8 +1,11 @@
 .previewBox{
 
+    margin-bottom:100;
     width:362px;
-    height:199px;
+    height:330px;
+    cursor: pointer;
 }    
+
 
 .descriptionDiv{
     width:362px;
