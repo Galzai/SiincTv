@@ -111,7 +111,7 @@ exports.searchStreams = function(req, res){
     const searchString = req.body.searchString
     const status = req.body.status;
     console.log("page ", page);
-    console.log("searcString", searchString)
+    console.log("searchString", searchString)
 
     const PAGE_SIZE = 20;                   // Similar to 'limit'
     const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0

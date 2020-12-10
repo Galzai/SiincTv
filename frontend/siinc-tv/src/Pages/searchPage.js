@@ -4,11 +4,11 @@ import StreamSearchResults from "../components/search/streamSearchResults";
 import StreamActions from '../stream/streamActions';
 
 function SearchPage(props) {
-    // const test = StreamActions.searchStreams("Test", 1, "Live");
+    const searchString = props.match.params.searchString;
     return(
         <div>
             <StreamSearchResults
-            searchString={"test"}
+            searchString={searchString}
             status={"Live"}
             />
         </div>       

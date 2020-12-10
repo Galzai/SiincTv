@@ -5,9 +5,9 @@ import LiveStreamPreview from '../previews/liveStreamPreview';
 
 function StreamSearchResults(props) 
 {   
-    const [results, setResults] = useState({streamers:[], page: 1, hasMoreResults: true});
-    const searchString = props.searchString;
+    const [searchString, setSearchString] = useState(props.searchString);
     const status = props.status;
+    const [results, setResults] = useState({streamers:[], page: 1, hasMoreResults: true});
 
 
     function fetchMoreData(){
@@ -15,26 +15,46 @@ function StreamSearchResults(props)
         console.log("Fetch");
         StreamActions.searchStreams(searchString, results.page, status).then((resultPage)=>{
             console.log(resultPage);
-            if((!resultPage) || (resultPage.len === 0) || (resultPage ==='stream/no_results') ){
+            if((!resultPage)  || (resultPage.length === 0) || (resultPage ==='stream/no_results') ){
                 setResults({hasMoreResults : false});
                 return;
             }
             console.log(results)
-            setResults({streamers:[...results.streamers, resultPage[0]], page : results.page + 1});
+                console.log("here")
+                setResults({streamers:[...results.streamers, ...resultPage], page : results.page + 1, 
+                    hasMoreResults : resultPage.length >= 20});
+            
         });
     }
+    React.useEffect(() => {
+        console.log("useEffect")
+        setResults({streamers:[], page: 1, hasMoreResults: true});
+      }, [searchString]);
 
     function displayResults(){
-        console.log(results.streamers.length);
-        // We return different views depending on what we are searching for
-        if(results === '/stream/no_results'){
-            return(<h1>No Results;</h1>);
+
+        // If the search string changed we reset everything
+        if(searchString != props.searchString)
+        {
+            setSearchString(props.searchString);
         }
-        console.log("result",results);
+
+        // We return different views depending on what we are searching for
+        if((!results.streamers) || results.streamers.length === 0){
+            return(<h1>0 Results found.</h1>);
+        }
+
         if(status === "Live"){
-            return(results.streamers.map((result, index)=>
-                        <LiveStreamPreview key={index}
-                        streamData={result}/>))
+            return((results.streamers).map((result, index)=>
+
+            {
+                return(
+                    <LiveStreamPreview key={index}
+                    streamData={result}/>
+                );
+
+            }))
+
                         
         }
     }

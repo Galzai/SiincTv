@@ -1,7 +1,7 @@
 import style from './navbar.module.css';
 import {useState} from "react"
 import useWindowDimensions from "../../useWindowDimensions.js"
-import streamActions from '../../stream/streamActions';
+import { withRouter } from 'react-router-dom';
 
 function NavSearchComponent(props) {
     const [search, setSearch] = useState('');
@@ -18,6 +18,10 @@ function NavSearchComponent(props) {
     const fieldStyle = { constainer: {width: width} };
     // --------------------------------------------------------------------------
 
+    function handleClick(){
+        console.log(search);
+        props.history.push(`/search/${search}`);
+    }
     return(
         <div className={style.navSearchContainer} >{/*style={fieldStyle.constainer} >*/}
             <input className={style.navSearchInput} type="text" required value={search}
@@ -27,11 +31,11 @@ function NavSearchComponent(props) {
             </div>  
             <div className={style.navSearchSeperator}></div>
             <div className={style.navSearchButtonContainer}>
-                <div className={style.navSearchButton}></div>
+                <button className={style.navSearchButton} onClick={handleClick}></button>
             </div>
         </div>
         
     );
 }
 
-export default NavSearchComponent
+export default withRouter(NavSearchComponent)
