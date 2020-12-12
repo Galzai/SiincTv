@@ -89,7 +89,7 @@ exports.user_login = function(req, res, next){
 
   // Callback for twitch authentication
   exports.twitch_auth_callback = function(req,res, next){
-    passport.authenticate("twitch.js", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+    passport.authenticate("twitch.js", { failureRedirect: "http://localhost:3000/" ,successRedirect:"http://localhost:3000/" })(req, res, next)
 };
 
 // Google authentication
@@ -99,7 +99,7 @@ exports.google_auth = function(req, res, next){
 
   // Callback for google authentication
   exports.google_auth_callback = function(req,res, next){
-    passport.authenticate("google", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+    passport.authenticate("google", { failureRedirect: "http://localhost:3000/" ,successRedirect:"http://localhost:3000/" })(req, res, next)
 };
 
   // Facebook authentication
@@ -109,6 +109,6 @@ exports.google_auth = function(req, res, next){
 
     // Callback for facebook authentication
     exports.facebook_auth_callback = function(req,res, next){
-      passport.authenticate("facebook", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+      passport.authenticate("facebook", { failureRedirect: "http://localhost:3000/" ,successRedirect:"http://localhost:3000/" })(req, res, next)
   };
 
