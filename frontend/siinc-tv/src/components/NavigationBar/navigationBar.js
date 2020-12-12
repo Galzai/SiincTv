@@ -15,21 +15,12 @@ function NavCreateStreamButton(props) {
     );  
 }
 
-function NavSiincHome(props) {
-    return(
-        <Link to="/">         
-            <div className={style.siincIcon}></div>
-        </Link>    
-    )
-}
-
 function NavigationBar() {
     const userContext = useContext(UserContext)
 
     return(
         <div>
             <div className={style.navigationBar}>
-                <NavSiincHome></NavSiincHome>
                 {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
                 <NavSearchComponent></NavSearchComponent>
                 <UserNavComponent></UserNavComponent>
