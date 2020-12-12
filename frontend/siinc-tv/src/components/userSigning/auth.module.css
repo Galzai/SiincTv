@@ -50,7 +50,7 @@
     line-height: 21px;
     display: flex;
     align-items: flex-end;
-    color: #F0D6FF;
+    color: #AFAFAF;
 
 }
 
@@ -67,12 +67,12 @@
     top: 10px;
     border:none;
     position: relative;
-    width: 94%;
+    width: 85.76%;
     height: 44px;
     padding: 0px;
-    background: #EFEFEF;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -87,23 +87,23 @@
 {
     box-shadow: 0px 1px 4px #AFAFAF;
     outline-width: 0ch;
-    border-radius: 14px;
+    border-radius: 3px;
 }
 
 .secretInputBox{
     top: 10px;
     border:none;
     position: relative;
-    width: 94%;
+    width: 85.76%;
     height: 44px;
     padding: 0px;
-    background: #EFEFEF;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 22px;
     box-sizing: border-box;
     padding-left: 10px;
@@ -115,7 +115,7 @@
 {
     box-shadow: 0px 1px 4px #AFAFAF;
     outline-width: 0ch;
-    border-radius: 14px;
+    border-radius: 3px;
 }
 
 .signInButtonDiv
@@ -134,9 +134,9 @@
     border:none;
     position: relative;
     height: 38px;
-    width:94%;
+    width:33.6%;
     top: 90px;
-    background: #8D31D8;
+    background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
     font-family: 'Roboto', sans-serif;
@@ -144,14 +144,14 @@
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
-    color: #F0D6FF;
+    color: #E2DAE9;
     cursor:pointer;
 }
 
 .signInButton:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #E2DAE9;
+    background-color: #5B10A3;
 }
 
 .signUpButton
@@ -160,24 +160,24 @@
     border:none;
     position: relative;
     height: 38px;
-    width:94%;
+    width:33.6%;
     top: 175px;
-    background: #8D31D8;
+    background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
-    color: #F0D6FF;
+    color: #E2DAE9;
     cursor:pointer;
 }
 
 .signUpButton:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #E2DAE9;
+    background-color: #5B10A3;
 }
 
 .signUpButton:disabled
@@ -326,7 +326,7 @@
     font-style: normal;
     font-weight: 900;
     font-size: 15px;
-    color: #BAA3C8;
+    color: #AFAFAF;
     position: absolute;
     float:bottom;
     right:20px;

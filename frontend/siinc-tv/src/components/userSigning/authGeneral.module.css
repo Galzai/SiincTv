@@ -3,7 +3,7 @@
     position: relative;
     width: 600px;
     height: 718px;  
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .titleBox{
@@ -11,7 +11,7 @@
     top:28px;
     width: 100%;
     text-align:center;
-    background-color: #8D31D8;
+    background-color: #10002B;
     height: 63px;
 }
 
@@ -21,9 +21,9 @@
     position: relative;
     top: 8px;
     width: 100%;
-    color: #F0D6FF;
+    color: #AFAFAF;
     font-family: 'Roboto', sans-serif;
-    font-style: normal;
+    font-style: bold;
     font-weight: bold;
     font-size: 36px;
     display: block;

@@ -17,8 +17,8 @@ const customStyles = {
         height                : 'fit-content',
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)',
-        backgroundColor       : '#3C096C',
-        borderRadius          : '20px',
+        backgroundColor       : '#10002B',
+        borderRadius          : '10px',
         padding               : '0px'
     }
 };
@@ -62,9 +62,8 @@ function SigningModal(props){
                 <div>
                     {!context.user && 
                         <div>
-                            <div onClick={()=>{setSigninType('signIn');openRegistration()}} className={style.signInButton}>Sign In</div>
+                            <div onClick={()=>{setSigninType('signIn');openRegistration()}} className={style.signInButton}>Log In</div>
                             <div className={style.navBarSeperator} style={{right:"140px"}}></div>
-                            <div onClick={()=>{setSigninType('signUp');openRegistration()}} className={style.signUpButton}>Sign Up</div>
                             <Modal
                                 isOpen={showRegistration}
                                 onRequestClose={closeRequest}
