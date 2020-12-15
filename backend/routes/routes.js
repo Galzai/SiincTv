@@ -6,6 +6,7 @@ var router = express.Router()
 var userController = require('../controllers/userController')
 var streamController = require('../controllers/streamController')
 var twitchController = require('../controllers/twitchController')
+var friendsController = require('../controllers/friendsController')
 
 
 // POST request to sign in
@@ -59,5 +60,7 @@ router.post('/search/users', userController.searchUsers);
 // GET request redirectBack
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
 
+// POST request to friends controller
+router.post('/user/friends', friendsController.handleFriendsRequest);
 
 module.exports = router;

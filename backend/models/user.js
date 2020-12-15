@@ -45,6 +45,16 @@ const upComingEventData = new mongoose.Schema({
 const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData );
 
 /**
+ * @brief holds information regarding the user's friends and friend requests
+ */
+const friendsData = new mongoose.Schema({
+  friendsList: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
+  receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, userמame: String}],
+  sentRequests: [{userId : mongoose.Schema.Types.ObjectId, userמame: String}]
+});
+const FriendsData = new mongoose.model("FriendsData", friendsData);
+
+/**
  * @brief Schema for user account
  */
 const user = new mongoose.Schema({
@@ -61,7 +71,8 @@ const user = new mongoose.Schema({
   googleData: {type: mongoose.Schema.Types.Mixed, ref: 'GoogleData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
-  upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}]
+  upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}],
+  friendsData:[{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'}]
 });
 
 // This is necessery for quick text search
@@ -74,7 +85,8 @@ module.exports = {
       GoogleData:GoogleData,
       TwitchData:TwitchData,
       FacebookData:FacebookData,
-      UpComingEventData:UpComingEventData
+      UpComingEventData:UpComingEventData,
+      FriendsData:FriendsData
 }
 
 

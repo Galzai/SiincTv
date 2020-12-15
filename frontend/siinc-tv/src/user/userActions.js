@@ -3,6 +3,9 @@
  */
 import axios from 'axios';
 
+const SEND_FRIEND_REQUEST = 0;
+const ANSWER_FRIEND_REQUEST = 1;
+
 const userActions ={
 
     createNewUser: async function(regUsername, regEmail, regPassword){
@@ -100,8 +103,40 @@ const userActions ={
 
     authenicateFacebook:  function(){
         window.location.assign('http://localhost:4000/auth/facebook/');
-    }
+    },
 
+    // ------------------------- FRIENDS -----------------------------
+
+    sendFriendRequest: async function(fromUser, toUser) {
+        const result = await axios({
+            method: 'POST',
+            data:{
+                action: SEND_FRIEND_REQUEST,
+                fromUser: fromUser,
+                toUser: toUser
+            },
+            withCredentials=true,
+            url:'http://localhost:4000/user/friends'
+        })
+        return result.data;
+    },
+
+    answerFriendRequest: async function(user1, user2, accepted) {
+        const result = await axios({
+            method: 'POST',
+            data:{
+                action: ANSWER_FRIEND_REQUEST,
+                user1: user1,
+                user2: user2,
+                accepted: accepted   //boolean true for accepted, false for rejeceted.
+            },
+            withCredentials=true,
+            url:'http://localhost:4000/user/friends'
+        })
+        return result.data;
+     }
+
+     // -------------------------------------------------------------
        
 };
 
