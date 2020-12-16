@@ -33,6 +33,8 @@ const customTagStyle={
  * @param {*} props props should have a member streamGroups and setStreamGroups for updating the current groups
  */
 function TeamBlock(props){
+    const maxGroups = props.maxGroups;
+    const friends = props.friends;
     const streamGroups = props.streamGroups;
     const setStreamGroups = props.setStreamGroups;
     const [, updateState] = React.useState();
@@ -42,7 +44,7 @@ function TeamBlock(props){
      * @brief adds a new group, if the number of groups exceeds 4 it does not allow to add a new group
      */
     const addGroup =()=>{
-        if(streamGroups.length > 3)
+        if(streamGroups.length >= maxGroups)
         {
             console.log("Maxmium number of groups exceeded")
             return;
@@ -75,6 +77,7 @@ function TeamBlock(props){
             return(
                 <div className={style.teamDiv} key={group.key + "d"}>
                 <FriendFinder key={group.key}
+                    friends={friends}
                     styles={customTagStyle}
                     group={group}
                     // Updates the specific group in the index

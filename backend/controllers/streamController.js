@@ -24,10 +24,10 @@ exports.createStream = function(req, res){
     let streamData = new StreamData({
         date : data.date,
         name : data.name,
-        status : "Scheduled",
+        status : data.status,
         privateStream : data.privateStream ,
         joinOnly : data.inviteOnly,
-        tags : data.tags.map(tag=>tag.value),
+        tags : data.tags ? data.tags.map(tag=>tag.value) : [],
         date: data.date,
         description:data.description,
         registeredViewers : null,
@@ -38,7 +38,7 @@ exports.createStream = function(req, res){
     streamData.creator = new StreamerData({
         memberId : req.user._id,
         displayName : req.user.username,
-        // TODO: User image
+        userImage : req.user.twitchData.profile_image_url
     });
 
     // We need to change the format of groups from the received format to the one we store
@@ -47,13 +47,12 @@ exports.createStream = function(req, res){
         member=>new StreamerData({
             // Note: member id and userImage will need to change frontend side when friends are implemented
             // memberId: member.memberId,
-            displayName: member.value,
-            // userImage: member.userImage
+            displayName: member.username,
+            userImage: member.image
         })));
     streamData.streamGroups = streamGroups;
     // Save the new streamData
     streamData.save();
-
     // Update the user's current events
     User.updateOne(
         {"_id": req.user._id},
@@ -62,7 +61,23 @@ exports.createStream = function(req, res){
         date: data.date,
         eventId: streamData._id }
         }}).then(obj=>{console.log("Object modified", obj)});
+    // If it's live we set it to the current stream
+    if(data.status === "Live")
+    {
+        User.updateOne(
+            {"_id": req.user._id},
+            {$set: {"currentStream": 
+             {name : data.name,
+            date: data.date,
+            eventId: streamData._id }
+            }}).then(obj=>{console.log("Object modified", obj)}); 
+    }
+    console.log(req.user._id);
+    // req.logIn(req.user._id, (err) => {
+    //     if (err) throw err;;
+    //   });
     res.send(streamData._id);
+
     
     //TODO: Will redirect to the newly created stream page
     // res.redirect();
