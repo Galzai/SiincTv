@@ -57,6 +57,7 @@ function NavProfileButton(props) {
     function assignImage()
     {
         const user = userContext.user;
+        if(!user) return NoProfilePic;
         if(user.image) return user.image;
         if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
         if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
