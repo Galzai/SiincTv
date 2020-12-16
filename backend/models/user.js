@@ -49,8 +49,8 @@ const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData 
  */
 const friendsData = new mongoose.Schema({
   friendsList: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
-  receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, userמame: String}],
-  sentRequests: [{userId : mongoose.Schema.Types.ObjectId, userמame: String}]
+  receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
+  sentRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}]
 });
 const FriendsData = new mongoose.model("FriendsData", friendsData);
 

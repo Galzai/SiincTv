@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const SEND_FRIEND_REQUEST = 0;
 const ANSWER_FRIEND_REQUEST = 1;
+const UNFRIEND_REQUEST = 2;
 
 const userActions ={
 
@@ -107,6 +108,8 @@ const userActions ={
 
     // ------------------------- FRIENDS -----------------------------
 
+    // String:fromUser - friend request sender
+    // String:toUser   - friend request receiver
     sendFriendRequest: async function(fromUser, toUser) {
         const result = await axios({
             method: 'POST',
@@ -115,29 +118,57 @@ const userActions ={
                 fromUser: fromUser,
                 toUser: toUser
             },
-            withCredentials=true,
+            withCredentials:true,
             url:'http://localhost:4000/user/friends'
         })
         return result.data;
     },
 
-    answerFriendRequest: async function(user1, user2, accepted) {
+    // String:fromUser - the sender of the request which is now being responded to
+    // String:toUser   - the one who responds to the requests
+    answerFriendRequest: async function(fromUser, toUser, accepted) {
         const result = await axios({
             method: 'POST',
             data:{
                 action: ANSWER_FRIEND_REQUEST,
-                user1: user1,
-                user2: user2,
+                fromUser: fromUser,
+                toUser: toUser,
                 accepted: accepted   //boolean true for accepted, false for rejeceted.
             },
-            withCredentials=true,
+            withCredentials:true,
             url:'http://localhost:4000/user/friends'
         })
         return result.data;
-     }
+     },
+
+     // String:fromUser - the one who unfriends
+     // String:toUser   - the one being unfriended
+     unfriendFriendRequest: async function(fromUser, toUser) {
+        const result = await axios({
+            method: 'POST',
+            data:{
+                action: UNFRIEND_REQUEST,
+                fromUser: fromUser,
+                toUser: toUser
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/user/friends'
+        })
+        return result.data;
+     },
 
      // -------------------------------------------------------------
-       
+      
+     getUsernameList: async function() {
+        const result = await axios({
+            method:'GET',
+            data:{},
+            withCredentials:true,
+            url:'http://localhost:4000/user/getusernamelist'
+        });
+        return result.data;
+     }
+
 };
 
 export default userActions;

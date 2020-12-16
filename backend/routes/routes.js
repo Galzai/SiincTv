@@ -48,6 +48,9 @@ router.post('/user/createstream', streamController.createStream);
 // POST request getStreamById
 router.post('/user/find_stream_data', streamController.getStreamById);
 
+// GET request getUsernameList
+router.get('/user/getusernamelist', userController.getUsernameList);
+
 // POST request searchStreams
 router.post('/search/streams', streamController.searchStreams);
 

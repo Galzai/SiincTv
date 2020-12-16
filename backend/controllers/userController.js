@@ -116,9 +116,21 @@ exports.user_login = function(req, res, next){
     res.redirect(destination)
   }
 
-  // Twitch authentication
-  exports.twitch_auth = function(req, res, next){
-    passport.authenticate("twitch.js")(req, res, next);
+  // get list of all usernames in database
+  exports.getUsernameList = function(req, res) {
+      User.find({}).distinct('username', 
+        function(err, usernames) {
+        if (err){
+            console.log("error occured");
+        }
+        // user exists
+        if (usernames) res.send(usernames);
+        else res.send([]);
+      }
+    );
+  };  
+  
+
   };
 
   // Callback for twitch authentication
@@ -148,4 +160,6 @@ exports.google_auth = function(req, res, next){
       console.log(req.session.UrlToRedirect);
       passport.authenticate("facebook", { failureRedirect: req.session.UrlToRedirect})(req, res, next)
   };
+
+
 
