@@ -16,7 +16,6 @@ const refreshTwitchAuth = async function(){
     }).catch((e)=>{console.log(e.result.data)} );
     // We check if any user with such name was found
     accessToken = result.data;
-    console.log(result.data)
     return result;
 };
 // This is where we validate our token before making a call
