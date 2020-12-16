@@ -6,7 +6,6 @@
     cursor: pointer;
 }    
 
-
 .descriptionDiv{
     width:362px;
 }
@@ -55,4 +54,75 @@
     transform: scale(0.7);
     -webkit-transform-origin-y: 0;
     -webkit-transform-origin-x: 0;
+}
+
+.UserPreviewBox{
+    display:inline-block;
+    margin-bottom:0px;
+    width:600px;
+    height:200px;
+    cursor: pointer;
+    vertical-align: top;
+}    
+
+.UserTitle{
+    margin-top:0px;
+    margin-bottom:0px;
+    bottom:0px;
+    display:inline-block;
+    vertical-align: top;
+    margin-right: 30px;
+}
+.NumFollowers{
+    top:0px;
+    margin-top:-20px;
+    display:relative;
+    vertical-align: top;
+    margin-right: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.UserName{
+    margin-top:0px;
+    display:inline-block;
+    vertical-align: top;
+    font-family: 'Roboto', sans-serif;
+    font-style: bold;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 25px;
+}
+
+.ShortDescription{
+    top:0px;
+    margin-top:-20px;
+    display:relative;
+    vertical-align: top;
+    margin-right: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+
+.UserButtons{
+    top:0px;
+    display:inline-block;
+    vertical-align: top;
+    margin-right: 30px;
+}
+
+.streamerCircle
+{
+    display:inline-block;
+    margin-right: 30px;
+    width: 120px;
+    height: 120px; 
+    border-radius: 60px;
 }
