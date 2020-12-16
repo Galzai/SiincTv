@@ -3,13 +3,14 @@ import style from './newStream.module.css'
 import CreateableInputOnly from "../selectors/createableInputOnly";
 import StreamDatePicker from "./streamDatePicker";
 import TeamBlock from "./teamBlock";
+import UserContext from "../../userContext";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
  * @brief stream creation page
  * @param {user} props expects the current user to be passed as props
  */
-function NewStream(props){
+function NewScheduledStream(props){
     const {
         user
     }=props;
@@ -61,6 +62,7 @@ const customTagStyle={
             inviteOnly:inviteOnly,
             tags:tags,
             date:date,
+            status:"Scheduled",
             streamGroups:streamGroups,
             description:description
         }
@@ -119,6 +121,8 @@ const customTagStyle={
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Teams:</label>
                         <TeamBlock
+                        maxGroups={3}
+                        friends={user.friends}
                         streamGroups={streamGroups}
                         setStreamGroups={setStreamGroups}/> 
                     </div>
@@ -130,4 +134,4 @@ const customTagStyle={
     );
 }
 
-export default NewStream;
+export default NewScheduledStream;
