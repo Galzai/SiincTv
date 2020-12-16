@@ -81,6 +81,33 @@ exports.user_login = function(req, res, next){
             else res.send(false);
         })
   };
+
+  exports.searchUsers = function(req, res){
+    const page = req.body.page;
+    const searchString = req.body.searchString
+    console.log("page ", page);
+    console.log("searchString", searchString)
+
+    const PAGE_SIZE = 20;                   // Similar to 'limit'
+    const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+    User.find({$and: [
+        { $text : { $search : searchString}}]},
+        { score : { $meta: "textScore" }},
+
+    ).limit(PAGE_SIZE).skip(skip).exec(
+    async function(err, result){
+        if (err){;
+            console.log(err)
+            console.log("user/no_results");
+        }
+        // id exists
+        console.log(result);
+        if (result) res.send(result);
+        else res.send('user/no_results');
+    }
+   
+    )  
+}
   
   // Twitch authentication
   exports.twitch_auth = function(req, res, next){

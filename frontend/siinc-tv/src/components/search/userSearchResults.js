@@ -1,19 +1,18 @@
 import React, {useState} from "react";
 import InfiniteScroll from 'react-infinite-scroller';
-import StreamActions from '../../stream/streamActions';
+import UserActions from '../../user/userActions';
 import UserPreview from '../previews/userPreview';
 
 function UserSearchResults(props) 
 {   
     const [searchString, setSearchString] = useState(props.searchString);
-    const status = props.status;
     const [results, setResults] = useState({streamers:[], page: 1, hasMoreResults: true});
 
 
     function fetchMoreData(){
         
         console.log("Fetch");
-        StreamActions.searchUsers(searchString, results.page, status).then((resultPage)=>{
+        UserActions.searchUsers(searchString, results.page).then((resultPage)=>{
             console.log(resultPage);
             if((!resultPage)  || (resultPage.length === 0) || (resultPage ==='stream/no_results') ){
                 setResults({hasMoreResults : false});
@@ -44,18 +43,15 @@ function UserSearchResults(props)
             return(<h1>0 Results found.</h1>);
         }
 
-        if(status === "Live"){
+        else{
             return((results.streamers).map((result, index)=>
-
             {
                 return(
                     <UserPreview key={index}
-                    streamData={result}/>
+                    user={result}/>
                 );
 
-            }))
-
-                        
+            }))               
         }
     }
 

@@ -64,6 +64,15 @@ const userActions ={
         return result.data;
     },
 
+    searchUsers: async function(searchString, page){
+        const result = await axios({
+            method: 'POST',
+            data:{searchString, page},
+            url:'http://localhost:4000/search/users'
+        });
+        return result.data;
+    },
+
     // External authenticaiton redirects
     authenicateTwitch:  function(){
         window.location.assign('http://localhost:4000/auth/twitch/');
@@ -76,6 +85,7 @@ const userActions ={
     authenicateFacebook:  function(){
         window.location.assign('http://localhost:4000/auth/facebook/');
     }
+
        
 };
 

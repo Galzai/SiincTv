@@ -1,23 +1,27 @@
 
-import {streamDataMock} from "../mocks/mockStreamData";
-import {streamGroupsMock} from "../mocks/streamGroupsMock";
+
+import {useContext, useState} from "react"
+import style from './searchPage.module.css'
 import StreamSearchResults from "../components/search/streamSearchResults";
-import UserPreview from "../components/previews/userPreview"
+import UserSearchResults from "../components/search/userSearchResults";
 
 function SearchPage(props) {
     const searchString = props.match.params.searchString;
-    const resultType = "users" 
+    const [resultType, setResultType] = useState("liveStream");
+
     return(
+
         <div>
+            <div className={style.ResultTypeButtons}>
+                <button onClick={()=>{setResultType("liveStream")}}>Live Streams</button>
+                <button onClick={()=>{setResultType("users")}}>Users</button>
+            </div>
            {resultType === "liveStream" &&  <StreamSearchResults
             searchString={searchString}
             status={"Live"}
             />}
-            {resultType === "users" &&  <UserPreview
-            user={streamGroupsMock[0][0]}
-            />}
-                        {resultType === "users" &&  <UserPreview
-            user={streamGroupsMock[0][0]}
+            {resultType === "users" &&  <UserSearchResults
+            searchString={searchString}
             />}
         </div>       
     )
