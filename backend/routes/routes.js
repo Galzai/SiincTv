@@ -53,6 +53,8 @@ router.post('/search/streams', streamController.searchStreams);
 // POST request getAllStreamGroupsStreams
 router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 
+// POST request searchStreams
+router.post('/search/users', userController.searchUsers);
 
 
 module.exports = router;

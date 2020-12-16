@@ -50,13 +50,25 @@ function NavProfileMenu(props) {
 
 function NavProfileButton(props) {
     const userContext = useContext(UserContext);
-    const imgSrc = ( userContext.user ) ? "https://img.icons8.com/material/4ac144/256/user-male.png"
-                                        : NoProfilePic;
+
+    /**
+     * @brief assigns image if an image is found in userData
+     */
+    function assignImage()
+    {
+        const user = userContext.user;
+        if(user.image) return user.image;
+        if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
+        if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
+        if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
+        return NoProfilePic;
+    }
+                                      
     return(
         <div className={style.navProfileButton}>  
             <img 
-                src={imgSrc} 
-                style={{width:"100%", height:"100%"}}
+                src={assignImage()} 
+                style={{width:"100%", height:"100%", borderRadius: "50%"}}
                 onClick={() => props.onClick()}
             > 
             </img>

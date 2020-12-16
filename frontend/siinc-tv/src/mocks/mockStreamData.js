@@ -1,5 +1,5 @@
 const streamGroupsMock = [
-    [{displayName:"varinio_h", userImage:"https://i.imgur.com/3jykKJ3.jpg"} 
+    [{displayName:"varinio_h", userImage:"https://i.imgur.com/3jykKJ3.jpg", numFollowers: 5} 
     , {displayName:"comicsexplained", userImage:"https://i.imgur.com/3jykKJ3.jpg"}
     , {displayName:"starlitedrivein", userImage:"https://i.imgur.com/3jykKJ3.jpg"}
     , {displayName:"mashonly", userImage:"https://i.imgur.com/3jykKJ3.jpg"}

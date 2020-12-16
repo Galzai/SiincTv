@@ -65,7 +65,6 @@ exports.createStream = function(req, res){
         date: data.date,
         eventId: streamData._id }
         }}).then(obj=>{console.log("Object modified", obj)});
-    console.log("Saved StreamData: " ,streamData);
     res.send(streamData._id);
     
     //TODO: Will redirect to the newly created stream page
@@ -110,8 +109,6 @@ exports.searchStreams = function(req, res){
     const page = req.body.page;
     const searchString = req.body.searchString
     const status = req.body.status;
-    console.log("page ", page);
-    console.log("searchString", searchString)
 
     const PAGE_SIZE = 20;                   // Similar to 'limit'
     const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
