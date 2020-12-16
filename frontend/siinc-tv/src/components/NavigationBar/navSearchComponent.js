@@ -19,15 +19,24 @@ function NavSearchComponent(props) {
     // --------------------------------------------------------------------------
 
     function handleClick(){
-        console.log(search);
         props.history.push(`/search/${search}`);
+
     }
+
+    function handleKeypress(e) {
+        //it triggers by pressing the enter key
+            if (e.keyCode === 13) {
+                props.history.push(`/search/${search}`);
+                e.preventDefault();
+            }
+        };
+
     return(
         <div className={style.navSearchContainer} >{/*style={fieldStyle.constainer} >*/}
             <input className={style.navSearchInput} type="text" required value={search}
-                    placeholder={"Search"} onChange={e => setSearch(e.target.value)}/>
+                    placeholder={"Search"} onKeyDown={handleKeypress} onChange={e => setSearch(e.target.value)}/>
             <div className={style.navClearButtonContainer}>
-                <div className={style.navClearButton}></div>
+                <button className={style.navClearButton} onClick={()=>{setSearch("")}}></button>
             </div>  
             <div className={style.navSearchSeperator}></div>
             <div className={style.navSearchButtonContainer}>

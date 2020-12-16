@@ -13,7 +13,6 @@ const { UpComingEventData } = require("../models/user");
 exports.createStream = function(req, res){
 
     console.log("StreamData: " , JSON.stringify(req.body));
-    console.log("User is: ",req.user)
     // We can't allow stream creation for a non logged in user
     if(!req.user){
         res.send('user/not_logged_in')
@@ -52,8 +51,6 @@ exports.createStream = function(req, res){
             // userImage: member.userImage
         })));
     streamData.streamGroups = streamGroups;
-
-    console.log("Stream model : ", streamData);
     // Save the new streamData
     streamData.save();
 
@@ -109,7 +106,6 @@ exports.searchStreams = function(req, res){
     const page = req.body.page;
     const searchString = req.body.searchString
     const status = req.body.status;
-
     const PAGE_SIZE = 20;                   // Similar to 'limit'
     const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
     StreamData.find({$and: [
@@ -124,7 +120,6 @@ exports.searchStreams = function(req, res){
             console.log("stream/no_results");
         }
         // id exists
-        console.log(result);
         if (result) res.send(result);
         else res.send('stream/no_results');
     }

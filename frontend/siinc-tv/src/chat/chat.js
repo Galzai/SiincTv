@@ -15,7 +15,7 @@ function Chat(props){
       };
     
       const handleSendMessage = () => {
-        sendMessage(userId + ": " + newMessage);
+        if(userId) sendMessage(userId + ": " + newMessage);
         setNewMessage("");
       };
     

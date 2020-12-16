@@ -24,22 +24,22 @@ router.get('/user',userController.get_user);
 router.post('/check_username',userController.check_username_exists);
 
 // GET request to authenticate twitch user
-router.get('/auth/twitch',userController.twitch_auth);
+router.get('/auth/twitch', userController.setRedirectURL, userController.twitch_auth);
 
 // GET request Twitch callback
-router.get('/auth/twitch/callback', userController.twitch_auth_callback);
+router.get('/auth/twitch/callback', userController.twitch_auth_callback, userController.successRedirect);
 
 // GET request to authenticate google user
-router.get('/auth/google',userController.google_auth);
+router.get('/auth/google', userController.setRedirectURL, userController.google_auth);
 
 // GET request google callback
-router.get('/auth/google/callback', userController.google_auth_callback);
+router.get('/auth/google/callback', userController.google_auth_callback, userController.successRedirect);
 
 // GET request to authenticate google user
-router.get('/auth/facebook',userController.facebook_auth);
+router.get('/auth/facebook', userController.setRedirectURL, userController.facebook_auth);
 
 // GET request google callback
-router.get('/auth/facebook/callback', userController.facebook_auth_callback);
+router.get('/auth/facebook/callback', userController.facebook_auth_callback, userController.successRedirect);
 
 // POST request create stream
 router.post('/user/createstream', streamController.createStream);
@@ -55,6 +55,9 @@ router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 
 // POST request searchStreams
 router.post('/search/users', userController.searchUsers);
+
+// GET request redirectBack
+router.post('/auth/setRedirectUrl', userController.setRedirectURL);
 
 
 module.exports = router;

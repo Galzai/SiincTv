@@ -73,9 +73,25 @@ const userActions ={
         return result.data;
     },
 
+    authenicateTwitch: async function(searchString, page){
+        const result = await axios({
+            method: 'GET',
+            data:{url:window.location.href },
+            url:'http://localhost:4000/auth/twitch/'
+        });
+        return result.data;
+    },
+
+    setRedirectURL: async function(searchString, page){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/auth/setRedirectUrl'
+        });
+    },
+
     // External authenticaiton redirects
     authenicateTwitch:  function(){
-        window.location.assign('http://localhost:4000/auth/twitch/');
+      window.location.assign('http://localhost:4000/auth/twitch/');
     },
 
     authenicateGoogle:  function(){
