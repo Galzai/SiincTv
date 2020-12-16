@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { withRouter } from 'react-router-dom';
 import style from './previews.module.css'
+import NoProfilePic from "../../assets/NoProfilePic.svg"
 
 /**
  * @brief displaysa preview of a user
@@ -25,6 +26,7 @@ function UserPreview(props){
         if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
         if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
         if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
+        return NoProfilePic;
     }
 
     function handleRedirect() {
