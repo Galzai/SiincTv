@@ -105,6 +105,7 @@ function UserSigning(props) {
         <div className={style.signingBox}>
             <div className={style.titleBox}>
                 <div className={style.titleDiv}>Log In</div>
+                <div className={style.subTitleDiv}>Continue with</div>
             </div>
             <div className={style.selectorBar}>
                 <button className={style.selectorButton} name='signInBtn' onClick={setSignIn}>Sign in</button>

@@ -19,7 +19,13 @@ function SignIn(props) {
     return (
         <section>
             <div className={style.signInDiv} >
-                <div className={style.usernameDiv}>
+            <button className={style.facebookAuth} onClick={userActions.authenicateFacebook}>Facebook</button>
+            <button className={style.twitchAuth} onClick={userActions.authenicateTwitch}>Twitch</button>
+            <button className={style.googleAuth} onClick={userActions.authenicateGoogle}>Google</button>
+                
+                 <div className={style.logInDiv}>
+                  <h2 className={style.line}><span className={style.lineClear}>or</span></h2>
+                  <div className={style.usernameDiv}>
                     <div className={style.formText}></div>
                     <div className={style.inputDiv}>
                         <input className={style.inputBox} type="text" autoFocus required value={userName}
@@ -41,13 +47,8 @@ function SignIn(props) {
 
                 <div className={style.signInButtonDiv}>
                     <button className={style.signInButton} onClick={handleSignIn}>Log In</button>
+                    <div className={style.signupLine}>Not yet a member? Press here to sign up</div>
                 </div>
-                
-                <div className={style.authDiv}>
-                  <h2 className={style.line}><span className={style.lineClear}>Or</span></h2>
-                    <button className={style.facebookAuth} onClick={userActions.authenicateFacebook}>Facebook</button>
-                    <button className={style.twitchAuth} onClick={userActions.authenicateTwitch}>Twitch</button>
-                    <button className={style.googleAuth} onClick={userActions.authenicateGoogle}>Google</button>
                 </div>
              </div>               
 

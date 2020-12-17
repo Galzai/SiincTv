@@ -1,6 +1,6 @@
 .signInDiv
 {
-    top: 135px;
+    top: 80px;
     position: absolute;
     width: 600px;
     height: 550px
@@ -64,7 +64,7 @@
 }
 
 .inputBox{
-    top: 10px;
+    top: 40px;
     border:none;
     position: relative;
     width: 85.76%;
@@ -91,7 +91,7 @@
 }
 
 .secretInputBox{
-    top: 10px;
+    top: 40px;
     border:none;
     position: relative;
     width: 85.76%;
@@ -135,7 +135,7 @@
     position: relative;
     height: 38px;
     width:33.6%;
-    top: 90px;
+    top: 112px;
     background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
@@ -188,9 +188,9 @@
 }
 
 
-.authDiv
+.logInDiv
 {
-    top:175px;
+    top:50px;
     position: relative;
     display:block;
     width: 100%;
@@ -208,22 +208,23 @@
     position: relative;
     height: 109px;
     width: 152px;
-    top: 50px;
-    margin-left: 20px;
+    top: 44px;
+    margin-left: 40px;
     background: #EFEFEF;
     background-image: url("../../assets/google-icon.svg");
     background-repeat: no-repeat;
     background-size: 50px 50px;
     background-position-x: 50%;
-    background-position-y: 75%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 20;
     font-size: 20px;
-    color: #AFAFAF;
+    color: #747474;
     cursor:pointer;
+    padding-top: 60px;
 }
 
 .googleAuth:hover
@@ -240,14 +241,14 @@
     position: relative;
     height: 109px;
     width: 152px;
-    top: 50px;
-    margin-left: 20px;
+    top: 44px;
+    margin-left: 40px;
     background: #EFEFEF;
     background-image: url("../../assets/TwitchGlitchPurple.svg");
     background-repeat: no-repeat;
     background-size:45px 45px;
     background-position-x: 50%;
-    background-position-y: 75%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
@@ -256,7 +257,7 @@
     font-size: 20px;
     color: #3C096C;
     cursor:pointer;
-    align-items: center;
+    padding-top: 60px;
 }
 
 .twitchAuth:hover
@@ -273,14 +274,14 @@
     position: relative;
     height: 109px;
     width: 152px;
-    top: 50px;
-    margin-left: 20px;
+    top: 44px;
+    margin-left: 32px;
     background: #3B5998;
     background-image: url("../../assets/facebook-icon.png");
     background-repeat: no-repeat;
     background-size: 50px 50px;
     background-position-x: 50%;
-    background-position-y: 75%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     font-family: 'Roboto', sans-serif;
@@ -289,6 +290,7 @@
     font-size: 20px;
     color: #EFEFEF;
     cursor:pointer;
+    padding-top: 60px;
 }
 
 .facebookAuth:hover
@@ -305,7 +307,7 @@
     left: 20px;
     text-align: center; 
     border-bottom: 2px solid #26044C; 
-    line-height: 0.1em;
+    line-height: 0;
     margin: 10px 0 20px; 
     font-family: 'Roboto', sans-serif;
  } 
@@ -316,8 +318,8 @@
     font-weight: 900;
     font-size: 15px;
     color: #BAA3C8;
-     background:#3C096C; 
-     padding:0 10px; 
+    background:#10002B; 
+    padding:0 10px; 
  }
 
  .errorMessage
@@ -329,5 +331,28 @@
     color: #AFAFAF;
     position: absolute;
     float:bottom;
+    top: 72px;
     right:20px;
  }
+
+ .signupLine
+{
+    position: absolute;
+    width: 326px;
+    height: 21px;
+    left: 137px;
+    top: 180px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}
