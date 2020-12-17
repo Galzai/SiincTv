@@ -116,6 +116,11 @@ exports.user_login = function(req, res, next){
     res.redirect(destination)
   }
 
+  // Twitch authentication
+  exports.twitch_auth = function(req, res, next){
+    passport.authenticate("twitch.js")(req, res, next);
+  };
+
   // get list of all usernames in database
   exports.getUsernameList = function(req, res) {
       User.find({}).distinct('username', 
@@ -129,9 +134,6 @@ exports.user_login = function(req, res, next){
       }
     );
   };  
-  
-
-  };
 
   // Callback for twitch authentication
   exports.twitch_auth_callback = function(req,res, next){
