@@ -45,9 +45,9 @@ function SignIn(props) {
                 
                 <div className={style.authDiv}>
                   <h2 className={style.line}><span className={style.lineClear}>Or</span></h2>
-                    <button className={style.twitchAuth} onClick={userActions.authenicateTwitch}>Log in with Twitch</button>
-                    <button className={style.googleAuth} onClick={userActions.authenicateGoogle}>Log in with Google</button>
-                    <button className={style.facebookAuth} onClick={userActions.authenicateFacebook}>Log in with Facebook</button>
+                    <button className={style.facebookAuth} onClick={userActions.authenicateFacebook}>Facebook</button>
+                    <button className={style.twitchAuth} onClick={userActions.authenicateTwitch}>Twitch</button>
+                    <button className={style.googleAuth} onClick={userActions.authenicateGoogle}>Google</button>
                 </div>
              </div>               
 
