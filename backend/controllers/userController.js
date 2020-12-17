@@ -81,7 +81,41 @@ exports.user_login = function(req, res, next){
             else res.send(false);
         })
   };
+
+  exports.searchUsers = function(req, res){
+    const page = req.body.page;
+    const searchString = req.body.searchString;
+    const PAGE_SIZE = 20;                   // Similar to 'limit'
+    const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+    User.find({$and: [
+        { $text : { $search : searchString}}]},
+        { score : { $meta: "textScore" }},
+
+    ).limit(PAGE_SIZE).skip(skip).exec(
+    async function(err, result){
+        if (err){;
+            console.log(err)
+            console.log("user/no_results");
+        }
+        // id exists
+        if (result) res.send(result);
+        else res.send('user/no_results');
+    }
+   
+    )  
+}
   
+  // Redirect user back to previous url
+  exports.setRedirectURL = function(req, res, next) {
+    req.session.UrlToRedirect = req.headers.referer;
+    next();
+  }
+  // Redirect on success
+  exports.successRedirect = function(req, res){
+    destination = req.session.UrlToRedirect || '/'
+    res.redirect(destination)
+  }
+
   // Twitch authentication
   exports.twitch_auth = function(req, res, next){
     passport.authenticate("twitch.js")(req, res, next);
@@ -89,7 +123,7 @@ exports.user_login = function(req, res, next){
 
   // Callback for twitch authentication
   exports.twitch_auth_callback = function(req,res, next){
-    passport.authenticate("twitch.js", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+    passport.authenticate("twitch.js", { failureRedirect: req.session.UrlToRedirect})(req, res, next)
 };
 
 // Google authentication
@@ -99,16 +133,19 @@ exports.google_auth = function(req, res, next){
 
   // Callback for google authentication
   exports.google_auth_callback = function(req,res, next){
-    passport.authenticate("google", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+    console.log(req.session.UrlToRedirect);
+    passport.authenticate("google", { failureRedirect: req.session.UrlToRedirect})(req, res, next)
 };
 
   // Facebook authentication
   exports.facebook_auth = function(req, res, next){
+    console.log(req.session.UrlToRedirect);
     passport.authenticate("facebook")(req, res, next);
   };
 
     // Callback for facebook authentication
     exports.facebook_auth_callback = function(req,res, next){
-      passport.authenticate("facebook", { failureRedirect: 'back' ,successRedirect:'back' })(req, res, next)
+      console.log(req.session.UrlToRedirect);
+      passport.authenticate("facebook", { failureRedirect: req.session.UrlToRedirect})(req, res, next)
   };
 

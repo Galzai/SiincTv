@@ -11,17 +11,31 @@ import FavoritesIcon from "../../assets/NavBar/NavProfileFavorites.png"
 import SubscribedIcon from "../../assets/NavBar/NavProfileSubscribed.png"
 import SettingsIcon from "../../assets/NavBar/NavProfileSettings.png"
 import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.png"
+import NoProfilePic from "../../assets/NoProfilePic.svg"
 /*-----------------------------------------------------------------------*/
 
 
 export function NavProfileMenuHeader() {
     const userContext = useContext(UserContext);
 
+    /**
+     * @brief assigns image if an image is found in userData
+     */
+    function assignImage()
+    {
+        const user = userContext.user;
+        if(user.image) return user.image;
+        if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
+        if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
+        if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
+        return NoProfilePic;
+    }
+
     return(
         <div>
             <div className={style.navProfileMenuPic}>
-                <img src="https://img.icons8.com/material/4ac144/256/user-male.png"
-                     style={{width:"100%", height:"100%"}}>
+                <img src={assignImage()}
+                     style={{width:"100%", height:"100%", borderRadius: "50%"}}>
                 </img>
             </div>
             <div className={style.navProfileMenuNameText}>

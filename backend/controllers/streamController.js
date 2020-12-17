@@ -13,7 +13,6 @@ const { UpComingEventData } = require("../models/user");
 exports.createStream = function(req, res){
 
     console.log("StreamData: " , JSON.stringify(req.body));
-    console.log("User is: ",req.user)
     // We can't allow stream creation for a non logged in user
     if(!req.user){
         res.send('user/not_logged_in')
@@ -25,10 +24,10 @@ exports.createStream = function(req, res){
     let streamData = new StreamData({
         date : data.date,
         name : data.name,
-        status : "Scheduled",
+        status : data.status,
         privateStream : data.privateStream ,
         joinOnly : data.inviteOnly,
-        tags : data.tags.map(tag=>tag.value),
+        tags : data.tags ? data.tags.map(tag=>tag.value) : [],
         date: data.date,
         description:data.description,
         registeredViewers : null,
@@ -39,7 +38,7 @@ exports.createStream = function(req, res){
     streamData.creator = new StreamerData({
         memberId : req.user._id,
         displayName : req.user.username,
-        // TODO: User image
+        userImage : req.user.twitchData.profile_image_url
     });
 
     // We need to change the format of groups from the received format to the one we store
@@ -48,15 +47,12 @@ exports.createStream = function(req, res){
         member=>new StreamerData({
             // Note: member id and userImage will need to change frontend side when friends are implemented
             // memberId: member.memberId,
-            displayName: member.value,
-            // userImage: member.userImage
+            displayName: member.username,
+            userImage: member.image
         })));
     streamData.streamGroups = streamGroups;
-
-    console.log("Stream model : ", streamData);
     // Save the new streamData
     streamData.save();
-
     // Update the user's current events
     User.updateOne(
         {"_id": req.user._id},
@@ -65,8 +61,23 @@ exports.createStream = function(req, res){
         date: data.date,
         eventId: streamData._id }
         }}).then(obj=>{console.log("Object modified", obj)});
-    console.log("Saved StreamData: " ,streamData);
+    // If it's live we set it to the current stream
+    if(data.status === "Live")
+    {
+        User.updateOne(
+            {"_id": req.user._id},
+            {$set: {"currentStream": 
+             {name : data.name,
+            date: data.date,
+            eventId: streamData._id }
+            }}).then(obj=>{console.log("Object modified", obj)}); 
+    }
+    console.log(req.user._id);
+    // req.logIn(req.user._id, (err) => {
+    //     if (err) throw err;;
+    //   });
     res.send(streamData._id);
+
     
     //TODO: Will redirect to the newly created stream page
     // res.redirect();
@@ -110,9 +121,6 @@ exports.searchStreams = function(req, res){
     const page = req.body.page;
     const searchString = req.body.searchString
     const status = req.body.status;
-    console.log("page ", page);
-    console.log("searchString", searchString)
-
     const PAGE_SIZE = 20;                   // Similar to 'limit'
     const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
     StreamData.find({$and: [
@@ -127,7 +135,6 @@ exports.searchStreams = function(req, res){
             console.log("stream/no_results");
         }
         // id exists
-        console.log(result);
         if (result) res.send(result);
         else res.send('stream/no_results');
     }
