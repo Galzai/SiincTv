@@ -3,6 +3,7 @@ import SignIn from './signin'
 import Signup from './signup'
 import userActions from "../../user/userActions"
 import style from './authGeneral.module.css'
+import style2 from './auth.module.css'
 
 /*
  * This components will be used to hold the signIn/signup components
@@ -101,15 +102,23 @@ function UserSigning(props) {
 
     }
 
+    function letsTry(){
+        setSignup();
+        document.getElementById("mainTitle").innerHTML = 'Sign Up';
+        document.getElementById("mainTitle").style.top = "32px";
+        document.getElementById("subTitle").innerHTML = '';
+        document.getElementById("signupLine").style.opacity = "0";
+        document.getElementById("signupLine").style.cursor = "default";
+    }
+
     return (
         <div className={style.signingBox}>
             <div className={style.titleBox}>
-                <div className={style.titleDiv}>Log In</div>
-                <div className={style.subTitleDiv}>Continue with</div>
+                <div className={style.titleDiv} id="mainTitle">Log In</div>
+                <div className={style.subTitleDiv} id="subTitle">Continue with</div>
             </div>
-            <div className={style.selectorBar}>
-                <button className={style.selectorButton} name='signInBtn' onClick={setSignIn}>Sign in</button>
-                <button className={style.selectorButton} name='signupBtn' onClick={setSignup}>Sign up</button>
+            <div className={style2.signInButtonDiv}>
+                <div className={style2.signupLine} id='signupLine' onClick={letsTry}>Not yet a member? Press here to sign up</div>
             </div>
             <h2>
                 {showLogin() && <SignIn

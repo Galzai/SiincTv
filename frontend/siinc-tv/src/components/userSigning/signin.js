@@ -29,7 +29,7 @@ function SignIn(props) {
                     <div className={style.formText}></div>
                     <div className={style.inputDiv}>
                         <input className={style.inputBox} type="text" autoFocus required value={userName}
-                            Placeholder={"Username"} onChange={e => setUserName(e.target.value)}
+                            placeholder={"Username"} onChange={e => setUserName(e.target.value)}
                         />
                     </div>
                     <p className={style.errorMessage}>{emailError}</p>
@@ -39,7 +39,7 @@ function SignIn(props) {
                     <div className={style.formText}></div>
                     <div className={style.inputDiv}>
                         <input className={style.secretInputBox}type="text" autoFocus required value={password}
-                            Placeholder={"Password"} onChange={e => setPassword(e.target.value)}
+                            placeholder={"Password"} onChange={e => setPassword(e.target.value)}
                         />
                             <p className={style.errorMessage}>{passwordError}</p>
                     </div>
@@ -47,7 +47,6 @@ function SignIn(props) {
 
                 <div className={style.signInButtonDiv}>
                     <button className={style.signInButton} onClick={handleSignIn}>Log In</button>
-                    <div className={style.signupLine}>Not yet a member? Press here to sign up</div>
                 </div>
                 </div>
              </div>               
