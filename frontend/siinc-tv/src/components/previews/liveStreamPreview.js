@@ -42,12 +42,15 @@ function LiveStreamPreview(props){
     return(
         <div className={style.previewBox} onClick={handleRedirect}>
             <div>
+                <div className={style.preloadDiv}>
                 <HoverSlideshow
                     aria-label={streamData.name}
                     images={streamPreviews}
                     width={`${width}px`}
-                    height={`${height}px`}               
+                    height={`${height}px`} 
+          
                 />
+            </div>
             </div>
         <h2 className={style.previewTitle}>{streamData.name}</h2>
         <div className={style.streamers}>

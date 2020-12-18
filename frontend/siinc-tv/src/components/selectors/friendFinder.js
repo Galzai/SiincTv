@@ -11,6 +11,7 @@ function FriendFinder(props){
     const styles = props.styles;
     const group = props.group;
     const setGroup = props.setGroup;
+    const friends = props.friends;
 
     const onChange=(value)=>{
         setGroup({key: group.key, group: value});

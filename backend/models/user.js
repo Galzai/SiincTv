@@ -67,6 +67,7 @@ const user = new mongoose.Schema({
   image: String,
   shortDescription: String,
   description: String,
+  currentStream: {type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'},
   twitchData: {type: mongoose.Schema.Types.Mixed, ref: 'TwitchData'} ,
   googleData: {type: mongoose.Schema.Types.Mixed, ref: 'GoogleData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},

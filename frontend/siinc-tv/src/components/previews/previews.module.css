@@ -48,6 +48,14 @@
     padding-left: 0px;
 }
 
+.preloadDiv{
+    background-color: rgb(46, 41, 41);
+    height:199px;
+    width:362px;
+    z-index: -1;
+}
+
+
 .streamers{
     position: relative;
     display: block;

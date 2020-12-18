@@ -201,15 +201,22 @@ passport.use(new FacebookStrategy({
 
   passport.deserializeUser((id, cb) => {
     User.findOne({ _id: id }, (err, user) => {
+      if(err) cb(err,null);
+
       // We only return relevant data
       const userInformation = {
         _id: user._id,
         username: user.username,
+        image:user.image,
+        shortDescription:user.shortDescription,
+        description:user.description,
+        currentStream:user.currentStream,
         twitchId: user.twitchId,
         googleId: user.googleId,
         twitchData: user.twitchData,
         googleData: user.googleData,
-        facebookData: user.facebookData
+        facebookData: user.facebookData,
+        upcomingEvents :user.upcomingEvents
       };
       cb(err, userInformation);
     });
