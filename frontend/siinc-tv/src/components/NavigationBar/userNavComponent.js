@@ -10,7 +10,6 @@ import {
         NavProfileMenuMyChannelLink,
         NavProfileMenuFriendsLink,
         NavProfileMenuFavoritesLink,
-        NavProfileMenuSubscribedLink,
         NavProfileMenuMySettingsLink,
         NavProfileMenuLogout
        } 
@@ -19,7 +18,6 @@ import {
 /*-----------------------------   Icons   -------------------------------*/
 import NoProfilePic from "../../assets/NoProfilePic.png"
 import NavNotificationIcon from "../../assets/NavBar/NavBarNotifications.png"
-import NavMessageIcon from "../../assets/NavBar/NavBarMessages.png"
 /*-----------------------------------------------------------------------*/
 
 function NavProfileMenu(props) {
@@ -33,15 +31,12 @@ function NavProfileMenu(props) {
                 <NavProfileMenuHeader></NavProfileMenuHeader>
                 <NavProfileMenuToggleOnline></NavProfileMenuToggleOnline>
                 <NavProfileMenuRanking></NavProfileMenuRanking>
-                <NavProfileMenuBreaker style={{top: "31.4%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuBreaker style={{top: "35%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuMyChannelLink></NavProfileMenuMyChannelLink>
-                <NavProfileMenuBreaker style={{top: "42.4%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuFriendsLink></NavProfileMenuFriendsLink>
                 <NavProfileMenuFavoritesLink></NavProfileMenuFavoritesLink>
-                <NavProfileMenuSubscribedLink></NavProfileMenuSubscribedLink>
-                <NavProfileMenuBreaker style={{top: "70%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuMySettingsLink></NavProfileMenuMySettingsLink>
-                <NavProfileMenuBreaker style={{top: "81.5%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuBreaker style={{top: "82%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuLogout></NavProfileMenuLogout>
             </div>
         </div>
@@ -88,17 +83,6 @@ function NavNotificationButton(props) {
     );
 }
 
-function NavMessageButton(props) {
-    return(
-        <div className={style.navMessageButton}>
-                <img src={NavMessageIcon}
-                     style={{width:"100%", height:"100%"}}
-                     onClick={() => props.onClick()}>
-                </img>
-        </div>
-    );
-}
-
 // represent user section of navigation bar ( sign in/sign up when logged out or notifications etc.. when logged in)
 function UserNavComponent(props) {
     const userContext = useContext(UserContext);
@@ -112,11 +96,6 @@ function UserNavComponent(props) {
 
     function handleProfileClick() {
         setProfileMenuOpen(!profileMenuOpen);
-    }
-
-    function handleMessageClick() {
-        setMessageOpen(!messageOpen);
-        console.log("mess = " + messageOpen);
     }
 
     function handleNotificationClick() {
@@ -133,8 +112,7 @@ function UserNavComponent(props) {
                 refreshUserData={userContext.refreshUserData}           
             >
             </SigningModal>
-            {userContext.user && <NavNotificationButton onClick={handleNotificationClick}></NavNotificationButton>}
-            {userContext.user && <NavMessageButton onClick={handleMessageClick}></NavMessageButton>}    
+            {userContext.user && <NavNotificationButton onClick={handleNotificationClick}></NavNotificationButton>}  
             {userContext.user && <NavProfileMenu open={profileMenuOpen}></NavProfileMenu> }       
         </div>
     );

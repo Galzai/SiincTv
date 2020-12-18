@@ -78,10 +78,11 @@
     
     float: right;
     position: relative;
-    width: 155px;
-    height: 319px;
+    width: 183px;
+    height: 394px;
     z-index: 20;
-    background: rgba(199, 125, 255, 0.75);
+    top: -10px;
+    background: #101011;
     box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.5);
     border-radius: 10px;    
 }
@@ -90,10 +91,8 @@
 {
     box-sizing: border-box;
     display: block;
-    padding-right: 10px;
     float: right;
     position: relative;
-    top: 3px;
 }
 
 .navNotificationButton
@@ -102,25 +101,11 @@
     position: absolute;
     width: 15px;
     height: 17px;
-    top: 18px;
-    left: 72px;
+    top: 36px;
+    left: 70px;
 
 }
 .navNotificationButton:hover
-{
-    cursor: pointer;
-}
-
-.navMessageButton
-{
-    box-sizing: border-box;
-    position: absolute;
-    width: 18px;
-    height: 13px;
-    top: 19px;
-    left: 30px;
-}
-.navMessageButton:hover
 {
     cursor: pointer;
 }
@@ -148,8 +133,7 @@
 {
     box-sizing: border-box;
     position: absolute;
-    top: 0px;
-    left: -1px;
+    left: -5px;
     height: 38px;
     width: 81%;
     background-color: #251A37;
@@ -160,9 +144,9 @@
     margin: 0px;
 
     font-family: Roboto;
-    font-style: normal;
+    font-style: thin;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 0;
     line-height: 21px;
     color: #AFAFAF;
 
@@ -170,21 +154,23 @@
 .navSearchInput:hover
 {
     height: 42px;
-    left: -3px;
+    width: 399px;
+    left: -6px;
     top: -2px;
     border: 1px solid rgb(153, 153, 153);
-    border-radius: 14px 0px 0px 14px;
+    border-radius: 14px;
 }
 
 .navSearchInput:focus
 {
     height: 42px;
-    left: -3px;
+    width: 399px;
+    left: -6px;
     top: -2px;
     background-color: #251A37;
     outline: none;
     border: 1px solid rgb(153, 153, 153);
-    border-radius: 14px 0px 0px 14px;
+    border-radius: 14px;
 
     color: #AFAFAF;
 }
@@ -197,7 +183,7 @@
     background-color: #251A37;
     width: 9.5%;
     height: 38px;
-    left: 322px;
+    left: 312px;
 }
 .navClearButton
 {
@@ -218,7 +204,7 @@
     padding: 4px;
     width: 9.5%;
     height: 38px;
-    left: 362px;
+    left: 350px;
     border-radius: 0px 14px 14px 0px;
 }
 .navSearchButton
@@ -232,13 +218,13 @@
     border:none;
 }
 
-.navSearchButto:focus{
+.navSearchButton:focus{
     border:none;
 }
-.navSearchButto:active{
+.navSearchButton:active{
     border:none;
 }
-.navSearchButto:visited{
+.navSearchButton:visited{
     border:none;
 }
 
@@ -247,7 +233,7 @@
     position: absolute;
     width: 23px;
     height: 0px;
-    left: 349px;
+    left: 338px;
     top: 18px;
     z-index: 1;
     border: 1px solid #AFAFAF;
