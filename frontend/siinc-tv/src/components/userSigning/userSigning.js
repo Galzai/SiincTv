@@ -102,7 +102,7 @@ function UserSigning(props) {
 
     }
 
-    function letsTry(){
+    function signupWindow(){
         setSignup();
         document.getElementById("mainTitle").innerHTML = 'Sign Up';
         document.getElementById("mainTitle").style.top = "32px";
@@ -118,7 +118,7 @@ function UserSigning(props) {
                 <div className={style.subTitleDiv} id="subTitle">Continue with</div>
             </div>
             <div className={style2.signInButtonDiv}>
-                <div className={style2.signupLine} id='signupLine' onClick={letsTry}>Not yet a member? Press here to sign up</div>
+                <div className={style2.signupLine} id='signupLine' onClick={signupWindow}>Not yet a member? Press here to sign up</div>
             </div>
             <h2>
                 {showLogin() && <SignIn
@@ -147,7 +147,6 @@ function UserSigning(props) {
                 />}
             </h2>
         </div>
-
     );
 
 }
