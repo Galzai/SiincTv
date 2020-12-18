@@ -55,6 +55,19 @@ const userActions ={
         });
         return result.data;
     },
+    
+    getUserData: async function( userName ){
+        console.log("Getting user data from : " + userName)
+        const result = await axios({
+            method:'POST',
+            data:{
+                username: userName,
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/userdata'
+        });
+        return result.data;
+    },
 
     checkUsernameExists: async function(regUsername){
         const result = await axios({

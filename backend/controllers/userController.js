@@ -1,6 +1,6 @@
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const {User} = require("../models/user");
+const {User, FriendsData} = require("../models/user");
 const e = require("express");
 
 exports.user_login = function(req, res, next){
@@ -53,11 +53,17 @@ exports.user_login = function(req, res, next){
 
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10); // encrypt the password
-  
+        
+        const friendsData = new FriendsData({
+          friendsList: [],
+          receivedRequests: [],
+          sentRequests: []
+        })
         const newUser = new User({
           username: req.body.username,
           email: req.body.email,
           password: hashedPassword,
+          friendsData: friendsData
         });
         await newUser.save();
         res.send("auth/user_created");
@@ -69,8 +75,31 @@ exports.user_login = function(req, res, next){
     res.send(req.user); // The req.user stores the entire user that has been authenticated inside of it.
   };
 
+  exports.get_user_data = function(req, res){
+    console.log("req = " + req.body.username)
+    User.findOne( 
+      {username: req.body.username},
+       async function(err, doc){
+          if (err){
+            console.log("error occured");
+            res.send([]);
+          }
+          if (doc){
+            res.send(
+              {friendsData: doc.friendsData}
+            );
+          }
+          else
+          {
+            console.log("couldnt get user data " + req.body.username);
+            res.send([]);
+          }
+    })
+  };
+
   // Check if a username exists in the DB
   exports.check_username_exists = function(req, res){
+    console.log("Username exists req : " + req.body.username);
     User.findOne({username: req.body.username},
         async function(err, doc){
             if (err){

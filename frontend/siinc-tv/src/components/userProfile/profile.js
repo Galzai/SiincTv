@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import style from './profile.module.css'
 
 import Friends from './friends'
@@ -6,6 +6,7 @@ import AboutOffline from './aboutOffline'
 import AboutOnline from './aboutOnline'
 import Schedule from './schedule'
 import UserContext from "../../userContext";
+import userActions from "../../user/userActions";
 
 import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
@@ -18,7 +19,9 @@ function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
     const userContext = useContext(UserContext);
-    const userName = (userContext.user) ? userContext.user.username : "Null";//props.userName;
+    const userNameOld = (userContext.user) ? userContext.user.username : "Null";//props.userName;
+    const userName = props.match.params.username;
+    const [user, setUser] = useState(userName);
     const userOnline = 'true';  //todo
     const userStreaming = 'true'; //todo
     const userRating  = 3 ;  //todo
@@ -26,8 +29,21 @@ function Profile(props) {
     const friends = '200'; //todo
     const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
     const aboutInfo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum posuere. Consectetur adipiscing elit. Nulla elementum posuere.' //todo
-  
-    
+    const [friendsData, setFriendsData] = useState(null)
+
+
+    useEffect(()=>{
+        console.log("Calling use effect of profile")
+        let isMounted = true;
+        (async()=>{
+            let data = await userActions.getUserData( userName );
+            if( isMounted ) {
+                setFriendsData(data.friendsData);
+            }
+        })();
+        return (() => {isMounted = false})
+    }, [props.match])
+
     const showDisplay = () => {
         return display;
     }
@@ -53,12 +69,50 @@ function Profile(props) {
         setUserInfoDisplay('friends')
     }
 
+    const debugFriendRepr=()=> {
+        console.log( "debugFriendRepr" );
+        console.log( userContext.user );
+        console.log( userContext.userData );
+        if( !userContext.user ) {
+            return "Not logged";
+        }
+        if( userContext.user.username == userName ) {
+            return "Its you!";
+        }
+        if( userContext.userData.friendsData.friendsList.find(x=>x.username=userName) != undefined ) {
+                                         
+            return "Unfriend";
+        }
+        if( userContext.userData.friendsData.sentRequests.find(x=>x.username=userName) != undefined ) {
+            return "Pending";
+        }
+        if( userContext.userData.friendsData.receivedRequests.find(x=>x.username=userName) != undefined ) {
+            return "Accept";
+        }
+        return "Add Friend";
+    }
+
     const handleLive=()=>{
         //todo - open a window to the live stream
     }
 
     const handleAddFriends=()=>{
-        //todo
+        if( userName = userContext.user.username ) {
+            console.log("Cant add yourself")
+            return;
+        }
+        let status = userActions.sendFriendRequest( userContext.user.username, userName );
+        if( !status ) {
+            console.log("An error occured while adding friend")
+            return;
+        }
+
+        // update user context
+        userContext.refreshData();
+
+        // update friends data of this profile
+        let data = userActions.getUserData( userName );
+        setFriendsData(data.friendsData);
     }
 
     const handleSubscribe=()=>{
@@ -69,6 +123,7 @@ function Profile(props) {
         //todo
     }
     
+
 
     return (
         <div>        
@@ -105,7 +160,7 @@ function Profile(props) {
                                 {subscribers} Subscribers
                             </span>
                             <span className={style.btns}>
-                                <a href=""><button className={style.addFriends} onClick={handleAddFriends}/> Add Friend</a>
+                                <a href=""><button className={style.addFriends} onClick={handleAddFriends}/>{debugFriendRepr()}</a>
                                 <a href=""><button className={style.subscribe} onClick={handleSubscribe} /> Subscribe</a>
                                 <a href=""><button className={style.addFavorites} onClick={handleAddFavourites} /> Add to Favourites</a>
                             </span>

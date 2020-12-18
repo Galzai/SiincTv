@@ -18,7 +18,7 @@ function HomePage(props) {
 
     const buttons = new Array(usernames.length);
     for(let i = 0 ; i < usernames.length ; i++) {        
-        console.log(usernames[i]);
+        //console.log(usernames[i]);
         buttons[i] = <button key={i}>{usernames[i]}</button>
     }
 

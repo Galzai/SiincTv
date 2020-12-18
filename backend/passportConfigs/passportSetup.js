@@ -13,7 +13,7 @@ const { json } = require("body-parser");
 const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
 
 // our Models
-const {User} = require("../models/user");
+const {User, FriendsData} = require("../models/user");
 const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
 const {FacebookData} = require("../models/user");
@@ -71,10 +71,16 @@ module.exports = function (passport) {
             profile_image_url: profile.profile_image_url,
             view_count: profile.view_count
           });
+          const friendsData = new FriendsData({
+            friendsList: [],
+            receivedRequests: [],
+            sentRequests: []
+          });
           const newUser = new User({
             username: profile.display_name,
             twitchId: profile.id,
-            twitchData:newTwitchData
+            twitchData:newTwitchData,
+            friendsData: friendsData
           });
           // we save and finish
           await newUser.save();
@@ -115,10 +121,16 @@ passport.use(new GoogleStrategy({
           emails: profile.emails,
           photos: profile.photos
         });
+        const friendsData = new FriendsData({
+          friendsList: [],
+          receivedRequests: [],
+          sentRequests: []
+        });
         const newUser = new User({
           username: profile.displayName,
           googleId: profile.id,
-          googleData:newGoogleData
+          googleData:newGoogleData,
+          friendsData: friendsData
         });
         // we save and finish
         await newUser.save();
@@ -160,10 +172,16 @@ passport.use(new FacebookStrategy({
           name: profile.name,
           photos: profile.photos
         });
+        const friendsData = new FriendsData({
+          friendsList: [],
+          receivedRequests: [],
+          sentRequests: []
+        });
         const newUser = new User({
           username: profile.displayName,
           facebookId: profile.id,
-          facebookData:newFacebookData
+          facebookData:newFacebookData,
+          friendsData:friendsData
         });
         // we save and finish
         await newUser.save();

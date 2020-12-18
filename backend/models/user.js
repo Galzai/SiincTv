@@ -52,7 +52,7 @@ const friendsData = new mongoose.Schema({
   receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
   sentRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}]
 });
-const FriendsData = new mongoose.model("FriendsData", friendsData);
+const FriendsData = mongoose.model("FriendsData", friendsData);
 
 /**
  * @brief Schema for user account
@@ -72,7 +72,7 @@ const user = new mongoose.Schema({
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}],
-  friendsData:[{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'}]
+  friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'}
 });
 
 // This is necessery for quick text search

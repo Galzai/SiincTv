@@ -21,6 +21,9 @@ router.post('/signup',userController.user_signup);
 // GET request to get currently signed in user
 router.get('/user',userController.get_user);
 
+// POST request to get user data
+router.post('/userdata',userController.get_user_data);
+
 // POST request to check if given username exists
 router.post('/check_username',userController.check_username_exists);
 

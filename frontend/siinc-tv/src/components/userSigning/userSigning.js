@@ -70,6 +70,8 @@ function UserSigning(props) {
                 setPasswordError("The entered credentials are incorrect.")
             }
             const userDataResponse = await userActions.getUser();
+            console.log("Got user : ");
+            console.log(userDataResponse);
             setUser(userDataResponse);
         }
         userFetcher();

@@ -23,6 +23,14 @@ class UserProvider extends React.Component {
 
     // This function is called for refreshing user data
     async refreshUserData(){
+        console.log("check user : " + this.state.user)
+        if( this.state.user == null ) {
+            this.setState({userData: null})
+            return;
+        }
+        let userdata = await userActions.getUserData( this.state.user.username );
+        console.log("Got userdata for provider")
+        this.setState({userData: userdata});
     }
 
     render() {
@@ -30,7 +38,12 @@ class UserProvider extends React.Component {
             <UserContext.Provider
                 value={{
                     user: this.state.user,
-                    setUser: curUser => this.setState({user: curUser}),
+                    setUser: curUser => {
+                        this.setState({user: curUser}); 
+                        this.refreshUserData();
+                        console.log("New user data")
+                        console.log(this.state.userData)
+                    },
                     userData: this.state.userData,
                     setUserData: curUserData => this.setState({userData: curUserData}),
                     refreshUserData: this.refreshUserData

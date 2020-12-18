@@ -57,6 +57,8 @@ function App(){
                     <Route path="/my_channel">
                         <Profile></Profile>
                     </Route>
+                    <Route path="/userpage/:username" component={Profile}>
+                    </Route>
                 </Switch>
                 </div>
             </Router>
