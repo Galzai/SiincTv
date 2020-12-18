@@ -5,17 +5,16 @@ import userActions from "../../user/userActions"
 import { Link } from "react-router-dom";
 
 /*-----------------------------   Icons   -------------------------------*/
-import MyChannelIcon from "../../assets/NavBar/NavProfileMyChannel.png"
-import FriendsIcon from "../../assets/NavBar/NavProfileFriends.png"
-import FavoritesIcon from "../../assets/NavBar/NavProfileFavorites.png"
-import SubscribedIcon from "../../assets/NavBar/NavProfileSubscribed.png"
-import SettingsIcon from "../../assets/NavBar/NavProfileSettings.png"
-import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.png"
+import MyChannelIcon from "../../assets/NavBar/NavProfileMyChannel.svg"
+import FriendsIcon from "../../assets/NavBar/NavProfileFriends.svg"
+import FavoritesIcon from "../../assets/NavBar/NavProfileFavorites.svg"
+import SettingsIcon from "../../assets/NavBar/NavProfileSettings.svg"
+import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.svg"
 import NoProfilePic from "../../assets/NoProfilePic.svg"
 /*-----------------------------------------------------------------------*/
 
 
-export function NavProfileMenuHeader() {
+export function NavProfileMenuHeader(props) {
     const userContext = useContext(UserContext);
 
     /**
@@ -33,7 +32,7 @@ export function NavProfileMenuHeader() {
 
     return(
         <div>
-            <div className={style.navProfileMenuPic}>
+            <div className={style.navProfileMenuPic} onClick={props.onProfileClick}>
                 <img src={assignImage()}
                      style={{width:"100%", height:"100%", borderRadius: "50%"}}>
                 </img>
@@ -106,7 +105,7 @@ export function NavProfileMenuBreaker(props) {
 }
 
 export function NavProfileMenuRanking() {
-    let rank = 3.5 * 2; //change with user contex rank data when field is added.
+    let rank = 5 * 2; //change with user contex rank data when field is added.
 
     const stars = new Array(rank);
     for(let i = 0 ; i < rank ; i++) {        
@@ -137,7 +136,7 @@ export function NavProfileMenuMyChannelLink() {
                 </img>
             </div>
             <div className={style.navProfileMenuMyChannelText}>
-                MyChannel
+                My Channel
             </div>
         </div>
         </Link>
@@ -173,21 +172,6 @@ export function NavProfileMenuFavoritesLink() {
             </div>
         </div>
     );   
-}
-
-export function NavProfileMenuSubscribedLink() {
-    return(
-        <div className={style.navProfileMenuSubscribedDiv}>
-            <div className={style.navProfileMenuSubscribedIcon}>
-                <img src={SubscribedIcon}
-                     style={{width:"100%", height:"100%"}}>
-                </img>
-            </div>
-            <div className={style.navProfileMenuSubscribedText}>
-                Subscribed
-            </div>
-        </div>
-    );    
 }
 
 export function NavProfileMenuMySettingsLink() {

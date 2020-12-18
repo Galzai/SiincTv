@@ -31,7 +31,7 @@ function Signup(props) {
     // Validates the password and updates it's errors
     const isPasswordConfirmed=()=>{
         if(!(passwordConfirmation === password)){
-            const matchError = "Passwords dont match";
+            const matchError = "Passwords don't match";
             if(passwordError !== matchError){
                 setPasswordError(matchError);
             }
@@ -39,7 +39,7 @@ function Signup(props) {
         }
         if(password.length < 6 ){
 
-            let lengthError = "Passwords too short";
+            let lengthError = "Passwords are too short";
             if(passwordError !== lengthError){ 
             setPasswordError(lengthError);
             }
@@ -58,7 +58,7 @@ function Signup(props) {
             // We check the email is valid by regular expression
             let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if(!regEmail.test(email)){
-                setEmailError('Invalid Email');
+                setEmailError('Invalid E-mail');
                 return false;
             }
             setEmailError('');
@@ -128,40 +128,40 @@ function Signup(props) {
         <section className={style.signInDiv}>
             <div className="signupContainer">
                 <div className={style.usernameDiv}>
-                    <label className={style.formText}>Username</label>
+                    <label className={style.formText}></label>
                     <div className={style.inputDiv}>
                     <input className={style.inputBox} autoFocus required value={userName}
-                        onChange={e => setUserName(e.target.value)}
+                        Placeholder={"Username"} onChange={e => setUserName(e.target.value)}
                     />
                         <p className={style.errorMessage}>{userNameError}</p>
                     </div>
                 </div>
                
                 <div className={style.emailDiv}>
-                    <label className={style.formText}>Email</label>
+                    <label className={style.formText}></label>
                         <div className={style.inputDiv}>
                         <input className={style.inputBox} type="text" autoFocus required value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            Placeholder={"E-mail address"} onChange={e => setEmail(e.target.value)}
                         />
                         <p className={style.errorMessage}>{emailError}</p>
                     </div>
                 </div>
 
                 <div className={style.signUpPasswordDiv}>
-                    <label className={style.formText} >Password</label>
+                    <label className={style.formText} ></label>
                     <div className={style.inputDiv}>
                     <input className={style.secretInputBox} type="text" autoFocus required value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        Placeholder={"Password"} onChange={e => setPassword(e.target.value)}
                     />
                     <p className={style.errorMessage}>{passwordError}</p>
                     </div>
                 </div>
 
                 <div className={style.confirmPasswordDiv}>
-                    <label className={style.formText} >Confirm Password</label>
+                    <label className={style.formText} ></label>
                     <div className={style.inputDiv}>
                         <input className={style.secretInputBox} type="text" autoFocus required value={passwordConfirmation}
-                            onChange={e => setPasswordConfirmation(e.target.value)}
+                            Placeholder={"Confirm Password"} onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                         {<p className={style.errorMessage}>{passwordError}</p>}
                     </div>

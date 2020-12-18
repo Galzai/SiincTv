@@ -34,7 +34,7 @@ function NavSearchComponent(props) {
     return(
         <div className={style.navSearchContainer} >{/*style={fieldStyle.constainer} >*/}
             <input className={style.navSearchInput} type="text" required value={search}
-                    placeholder={"Search"} onKeyDown={handleKeypress} onChange={e => setSearch(e.target.value)}/>
+                    placeholder={"Search stream names or users"} onKeyDown={handleKeypress} onChange={e => setSearch(e.target.value)}/>
             <div className={style.navClearButtonContainer}>
                 <button className={style.navClearButton} onClick={()=>{setSearch("")}}></button>
             </div>  
