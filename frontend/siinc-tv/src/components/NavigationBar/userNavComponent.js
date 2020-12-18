@@ -28,7 +28,7 @@ function NavProfileMenu(props) {
     return(
         <div style={styles}>  
             <div className={style.navProfileMenu}>
-                <NavProfileMenuHeader></NavProfileMenuHeader>
+                <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
                 <NavProfileMenuToggleOnline></NavProfileMenuToggleOnline>
                 <NavProfileMenuRanking></NavProfileMenuRanking>
                 <NavProfileMenuBreaker style={{top: "35%"}}></NavProfileMenuBreaker>
@@ -113,7 +113,7 @@ function UserNavComponent(props) {
             >
             </SigningModal>
             {userContext.user && <NavNotificationButton onClick={handleNotificationClick}></NavNotificationButton>}  
-            {userContext.user && <NavProfileMenu open={profileMenuOpen}></NavProfileMenu> }       
+            {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }       
         </div>
     );
 }

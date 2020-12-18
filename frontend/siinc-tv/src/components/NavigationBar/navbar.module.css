@@ -60,7 +60,7 @@
 .navProfileButton
 {
     margin-top: 30px;
-    margin-right: 35px;
+    margin-right: 20px;
     width: 30px;
     height: 30px;
     
@@ -81,7 +81,7 @@
     width: 183px;
     height: 394px;
     z-index: 20;
-    top: -10px;
+    top: -60px;
     background: #101011;
     box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.5);
     border-radius: 10px;    
@@ -102,7 +102,7 @@
     width: 15px;
     height: 17px;
     top: 36px;
-    left: 70px;
+    left: 92px;
 
 }
 .navNotificationButton:hover

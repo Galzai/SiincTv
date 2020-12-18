@@ -14,7 +14,7 @@ import NoProfilePic from "../../assets/NoProfilePic.svg"
 /*-----------------------------------------------------------------------*/
 
 
-export function NavProfileMenuHeader() {
+export function NavProfileMenuHeader(props) {
     const userContext = useContext(UserContext);
 
     /**
@@ -32,7 +32,7 @@ export function NavProfileMenuHeader() {
 
     return(
         <div>
-            <div className={style.navProfileMenuPic}>
+            <div className={style.navProfileMenuPic} onClick={props.onProfileClick}>
                 <img src={assignImage()}
                      style={{width:"100%", height:"100%", borderRadius: "50%"}}>
                 </img>
@@ -105,7 +105,7 @@ export function NavProfileMenuBreaker(props) {
 }
 
 export function NavProfileMenuRanking() {
-    let rank = 3.5 * 2; //change with user contex rank data when field is added.
+    let rank = 5 * 2; //change with user contex rank data when field is added.
 
     const stars = new Array(rank);
     for(let i = 0 ; i < rank ; i++) {        
