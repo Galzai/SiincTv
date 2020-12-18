@@ -33,7 +33,7 @@ function Profile(props) {
 
 
     useEffect(()=>{
-        console.log("Calling use effect of profile")
+        console.log("profile useEffect : call")
         let isMounted = true;
         (async()=>{
             let data = await userActions.getUserData( userName );
@@ -41,6 +41,7 @@ function Profile(props) {
                 setFriendsData(data.friendsData);
             }
         })();
+        console.log("profile useEffect : finished updating and getting data")
         return (() => {isMounted = false})
     }, [props.match])
 
@@ -70,7 +71,8 @@ function Profile(props) {
     }
 
     const debugFriendRepr=()=> {
-        console.log( "debugFriendRepr" );
+        console.log( "debugFriendRepr : thisfriends, contextuser, contextfreinds" );
+        console.log( friendsData )
         console.log( userContext.user );
         console.log( userContext.userData );
         if( !userContext.user ) {

@@ -39,9 +39,10 @@ class UserProvider extends React.Component {
                 value={{
                     user: this.state.user,
                     setUser: curUser => {
+                        console.log("setUser : start")
                         this.setState({user: curUser}); 
                         this.refreshUserData();
-                        console.log("New user data")
+                        console.log("setUser : end - New user data : ")
                         console.log(this.state.userData)
                     },
                     userData: this.state.userData,
