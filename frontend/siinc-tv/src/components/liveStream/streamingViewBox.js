@@ -1,6 +1,6 @@
 import style from './liveStream.module.css'
 import React, {useState} from "react";
-import LiveStream from "./liveStream";
+import TwitchLiveStream from "./twitchLiveStream";
 import StreamSelectorBar from "./streamSelectorBar";
 
 function StreamViewBox(props){
@@ -12,11 +12,11 @@ function StreamViewBox(props){
 
     return(
         <div>
-        <LiveStream key={currentStreamer.displayName}
+        <TwitchLiveStream key={currentStreamer.displayName}
             displayName={currentStreamer.displayName}
             dimensions={{width: "845", height:"463"}}
             muted={false}
-         ></LiveStream>
+         ></TwitchLiveStream>
          <StreamSelectorBar
             currentStreamer={currentStreamer}
             setCurrentStreamer={setCurrentStreamer}
