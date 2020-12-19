@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import SigningModal from "../userSigning/signingModal";
 import UserContext from "../../userContext";
+import userUtils from "../../user/userUtils" 
 import style from './navbar.module.css';
 import {
         NavProfileMenuHeader,
@@ -16,7 +17,6 @@ import {
        from "./navProfileMenuComponents.js"
 
 /*-----------------------------   Icons   -------------------------------*/
-import NoProfilePic from "../../assets/NoProfilePic.png"
 import NavNotificationIcon from "../../assets/NavBar/NavBarNotifications.png"
 /*-----------------------------------------------------------------------*/
 
@@ -45,25 +45,11 @@ function NavProfileMenu(props) {
 
 function NavProfileButton(props) {
     const userContext = useContext(UserContext);
-
-    /**
-     * @brief assigns image if an image is found in userData
-     */
-    function assignImage()
-    {
-        const user = userContext.user;
-        if(!user) return NoProfilePic;
-        if(user.image) return user.image;
-        if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
-        if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
-        if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
-        return NoProfilePic;
-    }
-                                      
+                                  
     return(
         <div className={style.navProfileButton}>  
             <img 
-                src={assignImage()} 
+                src={userUtils.assignImage(userContext.user)} 
                 style={{width:"100%", height:"100%", borderRadius: "50%"}}
                 onClick={() => props.onClick()}
             > 
