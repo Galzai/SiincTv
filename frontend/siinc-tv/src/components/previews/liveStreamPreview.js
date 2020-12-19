@@ -30,9 +30,21 @@ function LiveStreamPreview(props){
         }, []);
     }
 
-    function mapYoutubeThumbnails()
+    async function mapYoutubeThumbnails()
     {
-        const youtubeStreamer = streamers.filter((streamer)=> (streamer.youtubeId != null));
+        let resArray = [];
+        const youtubeStreamers = streamers.filter((streamer)=> (streamer.youtubeId != null));
+        if(youtubeStreamers && youtubeStreamers.length > 0){
+            youtubeStreamers.forEach(async (streamer)=>{
+
+                let url = await streamActions.getYoutubeVideoId(streamer.youtubeId);
+                    console.log(url);     
+                    resArray.push(`https://img.youtube.com/vi/${url}/mqdefault.jpg`);   
+            });
+        }
+        return resArray;
+
+
     }
 
     // Maps twitch thumbnails to correct size
@@ -50,11 +62,12 @@ function LiveStreamPreview(props){
         if(streamPreviews.length === 0 )
         {
             streamActions.getAllStreamGroupsStreams(streamData.streamGroups).then(
-                (twitchStreamResponse)=>{
+                async (twitchStreamResponse)=>{
                     console.log(twitchStreamResponse);
-
-                    setStreamPreviews(mapTwitchThumbnails(twitchStreamResponse));
-                
+                    let res = [];
+                    res.push(...mapTwitchThumbnails(twitchStreamResponse));
+                    res.push(await mapYoutubeThumbnails());
+                    setStreamPreviews(res);
                 }
 
             )

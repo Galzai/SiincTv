@@ -1,3 +1,4 @@
+const axios = require('axios');
 var {google} = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 const { GOOGLE_CONFIG} = require("../passportConfigs/passportConfigs.js");
@@ -32,12 +33,25 @@ exports.getYoutubeChannelFromGoogle = async function(accessToken, refreshToken){
     var channels = response.data.items;
     if (channels.length == 0) {
         console.log('No channel found.');
-    } else {
-        console.log('This channel\'s ID is %s. Its title is \'%s\', and ' +
-                    'it has %s views.',
-                    channels[0].id,
-                    channels[0].snippet.title,
-                    channels[0].statistics.viewCount);
     }
     return channels;
+}
+
+exports.getLiveVideoId = async function(req,res){
+    const channelId = req.body.channelId;
+    const result = await axios({
+        method: 'GET',
+        url:`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${GOOGLE_CONFIG.apiKey}`
+    }).catch((e)=>{
+        
+        console.log(e.response)
+    }).then((result)=>{
+        if(result && result.data && result.data.items && (result.data.items.length > 0)){
+            console.log(result.data.items[0].id.videoId);
+            res.send(result.data.items[0].id.videoId);
+            return;
+        }
+        res.send('/stream/no_user');
+    } 
+    );
 }

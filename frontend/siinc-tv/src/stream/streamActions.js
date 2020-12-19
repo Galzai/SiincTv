@@ -34,6 +34,15 @@ const streamActions={
         });
         return result.data;
     },
+    getYoutubeVideoId: async function(channelId){
+        const result = await axios({
+            method: 'POST',
+            data:{channelId},
+            url:'http://localhost:4000/youtube/getLiveVideoId'
+        });
+        console.log(result.data);
+        return result.data;
+    },
 
     searchStreams: async function(searchString, page, status){
         const result = await axios({
