@@ -17,6 +17,8 @@ const TwitchData = mongoose.model("TwitchData", twitchData );
  */ 
 const googleData = new mongoose.Schema({
   displayName: String,
+  youtubeId: String,
+  youtubeName: String,
   name: {familyName: String,givenName: String},
   emails:[{value: String, verified: Boolean}],
   photos:[{value:String}],

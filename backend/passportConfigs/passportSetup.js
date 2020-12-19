@@ -1,7 +1,5 @@
-var {google} = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
 const bcrypt = require("bcryptjs");
-
+var youtubeController = require('../controllers/youtubeController')
 //all our strategies
 const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -66,7 +64,6 @@ module.exports = function (passport) {
         }
         //Otherwise we create a new user
         else{
-
           const newTwitchData = new TwitchData({
             login: profile.login,
             display_name: profile.display_name,
@@ -107,34 +104,8 @@ passport.use(new GoogleStrategy({
         console.log("error occured");
         throw err;
       }
-    //****************Getting user's youtube channels **************** */
-    var oauth2Client = new OAuth2(GOOGLE_CONFIG.clientID, GOOGLE_CONFIG.clientSecret, "/auth/google/callback");
-    oauth2Client.credentials = {
-      access_token: accessToken,
-      refresh_token: refreshToken
-  };
-    var service = google.youtube('v3');
-    service.channels.list({
-      auth: oauth2Client,
-      part: 'snippet,contentDetails,statistics',
-      forUsername: 'GoogleDevelopers'
-    }, function(err, response) {
-      if (err) {
-        console.log('The API returned an error: ' + err);
-        return;
-      }
-      var channels = response.data.items;
-      if (channels.length == 0) {
-        console.log('No channel found.');
-      } else {
-        console.log('This channel\'s ID is %s. Its title is \'%s\', and ' +
-                    'it has %s views.',
-                    channels[0].id,
-                    channels[0].snippet.title,
-                    channels[0].statistics.viewCount);
-      }
-    });
 
+      var channels = await youtubeController.getYoutubeChannelFromGoogle(accessToken,refreshToken);
       // If we find a user with the existing google id we just sign in
       if(doc){
         return done(null, doc);
@@ -143,6 +114,8 @@ passport.use(new GoogleStrategy({
       else{
         const newGoogleData = new GoogleData({
           displayName: profile.displayName,
+          youtubeId: channels.length > 0 ? channels[0].id : null,
+          youtubeName: channels.length > 0 ? channels[0].snippet.title : null,
           name: profile.name,
           emails: profile.emails,
           photos: profile.photos
