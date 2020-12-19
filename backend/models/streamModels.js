@@ -6,6 +6,8 @@ const mongoose = require("mongoose");
  */
 const streamerData = new mongoose.Schema({
     memberId: mongoose.Schema.Types.ObjectId,
+    youtubeId: String,
+    twitchId: String,
     displayName : String,
     userImage : String,
 });

@@ -37,8 +37,9 @@ exports.createStream = function(req, res){
    // set the creator object
     streamData.creator = new StreamerData({
         memberId : req.user._id,
-        displayName : req.user.username,
-        userImage : req.user.twitchData.profile_image_url
+        displayName : data.creator.displayName,
+        userImage : data.creator.image,
+        youtubeId: data.creator.youtubeId
     });
 
     // We need to change the format of groups from the received format to the one we store
@@ -47,8 +48,9 @@ exports.createStream = function(req, res){
         member=>new StreamerData({
             // Note: member id and userImage will need to change frontend side when friends are implemented
             // memberId: member.memberId,
-            displayName: member.username,
-            userImage: member.image
+            displayName: member.displayName,
+            userImage: member.image,
+            youtubeId: member.youtubeId
         })));
     streamData.streamGroups = streamGroups;
     // Save the new streamData
@@ -73,14 +75,7 @@ exports.createStream = function(req, res){
             }}).then(obj=>{console.log("Object modified", obj)}); 
     }
     console.log(req.user._id);
-    // req.logIn(req.user._id, (err) => {
-    //     if (err) throw err;;
-    //   });
     res.send(streamData._id);
-
-    
-    //TODO: Will redirect to the newly created stream page
-    // res.redirect();
 }
 
 /**

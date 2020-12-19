@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import style from './newStream.module.css'
 import CreateableInputOnly from "../selectors/createableInputOnly";
-import StreamDatePicker from "./streamDatePicker";
+import userUtils from "../../user/userUtils" 
 import TeamBlock from "./teamBlock";
 const { default: streamActions } = require("../../stream/streamActions");
 
@@ -55,16 +55,22 @@ const customTagStyle={
      * @brief handles new stream form submission
      */
     const submissionHandler=()=>{
+        const creatorData = {
+             displayName: user.username,
+             image: userUtils.assignImage(user),
+             youtubeId: user.googleData ? user.googleData.youtubeId : null   
+            };
 
         const submissionData =
         {
             name:name,
+            creator: creatorData,
             privateStream:privateStream,
             inviteOnly:inviteOnly,
             tags:tags,
             date:date,
             status:"Live",
-            streamGroups:[...streamGroups, {group:[{username: user.username, image: user.twitchData.profile_image_url}]}],
+            streamGroups:[...streamGroups, {group:[creatorData]} ],
             description:description
         }
         streamActions.createNewStream(submissionData);
