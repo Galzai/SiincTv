@@ -4,7 +4,6 @@ import UserContext from "../../userContext";
 import style from './navbar.module.css';
 import {
         NavProfileMenuHeader,
-        NavProfileMenuToggleOnline,
         NavProfileMenuRanking,
         NavProfileMenuBreaker,
         NavProfileMenuMyChannelLink,
