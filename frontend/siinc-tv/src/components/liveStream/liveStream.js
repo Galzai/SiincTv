@@ -1,6 +1,4 @@
 import React, {useState, useRef} from "react";
-import style from './liveStream.module.css'
-import Streamers from "./streamers";
 
 const srcPre = "https://player.twitch.tv/?channel=";
 const srcPost = "&parent=localhost" 
@@ -12,23 +10,18 @@ function LiveStream(props){
     const [muted, setMuted] = useState(props.muted);
 
     return(
-        <div>
-            <h1 className={style.streamTitle}>{props.streamTitle}</h1>
-            <iframe style ={{marginRight:"27px"}}
-                src={streamSrc}
-                frameBorder="0" 
-                allowFullScreen={true}
-                scrolling="no" 
-                height={dimensions.height}
-                width={dimensions.width}
-                muted={muted}
+
+        <iframe style ={{marginRight:"27px"}}
+            src={streamSrc}
+            frameBorder="0" 
+            allowFullScreen={true}
+            scrolling="no" 
+            height={dimensions.height}
+            width={dimensions.width}
+            muted={muted}
             >
-            </iframe>
-            <Streamers
-            streamGroups={props.streamGroups}
-            />
-        </div>
-        
+
+        </iframe>
     );
 }
 

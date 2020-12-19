@@ -13,9 +13,8 @@ function Stream(props) {
         <div className={style.streamPage}>
             <div className={style.StreamBox}>
                 <StreamViewBox
-                    streamTitle={streamData.name}
-                    streamGroups={streamData.streamGroups}
                     currentStreamer={streamData.creator}
+                    streamGroups={streamData.streamGroups}  
                     >
                 </StreamViewBox>
                 <StreamDetails
