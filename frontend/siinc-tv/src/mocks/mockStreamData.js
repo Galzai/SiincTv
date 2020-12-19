@@ -1,6 +1,6 @@
 const streamGroupsMock = [
-    [{displayName:"varinio_h", userImage:"https://i.imgur.com/3jykKJ3.jpg", numFollowers: 5} 
-    , {displayName:"comicsexplained", userImage:"https://i.imgur.com/3jykKJ3.jpg"}
+    [{displayName:"varinio_h", userImage:"https://i.imgur.com/3jykKJ3.jpg", numFollowers: 5, } 
+    , {displayName:"comicsexplained", userImage:"https://i.imgur.com/3jykKJ3.jpg", youtubeData:"UCI-Ho-GaKYbtMzXJWmWAsrg"}
     , {displayName:"starlitedrivein", userImage:"https://i.imgur.com/3jykKJ3.jpg"}
     , {displayName:"mashonly", userImage:"https://i.imgur.com/3jykKJ3.jpg"}
     ,{displayName:"thehalfwayhouse", userImage:"https://i.imgur.com/3jykKJ3.jpg"} ]];

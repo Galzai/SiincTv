@@ -1,6 +1,6 @@
 import style from './liveStream.module.css'
 import React, {useState} from "react";
-import TwitchLiveStream from "./twitchLiveStream";
+import LiveStream from "./liveStream";
 
 
 /**
@@ -21,8 +21,8 @@ function StreamSelector(props){
 
     return(
       <div className={style.streamSelector}>
-        <TwitchLiveStream style={{display:"relative", marginRight:"10px"}}
-            displayName={streamer.displayName}
+        <LiveStream style={{display:"relative", marginRight:"10px"}}
+            streamer={streamer}
             dimensions={{width: "264", height:"145.13"}}
             muted={true}
          />

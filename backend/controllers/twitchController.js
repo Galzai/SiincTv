@@ -72,7 +72,11 @@ exports.getAllStreamGroupsStreams = function(req, res)
             }
             streamGroups.forEach((group)=>{
                 group.forEach((streamer)=>{
-                    requestString += `user_login=${streamer.displayName}&`
+                    //TODO Change to twitchData check
+                    if(!streamer.youtubeId){
+                        requestString += `user_login=${streamer.displayName}&`
+                    }
+
                 });
             });
             if(requestString == "")
@@ -87,7 +91,9 @@ exports.getAllStreamGroupsStreams = function(req, res)
                     "Authorization": "Bearer " + accessToken.access_token
                   },
                 url:`https://api.twitch.tv/helix/streams?${requestString}`
-            }).catch((e)=>{console.log(e.response)}).then((result)=>{
+            }).catch((e)=>{
+                // console.log(e.response)
+            }).then((result)=>{
                 if(result && result.data && result.data.data){
                     res.send(result.data.data);
                     return;
