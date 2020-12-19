@@ -10,7 +10,6 @@ function LiveStream(props){
     const [muted, setMuted] = useState(props.muted);
 
     return(
-
         <iframe style ={{marginRight:"27px"}}
             src={streamSrc}
             frameBorder="0" 
