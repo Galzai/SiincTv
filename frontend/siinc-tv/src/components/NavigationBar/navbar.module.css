@@ -79,7 +79,7 @@
     float: right;
     position: relative;
     width: 183px;
-    height: 394px;
+    height: 348px;
     z-index: 20;
     top: -60px;
     background: #101011;
@@ -102,7 +102,7 @@
     width: 15px;
     height: 17px;
     top: 36px;
-    left: 92px;
+    left: 50%;
 
 }
 .navNotificationButton:hover
@@ -125,7 +125,7 @@
     position: absolute;
     width: 399px;
     height: 40px;
-    left: 849px;
+    right: 160px;
     top: 25px;
     
 }
@@ -185,6 +185,12 @@
     height: 38px;
     left: 312px;
 }
+
+.navClearButtonContainer:hover
+{
+    cursor: pointer;
+}
+
 .navClearButton
 {
     position: absolute;
@@ -195,6 +201,12 @@
     left: 13px;
     border:none;
 }
+
+.navClearButton:hover
+{
+    cursor: pointer;
+}
+
 .navSearchButtonContainer
 {
     box-sizing: border-box;
@@ -207,6 +219,12 @@
     left: 350px;
     border-radius: 0px 14px 14px 0px;
 }
+
+.navSearchButtonContainer:hover
+{
+    cursor: pointer;
+}
+
 .navSearchButton
 {
     position: absolute;
@@ -216,6 +234,11 @@
     top: 10px;
     left: 8px;
     border:none;
+}
+
+.navSearchButton:hover
+{
+    cursor: pointer;
 }
 
 .navSearchButton:focus{

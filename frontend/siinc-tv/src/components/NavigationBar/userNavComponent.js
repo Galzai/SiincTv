@@ -29,9 +29,8 @@ function NavProfileMenu(props) {
         <div style={styles}>  
             <div className={style.navProfileMenu}>
                 <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
-                <NavProfileMenuToggleOnline></NavProfileMenuToggleOnline>
                 <NavProfileMenuRanking></NavProfileMenuRanking>
-                <NavProfileMenuBreaker style={{top: "35%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuBreaker style={{top: "32.5%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuMyChannelLink></NavProfileMenuMyChannelLink>
                 <NavProfileMenuFriendsLink></NavProfileMenuFriendsLink>
                 <NavProfileMenuFavoritesLink></NavProfileMenuFavoritesLink>
