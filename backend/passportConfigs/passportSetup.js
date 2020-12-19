@@ -1,3 +1,5 @@
+var {google} = require('googleapis');
+var OAuth2 = google.auth.OAuth2;
 const bcrypt = require("bcryptjs");
 
 //all our strategies
@@ -18,9 +20,10 @@ const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
 const {FacebookData} = require("../models/user");
 
+const YOUTUBE_SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
+
 // Used for authenticating users, passport is passed to not create new instance
 module.exports = function (passport) {
-
 
   // Local strategy
   passport.use( new LocalStrategy((username, password, done) => {
@@ -91,10 +94,11 @@ passport.use(new GoogleStrategy({
   clientID: GOOGLE_CONFIG.clientID,
   clientSecret: GOOGLE_CONFIG.clientSecret,
   callbackURL: "/auth/google/callback",
-  scope: ['profile', 'email']
+  scope: ['profile', 'email', YOUTUBE_SCOPE]
 },
    // Google auth callback function
   async function(accessToken ,refreshToken ,profile, done){
+    console.log(profile);
     // We try to see if we have an existing user with this id
     User.findOne({googleId: profile.id},
       // findOne callback function
@@ -103,6 +107,34 @@ passport.use(new GoogleStrategy({
         console.log("error occured");
         throw err;
       }
+    //****************Getting user's youtube channels **************** */
+    var oauth2Client = new OAuth2(GOOGLE_CONFIG.clientID, GOOGLE_CONFIG.clientSecret, "/auth/google/callback");
+    oauth2Client.credentials = {
+      access_token: accessToken,
+      refresh_token: refreshToken
+  };
+    var service = google.youtube('v3');
+    service.channels.list({
+      auth: oauth2Client,
+      part: 'snippet,contentDetails,statistics',
+      forUsername: 'GoogleDevelopers'
+    }, function(err, response) {
+      if (err) {
+        console.log('The API returned an error: ' + err);
+        return;
+      }
+      var channels = response.data.items;
+      if (channels.length == 0) {
+        console.log('No channel found.');
+      } else {
+        console.log('This channel\'s ID is %s. Its title is \'%s\', and ' +
+                    'it has %s views.',
+                    channels[0].id,
+                    channels[0].snippet.title,
+                    channels[0].statistics.viewCount);
+      }
+    });
+
       // If we find a user with the existing google id we just sign in
       if(doc){
         return done(null, doc);
@@ -149,7 +181,6 @@ passport.use(new FacebookStrategy({
       }
       // If we find a user with the existing facebook id we just sign in
       if(doc){
-        console.log(profile.id);
         return done(null, doc);
       }
       //Otherwise we create a new user
@@ -183,7 +214,10 @@ passport.use(new FacebookStrategy({
 
   passport.deserializeUser((id, cb) => {
     User.findOne({ _id: id }, (err, user) => {
-      if(err) cb(err,null);
+      if(err || user == null) {
+        return cb(err,null);
+
+      }
 
       // We only return relevant data
       const userInformation = {

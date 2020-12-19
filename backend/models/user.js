@@ -61,7 +61,6 @@ const user = new mongoose.Schema({
   twitchData: {type: mongoose.Schema.Types.Mixed, ref: 'TwitchData'} ,
   googleData: {type: mongoose.Schema.Types.Mixed, ref: 'GoogleData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
-  facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}]
 });
 
