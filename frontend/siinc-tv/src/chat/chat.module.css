@@ -18,8 +18,8 @@
     padding-left: 0px;
     text-align: left;
     top: 800px;
-    height: 900px;
- 
+    height: 808px;
+    overflow: scroll;
 }
 
 .messagesList
