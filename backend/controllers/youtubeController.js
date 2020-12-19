@@ -47,7 +47,6 @@ exports.getLiveVideoId = async function(req,res){
         console.log(e.response)
     }).then((result)=>{
         if(result && result.data && result.data.items && (result.data.items.length > 0)){
-            console.log(result.data.items[0].id.videoId);
             res.send(result.data.items[0].id.videoId);
             return;
         }

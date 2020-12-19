@@ -34,7 +34,6 @@ exports.createStream = function(req, res){
         numOfViewers: 0
     
     });
-    console.log(data.creator);
    // set the creator object
     streamData.creator = new StreamerData({
         memberId : req.user._id,
