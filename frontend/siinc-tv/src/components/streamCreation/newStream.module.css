@@ -3,6 +3,8 @@
     width: 689px;
     height: 1100px;
     background-color:#10002B;
+    margin-top: -40px;
+    margin-left: -70px;
 }
 .createStreamForm
 {
@@ -11,20 +13,22 @@
 
 .titleLine{
     height: 0px;
-    color: #F0D6FF;
-    border: 1px solid #F0D6FF;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
     transform: rotate(180deg);
+    opacity: 0.7;
 }
 
 .titleLabel{
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 36px;
     line-height: 47px;
     display: flex;
     align-items: flex-end;
-    color: #F0D6FF;
+    color: #FFFFFF;
+    opacity: 0.7;
 }
 
 .fieldLabel{
@@ -32,12 +36,14 @@
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 29px;
     display: flex;
     align-items: flex-end;
-    color: #F0D6FF;
-    margin-top: 10px;
+    color: #FFFFFF;
+    opacity: 0.7;
+    margin-top: 24px;
+    
 }
 
 .fieldText{
@@ -46,22 +52,21 @@
     width: 613px;
     height: 38px;
     border:none;
-    background: #EFEFEF;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
-    line-height: 14px;
+    line-height: 24px;
     padding-left: 10px;
     color: #AFAFAF;
 }
 
-.fieldText:focus
+.fieldText:hover, .fieldText:focus
 {
-    box-shadow: 0px 1px 4px #AFAFAF;
-    outline-width: 0ch;
+    border: 1px solid rgb(153, 153, 153);
 }
 
 .descriptionText{
@@ -69,25 +74,27 @@
     position:relative;
     width: 613px;
     height: 120px;
-    background: #EFEFEF;
+    border: none;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     margin-bottom: 20px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
-    line-height: 14px;
+    line-height: 24px;
     text-align: top;
     color: #AFAFAF;
     padding-left: 8px;
     padding-top: 8px;
+    resize: none;
 }
 
-.descriptionText:focus
+.descriptionText:hover, .descriptionText:focus
 {
-    box-shadow: 0px 1px 4px #AFAFAF;
-    outline-width: 0ch;
+    border: 1px solid rgb(153, 153, 153);
+    outline: none;
 }
 
 .checkbox
@@ -100,7 +107,6 @@
     width: 24px;
     height: 24px;
     display:inline-block;
-    position: relative;
     cursor:pointer;
 }
 
@@ -125,23 +131,28 @@
 }
 
 .submitButton{
-    position:absolute;
     display:block;
     border:none;
     position: relative;
     height: 38px;
     width:100px;
     left:513px;
-    bottom: 0px;
-    background: #8D31D8;
+    bottom: -42px;
+    background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 10px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
-    color: #F0D6FF;
+    color: #FFFFFF;
+    opacity: 0.7;
+    z-index: 1;
+}
+
+.submitButton:hover
+{
     cursor:pointer;
 }
 
@@ -152,6 +163,7 @@
     text-align:inline-block;
     width:100%
 }
+
 .removeTeamButton{
     border:none;
     left: 600px;
@@ -166,8 +178,8 @@
 
 .removeTeamButton:hover
 {
-    color: #8D31D8;
-    background-color: #8D31D8;
+    color: #3C096C;
+    background-color: #3C096C;
 }
 
 
@@ -188,8 +200,14 @@
 
 .addTeamButton:hover
 {
-    color: #8D31D8;
-    background-color: #8D31D8;
+    color: #3C096C;
+    background-color: #3C096C;
+    border: none;
+}
+
+.addTeamButton:focus
+{
+    outline: none;
 }
 
 .addTeamDiv{
