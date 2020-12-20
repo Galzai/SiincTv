@@ -13,40 +13,45 @@ const UNFRIEND_REQUEST = 2;
  */
 exports.handleFriendsRequest = function(req, res){
     
-    const action = req.action;
-    console.log("Received friends request of type : " +  action);
+    const fun = async() => {
+        const action = req.body.action;
+        console.log("Received friends request of type : " +  action);
 
-    let status = false;
+        let status = false;
 
-    if( action == SEND_FRIEND_REQUEST ) 
-    {
-        status = handleSendFriendRequest( req );
+        if( action == SEND_FRIEND_REQUEST ) 
+        {
+            status = await handleSendFriendRequest( req );
+        }
+        else if( action == ANSWER_FRIEND_REQUEST ) 
+        {
+            status = await handleAnswerFriendRequest2( req );
+        }
+        else if( action == UNFRIEND_REQUEST)
+        {
+            status = await handleUnfriendRequest( req );
+        }
+        else 
+        {
+            console.log( "Unkown friends action type" );   
+            status = false; 
+        }
+        return status;
     }
-    else if( action == ANSWER_FRIEND_REQUEST ) 
-    {
-        status = handleAnswerFriendRequest( req );
-    }
-    else if( action == UNFRIEND_REQUEST)
-    {
-        status = handleUnfriendRequest( req );
-    }
-    else 
-    {
-        console.log( "Unkown friends action type" );   
-        status = false; 
-    }
-
-    res.send(status);
-
+    fun().then( status => {res.send(status);} )
 }
 
 async function handleSendFriendRequest( req )
 {
-    let [fromUser, toUser] = getUsersFromRequest( req );
+    let [fromUser, toUser] = await getUsersFromRequest( req );
+
+    console.log("Handling sendFriendRequest from users : " + fromUser.username + ", " + toUser.username)
+    console.log(fromUser)
+    console.log(toUser)
 
     // now check if fromUser already has toUser as friends or has pending request - verified only one side
-    if( fromUser.friendsData.friendsList.includes( {userId:toUser._id, username:toUser.username} ) || 
-           fromUser.friendsData.sentRequests.includes( {userId:toUser._id, username:toUser.username} ) ) {
+    if( fromUser.friendsData.friendsList.find(el=>toString(el.id)==toString(toUser._id)) != undefined || 
+           fromUser.friendsData.sentRequests.find(el=>toString(el.id)==toString(toUser._id)) != undefined ) {
         console.log("Cannot send request to this user, you already sent a request or he is your friend");
         return false;
     }
@@ -54,85 +59,167 @@ async function handleSendFriendRequest( req )
     // now update fromUser and toUser data
     try {
         await User.updateOne( 
-            { name: fromUser },
-            { $push: { "friendsData.$.sentRequests": toUser } }
+            { username: fromUser.username },
+            { $push: { "friendsData.sentRequests": {
+                id: toUser._id,
+                username: toUser.username,
+            } } }
         ).exec();
 
         await User.updateOne( 
-            { name: toUser },
-            { $push: { "friendsData.$.receivedRequests": fromUser } }
+            { username: toUser.username },
+            { $push: { "friendsData.receivedRequests": {
+                id: fromUser._id,
+                username: fromUser.username 
+            } } }
         ).exec();
     }
     catch (error) {
         console.log("error occured in : <handleSendFriendRequest>")
+        console.log(error)
         return false;
     }
-    
+
     return true;
-
-
-/*
-    User.findOne({username: req.body.toUser},
-        function(err, doc){
-            if (err) {
-                console.log("error occured in : <handleSendFriendRequest>");
-            }
-            // user exists
-            if (doc)  {
-                toUser = doc    
-            }
-            else  {
-                console.log("Couldnt fine user : <handleSendFriendRequest>")
-            }
-    });
-*/
     
 }
 
 async function handleAnswerFriendRequest( req )
 {
-    let [fromUser, toUser] = getUsersFromRequest( req );
-    
+    let [fromUser, toUser] = await getUsersFromRequest( req );
+
+    console.log("Handling handleAnswerFriendRequest from users : " + fromUser.username + ", " + toUser.username)
+    console.log(fromUser)
+    console.log(toUser)
+
     // verify that toUser has a friend request from fromUser - verified only one side
-    if( !toUser.friendsData.receivedRequests.includes( {userId:fromUser._id, username:fromUser.username} ) ) {
+    if( !(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)) != undefined) ) {
         console.log("Cant accept/reject someone who is not in received requests list");
+        console.log(toUser.username + " does not have a request from " + fromUser.username)
+        console.log(toUser.friendsData.receivedRequests)
+        console.log({id:fromUser._id, username:fromUser.username})
+        console.log(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)))
         return false;
     }
 
-    
-
     // now update toUser and fromUser
-    if( req.accepted ) {
+    if( req.body.accepted ) {
         try {
             await User.updateOne( 
-                { name: fromUser },
-                { $pull: { "friendsData.$.sentRequests": toUser }, $push: { "friendsData.$.friendsList": toUser}}
+                { username: fromUser },
+                { $pull: { "friendsData.sentRequests": {
+                    id: toUser._id,
+                    username: toUser.username,
+                } }, 
+                  $push: { "friendsData.friendsList": {
+                    id: toUser._id,
+                    username: toUser.username,
+                }}}
             ).exec();
     
             await User.updateOne( 
-                { name: toUser },
-                { $pull: { "friendsData.$.receivedRequests": fromUser }, $push: { "friendsData.$.friendsList": fromUser} }
+                { username: toUser },
+                { $pull: { "friendsData.receivedRequests": {
+                    id: fromUser._id,
+                    username: fromUser.username,
+                } }, 
+                  $push: { "friendsData.friendsList": {
+                    id: fromUser._id,
+                    username: fromUser.username,
+                }} }
             ).exec();
         }
         catch (error) {
-            console.log("error occured in : <handleSendFriendRequest>")
+            console.log("error occured in : <handleAnswerFriendRequest>")
             return false;
         }
     }
     else {
         try {
             await User.updateOne( 
-                { name: fromUser },
-                { $pull: { "friendsData.$.sentRequests": toUser } }
+                { username: fromUser },
+                { $pull: { "friendsData.sentRequests": {
+                    id: toUser._id,
+                    username: toUser.username,
+                } } }
             ).exec();
     
             await User.updateOne( 
-                { name: toUser },
-                { $pull: { "friendsData.$.receivedRequests": fromUser } }
+                { username: toUser },
+                { $pull: { "friendsData.receivedRequests": {
+                    id: fromUser._id,
+                    username: fromUser.username,
+                } } }
             ).exec();
         }
         catch (error) {
-            console.log("error occured in : <handleSendFriendRequest>")
+            console.log("error occured in : <handleAnswerFriendRequest>")
+            return false;
+        }
+    }
+
+    console.log("after handling : " + fromUser.username + ", " + toUser.username)
+    console.log(fromUser)
+    console.log(toUser)
+
+    return true;       
+}
+
+async function handleAnswerFriendRequest2( req )
+{
+    let [fromUser, toUser] = await getUsersFromRequest( req );
+
+    console.log("Handling handleAnswerFriendRequest from users : " + fromUser.username + ", " + toUser.username)
+    console.log(fromUser)
+    console.log(toUser)
+
+    // verify that toUser has a friend request from fromUser - verified only one side
+    if( !(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)) != undefined) ) {
+        console.log("Cant accept/reject someone who is not in received requests list");
+        return false;
+    }
+
+    // now update toUser and fromUser
+    if( req.body.accepted ) {
+        try {
+           await User.updateOne( 
+                { username: fromUser.username },
+                { $pull: { "friendsData.sentRequests": { id: toUser._id } }, 
+                  $push: { "friendsData.friendsList": {
+                    id: toUser._id,
+                    username: toUser.username,
+                }}}
+            ).exec();
+
+            await User.updateOne( 
+                { username: toUser.username },
+                { $pull: { "friendsData.receivedRequests": { id: fromUser._id } },  
+                  $push: { "friendsData.friendsList": {
+                    id: fromUser._id,
+                    username: fromUser.username,
+                }} }
+            ).exec();
+        }
+        catch (error) {
+            console.log("error occured in : <handleAnswerFriendRequest>")
+            console.log(error)
+            return false;
+        }
+    }
+    else {
+        try {
+            await User.updateOne( 
+                { username: fromUser },
+                { $pull: { "friendsData.sentRequests": { id: toUser._id } } }
+            ).exec();
+    
+            await User.updateOne( 
+                { username: toUser },
+                { $pull: { "friendsData.receivedRequests": { id: fromUser._id } } }
+            ).exec();
+        }
+        catch (error) {
+            console.log("error occured in : <handleAnswerFriendRequest>")
             return false;
         }
     }
@@ -142,10 +229,14 @@ async function handleAnswerFriendRequest( req )
 
 async function handleUnfriendRequest( req )
 {
-    let [fromUser, toUser] = getUsersFromRequest( req );
+    let [fromUser, toUser] = await getUsersFromRequest( req );
+
+    console.log("Handling handleUnfriendRequest from users : " + fromUser.username + ", " + toUser.username)
+    console.log(fromUser)
+    console.log(toUser)
 
     // verify that fromUser has toUser as a friend - verified only one side
-    if( !fromUser.friendsData.friendsList.includes( {userId:toUser._id, username:toUser.username} ) ) {
+    if( !(fromUser.friendsData.friendsList.find(el=>toString(el.id)==toString(toUser._id)) != undefined) ) {
         console.log("cant remove someone who is not a friend");
         return false;
     }
@@ -153,17 +244,18 @@ async function handleUnfriendRequest( req )
     // update fromUser and toUser
     try {
         await User.updateOne( 
-            { name: fromUser },
-            { $pull: { "friendsData.$.friendsList": toUser}}
+            { username: fromUser.username },
+            { $pull: { "friendsData.friendsList": { id: toUser._id } } }
         ).exec();
 
         await User.updateOne( 
-            { name: toUser },
-            { $pull: { "friendsData.$.friendsList": fromUser} }
+            { username: toUser.username },
+            { $pull: { "friendsData.friendsList": { id: fromUser._id } } }
         ).exec();
     }
     catch (error) {
-        console.log("error occured in : <handleSendFriendRequest>")
+        console.log("error occured in : <handleUnfriendRequest>")
+        console.log(error)
         return false;
     }
 
@@ -179,7 +271,7 @@ async function getUsersFromRequest( req )
             fromUser = await User.findOne({username: req.body.fromUser}).exec();
         }
         catch (error) {
-            console.log("error occured in : <handleSendFriendRequest>")
+            console.log("error occured in : <handleUnfriendRequest>")
             return [fromUser, toUser];
         }
     

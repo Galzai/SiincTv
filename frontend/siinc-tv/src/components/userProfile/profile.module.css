@@ -41,6 +41,12 @@ a {
     
 }
 
+.notActive {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+  }
 
 .profilePhoto {
     margin-top: 10px;

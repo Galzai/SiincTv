@@ -216,7 +216,8 @@ passport.use(new FacebookStrategy({
         twitchData: user.twitchData,
         googleData: user.googleData,
         facebookData: user.facebookData,
-        upcomingEvents :user.upcomingEvents
+        upcomingEvents :user.upcomingEvents,
+        friendsData: user.friendsData
       };
       cb(err, userInformation);
     });

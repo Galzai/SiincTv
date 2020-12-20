@@ -85,9 +85,8 @@ exports.user_login = function(req, res, next){
             res.send([]);
           }
           if (doc){
-            res.send(
-              {friendsData: doc.friendsData}
-            );
+            console.log(doc);
+            res.send( doc );
           }
           else
           {

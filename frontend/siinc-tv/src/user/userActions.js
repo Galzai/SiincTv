@@ -66,6 +66,8 @@ const userActions ={
             withCredentials:true,
             url:'http://localhost:4000/userdata'
         });
+        console.log(result.data)
+        console.log("Finished getting data")
         return result.data;
     },
 

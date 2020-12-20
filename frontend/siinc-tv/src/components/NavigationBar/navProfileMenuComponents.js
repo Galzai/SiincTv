@@ -128,7 +128,7 @@ export function NavProfileMenuRanking() {
 
 export function NavProfileMenuMyChannelLink() {
     const userContext = useContext(UserContext);
-    const mychannel = "/userpage/" + userContext.user.username;
+    const mychannel = "/users/" + userContext.user.username;
 
     return(
         <Link to={mychannel} className={style.link} underline="none">
