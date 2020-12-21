@@ -136,3 +136,31 @@ exports.searchStreams = function(req, res){
    
     )  
 }
+
+/**
+ * @brief searches for streams, split to pages
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.getStreamsByStatus = function(req, res){
+    const page = req.body.page;
+    const status = req.body.status;
+    const PAGE_SIZE = 10;                   // Similar to 'limit'
+    const skip = (page - 1) * PAGE_SIZE;    // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
+    StreamData.find({$and: [
+        {status: status}]},
+
+    ).limit(PAGE_SIZE).skip(skip).exec(
+    async function(err, result){
+        if (err){;
+            console.log(err)
+            console.log("stream/no_results");
+        }
+        // id exists
+        if (result) res.send(result);
+        else res.send('stream/no_results');
+    }
+   
+    )  
+}
