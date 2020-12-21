@@ -154,6 +154,8 @@
 .submitButton:hover
 {
     cursor:pointer;
+    color: #E2DAE9;
+    background-color: #5B10A3;
 }
 
 .teamDiv

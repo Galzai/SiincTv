@@ -16,7 +16,7 @@ import {
        from "./navProfileMenuComponents.js"
 
 /*-----------------------------   Icons   -------------------------------*/
-import NavNotificationIcon from "../../assets/NavBar/NavBarNotifications.png"
+import NavNotificationIcon from "../../assets/NavBar/NavBarNotifications.svg"
 /*-----------------------------------------------------------------------*/
 
 function NavProfileMenu(props) {
