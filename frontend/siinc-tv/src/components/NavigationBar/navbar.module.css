@@ -63,13 +63,14 @@
     margin-right: 20px;
     width: 30px;
     height: 30px;
-    
+
     float: right;
     border-radius: 25px;
 }
 .navProfileButton:hover
 {
     cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9;
 }
 
 .navProfileMenu
@@ -103,11 +104,14 @@
     height: 17px;
     top: 36px;
     left: 50%;
+    border-radius: 40px;
 
 }
+
 .navNotificationButton:hover
 {
     cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
 }
 
 .navCreateStreamButton
@@ -117,7 +121,13 @@
     height: 17px;
     left: 14.5%;
     top: 35%;
-    background: url("../../assets/NavBar/NavBarCreateStream.png");   
+    background: url("../../assets/NavBar/NavBarCreateStream.png"); 
+}
+
+.navCreateStreamButton:hover
+{
+    cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9;
 }
 
 .navSearchContainer
