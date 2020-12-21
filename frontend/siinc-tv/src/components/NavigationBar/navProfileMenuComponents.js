@@ -20,6 +20,15 @@ export function NavProfileMenuHeader(props) {
 
 
 
+    function checkUserName(temp){
+        if(temp.length < 12){
+            return temp;
+        }
+        return temp.slice(0,12)+"...";
+    }
+
+    let relevant_username = checkUserName(userContext.user.username);
+
     return(
         <div>
             <div className={style.navProfileMenuPic} onClick={props.onProfileClick}>
@@ -28,7 +37,7 @@ export function NavProfileMenuHeader(props) {
                 </img>
             </div>
             <div className={style.navProfileMenuNameText}>
-                {userContext.user.username}
+                {relevant_username}
             </div>
             <div className={style.navProfileMenuStatusText}>
                 {/* Change this to user.showOnline after implementing feature on server side */}
@@ -44,50 +53,6 @@ export function NavProfileMenuHeader(props) {
         </div>
     );
 
-}
-
-//helper toggle button component
-function ToggleButton(props) {
-    const { selected, toggleSelected } = props;
-  
-    function getContainerStyle() {
-        if( selected ) {
-            return {backgroundColor: "green"};
-        }
-        return {backgroundColor: "rgb(50,50,50)"};
-    }
-
-    function getCircleStyle() {
-        if( selected ) {
-            return {right: "5%"};
-        }
-        return {left: "5%"};
-    }
-
-    return (
-        <div className={style.navProfileMenuToggleButtonContainer} style={getContainerStyle()} onClick={toggleSelected}>
-            <div className={style.navProfileMenuToggleButtonCircle} style={getCircleStyle()}>
-            </div>
-        </div>
-    );
-}
-
-export function NavProfileMenuToggleOnline() {
-    //TODO - Need to decide later on if and how to synchronize with servers online visibility state
-    const [selected, setSelected] = useState(false);
-    
-    return(
-        <div>
-            <div className={style.navProfileMenuOnlineText}>
-                Online
-            </div>
-            <ToggleButton
-                selected={selected}
-                toggleSelected={ ()=>setSelected(!selected) }
-            >
-            </ToggleButton>
-        </div>
-    );
 }
 
 export function NavProfileMenuBreaker(props) {

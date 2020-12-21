@@ -19,7 +19,7 @@ const customStyles = {
         transform             : 'translate(-50%, -50%)',
         backgroundColor       : '#10002B',
         borderRadius          : '10px',
-        padding               : '0px'
+        padding               : '0px',
     }
 };
 
@@ -40,11 +40,6 @@ function SigningModal(props){
     }
     function closeRequest(){
         setShowRegistration(false);
-    }
-
-    function signOut(){
-        userActions.signOut();
-        setUser(null);
     }
 
     // occurs after every render

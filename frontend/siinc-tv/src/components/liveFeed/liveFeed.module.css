@@ -1,0 +1,16 @@
+.liveFeedBar{
+    display:inline-block;
+    position:relative;
+    width: 1550px;
+    height: 500px;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.liveFeedContainer{
+    display:inline-block;
+    padding-right:100px;
+    width:450px;
+    height:330px;
+    cursor: pointer;
+}

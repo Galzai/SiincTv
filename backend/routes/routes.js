@@ -57,6 +57,9 @@ router.get('/user/getusernamelist', userController.getUsernameList);
 // POST request searchStreams
 router.post('/search/streams', streamController.searchStreams);
 
+// POST request getStreamsByStatus
+router.post('/feed/streams', streamController.getStreamsByStatus);
+
 // POST request getAllStreamGroupsStreams
 router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 

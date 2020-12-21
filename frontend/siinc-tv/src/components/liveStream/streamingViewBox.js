@@ -1,4 +1,3 @@
-import style from './liveStream.module.css'
 import React, {useState} from "react";
 import LiveStream from "./liveStream";
 import StreamSelectorBar from "./streamSelectorBar";

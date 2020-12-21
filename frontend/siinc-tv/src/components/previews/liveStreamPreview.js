@@ -49,10 +49,14 @@ function LiveStreamPreview(props){
 
     // Maps twitch thumbnails to correct size
     function mapTwitchThumbnails(twitchStreamResponse){
-        return twitchStreamResponse.map(
-            (twitchStream)=>
-            twitchStream.thumbnail_url.replace("{width}x{height}",`${width}x${height}`)
-            )
+        if(Array.isArray(twitchStreamResponse)){
+            return twitchStreamResponse.map(
+                (twitchStream)=>
+                    twitchStream.thumbnail_url.replace("{width}x{height}",`${width}x${height}`)
+                )
+        }
+        return [];
+
     }
 
 
@@ -62,8 +66,8 @@ function LiveStreamPreview(props){
         if(streamPreviews.length === 0 )
         {
             streamActions.getAllStreamGroupsStreams(streamData.streamGroups).then(
+
                 async (twitchStreamResponse)=>{
-                    console.log(twitchStreamResponse);
                     let res = [];
                     res.push(...mapTwitchThumbnails(twitchStreamResponse));
                     res.push(await mapYoutubeThumbnails());
