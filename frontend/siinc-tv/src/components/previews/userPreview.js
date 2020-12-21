@@ -34,8 +34,8 @@ function UserPreview(props){
 
             </div>
             <div className={style.UserButtons}>
-                <button>Follow</button>
-                <button>Add Friend</button>
+                <button className={style.favoriteFriendsButtons}>Follow</button>
+                <button className={style.favoriteFriendsButtons}>Add Friend</button>
              </div>
              
         </div>
