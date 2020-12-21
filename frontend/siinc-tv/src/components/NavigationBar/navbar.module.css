@@ -1,16 +1,12 @@
 .navigationBar
 {
-    padding: 0px;
-    margin: 0px;
-    display: inline-block;
-    position: fixed;
-    z-index: 10;
-    width: 100%;
-    height: 60px;
-    top: 0;
-    left: 0;
-    background-color: rgb(106, 38, 166);
-    box-shadow: 0px 2px 5px rgb(50, 50, 50);
+    position: absolute;
+    left: 256px;
+    right: 0%;
+    top: 0%;
+    bottom: 91.21%;
+
+    background: #10002B;
  
 }
 
@@ -42,10 +38,10 @@
 .signInButton
 {
     position: absolute;
-    width: 57px;
+    width: 50px;
     height: 21px;
-    top: 17px;
-    right: 160px;
+    top: 34px;
+    right: 92px;
 
     font-family: Roboto;
     font-style: normal;
@@ -53,51 +49,20 @@
     font-size: 18px;
     line-height: 21px;
 
-    color: #F0D6FF;
+    color: #FFFFFF;
+    opacity: 0.85;
 }
 .signInButton:hover
 {
     cursor: pointer;
 }
 
-.signUpButton
-{
-    position: absolute;
-    width: 64px;
-    height: 21px;
-    top: 17px;
-    right: 75px;
-    
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 18px;
-    line-height: 21px;
-
-    color: #F0D6FF;
-}
-.signUpButton:hover
-{
-    cursor: pointer;
-}
-
-
-.navBarSeperator
-{
-    position: absolute;
-    width: 19px;
-    height: 0px;
-    top: 25px;
-    
-    border: 1px solid #D1D1D1;
-    transform: rotate(90deg);    
-}
-
 .navProfileButton
 {
-    margin-top: 2px;
-    width: 50px;
-    height: 50px;
+    margin-top: 30px;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
     
     float: right;
     border-radius: 25px;
@@ -113,10 +78,11 @@
     
     float: right;
     position: relative;
-    width: 155px;
-    height: 319px;
+    width: 183px;
+    height: 394px;
     z-index: 20;
-    background: rgba(199, 125, 255, 0.75);
+    top: -60px;
+    background: #101011;
     box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.5);
     border-radius: 10px;    
 }
@@ -125,10 +91,8 @@
 {
     box-sizing: border-box;
     display: block;
-    padding-right: 10px;
     float: right;
     position: relative;
-    top: 3px;
 }
 
 .navNotificationButton
@@ -137,37 +101,13 @@
     position: absolute;
     width: 15px;
     height: 17px;
-    top: 18px;
-    left: 72px;
+    top: 36px;
+    left: 92px;
 
 }
 .navNotificationButton:hover
 {
     cursor: pointer;
-}
-
-.navMessageButton
-{
-    box-sizing: border-box;
-    position: absolute;
-    width: 18px;
-    height: 13px;
-    top: 19px;
-    left: 30px;
-}
-.navMessageButton:hover
-{
-    cursor: pointer;
-}
-
-.siincIcon
-{
-    position: absolute;
-    width: 108px;
-    height: 67px;
-    left: 19px;
-    top: -3px;
-    background: url("../../assets/NavBar/NavBarSiincLogo.png");   
 }
 
 .navCreateStreamButton
@@ -184,22 +124,19 @@
 {
     position: absolute;
     width: 399px;
-    height: 38px;
-    left: 21.3%;
-    top: 11px;
-    background: #EFEFEF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;  
+    height: 40px;
+    left: 849px;
+    top: 25px;
+    
 }
 .navSearchInput
 {
     box-sizing: border-box;
     position: absolute;
-    top: 0px;
-    left: -1px;
+    left: -5px;
     height: 38px;
     width: 81%;
-    background-color: #EFEFEF;
+    background-color: #251A37;
     border: 0px solid #8f5dac;
     border-radius: 14px 0px 0px 14px;
     padding: 4px;
@@ -207,28 +144,35 @@
     margin: 0px;
 
     font-family: Roboto;
-    font-style: normal;
+    font-style: thin;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 0;
     line-height: 21px;
+    color: #AFAFAF;
+
 }
 .navSearchInput:hover
 {
     height: 42px;
-    left: -3px;
+    width: 399px;
+    left: -6px;
     top: -2px;
     border: 1px solid rgb(153, 153, 153);
-    border-radius: 14px 0px 0px 14px;
+    border-radius: 14px;
 }
+
 .navSearchInput:focus
 {
     height: 42px;
-    left: -3px;
+    width: 399px;
+    left: -6px;
     top: -2px;
-    background-color: white;
+    background-color: #251A37;
     outline: none;
-    border: 2px solid rgb(56, 3, 97);
-    border-radius: 14px 0px 0px 14px;
+    border: 1px solid rgb(153, 153, 153);
+    border-radius: 14px;
+
+    color: #AFAFAF;
 }
 
 .navClearButtonContainer
@@ -236,10 +180,10 @@
     box-sizing: border-box;
     position: absolute;
     background-size: cover;      
-    background-color: #EFEFEF;
+    background-color: #251A37;
     width: 9.5%;
     height: 38px;
-    left: 322px;
+    left: 312px;
 }
 .navClearButton
 {
@@ -249,17 +193,18 @@
     height: 14px;
     top: 12px;
     left: 13px;
+    border:none;
 }
 .navSearchButtonContainer
 {
     box-sizing: border-box;
     position: relative;
     background-size: cover;      
-    background-color: #EFEFEF;
+    background-color: #251A37;
     padding: 4px;
     width: 9.5%;
     height: 38px;
-    left: 362px;
+    left: 350px;
     border-radius: 0px 14px 14px 0px;
 }
 .navSearchButton
@@ -273,13 +218,13 @@
     border:none;
 }
 
-.navSearchButto:focus{
+.navSearchButton:focus{
     border:none;
 }
-.navSearchButto:active{
+.navSearchButton:active{
     border:none;
 }
-.navSearchButto:visited{
+.navSearchButton:visited{
     border:none;
 }
 
@@ -288,7 +233,7 @@
     position: absolute;
     width: 23px;
     height: 0px;
-    left: 349px;
+    left: 338px;
     top: 18px;
     z-index: 1;
     border: 1px solid #AFAFAF;

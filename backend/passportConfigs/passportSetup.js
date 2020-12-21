@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-
+var youtubeController = require('../controllers/youtubeController')
 //all our strategies
 const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -18,9 +18,10 @@ const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
 const {FacebookData} = require("../models/user");
 
+const YOUTUBE_SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
+
 // Used for authenticating users, passport is passed to not create new instance
 module.exports = function (passport) {
-
 
   // Local strategy
   passport.use( new LocalStrategy((username, password, done) => {
@@ -63,7 +64,6 @@ module.exports = function (passport) {
         }
         //Otherwise we create a new user
         else{
-
           const newTwitchData = new TwitchData({
             login: profile.login,
             display_name: profile.display_name,
@@ -97,10 +97,11 @@ passport.use(new GoogleStrategy({
   clientID: GOOGLE_CONFIG.clientID,
   clientSecret: GOOGLE_CONFIG.clientSecret,
   callbackURL: "/auth/google/callback",
-  scope: ['profile', 'email']
+  scope: ['profile', 'email', YOUTUBE_SCOPE]
 },
    // Google auth callback function
   async function(accessToken ,refreshToken ,profile, done){
+    console.log(profile);
     // We try to see if we have an existing user with this id
     User.findOne({googleId: profile.id},
       // findOne callback function
@@ -109,6 +110,8 @@ passport.use(new GoogleStrategy({
         console.log("error occured");
         throw err;
       }
+
+      var channels = await youtubeController.getYoutubeChannelFromGoogle(accessToken,refreshToken);
       // If we find a user with the existing google id we just sign in
       if(doc){
         return done(null, doc);
@@ -117,6 +120,8 @@ passport.use(new GoogleStrategy({
       else{
         const newGoogleData = new GoogleData({
           displayName: profile.displayName,
+          youtubeId: channels.length > 0 ? channels[0].id : null,
+          youtubeName: channels.length > 0 ? channels[0].snippet.title : null,
           name: profile.name,
           emails: profile.emails,
           photos: profile.photos
@@ -161,7 +166,6 @@ passport.use(new FacebookStrategy({
       }
       // If we find a user with the existing facebook id we just sign in
       if(doc){
-        console.log(profile.id);
         return done(null, doc);
       }
       //Otherwise we create a new user
@@ -201,7 +205,10 @@ passport.use(new FacebookStrategy({
 
   passport.deserializeUser((id, cb) => {
     User.findOne({ _id: id }, (err, user) => {
-      if(err) cb(err,null);
+      if(err || user == null) {
+        return cb(err,null);
+
+      }
 
       // We only return relevant data
       const userInformation = {

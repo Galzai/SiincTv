@@ -5,7 +5,8 @@ const TWITCH_CONFIG = {
 
 const GOOGLE_CONFIG = {
     clientID:"735353026558-nknb0ii5ovjuurih5rkj910fhivsg875.apps.googleusercontent.com",
-    clientSecret:"t5RPYT1otUXQA5APhFzwrGsG"
+    clientSecret:"t5RPYT1otUXQA5APhFzwrGsG",
+    apiKey: "AIzaSyB_XwKOhmOr2Fjf2LI8DkhPUEduXR5gt3A"
 }
 
 const FACEBOOK_CONFIG={

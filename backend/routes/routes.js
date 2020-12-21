@@ -7,7 +7,7 @@ var userController = require('../controllers/userController')
 var streamController = require('../controllers/streamController')
 var twitchController = require('../controllers/twitchController')
 var friendsController = require('../controllers/friendsController')
-
+var youtubeController = require('../controllers/youtubeController')
 
 // POST request to sign in
 router.post('/signin',userController.user_login);
@@ -60,13 +60,17 @@ router.post('/search/streams', streamController.searchStreams);
 // POST request getAllStreamGroupsStreams
 router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 
+// POST request getLiveVideoId
+router.post('/youtube/getLiveVideoId', youtubeController.getLiveVideoId);
+
 // POST request searchStreams
 router.post('/search/users', userController.searchUsers);
 
-// GET request redirectBack
+// POST request redirectBack
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
 
 // POST request to friends controller
 router.post('/user/friends', friendsController.handleFriendsRequest);
+
 
 module.exports = router;

@@ -1,6 +1,6 @@
 .signInDiv
 {
-    top: 135px;
+    top: 80px;
     position: absolute;
     width: 600px;
     height: 550px
@@ -15,7 +15,7 @@
 .emailDiv
 {
     position: relative;
-    top: 70px;
+    top: 85px;
 }
 
 .passwordDiv
@@ -27,13 +27,13 @@
 .signUpPasswordDiv
 {
     position: relative;
-    top: 115px;
+    top: 140px;
 }
 
 .confirmPasswordDiv
 {
     position: relative;
-    top: 160px;
+    top: 200px;
 }
 
 .formText
@@ -50,7 +50,7 @@
     line-height: 21px;
     display: flex;
     align-items: flex-end;
-    color: #F0D6FF;
+    color: #AFAFAF;
 
 }
 
@@ -64,15 +64,15 @@
 }
 
 .inputBox{
-    top: 10px;
+    top: 40px;
     border:none;
     position: relative;
-    width: 94%;
+    width: 85.76%;
     height: 44px;
     padding: 0px;
-    background: #EFEFEF;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -87,23 +87,23 @@
 {
     box-shadow: 0px 1px 4px #AFAFAF;
     outline-width: 0ch;
-    border-radius: 14px;
+    border-radius: 3px;
 }
 
 .secretInputBox{
-    top: 10px;
+    top: 40px;
     border:none;
     position: relative;
-    width: 94%;
+    width: 85.76%;
     height: 44px;
     padding: 0px;
-    background: #EFEFEF;
+    background: #251A37;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 22px;
     box-sizing: border-box;
     padding-left: 10px;
@@ -115,7 +115,7 @@
 {
     box-shadow: 0px 1px 4px #AFAFAF;
     outline-width: 0ch;
-    border-radius: 14px;
+    border-radius: 3px;
 }
 
 .signInButtonDiv
@@ -134,24 +134,24 @@
     border:none;
     position: relative;
     height: 38px;
-    width:94%;
-    top: 90px;
-    background: #8D31D8;
+    width:33.6%;
+    top: 112px;
+    background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
-    color: #F0D6FF;
+    color: #E2DAE9;
     cursor:pointer;
 }
 
 .signInButton:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #E2DAE9;
+    background-color: #5B10A3;
 }
 
 .signUpButton
@@ -160,24 +160,24 @@
     border:none;
     position: relative;
     height: 38px;
-    width:94%;
-    top: 175px;
-    background: #8D31D8;
+    width:33.6%;
+    top: 270px;
+    background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 900;
     font-size: 18px;
     line-height: 21px;
-    color: #F0D6FF;
+    color: #E2DAE9;
     cursor:pointer;
 }
 
 .signUpButton:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #E2DAE9;
+    background-color: #5B10A3;
 }
 
 .signUpButton:disabled
@@ -188,9 +188,9 @@
 }
 
 
-.authDiv
+.logInDiv
 {
-    top:175px;
+    top:50px;
     position: relative;
     display:block;
     width: 100%;
@@ -203,98 +203,100 @@
 .googleAuth
 {
     margin-top: 20px;
-    display:block;
+    display:block inline;
     border:none;
     position: relative;
-    height: 38px;
-    width:94%;
-    top: 50px;
-    margin-left: 20px;
+    height: 109px;
+    width: 152px;
+    top: 44px;
+    margin-left: 40px;
     background: #EFEFEF;
     background-image: url("../../assets/google-icon.svg");
     background-repeat: no-repeat;
-    background-size:28px 28px;
-    background-position-x: 30%;
-    background-position-y: 50%;
+    background-size: 50px 50px;
+    background-position-x: 50%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 900;
-    font-size: 18px;
-    color: #AFAFAF;
+    font-weight: 20;
+    font-size: 20px;
+    color: #747474;
     cursor:pointer;
+    padding-top: 60px;
 }
 
 .googleAuth:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #5B10A3;
+    background-color: #E2DAE9;
 }
 
 .twitchAuth
 {
     margin-top: 20px;
-    display:block;
+    display:block inline;
     border:none;
     position: relative;
-    height: 38px;
-    width:94%;
-    top: 50px;
-    margin-left: 20px;
+    height: 109px;
+    width: 152px;
+    top: 44px;
+    margin-left: 40px;
     background: #EFEFEF;
     background-image: url("../../assets/TwitchGlitchPurple.svg");
     background-repeat: no-repeat;
-    background-size:28px 28px;
-    background-position-x: 30%;
-    background-position-y: 50%;
+    background-size:45px 45px;
+    background-position-x: 50%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 900;
-    font-size: 18px;
+    font-weight: 20;
+    font-size: 20px;
     color: #3C096C;
     cursor:pointer;
-    align-items: center;
+    padding-top: 60px;
 }
 
 .twitchAuth:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #5B10A3;
+    background-color: #E2DAE9;
 }
 
 .facebookAuth
 {
     margin-top: 20px;
-    display:block;
+    display:block inline;
     border:none;
     position: relative;
-    height: 38px;
-    width:94%;
-    top: 50px;
-    margin-left: 20px;
+    height: 109px;
+    width: 152px;
+    top: 44px;
+    margin-left: 32px;
     background: #3B5998;
     background-image: url("../../assets/facebook-icon.png");
     background-repeat: no-repeat;
-    background-size:28px 28px;
-    background-position-x: 30%;
-    background-position-y: 50%;
+    background-size: 50px 50px;
+    background-position-x: 50%;
+    background-position-y: 25%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 14px;
+    border-radius: 5px;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    font-weight: 900;
-    font-size: 18px;
+    font-weight: 20;
+    font-size: 20px;
     color: #EFEFEF;
     cursor:pointer;
+    padding-top: 60px;
 }
 
 .facebookAuth:hover
 {
-    color: #8D31D8;
-    background-color: #F0D6FF;
+    color: #5B10A3;
+    background-color: #E2DAE9;
 }
 
 .line{
@@ -305,7 +307,7 @@
     left: 20px;
     text-align: center; 
     border-bottom: 2px solid #26044C; 
-    line-height: 0.1em;
+    line-height: 0;
     margin: 10px 0 20px; 
     font-family: 'Roboto', sans-serif;
  } 
@@ -316,8 +318,8 @@
     font-weight: 900;
     font-size: 15px;
     color: #BAA3C8;
-     background:#3C096C; 
-     padding:0 10px; 
+    background:#10002B; 
+    padding:0 10px; 
  }
 
  .errorMessage
@@ -326,8 +328,31 @@
     font-style: normal;
     font-weight: 900;
     font-size: 15px;
-    color: #BAA3C8;
+    color: #AFAFAF;
     position: absolute;
     float:bottom;
+    top: 72px;
     right:20px;
  }
+
+ .signupLine
+{
+    position: absolute;
+    width: 326px;
+    height: 21px;
+    left: 137px;
+    top: 500px;
+
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+}

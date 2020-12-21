@@ -1,33 +1,21 @@
 import React, {useState} from "react";
 import { withRouter } from 'react-router-dom';
 import style from './previews.module.css'
-import NoProfilePic from "../../assets/NoProfilePic.svg"
+import userUtils from "../../user/userUtils" 
 
 /**
- * @brief displaysa preview of a user
+ * @brief displays a preview of a user
  * 
  * @param {*user} props 
  */
 function UserPreview(props){
     const user = props.user;
     const username = user.username;
-    const image = assignImage();
+    const image = userUtils.assignImage(user);
     const numFollowers = user.numFollowers ? user.numFollowers +  " Followers" : "No Followers";
     const description = user.shortDescription ? user.shortDescription :" No Description";
     const currentstream = user.currentstream;
     console.log(user);
-
-    /**
-     * @brief assigns image if an image is found in userData
-     */
-    function assignImage()
-    {
-        if(user.image) return user.image;
-        if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
-        if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
-        if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
-        return NoProfilePic;
-    }
 
     function handleRedirect() {
         props.history.push(`/users/${username}`);

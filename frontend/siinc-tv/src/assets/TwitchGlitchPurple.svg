@@ -1,21 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 2400 2800" style="enable-background:new 0 0 2400 2800;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#FFFFFF;}
-	.st1{fill:#9146FF;}
-</style>
-<title>Asset 2</title>
-<g>
-	<polygon class="st0" points="2200,1300 1800,1700 1400,1700 1050,2050 1050,1700 600,1700 600,200 2200,200 	"/>
-	<g>
-		<g id="Layer_1-2">
-			<path class="st1" d="M500,0L0,500v1800h600v500l500-500h400l900-900V0H500z M2200,1300l-400,400h-400l-350,350v-350H600V200h1600
-				V1300z"/>
-			<rect x="1700" y="550" class="st1" width="200" height="600"/>
-			<rect x="1150" y="550" class="st1" width="200" height="600"/>
-		</g>
-	</g>
-</g>
+<svg width="45" height="45" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 35.8696V2H41V28.1449L33.7121 35.8696H20.8182L13.5303 43V35.8696H4Z" fill="white" fill-opacity="0.85"/>
+<path d="M3.06877 0L0 7.82625V39.1275H11.2469V45H17.3873L23.5216 39.1275H32.7255L45 27.3933V0H3.06877ZM7.15723 3.91065H40.9098V25.4328L33.7487 32.2817H22.5L16.3675 38.1461V32.2817H7.15723V3.91065ZM18.4087 23.4789H22.5V11.7411H18.4087V23.4789ZM29.6581 23.4789H33.7486V11.7411H29.6581V23.4789Z" fill="#5A3E85"/>
 </svg>

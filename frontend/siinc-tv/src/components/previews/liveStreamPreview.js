@@ -10,6 +10,7 @@ const height = "199";
 const width = "362"
 function LiveStreamPreview(props){
     const streamData = props.streamData;
+    const streamers = flatten(streamData.streamGroups);
     const [streamPreviews, setStreamPreviews] = useState([]);
     const labels = (streamData.tags == null) ?  null : streamData.tags.map((tag)=>{
         return(
@@ -19,21 +20,60 @@ function LiveStreamPreview(props){
             </span>
         )
     })
+
     displayPreviewImage();
+    
+    // Flattens an array of arrays
+    function flatten(arr) {
+        return arr.reduce(function (flat, toFlatten) {
+          return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+        }, []);
+    }
+
+    async function mapYoutubeThumbnails()
+    {
+        let resArray = [];
+        const youtubeStreamers = streamers.filter((streamer)=> (streamer.youtubeId != null));
+        if(youtubeStreamers && youtubeStreamers.length > 0){
+            youtubeStreamers.forEach(async (streamer)=>{
+
+                let url = await streamActions.getYoutubeVideoId(streamer.youtubeId);
+                    console.log(url);     
+                    resArray.push(`https://img.youtube.com/vi/${url}/mqdefault.jpg`);   
+            });
+        }
+        return resArray;
+
+
+    }
+
+    // Maps twitch thumbnails to correct size
+    function mapTwitchThumbnails(twitchStreamResponse){
+        return twitchStreamResponse.map(
+            (twitchStream)=>
+            twitchStream.thumbnail_url.replace("{width}x{height}",`${width}x${height}`)
+            )
+    }
+
+
     // We need to get the previews asynchrounisly and then update the preview
     function displayPreviewImage(){
+
         if(streamPreviews.length === 0 )
         {
             streamActions.getAllStreamGroupsStreams(streamData.streamGroups).then(
-                (twitchStreamResponse)=>{
-                    setStreamPreviews(twitchStreamResponse.map(
-                        (twitchStream)=>
-                        twitchStream.thumbnail_url.replace("{width}x{height}",`${width}x${height}`)
-                        ));
+                async (twitchStreamResponse)=>{
+                    console.log(twitchStreamResponse);
+                    let res = [];
+                    res.push(...mapTwitchThumbnails(twitchStreamResponse));
+                    res.push(await mapYoutubeThumbnails());
+                    setStreamPreviews(res);
                 }
+
             )
         }
     }
+
 
     function handleRedirect() {
         props.history.push(`/stream_pages/${streamData._id}`);
