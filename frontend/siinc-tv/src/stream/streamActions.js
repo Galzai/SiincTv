@@ -25,7 +25,6 @@ const streamActions={
         });
         return result.data;
     },
-
     getAllStreamGroupsStreams: async function(streamGroups){
         const result = await axios({
             method: 'POST',
@@ -52,6 +51,14 @@ const streamActions={
         });
         return result.data;
     },
+    getStreamsByStatus: async function(page, status){
+        const result = await axios({
+            method: 'POST',
+            data:{page, status},
+            url:'http://localhost:4000/feed/streams'
+        });
+        return result.data;
+    }
 
 
 }
