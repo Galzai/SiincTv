@@ -19,22 +19,21 @@
 
 .label{
     display: inline-block;
-    padding-top:2px;
-    padding-bottom:2px;
-    margin-right: 5px;
-    padding-right: 5px;
-    padding-left: 5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
     width:auto;
-    border:2px;
-    border-color: black;
+    border: none;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 14px;
-
-
-    background-color:#5c5655;
+    text-align: center;
+    border-radius: 10px;
+    background-color:#12343B;
 }
 
 .previewTitle{
@@ -43,7 +42,7 @@
     font-family: 'Roboto', sans-serif;
     font-style: bold;
     font-weight: bolder;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 14px;
     padding-left: 0px;
 }
