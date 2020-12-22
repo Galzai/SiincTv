@@ -1,13 +1,13 @@
 .sidebar
 {
-    position: fixed;
+    position: absolute;
     width: 254px;
     height: 100%;
     left: 0px;
     top: 0px;
     padding: 0px;
     margin: 0px;
-    z-index: 0;
+    z-index: 3;
     background-color: #1C0D36;
 
     border-right: 2px solid #493D5E;
@@ -73,3 +73,18 @@
     background: url("../../assets/sideBar/cancel_presentation-black-18dp.svg") no-repeat;;  
 }
 
+.navCreateStreamButton
+{
+    position: relative;
+    width: 26px;
+    height: 17px;
+    margin-top: 40px;
+    margin-left: 200px;
+    background: url("../../assets/NavBar/NavBarCreateStream.png"); 
+}
+
+.navCreateStreamButton:hover
+{
+    cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9;
+}

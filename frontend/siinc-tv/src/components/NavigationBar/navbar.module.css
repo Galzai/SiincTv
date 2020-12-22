@@ -114,22 +114,6 @@
     box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
 }
 
-.navCreateStreamButton
-{
-    position: absolute;
-    width: 26px;
-    height: 17px;
-    left: 14.5%;
-    top: 35%;
-    background: url("../../assets/NavBar/NavBarCreateStream.png"); 
-}
-
-.navCreateStreamButton:hover
-{
-    cursor: pointer;
-    box-shadow: 0 0 10px #E2DAE9;
-}
-
 .navSearchContainer
 {
     position: absolute;
