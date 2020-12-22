@@ -22,3 +22,55 @@
     top: 22px;
     background: url("../../assets/NavBar/NavBarSiincLogo.png");   
 }
+
+.sidebarContent
+{
+    position: absolute;
+    width: 254px;
+    height: 100%;
+    margin-top:60px;
+    left: 15px;
+}
+
+.sidebarTitle
+{
+    margin-bottom:2px;
+}
+
+.currentStream
+{
+    width:180px;
+    overflow: hidden;
+    margin-bottom:2px;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 16px;
+    cursor:pointer;
+    float:left;
+}
+
+.currentStreamDiv
+{
+    width:100%;
+    display:inline-block;
+}
+
+.closeCurrentStreamBtn
+{
+    display:block;
+    float:right;
+    margin-right: 35px;
+    height: 20px;
+    width:30px;
+    border:none;
+    background-position: center center;
+    background-clip:padding-box;
+    background-size:cover;
+    background: url("../../assets/sideBar/cancel_presentation-black-18dp.svg") no-repeat;
+    cursor:pointer;
+}
+

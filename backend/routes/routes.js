@@ -72,8 +72,12 @@ router.post('/search/users', userController.searchUsers);
 // POST request redirectBack
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
 
-// POST request to friends controller
+
+
 router.post('/user/friends', friendsController.handleFriendsRequest);
+
+router.post('/streams/closeStream', streamController.closeStream);
+
 
 
 module.exports = router;
