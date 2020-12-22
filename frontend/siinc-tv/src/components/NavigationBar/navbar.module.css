@@ -119,8 +119,8 @@
     height: 40px;
     right: 160px;
     top: 25px;
-    
 }
+
 .navSearchInput
 {
     box-sizing: border-box;
@@ -141,6 +141,7 @@
     font-weight: 0;
     line-height: 21px;
     color: #AFAFAF;
+
 
 }
 .navSearchInput:hover
