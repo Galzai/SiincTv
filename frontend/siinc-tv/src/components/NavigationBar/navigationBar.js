@@ -11,8 +11,8 @@ function NavigationBar() {
         <div>
             <div className={style.navigationBar}>
                 
-                <NavSearchComponent></NavSearchComponent>
                 <UserNavComponent></UserNavComponent>
+                <NavSearchComponent></NavSearchComponent>
                 
             </div>
         </div>
