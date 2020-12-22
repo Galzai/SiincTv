@@ -2,6 +2,8 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 const {User} = require("../models/user");
 const e = require("express");
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 } );
 
 exports.user_login = function(req, res, next){
     passport.authenticate("local", (err, user, info) => {
@@ -71,15 +73,30 @@ exports.user_login = function(req, res, next){
 
   // Check if a username exists in the DB
   exports.check_username_exists = function(req, res){
-    User.findOne({username: req.body.username},
+
+    const username = req.body.username
+    let exists = myCache.get(username);
+    if(exists === undefined)
+    {
+      User.findOne({username: username},
         async function(err, doc){
             if (err){
                 console.log("error occured");
             }
             // user exists
-            if (doc) res.send(true);
+            if (doc){
+              const success = myCache.set(username, true)
+              res.send(true);
+            }
             else res.send(false);
         })
+    }
+    else
+    {
+      res.send(true);
+    }
+
+
   };
 
   exports.searchUsers = function(req, res){

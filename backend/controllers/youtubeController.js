@@ -2,7 +2,8 @@ const axios = require('axios');
 var {google} = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
 const { GOOGLE_CONFIG} = require("../passportConfigs/passportConfigs.js");
-
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 } );
 
 /**
  * Get the current users youtube channel from his access tokens
@@ -37,20 +38,37 @@ exports.getYoutubeChannelFromGoogle = async function(accessToken, refreshToken){
     return channels;
 }
 
+/**
+ * Returns the live video id of the requested channel id, tried to call it from cach if possible
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.getLiveVideoId = async function(req,res){
     const channelId = req.body.channelId;
-    const result = await axios({
-        method: 'GET',
-        url:`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${GOOGLE_CONFIG.apiKey}`
-    }).catch((e)=>{
-        
-        console.log(e.response)
-    }).then((result)=>{
-        if(result && result.data && result.data.items && (result.data.items.length > 0)){
-            res.send(result.data.items[0].id.videoId);
-            return;
-        }
-        res.send('/stream/no_user');
-    } 
-    );
+    let videoId = myCache.get(channelId);
+    if(videoId === undefined)
+    {
+        const result = await axios({
+            method: 'GET',
+            url:`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${GOOGLE_CONFIG.apiKey}`
+        }).catch((e)=>{
+            
+            console.log(e.response)
+        }).then((result)=>{
+            if(result && result.data && result.data.items && (result.data.items.length > 0)){
+                videoId = result.data.items[0].id.videoId;
+                const success = myCache.set(channelId, videoId)
+                res.send(videoId);
+                return;
+            }
+            res.send('/stream/no_user');
+        } 
+        );
+    }
+    else
+    {
+        res.send(videoId);
+    }
+
+
 }

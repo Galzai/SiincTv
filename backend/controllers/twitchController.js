@@ -5,17 +5,23 @@
 const axios = require('axios');
 const { request } = require('express');
 const passportConfigs = require('./../passportConfigs/passportConfigs.js');
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 } );
+const twitchAuthenticatedKey = "TWITCH_AUTH42069"
 
 let accessToken = "NO TOKEN";
 // We need to get a twitch auth token in order to get full streamer data
 // Tokens need to be refreshed every set interval - we validate the token on each call and if it's invalid we refresh it
+// Token resets every 60 days, we clear it from the cache every 30
 const refreshTwitchAuth = async function(){
     const result = await axios({
         method: 'POST',
         url:`https://id.twitch.tv/oauth2/token?client_id=${passportConfigs.TWITCH_CONFIG.clientID}&client_secret=${passportConfigs.TWITCH_CONFIG.clientSecret}&grant_type=client_credentials`
     }).catch((e)=>{console.log(e.result.data)} );
     // We check if any user with such name was found
+    const success = myCache.set(twitchAuthenticatedKey, result.data, 30 * 24 * 60 * 60);
     accessToken = result.data;
+
     return result;
 };
 // This is where we validate our token before making a call
@@ -34,17 +40,26 @@ const validateTwitchAuth = async function(){
 // This must be called before any call to the twitch API that requires authentication!
 const getTwitchAuth = async function(){
 
-    // We validate that we are authenticated
-    let result = await validateTwitchAuth();
-    // If we are not we try and get a token
-    result = result ? "Validated" : await refreshTwitchAuth();
-    // We check if we managed to get validated, if not we return an error status
-    if(result != "Validated")
+    const token = myCache.get(twitchAuthenticatedKey);
+    if(token === undefined)
     {
-        result = await validateTwitchAuth();
-        return result ? "Validated" : "Note Validated";
+        // We validate that we are authenticated
+        let result = await validateTwitchAuth();
+        // If we are not we try and get a token
+        result = result ? "Validated" : await refreshTwitchAuth();
+        // We check if we managed to get validated, if not we return an error status
+        if(result != "Validated")
+        {
+            result = await validateTwitchAuth();
+            return result ? "Validated" : "Note Validated";
+        }
+        return result;
     }
-    return result;
+    else
+    {
+       return "Validated"; 
+    }
+
 }
 
 
@@ -84,23 +99,35 @@ exports.getAllStreamGroupsStreams = function(req, res)
                 res.send('/stream/no_users');
                 return;
             }
-            const result = await axios({
-                method: 'GET',
-                headers: {
-                    "Client-ID": passportConfigs.TWITCH_CONFIG.clientID,
-                    "Authorization": "Bearer " + accessToken.access_token
-                  },
-                url:`https://api.twitch.tv/helix/streams?${requestString}`
-            }).catch((e)=>{
-                // console.log(e.response)
-            }).then((result)=>{
-                if(result && result.data && result.data.data){
-                    res.send(result.data.data);
-                    return;
-                }
-                res.send('/stream/no_user');
-            } 
-            );
+            let streams = myCache.get(requestString);
+            if(streams === undefined)
+            {
+                const result = await axios({
+                    method: 'GET',
+                    headers: {
+                        "Client-ID": passportConfigs.TWITCH_CONFIG.clientID,
+                        "Authorization": "Bearer " + accessToken.access_token
+                      },
+                    url:`https://api.twitch.tv/helix/streams?${requestString}`
+                }).catch((e)=>{
+                    // console.log(e.response)
+                }).then((result)=>{
+                    if(result && result.data && result.data.data){
+                        streams = result.data.data;
+                        const success = myCache.set(requestString, streams);
+                        res.send(streams);
+                        return;
+                    }
+
+                    res.send('/stream/no_user');
+                } 
+                );
+            }
+            else
+            {
+                res.send(streams);
+            }
+
         }
         getUserAsync();
     });
