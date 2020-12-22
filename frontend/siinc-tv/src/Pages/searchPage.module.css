@@ -4,3 +4,31 @@
     vertical-align: top;
     margin-right: 30px;
 }
+
+.resultTypeButton
+{
+    margin-bottom: 16px;
+    margin-right: 16px;
+    border: none;
+    background: #3C096C;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-right: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    line-height: 24x;
+    color: #FFFFFF;
+    opacity: 0.7;
+}
+
+.resultTypeButton:hover
+{
+    color: #E2DAE9;
+    background-color: #5B10A3;
+    cursor: pointer;
+}

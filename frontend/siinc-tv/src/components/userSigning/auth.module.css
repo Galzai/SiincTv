@@ -4,6 +4,7 @@
     position: absolute;
     width: 600px;
     height: 550px;
+    z-index: 10;
 }
 
 .usernameDiv
