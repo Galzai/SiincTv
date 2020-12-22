@@ -1,6 +1,6 @@
 .sidebar
 {
-    position: fixed;
+    position: absolute;
     width: 254px;
     height: 100%;
     left: 0px;
@@ -74,3 +74,18 @@
     cursor:pointer;
 }
 
+.navCreateStreamButton
+{
+    position: relative;
+    width: 26px;
+    height: 19px;
+    margin-top: 40px;
+    margin-left: 200px;
+    background: url("../../assets/NavBar/NavBarCreateStream.png"); 
+}
+
+.navCreateStreamButton:hover
+{
+    cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9, inset 0 0 1px #7b4da1;
+}

@@ -12,6 +12,15 @@ function NavSiincHome(props) {
     )
 }
 
+function NavCreateStreamButton(props) {
+    return(
+         <Link to="/create_stream">         
+             <div className={style.navCreateStreamButton}>
+             </div> 
+        </Link> 
+    );  
+}
+
 function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
@@ -25,6 +34,7 @@ function SideBar(props) {
     return(
         <div className={style.sidebar}>
             <NavSiincHome></NavSiincHome>
+            {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
             <div className={style.sidebarContent}>
                 {currentStream && <div className={style.currentStreamDiv}>
                     <h3 className={style.sidebarTitle}>My current stream</h3>

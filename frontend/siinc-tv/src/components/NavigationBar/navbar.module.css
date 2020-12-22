@@ -1,7 +1,6 @@
 .navigationBar
 {
-    position: absolute;
-    left: 256px;
+    position: relative;
     right: 0%;
     top: 0%;
     bottom: 91.21%;
@@ -76,16 +75,15 @@
 .navProfileMenu
 {
     box-sizing: border-box;
-    
     float: right;
-    position: relative;
+    position: absolute;
     width: 183px;
     height: 348px;
     z-index: 20;
-    top: -60px;
+    right: 0px;
     background: #101011;
     box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;    
+    border-radius: 10px;
 }
 
 .navUserComponent
@@ -103,7 +101,7 @@
     width: 15px;
     height: 17px;
     top: 36px;
-    left: 50%;
+    right: 80px;
     border-radius: 40px;
 
 }
@@ -114,22 +112,6 @@
     box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
 }
 
-.navCreateStreamButton
-{
-    position: absolute;
-    width: 26px;
-    height: 17px;
-    left: 14.5%;
-    top: 35%;
-    background: url("../../assets/NavBar/NavBarCreateStream.png"); 
-}
-
-.navCreateStreamButton:hover
-{
-    cursor: pointer;
-    box-shadow: 0 0 10px #E2DAE9;
-}
-
 .navSearchContainer
 {
     position: absolute;
@@ -137,8 +119,8 @@
     height: 40px;
     right: 160px;
     top: 25px;
-    
 }
+
 .navSearchInput
 {
     box-sizing: border-box;
@@ -159,6 +141,7 @@
     font-weight: 0;
     line-height: 21px;
     color: #AFAFAF;
+
 
 }
 .navSearchInput:hover
