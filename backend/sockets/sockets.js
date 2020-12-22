@@ -63,9 +63,10 @@ module.exports.initializeSocket =  function(io){
 
 
 module.exports.emitToUser = function (userId, event, data) {
-    console.log("Trying to emit a message to : " + userId + ". connected sockets to this room : ")
+    console.log("Trying to emit a message to : " + userId + ". message : ")
+    console.log(data);
     //var clients= global_io.sockets.adapter.rooms[userId].sockets
-    console.log(global_io.sockets.adapter)
+    //console.log(global_io.sockets.adapter)
     global_io.in(toString(userId)).emit(event, data);
 }
 
