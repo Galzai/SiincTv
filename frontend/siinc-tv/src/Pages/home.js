@@ -9,7 +9,7 @@ function HomePage(props) {
  return(
 
 <div>
-    <h1>Currently Live</h1>
+    <h1>Live Now</h1>
     <LiveFeed/>
 </div>
 

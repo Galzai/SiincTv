@@ -156,6 +156,13 @@
     cursor:pointer;
     color: #E2DAE9;
     background-color: #5B10A3;
+    border: none;
+    outline: none;
+}
+
+.submitButton:focus
+{
+    outline: none;
 }
 
 .teamDiv

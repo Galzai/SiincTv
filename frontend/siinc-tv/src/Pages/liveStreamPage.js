@@ -10,19 +10,21 @@ function Stream(props) {
     const [streamData] = useState(props.streamData);
     
     return(
-        <div className={style.streamPage}>
-            <div className={style.StreamBox}>
-                <StreamViewBox
-                    currentStreamer={streamData.creator}
+        <div>
+            <div className={style.streamPage}>
+                <div className={style.StreamBox}>
+                    <StreamViewBox
+                        currentStreamer={streamData.creator}
+                        streamGroups={streamData.streamGroups}  
+                        >
+                    </StreamViewBox>
+                    <StreamDetails
+                    streamTitle={streamData.name}
                     streamGroups={streamData.streamGroups}  
+                    description={streamData.description}
                     >
-                </StreamViewBox>
-                <StreamDetails
-                streamTitle={streamData.name}
-                streamGroups={streamData.streamGroups}  
-                description={streamData.description}
-                >
-                </StreamDetails>
+                    </StreamDetails>
+                </div>
             </div>
             <Chat className={style.chatBox}
                 userId = {userContext.user ? userContext.user.username : ""}
