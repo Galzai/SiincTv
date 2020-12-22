@@ -70,7 +70,8 @@
     background-position: center center;
     background-clip:padding-box;
     background-size:cover;
-    background: url("../../assets/sideBar/cancel_presentation-black-18dp.svg") no-repeat;;  
+    background: url("../../assets/sideBar/cancel_presentation-black-18dp.svg") no-repeat;
+    cursor:pointer;
 }
 
 .navCreateStreamButton
