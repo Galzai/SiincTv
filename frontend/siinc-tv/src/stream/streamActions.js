@@ -58,6 +58,14 @@ const streamActions={
             url:'http://localhost:4000/feed/streams'
         });
         return result.data;
+    },
+    closeStream: async function(){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/streams/closeStream',
+            withCredentials:true,
+        });
+        return result.data;
     }
 
 

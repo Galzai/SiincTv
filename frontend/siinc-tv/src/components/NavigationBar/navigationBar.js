@@ -16,7 +16,8 @@ function NavCreateStreamButton(props) {
 }
 
 function NavigationBar() {
-    const userContext = useContext(UserContext)
+    const userContext = useContext(UserContext);
+    
 
     return(
         <div>
