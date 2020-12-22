@@ -1,4 +1,6 @@
+
 import style from './sidebar.module.css';
+import { withRouter } from 'react-router-dom';
 import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
@@ -25,6 +27,10 @@ function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
 
+    function handleRedirect() {
+        props.history.push(`/stream_pages/${currentStream.eventId}`);
+      }
+
     function closeStream()
     {
         streamActions.closeStream().then();
@@ -38,7 +44,8 @@ function SideBar(props) {
             <div className={style.sidebarContent}>
                 {currentStream && <div className={style.currentStreamDiv}>
                     <h3 className={style.sidebarTitle}>My current stream</h3>
-                    <div className={style.currentStream}>
+                    <div className={style.currentStream}
+                    onClick={handleRedirect}>
                         {currentStream.name ? currentStream.name : "Untitled stream"}
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
@@ -49,4 +56,4 @@ function SideBar(props) {
     );
 }
 
-export default SideBar;
+export default withRouter(SideBar);
