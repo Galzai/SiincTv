@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import UserProvider from "./userProvider";
+import SocketProvider from "./socketProvider"
 import useWindowDimensions from "./useWindowDimensions.js";
 import { createBrowserHistory } from "history";
 import { Router as Router, Route, Switch} from "react-router-dom";
@@ -39,6 +40,7 @@ function App(){
     return(
         <div style={wrapperStyle.container}>
         <UserProvider>
+        <SocketProvider>
             <Router history={history}>
             <SideBar></SideBar>
                 <NavigationBar></NavigationBar>        
@@ -62,6 +64,7 @@ function App(){
                 </Switch>
                 </div>
             </Router>
+        </SocketProvider>
         </UserProvider>
         </div>
     )

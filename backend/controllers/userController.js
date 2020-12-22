@@ -85,7 +85,7 @@ exports.user_login = function(req, res, next){
             res.send([]);
           }
           if (doc){
-            console.log(doc);
+            //console.log(doc);
             res.send( doc );
           }
           else

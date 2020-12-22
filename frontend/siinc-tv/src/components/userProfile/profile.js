@@ -13,6 +13,7 @@ import profilePhoto from '../../assets/userProfilePic.png'; //todo
 import blackStar from '../../assets/blackstar.png'; //todo
 import purpleStar from '../../assets/purpelstar.png'; //todo
 
+import SocketContext from "../../socketContext"
 
 
 function Profile(props) {
@@ -32,8 +33,49 @@ function Profile(props) {
     const [friendsData, setFriendsData] = useState(null)
 
 
+
+    // TODO: Move all friends stuff into a different .js
+    const socketContext = useContext(SocketContext);
+
+    // TODO : Move this as well together with friends stuff
+    useEffect(() => {
+        console.log("Running profile useeffect. socket : ")
+        console.log(socketContext.socket)
+        if( socketContext.socket != null) {
+        // setup socket event listeners
+        socketContext.socket.on('receivedFriendRequest', (data) => {
+            console.log("socket : received friend request from : " + data.name)
+            userContext.refreshUserData();
+        })
+
+        socketContext.socket.on('friendRequestAccepted', (data) => {
+            console.log("socket : friend request accepted from : " + data.name);
+            userContext.refreshUserData();
+        })
+
+        socketContext.socket.on('friendRequestDeclined', (data) => {
+            console.log("socket : friend request declined from : " + data.name + " (no need to notify about it visually)")
+            userContext.refreshUserData();
+        })
+
+        socketContext.socket.on('receivedUnfriend', (data) => {
+            console.log("socket : got unfriended by : " + data.name + " (no need to notify about it visually)")
+            userContext.refreshUserData();            
+        })
+        }
+        return () => {
+            if(socketContext.socker != null) {
+                socketContext.socket.off('receivedFriendRequest');
+                socketContext.socket.off('friendRequestAccepted');
+                socketContext.socket.off('friendRequestDeclined');
+            }
+        }
+     }, []);
+
     useEffect(()=>{
         let isMounted = true;
+        console.log("Just checking socketContext : ")
+        console.log(socketContext.socket)
         userActions.getUserData( userName )
         .then(data=>{
             if( isMounted ) { 
@@ -107,7 +149,7 @@ function Profile(props) {
                 console.log("An error occured while adding friend")
                 return false;
             }
-    
+            
             // update user context
             await userContext.refreshUserData();
     

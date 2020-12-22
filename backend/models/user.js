@@ -57,6 +57,24 @@ const friendsData = new mongoose.Schema({
 const FriendsData = mongoose.model("FriendsData", friendsData);
 
 /**
+ * @brief Schema for Notification data/fields ( each type of notification has different fields )
+ */ 
+var notificationData = new mongoose.Schema({
+  type: Map,
+  of: String
+});
+const NotificationData = mongoose.model("NotificationData", notificationData );
+
+/**
+* @brief Schema for notifications
+*/ 
+const notification = new mongoose.Schema({
+  type: String,
+  data: [{type: mongoose.Schema.Types.Mixed, ref: 'NotificationData'}]
+});
+const Notification = mongoose.model("Notification", notification );
+
+/**
  * @brief Schema for user account
  */
 const user = new mongoose.Schema({
@@ -74,7 +92,8 @@ const user = new mongoose.Schema({
   googleData: {type: mongoose.Schema.Types.Mixed, ref: 'GoogleData'},
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}],
-  friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'}
+  friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'},
+  notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}]
 });
 
 // This is necessery for quick text search
@@ -88,7 +107,9 @@ module.exports = {
       TwitchData:TwitchData,
       FacebookData:FacebookData,
       UpComingEventData:UpComingEventData,
-      FriendsData:FriendsData
+      FriendsData:FriendsData,
+      Notification:Notification,
+      NotificationData:NotificationData
 }
 
 

@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import SignIn from './signin'
 import Signup from './signup'
 import userActions from "../../user/userActions"
 import style from './authGeneral.module.css'
 import style2 from './auth.module.css'
+import SocketContext from "../../socketContext"
 
 /*
  * This components will be used to hold the signIn/signup components
@@ -20,6 +21,7 @@ function UserSigning(props) {
     const [password, setPassword] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const curType = props.type;
+    const socketContext = useContext( SocketContext )
 
     // Sets type of form to display
     const showLogin = () => {
@@ -74,6 +76,7 @@ function UserSigning(props) {
             console.log("Got user : ");
             console.log(userDataResponse);
             setUser(userDataResponse);
+            socketContext.socket.emit('userConnection', userDataResponse._id)
         }
         userFetcher();
     }
@@ -98,6 +101,7 @@ function UserSigning(props) {
             const loginResponse = await  userActions.signinWithUsernameAndPassword(userName, password);
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
+            socketContext.socket.emit('userConnection', userDataResponse._id)
             clearInputs();
         }
         userFetcher();

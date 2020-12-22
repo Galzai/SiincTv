@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import UserContext from "../../userContext";
+import SocketContext from "../../socketContext"
 import style from './navprofilemenu.module.css';
 import userActions from "../../user/userActions" 
 import userUtils from "../../user/userUtils" 
@@ -148,9 +149,11 @@ export function NavProfileMenuMySettingsLink() {
 
 export function NavProfileMenuLogout() {
     const userContext = useContext(UserContext)
+    const socketContext = useContext(SocketContext)
 
     function signOut(){
         userActions.signOut();
+        socketContext.socket.emit('userDisconnect', userContext.user._id)
         userContext.setUser(null);
     }
 
