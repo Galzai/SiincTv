@@ -22,6 +22,7 @@ function NewLiveStream(props){
     const [streamGroups, setStreamGroups]=useState([]);
     const [description, setDescription]=useState('');
     const [currentTag, setCurrentTag] = useState("");
+    const [formErrors, setFormErrors] = useState(null);
 
 // We use this to style our selector   
 const customTagStyle={
@@ -38,23 +39,14 @@ const customTagStyle={
 };
 
     /**
-     * @brief sets the value of privateStrean
-     */
-    const privacyCheckboxOnChange=()=>{
-        setPrivateStream(!privateStream);
-    };
-
-    /**
-     * @brief sets the value of inviteOnly
-     */
-    const inviteOnlyCheckboxOnChange=()=>{
-        setInviteOnly(!inviteOnly);
-    };
-
-    /**
      * @brief handles new stream form submission
      */
     const submissionHandler=()=>{
+        if(streamGroups.length == 0)
+        {
+            setFormErrors("Must have at least one other streamer.");
+            return;
+        }
         const creatorData = {
              displayName: user.username,
              image: userUtils.assignImage(user),
@@ -86,6 +78,7 @@ const customTagStyle={
                         <button className={style.submitButton} onClick={submissionHandler}>Submit</button>
                         <label className={style.titleLabel}>Stream information</label>
                         <hr className={style.titleLine}/>
+                        {formErrors &&<h2>{formErrors}</h2>}
 
                     <div className={style.fieldDiv}>
                     <label className={style.fieldLabel}>Stream Title:</label>
