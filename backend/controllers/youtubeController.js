@@ -18,16 +18,16 @@ exports.getYoutubeChannelFromGoogle = async function(accessToken, refreshToken){
         refresh_token: refreshToken
     };
     try{
-    var service =  google.youtube('v3');
-    var response = await service.channels.list({
-        auth: oauth2Client,
-        part: 'snippet,contentDetails,statistics',
-        mine: true
-    });
+        var service =  google.youtube('v3');
+        var response = await service.channels.list({
+            auth: oauth2Client,
+            part: 'snippet,contentDetails,statistics',
+            mine: true
+        });
     }
     catch(err)
     {
-    console.log('The API returned an error: ' + err);
+        console.log('The API returned an error: ' + err);
     return;
     }
 
@@ -45,6 +45,10 @@ exports.getYoutubeChannelFromGoogle = async function(accessToken, refreshToken){
  */
 exports.getLiveVideoId = async function(req,res){
     const channelId = req.body.channelId;
+    if(channelId == undefined)
+    {
+        send("/stream/no_channel_id")
+    }
     let videoId = myCache.get(channelId);
     if(videoId === undefined)
     {
@@ -61,7 +65,7 @@ exports.getLiveVideoId = async function(req,res){
                 res.send(videoId);
                 return;
             }
-            res.send('/stream/no_user');
+            res.send('/stream/no_stream');
         } 
         );
     }
