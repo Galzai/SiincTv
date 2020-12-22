@@ -75,16 +75,15 @@
 .navProfileMenu
 {
     box-sizing: border-box;
-    
     float: right;
-    position: relative;
+    position: absolute;
     width: 183px;
     height: 348px;
     z-index: 20;
-    top: -60px;
+    right: 0px;
     background: #101011;
     box-shadow: 3px 3px 4px 1px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;    
+    border-radius: 10px;
 }
 
 .navUserComponent
@@ -102,7 +101,7 @@
     width: 15px;
     height: 17px;
     top: 36px;
-    left: 50%;
+    right: 80px;
     border-radius: 40px;
 
 }
