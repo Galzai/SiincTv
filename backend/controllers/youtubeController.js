@@ -57,7 +57,7 @@ exports.getLiveVideoId = async function(req,res){
             url:`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${GOOGLE_CONFIG.apiKey}`
         }).catch((e)=>{
             
-            console.log(e.response)
+            console.log("error on getting video id")
         }).then((result)=>{
             if(result && result.data && result.data.items && (result.data.items.length > 0)){
                 videoId = result.data.items[0].id.videoId;

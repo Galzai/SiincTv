@@ -3,6 +3,7 @@ const {StreamData, StreamerData} = require("../models/streamModels");
 const {User} = require("../models/user");
 const e = require("express");
 const { UpComingEventData } = require("../models/user");
+var ObjectID = require('mongodb').ObjectID;
 
 /**
  * @brief creates a new stream
@@ -163,4 +164,23 @@ exports.getStreamsByStatus = function(req, res){
     }
    
     )  
+}
+
+exports.closeStream = function(req, res){
+    const user = req.user;
+    const streamId = user.currentStream ? user.currentStream.eventId : null;
+    console.log(user.currentStream);
+    if(streamId == null)
+    {
+        res.send("/stream/no_current_stream")
+    }
+    console.log(streamId);
+    StreamData.deleteOne({_id: new ObjectID(streamId)}, function(err){
+        console.log("could not remove current stream");
+    });
+
+    User.updateOne(
+        {"_id": req.user._id},
+        {$unset: {"currentStream": ""}}).then(obj=>{console.log("Object modified", obj)}
+        );   
 }

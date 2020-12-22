@@ -65,6 +65,9 @@ router.post('/search/users', userController.searchUsers);
 // POST request redirectBack
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
 
+// POST request closeStream
+router.post('/streams/closeStream', streamController.closeStream);
+
 
 
 module.exports = router;
