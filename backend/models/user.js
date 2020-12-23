@@ -51,6 +51,7 @@ const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData 
  */
 const friendsData = new mongoose.Schema({
   friendsList: [{
+      value: String,
       memberId: mongoose.Schema.Types.ObjectId,
       youtubeId: String,
       twitchId: String,

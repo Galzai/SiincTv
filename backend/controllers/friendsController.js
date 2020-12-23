@@ -141,6 +141,7 @@ async function handleAnswerFriendRequest2( req )
                 { username: fromUser.username },
                 { $pull: { "friendsData.sentRequests": { id: toUser._id } }, 
                   $push: { "friendsData.friendsList": {
+                    value: toUser.username,
                     memberId: toUser._id,
                     youtubeId: toUser.youtubeId,
                     twitchId: toUser.twitchId,
@@ -157,6 +158,7 @@ async function handleAnswerFriendRequest2( req )
                 { username: toUser.username },
                 { $pull: { "friendsData.receivedRequests": { id: fromUser._id } },  
                   $push: { "friendsData.friendsList": {
+                    value: fromUser.username,
                     memberId: fromUser._id,
                     youtubeId: fromUser.youtubeId,
                     twitchId: fromUser.twitchId,
