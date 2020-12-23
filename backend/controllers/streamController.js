@@ -23,13 +23,12 @@ exports.createStream = function(req, res){
     
     // Create the new stream data
     let streamData = new StreamData({
-        date : data.date,
+        date : new Date() /*data.date*/,
         name : data.name,
         status : data.status,
         privateStream : data.privateStream ,
         joinOnly : data.inviteOnly,
         tags : data.tags ? data.tags.map(tag=>tag.value) : [],
-        date: data.date,
         description:data.description,
         registeredViewers : null,
         numOfViewers: 0

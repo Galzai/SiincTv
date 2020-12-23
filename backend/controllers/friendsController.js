@@ -1,9 +1,23 @@
+// temporary
+// ======================
+
 const {User} = require("../models/user");
 var notification = require('../Notification/notification')
+
 
 const SEND_FRIEND_REQUEST = 0;
 const ANSWER_FRIEND_REQUEST = 1;
 const UNFRIEND_REQUEST = 2;
+
+// temporary function - delete later.
+function assignImage(user){
+    if(!user) return "";
+    if(user.image) return user.image;
+    if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
+    if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
+    if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
+    return "";
+}
 
 /**
  * @brief handles friends related requests by delegating to appropriate methods/
@@ -51,8 +65,8 @@ async function handleSendFriendRequest( req )
     //console.log(toUser)
 
     // now check if fromUser already has toUser as friends or has pending request - verified only one side
-    if( fromUser.friendsData.friendsList.find(el=>toString(el.id)==toString(toUser._id)) != undefined || 
-           fromUser.friendsData.sentRequests.find(el=>toString(el.id)==toString(toUser._id)) != undefined ) {
+    if( fromUser.friendsData.friendsList.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined || 
+           fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined ) {
         console.log("Cannot send request to this user, you already sent a request or he is your friend");
         return false;
     }
@@ -108,17 +122,30 @@ async function handleAnswerFriendRequest2( req )
                 { username: fromUser.username },
                 { $pull: { "friendsData.sentRequests": { id: toUser._id } }, 
                   $push: { "friendsData.friendsList": {
+                    memberId: toUser._id,
+                    youtubeId: toUser.youtubeId,
+                    twitchId: toUser.twitchId,
+                    displayName : toUser.username,
+                    userImage : assignImage(toUser),
+                    label: toUser.username,
+                      /*
                     id: toUser._id,
-                    username: toUser.username,
+                    username: toUser.username,*/
                 }}}
             ).exec();
-
+            
             await User.updateOne( 
                 { username: toUser.username },
                 { $pull: { "friendsData.receivedRequests": { id: fromUser._id } },  
                   $push: { "friendsData.friendsList": {
-                    id: fromUser._id,
-                    username: fromUser.username,
+                    memberId: fromUser._id,
+                    youtubeId: fromUser.youtubeId,
+                    twitchId: fromUser.twitchId,
+                    displayName : fromUser.username,
+                    userImage : assignImage(fromUser),
+                    label: fromUser.username,
+                    /*id: fromUser._id,
+                    username: fromUser.username,*/
                 }} }
             ).exec();
         }
@@ -165,7 +192,7 @@ async function handleUnfriendRequest( req )
     console.log(toUser)
 
     // verify that fromUser has toUser as a friend - verified only one side
-    if( !(fromUser.friendsData.friendsList.find(el=>toString(el.id)==toString(toUser._id)) != undefined) ) {
+    if( !(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined) ) {
         console.log("cant remove someone who is not a friend");
         return false;
     }
@@ -174,12 +201,12 @@ async function handleUnfriendRequest( req )
     try {
         await User.updateOne( 
             { username: fromUser.username },
-            { $pull: { "friendsData.friendsList": { id: toUser._id } } }
+            { $pull: { "friendsData.friendsList": { memberId: toUser._id } } }
         ).exec();
 
         await User.updateOne( 
             { username: toUser.username },
-            { $pull: { "friendsData.friendsList": { id: fromUser._id } } }
+            { $pull: { "friendsData.friendsList": { memberId: fromUser._id } } }
         ).exec();
     }
     catch (error) {

@@ -23,7 +23,7 @@ function FriendFinder(props){
         isMulti
         name="friends"
         onChange={onChange}
-        options={friendsMock}
+        options={friends}
         className="basic-multi-select"
         classNamePrefix="select"
     />

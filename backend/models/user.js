@@ -50,7 +50,16 @@ const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData 
  * @brief holds information regarding the user's friends and friend requests
  */
 const friendsData = new mongoose.Schema({
-  friendsList: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
+  friendsList: [{
+      memberId: mongoose.Schema.Types.ObjectId,
+      youtubeId: String,
+      twitchId: String,
+      displayName : String,
+      userImage : String,
+      label: String,
+      userImage: String
+    }],
+    //{userId : mongoose.Schema.Types.ObjectId, username: String, }],
   receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
   sentRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}]
 });

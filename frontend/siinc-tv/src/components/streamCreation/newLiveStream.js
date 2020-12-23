@@ -70,6 +70,12 @@ const customTagStyle={
 
     }
 
+    function test(user) {
+        console.log("Friends list)")
+        console.log(user.friendsData.friendsList)
+        return user.friendsData.friendsList;
+    }
+
     return(
         <div className={style.createStreamBox}>
             <div className={style.createStreamForm}>
@@ -102,7 +108,7 @@ const customTagStyle={
                     <label className={style.fieldLabel}>Invite Friends:</label>
                         <TeamBlock
                         maxGroups={1}
-                        friends={user.friends}
+                        friends={/*user.friendsData.friendList*/test(user)}
                         streamGroups={streamGroups}
                         setStreamGroups={setStreamGroups}/> 
                     </div>

@@ -5,3 +5,4 @@ export const friendsMock = [
     { value: 'Itzik4', label: 'Itzik4', color: '#FF5630'},
     { value: 'Itzik5', label: 'Itzik5', color: '#FF8B00' }
 ];
+

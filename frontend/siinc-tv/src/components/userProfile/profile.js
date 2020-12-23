@@ -121,13 +121,15 @@ function Profile(props) {
         if( userContext.user.username == userName ) {
             return "Its you!";
         }
-        if( userContext.user.friendsData.friendsList.find(x=>x.username=userName) != undefined ) {                      
+        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
+            console.log("debug ------------------- ")
+            console.log(userName)
             return "Unfriend";
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username=userName) != undefined ) {
+        if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
             return "Pending";
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username=userName) != undefined ) {
+        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
             return "Accept";
         }
         return "Add Friend";
@@ -229,15 +231,15 @@ function Profile(props) {
             console.log("Its you man");
             return;
         }
-        if( userContext.user.friendsData.friendsList.find(x=>x.username=userName) != undefined ) {
+        if( userContext.user.friendsData.friendsList.find(x=>x.displayName==userName) != undefined ) {
             handleUnfriend();                                         
             return;
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username=userName) != undefined ) {
+        if( userContext.user.friendsData.sentRequests.find(x=>x.username==userName) != undefined ) {
             console.log("unimplemented - maybe cancell request");
             return;
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username=userName) != undefined ) {
+        if( userContext.user.friendsData.receivedRequests.find(x=>x.username==userName) != undefined ) {
             handleAcceptFriend();
             return;
         }
