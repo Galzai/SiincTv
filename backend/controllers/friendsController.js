@@ -9,6 +9,13 @@ const SEND_FRIEND_REQUEST = 0;
 const ANSWER_FRIEND_REQUEST = 1;
 const UNFRIEND_REQUEST = 2;
 
+function cmpIdsInList(list, user) {
+    if (list.filter(function(e) { return e.memberId === user._id; }).length > 0) {
+        return true;
+    }
+    return false;
+}
+
 // temporary function - delete later.
 function assignImage(user){
     if(!user) return "";
@@ -65,9 +72,20 @@ async function handleSendFriendRequest( req )
     //console.log(toUser)
 
     // now check if fromUser already has toUser as friends or has pending request - verified only one side
-    if( fromUser.friendsData.friendsList.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined || 
-           fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined ) {
+    /*if( fromUser.friendsData.friendsList.find(el=>toString(el.memberId)===toString(toUser._id)) != undefined || 
+           fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)) != undefined ) */
+      if( cmpIdsInList( fromUser.friendsData.friendsList, toUser ) || 
+          cmpIdsInList( fromUser.friendsData.friendsList, toUser ) ) {
         console.log("Cannot send request to this user, you already sent a request or he is your friend");
+        console.log(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)===toString(toUser._id)))
+        console.log(fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)))
+        console.log(fromUser.friendsData.friendsList)
+        console.log(fromUser.friendsData.sentRequests)
+        console.log(toUser._id)
+        console.log("Printing users : ")
+        console.log(fromUser)
+        console.log(toUser)
+        console.log("Print friends list")
         return false;
     }
 
@@ -110,7 +128,8 @@ async function handleAnswerFriendRequest2( req )
     //console.log(toUser)
 
     // verify that toUser has a friend request from fromUser - verified only one side
-    if( !(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)) != undefined) ) {
+    //if( !(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)) != undefined) ) {
+    if( cmpIdsInList( toUser.friendsData.friendsList, fromUser) ) {
         console.log("Cant accept/reject someone who is not in received requests list");
         return false;
     }

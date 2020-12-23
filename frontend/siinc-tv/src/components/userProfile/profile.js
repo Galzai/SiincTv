@@ -16,6 +16,13 @@ import purpleStar from '../../assets/purpelstar.png'; //todo
 import SocketContext from "../../socketContext"
 
 
+
+function FriendButtonComponent(props) {
+
+    
+
+}
+
 function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
@@ -74,8 +81,6 @@ function Profile(props) {
 
     useEffect(()=>{
         let isMounted = true;
-        console.log("Just checking socketContext : ")
-        console.log(socketContext.socket)
         userActions.getUserData( userName )
         .then(data=>{
             if( isMounted ) { 
@@ -122,8 +127,6 @@ function Profile(props) {
             return "Its you!";
         }
         if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
-            console.log("debug ------------------- ")
-            console.log(userName)
             return "Unfriend";
         }
         if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
