@@ -69,8 +69,12 @@ function LiveStreamPreview(props){
 
                 async (twitchStreamResponse)=>{
                     let res = [];
-                    res.push(...mapTwitchThumbnails(twitchStreamResponse));
-                    res.push(await mapYoutubeThumbnails());
+                    if(twitchStreamResponse){
+                        res.push(...mapTwitchThumbnails(twitchStreamResponse));
+                    }
+                    const youtubeThumb = await mapYoutubeThumbnails()
+                    if(youtubeThumb.length !== 0)
+                    res.push(...youtubeThumb);
                     setStreamPreviews(res);
                 }
 
