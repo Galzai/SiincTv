@@ -26,6 +26,7 @@ function NavCreateStreamButton(props) {
 function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
+    const friends = userContext.user && userContext.user.friendsData ?userContext.user.friendsData.friendsList : [];
 
     function handleRedirect() {
         props.history.push(`/stream_pages/${currentStream.eventId}`);
@@ -37,6 +38,23 @@ function SideBar(props) {
         window.location.reload();
     }
 
+    function mapFriends(){
+        return((friends).map((friend, index)=>{
+            return(
+                    <div className={style.friendDiv}>
+                        <img className={style.streamerCircle}
+                            src={friend.userImage}/>
+                        <div className={style.friend}
+                        onClick={()=>(props.history.push(`/users/${friend.displayName}`))}> 
+                            {friend.displayName}
+                        </div>
+                    </div>
+
+
+            )
+            
+        })) ;
+    }
     return(
         <div className={style.sidebar}>
             <NavSiincHome></NavSiincHome>
@@ -49,7 +67,9 @@ function SideBar(props) {
                         {currentStream.name ? currentStream.name : "Untitled stream"}
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
-            </div>}
+                </div>}
+                <h3 className={style.sidebarTitle}>Friends</h3> 
+                {mapFriends()}
 
         </div>
         </div>
