@@ -38,10 +38,14 @@ function LiveStreamFeed(props){
     } )
 
     React.useEffect(() => {
+    
         console.log("useEffect")
-        streamActions.getStreamsByStatus(1, "Live").then((result)=>{
+        if(streamDatas.length === 0){
+          streamActions.getStreamsByStatus(1, "Live").then((result)=>{
             setStreamDatas(result);
         });
+        }
+
       }, [streamDatas]);
 
     return(
