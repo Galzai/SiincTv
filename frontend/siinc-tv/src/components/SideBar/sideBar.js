@@ -71,8 +71,11 @@ function SideBar(props) {
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
                 </div>}
+                {(friends.length != 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
+                </div>}
+
 
         </div>
         </div>
