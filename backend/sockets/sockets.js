@@ -1,6 +1,7 @@
 
 const {User} = require("../models/user");
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
+const END_STREAM = "endStream"; // Name of the event
 
 var global_io = null;
 
@@ -43,7 +44,12 @@ module.exports.initializeSocket =  function(io){
             console.log("NewMessage");
         });
 
-
+        // end stream event
+        socket.on(END_STREAM,async ()=>{
+            console.log("endStream");
+            console.log(roomId);
+            io.in(roomId).emit(END_STREAM);
+        });
 
         socket.on("userConnection", (userId) => { console.log("user : " + userId + " logged in")
                                                   socket.join(toString(userId)); })

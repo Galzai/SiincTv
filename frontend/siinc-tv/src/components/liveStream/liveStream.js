@@ -2,10 +2,10 @@ import React, {useState, useRef} from "react";
 import TwitchLiveStream from "./twitchLiveStream";
 import YoutubeLiveStream from "./youtubeLiveStream";
 
+
 const srcPre = "https://player.twitch.tv/?channel=";
 const srcPost = "&parent=localhost" 
 function LiveStream(props){
-
     const [streamer, setStreamer] = useState(props.streamer);
     const [dimensions, setDimension] = useState(props.dimensions);
 

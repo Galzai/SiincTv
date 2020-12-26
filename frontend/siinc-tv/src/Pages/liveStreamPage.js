@@ -4,8 +4,10 @@ import Chat from '../chat/chat'
 import {useContext, useState} from "react"
 import UserContext from "../userContext";
 import style from '../components/liveStream/liveStream.module.css'
+import StreamEnder from '../components/liveStream/streamEnderSocket'
 
 function Stream(props) {
+    const {endStream, sendEndStream} = StreamEnder(props.streamData._id);
     const userContext= useContext(UserContext);
     const [streamData] = useState(props.streamData);
     
