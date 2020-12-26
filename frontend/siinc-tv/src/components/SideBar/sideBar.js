@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
+import StreamEnder from "../liveStream/streamEnderSocket";
 const { default: streamActions } = require("../../stream/streamActions");
 
 function NavSiincHome(props) {
@@ -26,6 +27,7 @@ function NavCreateStreamButton(props) {
 function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
+    const {endStream, sendEndStream} = StreamEnder(currentStream ? currentStream.eventId : null);
     const friends = userContext.user && userContext.user.friendsData ?userContext.user.friendsData.friendsList : [];
 
     function handleRedirect() {
@@ -35,6 +37,7 @@ function SideBar(props) {
     function closeStream()
     {
         streamActions.closeStream().then();
+        sendEndStream();
         window.location.reload();
     }
 
@@ -68,8 +71,11 @@ function SideBar(props) {
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
                 </div>}
+                {(friends.length != 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
+                </div>}
+
 
         </div>
         </div>

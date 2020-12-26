@@ -3,7 +3,6 @@ import {useContext, useState} from "react"
 const { default: streamActions } = require("../stream/streamActions");
 
 function LivetreamPage(props) {
-
     const [streamData, setStreamData] = useState(null);
     const id = props.match.params.id;
 
@@ -12,6 +11,14 @@ function LivetreamPage(props) {
         const getStreamData= async ()=>{
             setStreamData(await streamActions.getStreamById(props.match.params.id));
         } 
+        // If there no stream display a message TODO: Create an error page
+        if(id == "ended")
+        {
+            return(
+                <div>
+                    <h1>This stream has ended!</h1>
+                </div>);
+        }
         // We get the data asyncrhoniously and set it
         if(streamData === null)
         {
