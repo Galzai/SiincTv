@@ -4,12 +4,11 @@
 }
 
 .StreamBox{
-    float:left;
-    width: 958px;
-    height: 1225px;
+    display: inline-block;
 }
 
 .chatBox{
+    top:0px;
     float:left;
     height: 958px;
 }
@@ -117,9 +116,9 @@
 
 .numOfViews{
     position: relative;
-    float: right;
-    right: 120px;
-    top: 40px;
+    display: inline;
+    left: 750px;
+    top:-40px;
     border:none;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -130,4 +129,22 @@
     color: #FFFFFF;
     overflow: hidden;
     opacity: 0.7;
+}
+
+.splitStreamDiv
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width:1400px;
+}
+
+.splitScreen
+{
+    /* display: inline-block; */
+    float:left;
+}
+.singleStreamViewBox
+{
+    display: inline-block;
 }

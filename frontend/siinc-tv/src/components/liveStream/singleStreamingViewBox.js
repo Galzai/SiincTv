@@ -1,8 +1,9 @@
 import React, {useState} from "react";
 import LiveStream from "./liveStream";
+import style from './liveStream.module.css'
 import StreamSelectorBar from "./streamSelectorBar";
 
-function StreamViewBox(props){
+function SingleStreamViewBox(props){
 
     // The initial current streamer is the host
     const [currentStreamer, setCurrentStreamer] = useState(props.currentStreamer);
@@ -10,7 +11,7 @@ function StreamViewBox(props){
 
 
     return(
-        <div>
+        <div className={style.singleStreamViewBox}>
         <LiveStream key={currentStreamer.displayName}
             streamer={currentStreamer}
             dimensions={{width: "845", height:"463"}}
@@ -26,4 +27,4 @@ function StreamViewBox(props){
     );
 }
 
-export default StreamViewBox;
+export default SingleStreamViewBox;

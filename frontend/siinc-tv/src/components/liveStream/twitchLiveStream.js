@@ -11,7 +11,7 @@ function LiveStream(props){
 
     return(
 
-        <iframe style ={{marginRight:"27px"}}
+        <iframe style ={{margin:"0px"}}
             src={streamSrc}
             frameBorder="0" 
             allowFullScreen={true}
