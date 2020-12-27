@@ -100,6 +100,7 @@ function LiveStreamPreview(props){
             </div>
             </div>
         <h2 className={style.previewTitle}>{streamData.name}</h2>
+        <h2 className={style.viewers}>Viewers: {streamData.numOfViewers}</h2>
         <div className={style.streamers}>
 
         <Streamers

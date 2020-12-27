@@ -121,7 +121,7 @@ exports.searchStreams = function(req, res){
     StreamData.find({$and: [
         { $text : { $search : searchString}},
         {status: status}]},
-        { score : { $meta: "textScore" }},
+        { score : { $meta: "textScore" }}
 
     ).limit(PAGE_SIZE).skip(skip).exec(
     async function(err, result){
@@ -132,8 +132,7 @@ exports.searchStreams = function(req, res){
         // id exists
         if (result) res.send(result);
         else res.send('stream/no_results');
-    }
-   
+    }  
     )  
 }
 
@@ -151,7 +150,7 @@ exports.getStreamsByStatus = function(req, res){
     StreamData.find({$and: [
         {status: status}]},
 
-    ).limit(PAGE_SIZE).skip(skip).exec(
+    ).limit(PAGE_SIZE).skip(skip).sort('-numOfViewers').exec(
     async function(err, result){
         if (err){;
             console.log(err)
