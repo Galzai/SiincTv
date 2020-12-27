@@ -4,10 +4,10 @@ import Chat from '../chat/chat'
 import {useContext, useState} from "react"
 import UserContext from "../userContext";
 import style from '../components/liveStream/liveStream.module.css'
-import StreamEnder from '../components/liveStream/streamEnderSocket'
+import StreamSocket from '../components/liveStream/streamSocket'
 
 function Stream(props) {
-    const {endStream, sendEndStream} = StreamEnder(props.streamData._id);
+    const {endStream, sendEndStream, numOfViews} = StreamSocket(props.streamData._id);
     const userContext= useContext(UserContext);
     const [streamData] = useState(props.streamData);
     
@@ -20,6 +20,7 @@ function Stream(props) {
                         streamGroups={streamData.streamGroups}  
                         >
                     </StreamViewBox>
+                    <h3 className={style.numOfViews}>Viewing: {numOfViews}</h3>
                     <StreamDetails
                     streamTitle={streamData.name}
                     streamGroups={streamData.streamGroups}  
