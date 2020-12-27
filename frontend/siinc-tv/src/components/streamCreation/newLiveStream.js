@@ -49,10 +49,10 @@ const customTagStyle={
         }
         const creatorData = {
              displayName: user.username,
-             image: userUtils.assignImage(user),
+             userImage: userUtils.assignImage(user),
              youtubeId: user.googleData ? user.googleData.youtubeId : null   
             };
-
+        
         const submissionData =
         {
             name:name,
