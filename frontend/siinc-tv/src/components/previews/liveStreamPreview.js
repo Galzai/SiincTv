@@ -35,12 +35,11 @@ function LiveStreamPreview(props){
         let resArray = [];
         const youtubeStreamers = streamers.filter((streamer)=> (streamer.youtubeId != null));
         if(youtubeStreamers && youtubeStreamers.length > 0){
-            youtubeStreamers.forEach(async (streamer)=>{
-
-                let url = await streamActions.getYoutubeVideoId(streamer.youtubeId);
-                    console.log(url);     
+           for(let i = 0; i < youtubeStreamers.length; ++i){
+                let streamer = youtubeStreamers[i];
+                let url = await streamActions.getYoutubeVideoId(streamer.youtubeId); 
                     resArray.push(`https://img.youtube.com/vi/${url}/mqdefault.jpg`);   
-            });
+            };
         }
         return resArray;
 
@@ -74,7 +73,7 @@ function LiveStreamPreview(props){
                     }
                     const youtubeThumb = await mapYoutubeThumbnails()
                     if(youtubeThumb.length !== 0)
-                    res.push(...youtubeThumb);
+                        res.push(...youtubeThumb);
                     setStreamPreviews(res);
                 }
 
