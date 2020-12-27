@@ -12,7 +12,7 @@ function YoutubeLiveStream(props){
 
     return(
 
-        <iframe style ={{marginRight:"27px"}}
+        <iframe style ={{marginRight:"0px"}}
             src={streamSrc}
             frameBorder="0" 
             allowFullScreen={true}

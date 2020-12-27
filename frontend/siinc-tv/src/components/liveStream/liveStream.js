@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 import TwitchLiveStream from "./twitchLiveStream";
 import YoutubeLiveStream from "./youtubeLiveStream";
-
+import style from './liveStream.module.css'
 
 const srcPre = "https://player.twitch.tv/?channel=";
 const srcPost = "&parent=localhost" 

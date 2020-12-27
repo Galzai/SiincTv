@@ -1,42 +1,44 @@
-import StreamViewBox from '../components/liveStream/streamingViewBox'
+import SingleStreamViewBox from '../components/liveStream/singleStreamingViewBox'
+import SplitStreamViewBox from '../components/liveStream/splitScreenViewBox'
 import StreamDetails from '../components/liveStream/streamDetails'
 import Chat from '../chat/chat'
 import {useContext, useState} from "react"
 import UserContext from "../userContext";
 import style from '../components/liveStream/liveStream.module.css'
-import StreamSocket from '../components/liveStream/streamSocket'
 
 function Stream(props) {
-    const {endStream, sendEndStream, numOfViews} = StreamSocket(props.streamData._id);
     const userContext= useContext(UserContext);
     const [streamData] = useState(props.streamData);
+    const [isSplit, setIsSplit] = useState(false);
     
     return(
-        <div>
             <div className={style.streamPage}>
+            <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
                 <div className={style.StreamBox}>
-                    <StreamViewBox
+                    {(!isSplit) && <SingleStreamViewBox
                         currentStreamer={streamData.creator}
                         streamGroups={streamData.streamGroups}  
                         >
-                    </StreamViewBox>
-                    <h3 className={style.numOfViews}>Viewing: {numOfViews}</h3>
+                    </SingleStreamViewBox>}
+                    {(isSplit) && <SplitStreamViewBox
+                        currentStreamer={streamData.creator}
+                        streamGroups={streamData.streamGroups}  
+                        >
+                    </SplitStreamViewBox>}
                     <StreamDetails
+                    id={streamData._id}
                     streamTitle={streamData.name}
                     streamGroups={streamData.streamGroups}  
                     description={streamData.description}
                     >
                     </StreamDetails>
                 </div>
-            </div>
+
             <Chat className={style.chatBox}
                 userId = {userContext.user ? userContext.user.username : ""}
                 roomId={streamData._id}
                 />
-        </div>
-
-
-           
+            </div>     
     )
 }
 
