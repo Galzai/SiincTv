@@ -38,7 +38,7 @@ exports.createStream = function(req, res){
     streamData.creator = new StreamerData({
         memberId : req.user._id,
         displayName : data.creator.displayName,
-        userImage : data.creator.image,
+        userImage : data.creator.userImage,
         youtubeId: data.creator.youtubeId
     });
 
@@ -49,7 +49,7 @@ exports.createStream = function(req, res){
             // Note: member id and userImage will need to change frontend side when friends are implemented
             // memberId: member.memberId,
             displayName: member.displayName,
-            userImage: member.image,
+            userImage: member.userImage,
             youtubeId: member.youtubeId
         })));
     streamData.streamGroups = streamGroups;
