@@ -1,13 +1,15 @@
 
+const { StreamData } = require("../models/streamModels");
 const {User} = require("../models/user");
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
 const END_STREAM = "endStream"; // Name of the event
+const VIEWERS_CHANGED = "viewersChanged"; // Name of the event
 
 var global_io = null;
 
 // This is called to initialize the socket
 module.exports.initializeSocket =  function(io){
-
+    let viewerMap = new Map();
     io.on("connection", async function(socket){
         console.log("socket : " + socket.id + " connected")
         global_io = io;
@@ -23,7 +25,16 @@ module.exports.initializeSocket =  function(io){
         const { roomId } = socket.handshake.query;
         // Join a conversation
         socket.join(roomId);
-
+        if((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
+        {
+            console.log(roomId);
+            let numViewers = io.sockets.adapter.rooms.get(roomId).size;
+            StreamData.updateOne({"_id": roomId},
+            {$set: {"numOfViewers": numViewers}}
+            ).then();
+           // result
+           io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
+        }
         // Listen for new messages
         socket.on(NEW_CHAT_MESSAGE_EVENT, async (data) => {
             socket.request.session.reload(function(err) {});
@@ -62,6 +73,23 @@ module.exports.initializeSocket =  function(io){
         socket.on("disconnect", () => {
             console.log("socket : " + socket.id + " disconnected");
             socket.leave(roomId);
+            if ((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
+            {
+                let numViewers = io.sockets.adapter.rooms.get(roomId).size;
+                StreamData.updateOne({"_id": roomId},
+                {$set: {"numOfViewers": numViewers}}
+                ).then();
+               // result
+               io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
+            }
+            else{
+                if(roomId)
+                {
+                    StreamData.updateOne({"_id": roomId},
+                    {$set: {"numOfViewers": 0}}
+                    ).then(obj=>{console.log("Object modified", obj)});
+                }
+            }
         });
         })
         

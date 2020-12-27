@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
-import StreamEnder from "../liveStream/streamEnderSocket";
+import StreamSocket from "../liveStream/streamSocket";
 const { default: streamActions } = require("../../stream/streamActions");
 
 function NavSiincHome(props) {
@@ -27,7 +27,7 @@ function NavCreateStreamButton(props) {
 function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
-    const {endStream, sendEndStream} = StreamEnder(currentStream ? currentStream.eventId : null);
+    const {endStream, sendEndStream} = StreamSocket(currentStream ? currentStream.eventId : null);
     const friends = userContext.user && userContext.user.friendsData ?userContext.user.friendsData.friendsList : [];
 
     function handleRedirect() {
