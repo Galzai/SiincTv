@@ -25,7 +25,7 @@
     font-weight: bold;
     font-size: 36px;
     line-height: 47px;
-    display: flex;
+    display: inline;
     align-items: flex-end;
     color: #FFFFFF;
     opacity: 0.7;
@@ -131,13 +131,13 @@
 }
 
 .submitButton{
-    display:block;
+    display:inline-block;
     border:none;
     position: relative;
     height: 38px;
     width:100px;
-    left:513px;
-    bottom: -42px;
+    bottom: 4px;
+    left:240px;
     background: #3C096C;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -148,7 +148,6 @@
     line-height: 21px;
     color: #FFFFFF;
     opacity: 0.7;
-    z-index: 1;
 }
 
 .submitButton:hover

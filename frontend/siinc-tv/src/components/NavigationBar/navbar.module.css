@@ -1,10 +1,11 @@
 .navigationBar
 {
-    position: relative;
+    position: absolute;
     right: 0%;
+    left: 15.2%;
     top: 0%;
     bottom: 91.21%;
-    z-index: 2;
+    z-index: 0;
     background: #10002B;
  
 }

@@ -3,6 +3,7 @@ import style from './newStream.module.css'
 import CreateableInputOnly from "../selectors/createableInputOnly";
 import userUtils from "../../user/userUtils" 
 import TeamBlock from "./teamBlock";
+import NavigationBar from "../NavigationBar/navigationBar"
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
@@ -77,13 +78,15 @@ const customTagStyle={
     }
 
     return(
+        <div>
         <div className={style.createStreamBox}>
             <div className={style.createStreamForm}>
                 <div className={style.streamInformation}>
-
-                        <button className={style.submitButton} onClick={submissionHandler}>Submit</button>
+                    <div>
                         <label className={style.titleLabel}>Stream information</label>
+                        <button className={style.submitButton} onClick={submissionHandler}>Submit</button>
                         <hr className={style.titleLine}/>
+                    </div>
                         {formErrors &&<h2>{formErrors}</h2>}
 
                     <div className={style.fieldDiv}>
@@ -115,6 +118,8 @@ const customTagStyle={
 
                 </div>
             </div>
+        </div>
+        <NavigationBar></NavigationBar>
         </div>
     );
 }
