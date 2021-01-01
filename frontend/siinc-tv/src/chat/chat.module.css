@@ -1,6 +1,7 @@
 .chatContainer
 {
     text-align: left;
+    top: -20px;
     padding-left: 0px;
     margin: 0px;
     display: inline-block;

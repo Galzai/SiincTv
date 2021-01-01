@@ -6,8 +6,8 @@ import Streamers from "../liveStream/streamers";
 const { default: streamActions } = require("../../stream/streamActions");
 
 
-const height = "199";
-const width = "362"
+const height = "240";
+const width = "426"
 function LiveStreamPreview(props){
     const streamData = props.streamData;
     const streamers = flatten(streamData.streamGroups);
