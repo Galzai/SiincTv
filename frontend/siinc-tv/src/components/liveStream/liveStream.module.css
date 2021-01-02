@@ -9,8 +9,9 @@
 
 .chatBox{
     top:0px;
-    height: 958px;
+    height: 100%;
     display: inline-block;
+    resize: none;
 }
 
 .streamSelectorBar{

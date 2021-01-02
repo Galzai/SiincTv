@@ -1,3 +1,7 @@
+@viewport{
+    zoom: 0.25;
+}
+
 .chatContainer
 {
     text-align: left;
@@ -11,7 +15,7 @@
     right: 0px;
     z-index: 0;
     background-color: #1C0D36;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
 
 .messagesContainer
@@ -21,7 +25,7 @@
     text-align: left;
     top: 10px;
     right: 0px;
-    height: 808px;
+    height: 95%;
     overflow-y: auto;
 }
 
@@ -36,7 +40,8 @@
     list-style-position: inside;
     padding-left: 0px;
     text-align: left;
- 
+    right: 0px;
+    overflow: hidden;
 }
 
 .myMessage
@@ -87,6 +92,7 @@
     bottom: 20px;
     left:5%;
     resize: none;
+    overflow: hidden;
 }
 
 .messageTextArea:focus, input:focus{
