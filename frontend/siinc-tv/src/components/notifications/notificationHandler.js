@@ -9,17 +9,17 @@ const NotificationHandler = () => {
   const socketContext = useContext(SocketContext);
 
   useEffect(() => {
-    if(socketContext.socket !== null){
+    if(socketContext && (socketContext.socket !== undefined)){
        const socket = socketContext.socket;
 
         // Triggers a refresh when a new notifications occurs
-        socketRef.current.on(NEW_NOTIFICATON, () => {
-          setNotifications(true);
+        socket.on(NEW_NOTIFICATON, () => {
+        setNewNotifications(true);
       });
         
     }
   }, []);
-  return {notifications};
+  return {newNotification};
 };
 
 export default NotificationHandler;

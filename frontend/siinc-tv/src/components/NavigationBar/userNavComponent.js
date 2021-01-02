@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import SigningModal from "../userSigning/signingModal";
+import NotificationMenu from '../notifications/notificationMenu.js'
 import UserContext from "../../userContext";
 import userUtils from "../../user/userUtils" 
 import style from './navbar.module.css';
@@ -96,7 +97,7 @@ function UserNavComponent(props) {
                 refreshUserData={userContext.refreshUserData}           
             >
             </SigningModal>
-            {userContext.user && <NavNotificationButton onClick={handleNotificationClick}></NavNotificationButton>}  
+            <NotificationMenu/>
             {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }       
         </div>
     );

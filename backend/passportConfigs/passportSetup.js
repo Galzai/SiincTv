@@ -225,7 +225,8 @@ passport.use(new FacebookStrategy({
         googleData: user.googleData,
         facebookData: user.facebookData,
         upcomingEvents :user.upcomingEvents,
-        friendsData: user.friendsData
+        friendsData: user.friendsData,
+        notifications: user.notifications
       };
       cb(err, userInformation);
     });
