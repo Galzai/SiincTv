@@ -3,7 +3,7 @@
     position:relative;
     width: 1240px;
     height: 500px;
-    right: 2.5%;
+    left: -32px;
     white-space: nowrap;
     overflow-x: hidden;
 }
