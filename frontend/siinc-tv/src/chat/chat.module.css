@@ -5,12 +5,13 @@
     padding-left: 0px;
     margin: 0px;
     display: inline-block;
-    position: fixed;
+    position: absolute;
     width: 362px;
     height: 100%;
     right: 0px;
     z-index: 0;
     background-color: #1C0D36;
+    overflow: hidden;
 }
 
 .messagesContainer
@@ -22,6 +23,7 @@
     right: 0px;
     height: 85%;
     overflow-y: auto;
+    overflow: hidden;
 }
 
 .messagesContainer::-webkit-scrollbar

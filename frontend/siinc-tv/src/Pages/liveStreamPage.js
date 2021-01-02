@@ -12,6 +12,11 @@ function Stream(props) {
     const [isSplit, setIsSplit] = useState(false);
     
     return(
+        <div>
+            <Chat className={style.chatBox}
+                    userId = {userContext.user ? userContext.user.username : ""}
+                    roomId={streamData._id}
+                />
             <div className={style.streamPage}>
                 <div className={style.StreamBox}>
                     {(!isSplit) && <SingleStreamViewBox
@@ -33,11 +38,9 @@ function Stream(props) {
                     </StreamDetails>
                 </div>
                 <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                <Chat className={style.chatBox}
-                    userId = {userContext.user ? userContext.user.username : ""}
-                    roomId={streamData._id}
-                />
-            </div>     
+            </div> 
+        </div>
+                
     )
 }
 
