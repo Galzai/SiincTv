@@ -2,6 +2,7 @@ const {User, Notifications} = require("../models/user");
 const NodeCache = require( "node-cache" );
 const e = require("express");
 const {emitReloadNotifications} = require("../sockets/sockets")
+var ObjectID = require('mongodb').ObjectID;
 
 
 
@@ -12,11 +13,11 @@ function deleteNotification(userId, notificationId)
         console.log("Nah");
         return false;
     }
-    console.log(notificationId);
-
+    console.log("id is", notificationId);
+    console.log("id is", userId);
     User.updateOne(
-        {"_id": userId},
-        { $pull: { "notifications": { _id: notificationId} } }
+        {_id:  new ObjectID(userId)},
+        { $pull: { "notifications": { _id:  new ObjectID(notificationId)} } }
         ).then(err=>
            {
             console.log(err);

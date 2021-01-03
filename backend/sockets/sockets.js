@@ -103,13 +103,12 @@ module.exports.emitToUser = function (userId, event, data) {
     global_io.in(String(userId)).emit(event, data);
 }
 
+/**
+ * Emites a notifications change
+ * @param {*} userId 
+ */
 module.exports.emitReloadNotifications = function (userId) {
-    console.log("userId", String(userId));
-    console.log("userId", userId);
-    //var clients= global_io.sockets.adapter.rooms[userId].sockets
-    console.log(global_io.sockets.adapter.rooms.get(String(userId)))
-    console.log(global_io.sockets.adapter.rooms)
-    console.log(global_io.in(String(userId)).emit(NEW_NOTIFICATON));
+    global_io.in(String(userId)).emit(NEW_NOTIFICATON);
 }
 
 
