@@ -1,0 +1,72 @@
+.notificationButton
+{
+    width: 30px;
+    height: 34px;   
+    color:#E2DAE9;
+}
+
+.closeButton
+{
+    flex: 1;
+    color:#FFFFFF !important;
+    float:right !important;
+    right:10px;
+}
+
+.clearNotificationsButton
+{
+    font-family: Roboto !important; 
+    font-style: normal !important; 
+    font-weight: 600 !important; 
+    color: #FFFFFF !important; 
+    padding-left:80px !important; 
+    padding-right:12px !important; 
+    text-transform: none !important; 
+}
+
+.notificationButton:hover
+{
+    cursor: pointer;
+    box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
+}
+
+.notificationDiv{
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    border-radius: 40px;
+}
+
+.notificationTitle{
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    border-radius: 40px;
+}
+
+.menuPaper{
+    background-color: #101011 !important;  
+    color:#101011;
+}
+
+
+.menuRoot{
+    background-color: #101011 !important; 
+    color:#101011; 
+}
+
+.menuList{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    color: #FFFFFF;
+    background-color: #101011;  
+}
+
+.menuTitle
+{
+    position:relative;
+    left: 12px;
+}

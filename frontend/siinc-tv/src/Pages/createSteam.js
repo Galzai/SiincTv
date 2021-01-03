@@ -4,7 +4,7 @@ import NewScheduledStream from "../components/streamCreation/newScheduledStream"
 import NewLiveStream from "../components/streamCreation/newLiveStream";
 
 function CreateStreamPage(props) {
-    const userContext = useContext(UserContext)
+    const userContext = useContext(UserContext);
     console.log(userContext.user);
     return(
         <div>

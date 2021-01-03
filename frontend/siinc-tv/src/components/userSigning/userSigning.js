@@ -76,7 +76,6 @@ function UserSigning(props) {
             console.log("Got user : ");
             console.log(userDataResponse);
             setUser(userDataResponse);
-            socketContext.socket.emit('userConnection', userDataResponse._id)
         }
         userFetcher();
     }
@@ -101,7 +100,6 @@ function UserSigning(props) {
             const loginResponse = await  userActions.signinWithUsernameAndPassword(userName, password);
             const userDataResponse = await userActions.getUser();
             setUser(userDataResponse);
-            socketContext.socket.emit('userConnection', userDataResponse._id)
             clearInputs();
         }
         userFetcher();

@@ -32,7 +32,7 @@ exports.getYoutubeChannelFromGoogle = async function(accessToken, refreshToken){
     }
 
     var channels = response.data.items;
-    if (channels.length == 0) {
+    if (channels && channels.length == 0) {
         console.log('No channel found.');
     }
     return channels;

@@ -3,7 +3,8 @@ const { StreamData } = require("../models/streamModels");
 const {User} = require("../models/user");
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
 const END_STREAM = "endStream"; // Name of the event
-const VIEWERS_CHANGED = "viewersChanged"; // Name of the event
+const VIEWERS_CHANGED = "viewersChanged"; // Name of the event 
+const NEW_NOTIFICATON = "newNotification";
 
 var global_io = null;
 
@@ -63,11 +64,9 @@ module.exports.initializeSocket =  function(io){
         });
 
         socket.on("userConnection", (userId) => { console.log("user : " + userId + " logged in")
-                                                  socket.join(toString(userId)); })
+                                                  socket.join(userId); })
         socket.on("userDisconnect", (userId) => { console.log("user : " + userId + " logged out");
-                                                  socket.leave(toString(userId)); })     
-        
-
+                                                  socket.leave(userId); })     
 
         // Leave the room if the user closes the socket
         socket.on("disconnect", () => {
@@ -101,6 +100,15 @@ module.exports.emitToUser = function (userId, event, data) {
     console.log(data);
     //var clients= global_io.sockets.adapter.rooms[userId].sockets
     //console.log(global_io.sockets.adapter)
-    global_io.in(toString(userId)).emit(event, data);
+    global_io.in(String(userId)).emit(event, data);
 }
+
+/**
+ * Emites a notifications change
+ * @param {*} userId 
+ */
+module.exports.emitReloadNotifications = function (userId, popUpText) {
+    global_io.in(String(userId)).emit(NEW_NOTIFICATON, popUpText);
+}
+
 

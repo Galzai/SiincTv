@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import SigningModal from "../userSigning/signingModal";
+import NotificationMenu from '../notifications/notificationMenu.js'
 import UserContext from "../../userContext";
 import userUtils from "../../user/userUtils" 
 import style from './navbar.module.css';
@@ -56,17 +57,6 @@ function NavProfileButton(props) {
     );
 }
 
-function NavNotificationButton(props) {
-    return(
-        <div className={style.navNotificationButton}>
-                <img src={NavNotificationIcon}
-                     style={{width:"100%", height:"100%"}}
-                     onClick={() => props.onClick()}>
-                </img>
-        </div>
-    );
-}
-
 // represent user section of navigation bar ( sign in/sign up when logged out or notifications etc.. when logged in)
 function UserNavComponent(props) {
     const userContext = useContext(UserContext);
@@ -96,7 +86,7 @@ function UserNavComponent(props) {
                 refreshUserData={userContext.refreshUserData}           
             >
             </SigningModal>
-            {userContext.user && <NavNotificationButton onClick={handleNotificationClick}></NavNotificationButton>}  
+            {userContext.user && <NotificationMenu/>}
             {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }       
         </div>
     );
