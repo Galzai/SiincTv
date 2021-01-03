@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import CloseIcon from '@material-ui/icons/Close';
+const { default: userActions } = require("../../user/userActions");
 
 /**
  * @brief This displays details regarding the stream
@@ -21,7 +23,6 @@ function NotificationMenu(){
 
     function buildNotificationByType(notification)
     {
-        console.log("Notification", notification);
         switch(notification.type)
         {
             case "poke":
@@ -29,13 +30,20 @@ function NotificationMenu(){
         }
     }
 
+    function clearNotification(id)
+    {
+        userActions.deleteNotification(id).then();
+    }
+
     function mapNotifications(){
-        console.log(userContext.user);
         if(userContext.user && userContext.user.notifications){
             return(userContext.user.notifications.map(notification=>
                 <MenuItem>
                     {buildNotificationByType(notification)}
-                    {/* {notification.clearable && } */}
+                    {notification.clearable && 
+                    <IconButton aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
+                        <CloseIcon/>
+                    </IconButton>}
                 </MenuItem>)
             );
             }

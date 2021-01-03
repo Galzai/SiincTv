@@ -29,17 +29,8 @@ class SocketProvider extends React.Component {
     }
 
     componentDidMount() {
-        /*
-        console.log("Creating socket ..... ")
-        let sock = socketIOClient(SOCKET_SERVER_URL, {
-            withCredentials: true,
-            transports: ['websocket']
-        });
-        console.log("Created socket : ")
-        console.log(sock);
-        this.setState( {socket: sock}, () => {console.log("finished setting socker state"); console.log(this.state.socket)} )
-        */
     }
+
 
     componentWillUnmount() {
         if(this.state.socket != null) {

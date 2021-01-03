@@ -64,9 +64,9 @@ module.exports.initializeSocket =  function(io){
         });
 
         socket.on("userConnection", (userId) => { console.log("user : " + userId + " logged in")
-                                                  socket.join(toString(userId)); })
+                                                  socket.join(userId); })
         socket.on("userDisconnect", (userId) => { console.log("user : " + userId + " logged out");
-                                                  socket.leave(toString(userId)); })     
+                                                  socket.leave(userId); })     
 
         // Leave the room if the user closes the socket
         socket.on("disconnect", () => {
@@ -100,14 +100,16 @@ module.exports.emitToUser = function (userId, event, data) {
     console.log(data);
     //var clients= global_io.sockets.adapter.rooms[userId].sockets
     //console.log(global_io.sockets.adapter)
-    global_io.in(toString(userId)).emit(event, data);
+    global_io.in(String(userId)).emit(event, data);
 }
 
 module.exports.emitReloadNotifications = function (userId) {
-    console.log(data);
+    console.log("userId", String(userId));
+    console.log("userId", userId);
     //var clients= global_io.sockets.adapter.rooms[userId].sockets
-    //console.log(global_io.sockets.adapter)
-    global_io.in(userId).emit(NEW_NOTIFICATON);
+    console.log(global_io.sockets.adapter.rooms.get(String(userId)))
+    console.log(global_io.sockets.adapter.rooms)
+    console.log(global_io.in(String(userId)).emit(NEW_NOTIFICATON));
 }
 
 
