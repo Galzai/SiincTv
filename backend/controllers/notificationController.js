@@ -20,7 +20,6 @@ function deleteNotification(userId, notificationId)
         { $pull: { "notifications": { _id:  new ObjectID(notificationId)} } }
         ).then(err=>
            {
-            console.log(err);
             emitReloadNotifications(userId);
            } 
         ); 
@@ -61,14 +60,14 @@ exports.deleteNotificationFromCurrentUser = function(req, res){
     }
 }
 
-function AddNotification(userId, notification)
+function AddNotification(userId, notification, popupText)
 {
     User.updateOne(
         {_id: new ObjectID(userId)},
         { $push: { "notifications": notification} }
         ).then(obj=>
            {
-            emitReloadNotifications(userId);
+            emitReloadNotifications(userId, popupText);
            } 
         );  
 }
@@ -77,8 +76,8 @@ function AddNotification(userId, notification)
  * @param {*} userId 
  * @param {*} notification 
  */
-exports.addNotificationToUser = function(userId, notification){
-    AddNotification(userId, notification);
+exports.addNotificationToUser = function(userId, notification, popupText){
+    AddNotification(userId, notification, popupText);
 }
 
 // TEST FUNCTION - to be removed
@@ -86,7 +85,6 @@ exports.pokeYourself = function(req, res){
     const user = req.user;
     if(!user)
     {
-        console.log("failed");
         return res.send("failed");  
     }
     const userId = req.user._id;
@@ -94,7 +92,7 @@ exports.pokeYourself = function(req, res){
         type: "poke",
         clearable: true,
     });
-    if(AddNotification(userId, newPoke))
+    if(AddNotification(userId, newPoke, "You just got poked!"))
     {
         res.send("success");
     }

@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -62,39 +64,52 @@ function NotificationMenu(){
   };
 
     return(
-    <div className={style.notificationDiv}>
+        <div>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+         />
+        <div className={style.notificationDiv}>
 
-        <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-        <Badge badgeContent={numNotifications} color="primary">
-        <NotificationsIcon
-        className={style.notificationButton}
-        />
-        </Badge>
-      </IconButton>
+            <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+            <Badge badgeContent={numNotifications} color="primary">
+            <NotificationsIcon
+            className={style.notificationButton}
+            />
+            </Badge>
+        </IconButton>
 
-        <Menu
-                classes={{
-                    paper:  style.menuPaper,
-                    list: style.menuList
-                }}
-                id="simple-menu"
-                anchorEl={anchorEl}
-                getContentAnchorEl={null}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-                transformOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-            <label className={style.menuTitle}>Notifications</label>
-            {(numNotifications == 0) &&
-                            <MenuItem>
-                                        <div>You have no notifications.</div>
-                            </MenuItem>
+            <Menu
+                    classes={{
+                        paper:  style.menuPaper,
+                        list: style.menuList
+                    }}
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    getContentAnchorEl={null}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+                    transformOrigin={{ vertical: "top", horizontal: "center" }}
+            >
+                <label className={style.menuTitle}>Notifications</label>
+                {(numNotifications == 0) &&
+                                <MenuItem>
+                                            <div>You have no notifications.</div>
+                                </MenuItem>
 
-            }
-            {mapNotifications()}
-        </Menu>
+                }
+                {mapNotifications()}
+            </Menu>
+        </div>
       </div>
     );
 }

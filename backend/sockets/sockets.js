@@ -107,8 +107,8 @@ module.exports.emitToUser = function (userId, event, data) {
  * Emites a notifications change
  * @param {*} userId 
  */
-module.exports.emitReloadNotifications = function (userId) {
-    global_io.in(String(userId)).emit(NEW_NOTIFICATON);
+module.exports.emitReloadNotifications = function (userId, popUpText) {
+    global_io.in(String(userId)).emit(NEW_NOTIFICATON, popUpText);
 }
 
 

@@ -57,17 +57,6 @@ function NavProfileButton(props) {
     );
 }
 
-function NavNotificationButton(props) {
-    return(
-        <div className={style.navNotificationButton}>
-                <img src={NavNotificationIcon}
-                     style={{width:"100%", height:"100%"}}
-                     onClick={() => props.onClick()}>
-                </img>
-        </div>
-    );
-}
-
 // represent user section of navigation bar ( sign in/sign up when logged out or notifications etc.. when logged in)
 function UserNavComponent(props) {
     const userContext = useContext(UserContext);
@@ -97,7 +86,7 @@ function UserNavComponent(props) {
                 refreshUserData={userContext.refreshUserData}           
             >
             </SigningModal>
-            <NotificationMenu/>
+            {userContext.user && <NotificationMenu/>}
             {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }       
         </div>
     );
