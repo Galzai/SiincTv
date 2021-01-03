@@ -72,6 +72,7 @@ function NotificationMenu(){
 
         <Menu
                 classes={{
+                    root: style.menuRoot,
                     paper: style.menuPaper, 
                     list: style.menuList
                 }}
@@ -84,7 +85,7 @@ function NotificationMenu(){
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "center" }}
         >
-            <label>Notifications</label>
+            <label className={style.menuTitle}>Notifications</label>
             {(numNotifications == 0) &&
                             <MenuItem>
                                         <div>You have no notifications.</div>

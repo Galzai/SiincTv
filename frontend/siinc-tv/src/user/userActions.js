@@ -189,6 +189,14 @@ const userActions ={
         });
         return result.data;
     },
+     pokeYourself: async function(){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/test/selfPoke',
+            withCredentials:true,
+        });
+        return result.data;
+    }
 
 };
 

@@ -1,4 +1,4 @@
-const {User, Notifications} = require("../models/user");
+const {User, Notification} = require("../models/user");
 const NodeCache = require( "node-cache" );
 const e = require("express");
 const {emitReloadNotifications} = require("../sockets/sockets")
@@ -61,18 +61,45 @@ exports.deleteNotificationFromCurrentUser = function(req, res){
     }
 }
 
+function AddNotification(userId, notification)
+{
+    User.updateOne(
+        {_id: new ObjectID(userId)},
+        { $push: { "notifications": notification} }
+        ).then(obj=>
+           {
+            emitReloadNotifications(userId);
+           } 
+        );  
+}
 /**
  * @brief adds a notification to a user
  * @param {*} userId 
  * @param {*} notification 
  */
 exports.addNotificationToUser = function(userId, notification){
-    User.updateOne(
-        {_id: new ObjectId(userId)},
-        { $push: { "notifications": notification} }
-        ).then(obj=>
-           {
-            emitReloadNotifications(userId);
-           } 
-        );   
+    AddNotification(userId, notification);
+}
+
+// TEST FUNCTION - to be removed
+exports.pokeYourself = function(req, res){
+    const user = req.user;
+    if(!user)
+    {
+        console.log("failed");
+        return res.send("failed");  
+    }
+    const userId = req.user._id;
+    const newPoke = new Notification({
+        type: "poke",
+        clearable: true,
+    });
+    if(AddNotification(userId, newPoke))
+    {
+        res.send("success");
+    }
+    else
+    {
+        return res.send("failed");
+    }
 }

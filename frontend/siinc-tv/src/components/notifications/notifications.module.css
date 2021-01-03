@@ -42,3 +42,9 @@
     color: #FFFFFF;
     background-color: #101011;  
 }
+
+.menuTitle
+{
+    position:relative;
+    left: 12px;
+}
