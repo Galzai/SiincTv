@@ -7,6 +7,9 @@ import style from "../NavigationBar/navbar.module.css"
 
 // React modal doesn't play nice with css modules
 const customStyles = {
+    overlay:{
+        backgroundColor: 'rgba(17, 17, 17, 0.7)'
+    },
     content : {
         overflowX             : 'hidden',
         top                   : '50%',
@@ -20,6 +23,8 @@ const customStyles = {
         backgroundColor       : '#10002B',
         borderRadius          : '10px',
         padding               : '0px',
+        border                : 'none',
+        boxShadow             : '0px 0px 20px 5px #1C0D36',
     }
 };
 

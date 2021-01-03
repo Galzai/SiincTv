@@ -42,10 +42,14 @@ function App(){
         <div style={wrapperStyle.container}>
         <UserProvider>
         <SocketProvider>
+<<<<<<< HEAD
             <UserSocketConnector/>;
             <Router history={history}>
             <SideBar></SideBar>
                 <NavigationBar></NavigationBar>        
+=======
+            <Router history={history}>     
+>>>>>>> main
                 <div style={{paddingLeft:"350px", paddingTop:"129px"}}>
                 <Switch >
                     <Route exact path="/">
@@ -64,6 +68,8 @@ function App(){
                     <Route path="/users/:username" component={Profile}>
                     </Route>
                 </Switch>
+                <NavigationBar></NavigationBar>
+                <SideBar></SideBar> 
                 </div>
             </Router>
         </SocketProvider>

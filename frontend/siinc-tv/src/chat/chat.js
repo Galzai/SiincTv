@@ -28,8 +28,15 @@ function Chat(props){
     };
 
     return (
-        <div className={style.chatContainer}>
-          <div className={style.messagesContainer}>
+        <div className={style.chatContainer}>  
+           <Textarea  className={style.messageTextArea}
+              value={newMessage}
+              onChange={handleNewMessageChange}
+              placeholder="Click enter to send message..."
+              maxLength="200"
+              onKeyDown={handleKeypress}
+            />
+            <div className={style.messagesContainer}>
             <ol className={style.messageList}>
               {messages.map((message, i) => (
                 <li
@@ -41,14 +48,7 @@ function Chat(props){
                 </li>
               ))}
             </ol>
-          </div>   
-           <Textarea  className={style.messageTextArea}
-              value={newMessage}
-              onChange={handleNewMessageChange}
-              placeholder="Click enter to send message..."
-              maxLength="200"
-              onKeyDown={handleKeypress}
-            />           
+          </div>           
 
           </div>
       );

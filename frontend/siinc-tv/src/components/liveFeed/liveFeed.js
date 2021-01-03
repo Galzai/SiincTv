@@ -6,18 +6,23 @@ import 'react-multi-carousel/lib/styles.css';
 const { default: streamActions } = require("../../stream/streamActions");
 
   const responsive = {
+    superLargeDesktop: {
+      breakpoint: {max: 4000, min: 3000},
+      items: 5,
+      slidesToSlide: 2
+    },
     desktop: {
-      breakpoint: { max: 3000, min: 1024 },
+      breakpoint: { max: 3000, min: 1600 },
       items: 3,
-      slidesToSlide: 2 // optional, default to 1.
+      slidesToSlide: 1 // optional, default to 1.
     },
     tablet: {
-      breakpoint: { max: 1024, min: 464 },
+      breakpoint: { max: 1600, min: 1200 },
       items: 2,
-      slidesToSlide: 2 // optional, default to 1.
+      slidesToSlide: 1 // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 1200, min: 0 },
       items: 1,
       slidesToSlide: 1 // optional, default to 1.
     }
@@ -49,13 +54,14 @@ function LiveStreamFeed(props){
 
     return(
         <div className={style.liveFeedBar}> 
-        <Carousel responsive={responsive}
-                        infinite={true}
-        >
+          <h1>Live Now</h1>
+          <Carousel responsive={responsive}
+                    infinite={true}
+          >
                 {streamPreviews}
 
-                </Carousel>
-            </div>
+          </Carousel>
+        </div>
     );
 }
 

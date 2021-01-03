@@ -3,14 +3,16 @@
     position:relative;
     width: 1240px;
     height: 500px;
+    left: -32px;
     white-space: nowrap;
     overflow-x: hidden;
 }
 
 .liveFeedContainer{
     display:inline-block;
-    padding-right:100px;
-    width:320px;
-    height:330px;
+    padding-right: 10px;
+    width:426px;
+    height:368px;
     cursor: pointer;
+    overflow: hidden;
 }
