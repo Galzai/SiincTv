@@ -11,7 +11,6 @@ function HomePage(props) {
 
     return(
     <div>
-        <h1>Live Now</h1>
         <LiveFeed/>
         <button onClick={poke}>Poke yoself</button>
     </div>
