@@ -8,9 +8,6 @@ function UserSocketConnector()
     const socketContext = useContext(SocketContext);
 
     useEffect(() => {
-        console.log("useEffect2");
-        console.log(userContext.user);
-        console.log(userContext);
         if(userContext.user && userContext.user._id)
         {
             socketContext.socket.emit('userConnection', userContext.user._id);

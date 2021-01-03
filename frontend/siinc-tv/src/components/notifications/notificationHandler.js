@@ -13,7 +13,6 @@ const NotificationHandler = () => {
   useEffect(() => {
         // Triggers a refresh when a new notifications occurs
         socketContext.socket.on(NEW_NOTIFICATON, () => {
-        console.log("New notification");
         userContext.refreshUserData();
         setNewNotifications(true);
       });

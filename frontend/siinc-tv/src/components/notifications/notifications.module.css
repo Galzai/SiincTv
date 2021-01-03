@@ -18,3 +18,27 @@
     right: 80px;
     border-radius: 40px;
 }
+
+.notificationTitle{
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    right: 80px;
+    border-radius: 40px;
+}
+
+.menuPaper{
+    background-color: #101011;  
+}
+
+.menuRoot{
+    background-color: #101011;  
+}
+
+.menuList{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    color: #FFFFFF;
+    background-color: #101011;  
+}

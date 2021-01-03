@@ -16,7 +16,6 @@ class UserProvider extends React.Component {
         super(props);
         this.state = {  user: null,
                         userData: null};
-        console.log("invoked user provider constructor")
         // Bindings go here
         this.refreshUserData = this.refreshUserData.bind(this);
     }
@@ -24,13 +23,12 @@ class UserProvider extends React.Component {
     // This function is called for refreshing user data
     async refreshUserData(){
         if( this.state.user == null ) {
+
             return;
         }
         
         let userdata = await userActions.getUser();
         this.setState({user: userdata});
-        console.log("User after refresh : ")
-        console.log(userdata)
     }
 
     render() {

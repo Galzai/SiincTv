@@ -68,11 +68,11 @@ exports.deleteNotificationFromCurrentUser = function(req, res){
  */
 exports.addNotificationToUser = function(userId, notification){
     User.updateOne(
-        {"_id": userId},
+        {_id: new ObjectId(userId)},
         { $push: { "notifications": notification} }
         ).then(obj=>
            {
-            emitReloadNotifications(req.userId);
+            emitReloadNotifications(userId);
            } 
         );   
 }

@@ -10,6 +10,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
 const { default: userActions } = require("../../user/userActions");
 
+
 /**
  * @brief This displays details regarding the stream
  * @param {*} props 
@@ -70,6 +71,10 @@ function NotificationMenu(){
       </IconButton>
 
         <Menu
+                classes={{
+                    paper: style.menuPaper, 
+                    list: style.menuList
+                }}
                 id="simple-menu"
                 anchorEl={anchorEl}
                 getContentAnchorEl={null}
@@ -79,7 +84,13 @@ function NotificationMenu(){
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "center" }}
         >
-            
+            <label>Notifications</label>
+            {(numNotifications == 0) &&
+                            <MenuItem>
+                                        <div>You have no notifications.</div>
+                            </MenuItem>
+
+            }
             {mapNotifications()}
         </Menu>
       </div>
