@@ -43,7 +43,9 @@ function NotificationMenu(){
                     {buildNotificationByType(notification)}
                     {notification.clearable && 
                     <IconButton aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
-                        <CloseIcon/>
+                        <CloseIcon
+                         className={style.closeButton}
+                        />
                     </IconButton>}
                 </MenuItem>)
             );
@@ -72,8 +74,7 @@ function NotificationMenu(){
 
         <Menu
                 classes={{
-                    root: style.menuRoot,
-                    paper: style.menuPaper, 
+                    paper:  style.menuPaper,
                     list: style.menuList
                 }}
                 id="simple-menu"

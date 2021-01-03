@@ -5,6 +5,11 @@
     color:#E2DAE9;
 }
 
+.closeButton
+{
+    color:#FFFFFF;
+}
+
 .notificationButton:hover
 {
     cursor: pointer;
@@ -28,11 +33,14 @@
 }
 
 .menuPaper{
-    background-color: #101011;  
+    background-color: #101011 !important;  
+    color:#101011;
 }
 
+
 .menuRoot{
-    background-color: #101011;  
+    background-color: #101011 !important; 
+    color:#101011; 
 }
 
 .menuList{
