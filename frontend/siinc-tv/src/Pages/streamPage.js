@@ -25,7 +25,6 @@ function LivetreamPage(props) {
             getStreamData();
             return;
         }
-        console.log(streamData);
         // If there no stream display a message TODO: Create an error page
         if(streamData === "stream/invalid_id")
         {
@@ -35,7 +34,6 @@ function LivetreamPage(props) {
             </div>);
         }
         // We select what type of page to display depending on the status
-        console.log(streamData.status)
         switch(streamData.status){
             case 'Live':
                 return <LiveStreamPage

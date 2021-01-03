@@ -5,10 +5,10 @@ import UserContext from "../../userContext";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
-import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const { default: userActions } = require("../../user/userActions");
 
@@ -38,10 +38,15 @@ function NotificationMenu(){
         userActions.deleteNotification(id).then();
     }
 
+    function clearAllNotifications()
+    {
+        userActions.clearNotifications().then();
+    }
+
     function mapNotifications(){
         if(userContext.user && userContext.user.notifications){
             return(userContext.user.notifications.map(notification=>
-                <MenuItem>
+                <MenuItem >
                     {buildNotificationByType(notification)}
                     {notification.clearable && 
                     <IconButton aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
@@ -64,18 +69,7 @@ function NotificationMenu(){
   };
 
     return(
-        <div>
-        <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-         />
+
         <div className={style.notificationDiv}>
 
             <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -100,7 +94,11 @@ function NotificationMenu(){
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     transformOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                <label className={style.menuTitle}>Notifications</label>
+                <div>
+                    <label className={style.menuTitle}>Notifications</label>
+                    {(numNotifications != 0) && <Button className={style.clearNotificationsButton} onClick={clearAllNotifications}>Clear Notifications</Button>}
+                </div>
+
                 {(numNotifications == 0) &&
                                 <MenuItem>
                                             <div>You have no notifications.</div>
@@ -110,7 +108,6 @@ function NotificationMenu(){
                 {mapNotifications()}
             </Menu>
         </div>
-      </div>
     );
 }
 

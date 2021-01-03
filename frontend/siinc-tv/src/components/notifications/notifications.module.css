@@ -7,7 +7,21 @@
 
 .closeButton
 {
-    color:#FFFFFF;
+    flex: 1;
+    color:#FFFFFF !important;
+    float:right !important;
+    right:10px;
+}
+
+.clearNotificationsButton
+{
+    font-family: Roboto !important; 
+    font-style: normal !important; 
+    font-weight: 600 !important; 
+    color: #FFFFFF !important; 
+    padding-left:80px !important; 
+    padding-right:12px !important; 
+    text-transform: none !important; 
 }
 
 .notificationButton:hover

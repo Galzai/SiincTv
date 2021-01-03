@@ -196,6 +196,14 @@ const userActions ={
             withCredentials:true,
         });
         return result.data;
+    },
+    clearNotifications: async function(){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/notifications/clearNotifications',
+            withCredentials:true,
+        });
+        return result.data;
     }
 
 };

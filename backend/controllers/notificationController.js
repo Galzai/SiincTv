@@ -80,6 +80,30 @@ exports.addNotificationToUser = function(userId, notification, popupText){
     AddNotification(userId, notification, popupText);
 }
 
+/**
+ * @brief clears all clearable notifications from a user
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.clearAllClearableNotifications = function(req, res){
+    const user = req.user;
+    if(!user)
+    {
+        return res.send("failed");  
+    }
+    const userId = req.user._id;
+    console.log("id is", userId);
+    User.updateOne(
+        {_id:  new ObjectID(userId)},
+        { $pull: { "notifications": { clearable: true} } }
+        ).then(err=>
+           {
+            emitReloadNotifications(userId);
+           } 
+        ); 
+    return true;  
+}
+
 // TEST FUNCTION - to be removed
 exports.pokeYourself = function(req, res){
     const user = req.user;
@@ -101,3 +125,5 @@ exports.pokeYourself = function(req, res){
         return res.send("failed");
     }
 }
+
+

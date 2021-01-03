@@ -81,6 +81,9 @@ router.post('/streams/closeStream', streamController.closeStream);
 // POST request closeStream
 router.post('/notifications/deleteNotification', notificationController.deleteNotificationFromCurrentUser);
 
+// POST request clearNotifications
+router.post('/notifications/clearNotifications', notificationController.clearAllClearableNotifications);
+
 //TODO: Delete this
 // POST request poke yourself
 router.post('/test/selfPoke', notificationController.pokeYourself);
