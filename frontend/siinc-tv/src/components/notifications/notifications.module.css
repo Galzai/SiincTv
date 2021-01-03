@@ -70,3 +70,17 @@
     position:relative;
     left: 12px;
 }
+.requestButton
+{
+    top:40px;
+    float:right !important;
+}
+
+.userProfileCircle
+{
+    display:inline-block;
+    margin-right: 30px;
+    width: 40px;
+    height: 40px; 
+    border-radius: 20px;
+}
