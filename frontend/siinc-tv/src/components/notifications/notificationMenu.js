@@ -9,7 +9,9 @@ import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
+import Divider from '@material-ui/core/Divider';
 import 'react-toastify/dist/ReactToastify.css';
+import JoinStreamRequestNotification from './joinStreamRequestNotification'
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -29,7 +31,11 @@ function NotificationMenu(){
         switch(notification.type)
         {
             case "poke":
-                return "YOU JUST GOT POKED SON"
+                return "YOU JUST GOT POKED SON";
+            case "joinStreamRequest":
+                return <JoinStreamRequestNotification
+                    notification={notification}
+                />;
         }
     }
 
@@ -45,8 +51,8 @@ function NotificationMenu(){
 
     function mapNotifications(){
         if(userContext.user && userContext.user.notifications){
-            return(userContext.user.notifications.map(notification=>
-                <MenuItem >
+            return(userContext.user.notifications.reverse().map(notification=>
+                <MenuItem divider>
                     {buildNotificationByType(notification)}
                     {notification.clearable && 
                     <IconButton aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
@@ -54,7 +60,8 @@ function NotificationMenu(){
                          className={style.closeButton}
                         />
                     </IconButton>}
-                </MenuItem>)
+                </MenuItem>        
+                )
             );
             }
         }

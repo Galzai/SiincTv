@@ -84,6 +84,9 @@ router.post('/notifications/deleteNotification', notificationController.deleteNo
 // POST request clearNotifications
 router.post('/notifications/clearNotifications', notificationController.clearAllClearableNotifications);
 
+// POST request requestToJoinStream
+router.post('/streams/requestToJoinStream', streamController.requestToJoinStream);
+
 //TODO: Delete this
 // POST request poke yourself
 router.post('/test/selfPoke', notificationController.pokeYourself);
