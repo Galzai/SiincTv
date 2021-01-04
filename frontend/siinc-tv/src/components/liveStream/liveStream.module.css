@@ -175,8 +175,13 @@
 
 .splitScreen
 {
-    /* display: inline-block; */
-    float:inline-start;
+    position: relative;
+    padding-bottom: 52.68%;
+    padding-top: 30px;
+    height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
+    
 }
 .singleStreamViewBox
 {
