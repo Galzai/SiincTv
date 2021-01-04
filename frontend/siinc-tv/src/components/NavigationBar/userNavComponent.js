@@ -16,10 +16,6 @@ import {
        } 
        from "./navProfileMenuComponents.js"
 
-/*-----------------------------   Icons   -------------------------------*/
-import NavNotificationIcon from "../../assets/NavBar/NavBarNotifications.svg"
-/*-----------------------------------------------------------------------*/
-
 function NavProfileMenu(props) {
     const userContext = useContext(UserContext);
 

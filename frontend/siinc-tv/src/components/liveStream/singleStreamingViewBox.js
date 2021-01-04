@@ -14,7 +14,7 @@ function SingleStreamViewBox(props){
         <div className={style.singleStreamViewBox}>
         <LiveStream key={currentStreamer.displayName}
             streamer={currentStreamer}
-            dimensions={{width: "845", height:"463"}}
+            dimensions={{width: "845", height:"475"}}
             muted={false}
          ></LiveStream>
          <StreamSelectorBar

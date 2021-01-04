@@ -53,7 +53,8 @@ function LiveStreamFeed(props){
       }, [streamDatas]);
 
     return(
-        <div className={style.liveFeedBar}> 
+      <div>
+         <div className={style.liveFeedBar}> 
           <h1>Live Now</h1>
           <Carousel responsive={responsive}
                     infinite={true}
@@ -62,6 +63,7 @@ function LiveStreamFeed(props){
 
           </Carousel>
         </div>
+      </div>
     );
 }
 
