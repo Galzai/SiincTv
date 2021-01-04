@@ -1,10 +1,13 @@
 
 const { StreamData } = require("../models/streamModels");
 const {User} = require("../models/user");
+var ObjectID = require('mongodb').ObjectID;
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
 const END_STREAM = "endStream"; // Name of the event
 const VIEWERS_CHANGED = "viewersChanged"; // Name of the event 
 const NEW_NOTIFICATON = "newNotification";
+const JOIN_ROOM = "joinRoom"; // Name of the event
+const LEAVE_ROOM = "leaveRoom"; // Name of the event
 
 var global_io = null;
 
@@ -12,7 +15,6 @@ var global_io = null;
 module.exports.initializeSocket =  function(io){
     let viewerMap = new Map();
     io.on("connection", async function(socket){
-        console.log("socket : " + socket.id + " connected")
         global_io = io;
         let user = null;
         let passport = socket.request.session.passport;
@@ -22,22 +24,49 @@ module.exports.initializeSocket =  function(io){
             user = await User.findById(id);
         }
 
-        // var userId = socket
-        const { roomId } = socket.handshake.query;
-        // Join a conversation
-        socket.join(roomId);
-        if((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
-        {
-            console.log(roomId);
-            let numViewers = io.sockets.adapter.rooms.get(roomId).size;
-            StreamData.updateOne({"_id": roomId},
-            {$set: {"numOfViewers": numViewers}}
-            ).then();
-           // result
-           io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
-        }
+        // Join a stream room
+        socket.on(JOIN_ROOM, async (roomId)=>{
+            console.log("socket : " + roomId + " connected")
+            // Join a conversation
+            socket.join(roomId);
+            console.log("roomId", roomId);
+            if((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
+            {
+                let numViewers = io.sockets.adapter.rooms.get(roomId).size;
+                StreamData.updateOne({"_id": roomId},
+                {$set: {"numOfViewers": numViewers}}
+                ).then();
+            // result
+            io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
+            }
+        });
+
+        // Leave a stream room
+        socket.on(LEAVE_ROOM,  async (roomId)=>{
+            console.log("socket : " + roomId+ " disconnected");
+            socket.leave(roomId);
+            if ((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
+            {
+                let numViewers = io.sockets.adapter.rooms.get(roomId).size;
+                StreamData.updateOne({"_id": roomId},
+                {$set: {"numOfViewers": numViewers}}
+                ).then();
+               // result
+               io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
+            }
+
+            else{
+                if(roomId && roomId != "undefined")
+                {
+                    StreamData.updateOne({"_id": roomId},
+                    {$set: {"numOfViewers": 0}}
+                    ).then(obj=>{console.log("Object modified", obj)});
+                }
+            }
+        });
+
         // Listen for new messages
-        socket.on(NEW_CHAT_MESSAGE_EVENT, async (data) => {
+        socket.on(NEW_CHAT_MESSAGE_EVENT, async (data, roomId) => {
             socket.request.session.reload(function(err) {});
             // If the user changed we need to update it
             if(passport !== socket.request.session.passport)
@@ -52,12 +81,13 @@ module.exports.initializeSocket =  function(io){
             }
             if(user) io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
             console.log(socket.request.session.passport);
-
+            console.log(roomId);
+            console.log(data);
             console.log("NewMessage");
         });
 
         // end stream event
-        socket.on(END_STREAM,async ()=>{
+        socket.on(END_STREAM,async (roomId)=>{
             console.log("endStream");
             console.log(roomId);
             io.in(roomId).emit(END_STREAM);
@@ -68,30 +98,7 @@ module.exports.initializeSocket =  function(io){
         socket.on("userDisconnect", (userId) => { console.log("user : " + userId + " logged out");
                                                   socket.leave(userId); })     
 
-        // Leave the room if the user closes the socket
-        socket.on("disconnect", () => {
-            console.log("socket : " + socket.id + " disconnected");
-            socket.leave(roomId);
-            if ((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
-            {
-                let numViewers = io.sockets.adapter.rooms.get(roomId).size;
-                StreamData.updateOne({"_id": roomId},
-                {$set: {"numOfViewers": numViewers}}
-                ).then();
-               // result
-               io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
-            }
-            else{
-                if(roomId)
-                {
-                    StreamData.updateOne({"_id": roomId},
-                    {$set: {"numOfViewers": 0}}
-                    ).then(obj=>{console.log("Object modified", obj)});
-                }
-            }
-        });
-        })
-        
+    });   
 }
 
 
