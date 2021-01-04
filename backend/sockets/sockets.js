@@ -13,7 +13,6 @@ var global_io = null;
 
 // This is called to initialize the socket
 module.exports.initializeSocket =  function(io){
-    let viewerMap = new Map();
     io.on("connection", async function(socket){
         global_io = io;
         let user = null;
@@ -26,10 +25,8 @@ module.exports.initializeSocket =  function(io){
 
         // Join a stream room
         socket.on(JOIN_ROOM, async (roomId)=>{
-            console.log("socket : " + roomId + " connected")
             // Join a conversation
             socket.join(roomId);
-            console.log("roomId", roomId);
             if((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
             {
                 let numViewers = io.sockets.adapter.rooms.get(roomId).size;
@@ -43,7 +40,6 @@ module.exports.initializeSocket =  function(io){
 
         // Leave a stream room
         socket.on(LEAVE_ROOM,  async (roomId)=>{
-            console.log("socket : " + roomId+ " disconnected");
             socket.leave(roomId);
             if ((roomId != "undefined") && io.sockets.adapter.rooms.get(roomId) )
             {
@@ -80,9 +76,6 @@ module.exports.initializeSocket =  function(io){
                 }
             }
             if(user) io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-            console.log(socket.request.session.passport);
-            console.log(roomId);
-            console.log(data);
             console.log("NewMessage");
         });
 
