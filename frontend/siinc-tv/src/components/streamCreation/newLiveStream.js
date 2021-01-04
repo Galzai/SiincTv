@@ -28,15 +28,16 @@ function NewLiveStream(props){
 // We use this to style our selector   
 const customTagStyle={
     control: styles=>({...styles, width:613, marginTop:10, backgroundColor: '#251A37', borderRadius:3, height:40, 
-    minHeight: 40, border: 'none', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", 
+    minHeight: 40, border: 'none', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     ':hover': {borderRadius: 3, cursor: 'text', border: '1px solid rgb(153, 153, 153)'}}),
     valueContainer: styles=>({...styles, height:40, minHeight: 40}),
     indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),
     input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',
     textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
-    multiValue: styles=>({...styles, textAlign:'center', bottom:20, height:30, backgroundColor:'#12343B', borderRadius:10}),
-    multiValueLabel: styles=>({...styles, height:30, fontSize:16, top:15, color:'#FFFFFF', fontFamily:'Roboto'})
+    multiValue: styles=>({...styles, textAlign:'center', bottom:20, height:30, backgroundColor:'#12343B', borderRadius:5}),
+    multiValueLabel: styles=>({...styles, height:30, fontSize:16, top:15, color:'#FFFFFF', fontFamily:'Roboto'}),
+    multiValueRemove: styles=>({...styles,':hover': {backgroundColor: '#071416', color: '#AFAFAF', cursor: 'pointer'}})
 };
 
     /**
