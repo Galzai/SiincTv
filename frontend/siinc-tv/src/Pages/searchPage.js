@@ -11,7 +11,7 @@ function SearchPage(props) {
 
     return(
 
-        <div>
+        <div className = {style.searchPage}>
             <h3>Search mode: </h3>
             <div className={style.resultTypeButtons}>
                 <button className={style.resultTypeButton} onClick={()=>{setResultType("liveStream")}}>Live Streams</button>
