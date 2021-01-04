@@ -22,7 +22,8 @@ const ChatHandler = (roomId) => {
 
       // Listens for incoming messages
       socketContext.socket.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
-        console.log("newmsg");
+        console.log(socketContext.socket.id);
+        console.log(message.senderId);
         const incomingMessage = {
           ...message,
           ownedByCurrentUser: message.senderId === socketContext.socket.id,
@@ -40,7 +41,7 @@ const ChatHandler = (roomId) => {
         }
       };
   }
-  }, [socketContext, roomId]);
+  }, []);
 
   // Sends a message to the server that
   // forwards it to all users in the same room
