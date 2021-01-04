@@ -17,7 +17,7 @@ function NewLiveStream(props){
 
     const [name, setName]=useState("");
     const [privateStream, setPrivateStream]=useState(false);
-    const [inviteOnly, setInviteOnly]=useState(false);
+    const [inviteOnly, setInviteOnly]=useState(true);
     const [tags, setTags]=useState([]);
     const [date, setDate]=useState(new Date().toLocaleString());
     const [streamGroups, setStreamGroups]=useState([]);
@@ -39,19 +39,30 @@ const customTagStyle={
     multiValueLabel: styles=>({...styles, height:30, fontSize:16, top:15, color:'#FFFFFF', fontFamily:'Roboto'})
 };
 
+
+
+    /**
+     * @brief sets the value of inviteOnly
+     */
+    const inviteOnlyCheckboxOnChange=()=>{
+        setInviteOnly(!inviteOnly);
+    };
+
+
     /**
      * @brief handles new stream form submission
      */
     const submissionHandler=()=>{
-        if(streamGroups.length == 0)
-        {
-            setFormErrors("Must have at least one other streamer.");
-            return;
-        }
+        // if(streamGroups.length == 0)
+        // {
+        //     setFormErrors("Must have at least one other streamer.");
+        //     return;
+        // }
         const creatorData = {
              displayName: user.username,
              userImage: userUtils.assignImage(user),
-             youtubeId: user.googleData ? user.googleData.youtubeId : null   
+             youtubeId: user.googleData ? user.googleData.youtubeId : null,
+             twitchId: user.twitchId
             };
         
         const submissionData =
@@ -71,10 +82,11 @@ const customTagStyle={
 
     }
 
-    function test(user) {
-        console.log("Friends list)")
-        console.log(user.friendsData.friendsList)
-        return user.friendsData.friendsList;
+    function filterFriends(user) {
+        const friends = user.friendsData.friendsList;
+        const filteredFriends = friends.filter((friend=>{ return (friend.twitchId || friend.youtubeId)}
+        ));
+        return filteredFriends;
     }
 
     return(
@@ -103,6 +115,12 @@ const customTagStyle={
                         <textarea className={style.descriptionText}  onChange={e => setDescription(e.target.value)} type="text" value={description}/>
                     </div>
                 </div>
+                                    
+                <div className={style.checkboxDiv}>
+                    <label className={style.fieldLabel}>Invite Only?
+                        <input className={style.checkbox} type="checkbox" checked={inviteOnly} onChange={inviteOnlyCheckboxOnChange}></input>
+                        </label>
+                    </div>
                 <div className={style.participants}>
                     <label className={style.titleLabel}>Participants</label>
                     <hr className={style.titleLine}/>
@@ -111,7 +129,7 @@ const customTagStyle={
                     <label className={style.fieldLabel}>Invite Friends:</label>
                         <TeamBlock
                         maxGroups={1}
-                        friends={/*user.friendsData.friendList*/test(user)}
+                        friends={filterFriends(user)}
                         streamGroups={streamGroups}
                         setStreamGroups={setStreamGroups}/> 
                     </div>

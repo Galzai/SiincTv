@@ -110,19 +110,19 @@ passport.use(new GoogleStrategy({
         console.log("error occured");
       }
 
-      var channels = await youtubeController.getYoutubeChannelFromGoogle(accessToken,refreshToken);
+
       // If we find a user with the existing google id we just sign in
-      let youtubeSuccess = false;
       if(doc){
         return done(null, doc);
-        youtubeSuccess = true;
       }
       //Otherwise we create a new user
       else{
+        var channels = await youtubeController.getYoutubeChannelFromGoogle(accessToken,refreshToken);
+        console.log(channels);
         const newGoogleData = new GoogleData({
           displayName: profile.displayName,
-          youtubeId: (youtubeSuccess && channels.length > 0) ? channels[0].id : null,
-          youtubeName: (youtubeSuccess && channels.length > 0) ? channels[0].snippet.title : null,
+          youtubeId: (channels.length > 0) ? channels[0].id : null,
+          youtubeName: (channels.length > 0) ? channels[0].snippet.title : null,
           name: profile.name,
           emails: profile.emails,
           photos: profile.photos

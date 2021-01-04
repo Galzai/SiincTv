@@ -6,6 +6,7 @@ const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"
 const END_STREAM = "endStream"; // Name of the event
 const VIEWERS_CHANGED = "viewersChanged"; // Name of the event 
 const NEW_NOTIFICATON = "newNotification";
+const NEW_STREAMER = "newStreamer"; // Name of the event
 const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
 
@@ -96,10 +97,7 @@ module.exports.initializeSocket =  function(io){
 
 
 module.exports.emitToUser = function (userId, event, data) {
-    console.log("Trying to emit a message to : " + userId + ". message : ")
-    console.log(data);
-    //var clients= global_io.sockets.adapter.rooms[userId].sockets
-    //console.log(global_io.sockets.adapter)
+
     global_io.in(String(userId)).emit(event, data);
 }
 
@@ -109,6 +107,14 @@ module.exports.emitToUser = function (userId, event, data) {
  */
 module.exports.emitReloadNotifications = function (userId, popUpText) {
     global_io.in(String(userId)).emit(NEW_NOTIFICATON, popUpText);
+}
+
+/**
+ * Emites a newStreamerJoined event 
+ * @param {*} userId 
+ */
+module.exports.emitNewStreamerJoined = function (streamId) {
+    global_io.in(String(streamId)).emit(NEW_STREAMER);
 }
 
 

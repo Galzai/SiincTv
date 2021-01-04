@@ -10,7 +10,7 @@ import style from '../components/liveStream/liveStream.module.css'
 
 function Stream(props) {
     const userContext= useContext(UserContext);
-    const [streamData] = useState(props.streamData);
+    const [streamData, setStreamData] = useState(props.streamData);
     const [isSplit, setIsSplit] = useState(false);
 
     // Sends a join stream request to the stream creator
@@ -26,6 +26,31 @@ function Stream(props) {
         StreamActions.requestToJoinStream(data, streamData.creator.memberId).then();
     }
     
+    function flatten(arr) {
+        return arr.reduce(function (flat, toFlatten) {
+          return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+        }, []);
+      }
+
+    // True if user can request to join, false otherwise
+    function canRequestToJoin(){
+        const user = userContext.user;
+        if(!user) return false;
+        if(streamData.joinOnly) return false;
+        if(streamData.creator.memberId === user._id) return false;
+        const streamGroups = streamData.streamGroups;
+        if(streamGroups)
+        {
+            let filteredStreamers = flatten(streamData.streamGroups).filter(function(streamer){
+                return streamer.memberId === user._id;
+            });
+            if(filteredStreamers && filteredStreamers.length > 0) return false;
+        }
+        if((!(user.googleData && user.googleData.youtubeId)) && !user.twitchId) return false;
+        return true;
+
+    }
+
     return(
         <div>
             <Chat className={style.chatBox}
@@ -49,11 +74,12 @@ function Stream(props) {
                     streamTitle={streamData.name}
                     streamGroups={streamData.streamGroups}  
                     description={streamData.description}
+                    setStreamData={setStreamData}
                     >
                     </StreamDetails>
                 </div>
                 <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                <button onClick={requestToJoinStream}>Request to join</button>
+                {canRequestToJoin() && <button onClick={requestToJoinStream}>Request to join</button>}
             </div> 
         </div>
                 

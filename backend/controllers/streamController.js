@@ -1,10 +1,13 @@
 const passport = require("passport");
-const {StreamData, StreamerData} = require("../models/streamModels");
+const {StreamData, StreamerData, streamGroup} = require("../models/streamModels");
 const {User,Notification} = require("../models/user");
 const e = require("express");
 const { UpComingEventData } = require("../models/user");
 var ObjectID = require('mongodb').ObjectID;
 var notificationController = require('../controllers/notificationController')
+const {emitReloadNotifications, emitNewStreamerJoined} = require("../sockets/sockets")
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 120, checkperiod: 60 } );
 
 /**
  * @brief creates a new stream
@@ -193,8 +196,13 @@ exports.requestToJoinStream = function(req, res){
     const user = req.user;
     const creatorId = req.body.creatorId;
     data = req.body.data;
-    console.log("ehh");
-    console.log("creator id ",creatorId);
+    if(myCache.has(String(user._id)))
+    {
+
+        emitReloadNotifications(user._id, `Please wait two minutes between requests.`);
+        res.send("wait between requests");
+        return;
+    };
     if(!user || !creatorId)
     {
         res.send("error");
@@ -203,21 +211,130 @@ exports.requestToJoinStream = function(req, res){
     console.log("creator id ",creatorId);
 
     streamerData = new StreamerData({
-        // Note: member id and userImage will need to change frontend side when friends are implemented
         memberId: user._id,
         displayName: data.displayName,
         userImage: data.userImage,
-        youtubeId: data.youtubeId
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
     });
+
     console.log("data" , streamerData);
 
-    notificationData = new Notification({
+   const notificationData = new Notification({
         type: "joinStreamRequest",
         clearable: false,
         data: streamerData
     })
+    console.log("id is", String(user._id));
+    myCache.set(String(user._id));
     notificationController.addNotificationToUser(creatorId, notificationData, `${user.username} wants to stream with you.` )
 }
-// exports.addStreamer = function(req, result){
-//     if(req.user)
-// }
+
+/**
+ * Rejects a stream join request
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.rejectRequestToJoin = function(req, res){
+    const user = req.user;
+    const data = req.body.data;
+    console.log(req.body);
+    const fromId = data.memberId;
+    const notificationId = req.body._id;
+
+
+    if(!user || !fromId || ! notificationId)
+    {
+        res.send("error");
+        return;
+    }
+    // Remove the notification from the user
+    console.log("id is", user._id);
+    console.log("notification id is ", notificationId);
+    notificationController.deleteNotificationFromUser(user._id, notificationId);
+
+    streamerData = new StreamerData({
+        
+        memberId: data.memberId,
+        displayName: data.displayName,
+        userImage: data.userImage,
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
+    });
+
+    notificationData = new Notification({
+        type: "rejectJoinStreamRequest",
+        clearable: true,
+        data: streamerData
+    })
+    // Notify the requester the his request has been rejected
+    notificationController.addNotificationToUser(fromId, notificationData, `${user.username} declined your request to join the stream.` )
+}
+
+
+/**
+ * @brief Adds a streamer to the stream with stream id and emits a refresh to all the viewers
+ * @param {*} streamId 
+ * @param {*} streamerData 
+ */
+function addStreamer(streamId, streamerData){
+    if(!streamId || !streamerData)
+    {
+        return;
+    }
+    const newGroup =  [streamerData];
+    StreamData.updateOne(
+        {_id: new ObjectID(streamId)},
+        { $push: { "streamGroups": newGroup} }
+        ).then(obj=>
+           {
+            console.log(obj);
+            emitNewStreamerJoined(streamId);
+           } 
+        ); 
+    
+}
+/**
+ * Rejects a stream join request
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.acceptRequestToJoin = function(req, res){
+    const user = req.user;
+    const data = req.body.data;
+    const streamId = user.currentStream.eventId;
+    const fromId = data.memberId;
+    const notificationId = req.body._id;
+
+    if(!user || !fromId || ! notificationId)
+    {
+        res.send("error");
+        return;
+    }
+    // Remove the notification from the user
+    console.log("id is", user._id);
+    console.log("notification id is ", notificationId);
+    console.log("stream id is ", streamId);
+    notificationController.deleteNotificationFromUser(user._id, notificationId);
+
+    streamerData = new StreamerData({
+        
+        memberId: data.memberId,
+        displayName: data.displayName,
+        userImage: data.userImage,
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
+    });
+
+    notificationData = new Notification({
+        type: "acceptJoinStreamRequest",
+        clearable: true,
+        data: streamerData
+    })
+    // Notify the requester the his request has been rejected
+    
+    notificationController.addNotificationToUser(fromId, notificationData, `${user.username} accepted your request to join the stream.` )
+    console.log("here");
+    // Add the streamer to the stream
+    addStreamer(streamId, streamerData);
+}

@@ -9,9 +9,9 @@ import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
-import Divider from '@material-ui/core/Divider';
 import 'react-toastify/dist/ReactToastify.css';
 import JoinStreamRequestNotification from './joinStreamRequestNotification'
+import JoinStreamRequestResponse from './JoinStreamRequestResponse'
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -32,9 +32,21 @@ function NotificationMenu(){
         {
             case "poke":
                 return "YOU JUST GOT POKED SON";
+
             case "joinStreamRequest":
                 return <JoinStreamRequestNotification
-                    notification={notification}
+                    notification={notification}/>;
+
+            case "rejectJoinStreamRequest":
+                return <JoinStreamRequestResponse
+                notification={notification}
+                response={false}
+                />;
+
+            case "acceptJoinStreamRequest":
+                return <JoinStreamRequestResponse
+                notification={notification}
+                response={true}
                 />;
         }
     }
