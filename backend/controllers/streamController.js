@@ -214,7 +214,8 @@ exports.requestToJoinStream = function(req, res){
         memberId: user._id,
         displayName: data.displayName,
         userImage: data.userImage,
-        youtubeId: data.youtubeId
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
     });
 
     console.log("data" , streamerData);
@@ -257,7 +258,8 @@ exports.rejectRequestToJoin = function(req, res){
         memberId: data.memberId,
         displayName: data.displayName,
         userImage: data.userImage,
-        youtubeId: data.youtubeId
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
     });
 
     notificationData = new Notification({
@@ -320,7 +322,8 @@ exports.acceptRequestToJoin = function(req, res){
         memberId: data.memberId,
         displayName: data.displayName,
         userImage: data.userImage,
-        youtubeId: data.youtubeId
+        youtubeId: data.youtubeId,
+        twitchId: data.twitchId
     });
 
     notificationData = new Notification({

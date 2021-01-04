@@ -61,7 +61,8 @@ const customTagStyle={
         const creatorData = {
              displayName: user.username,
              userImage: userUtils.assignImage(user),
-             youtubeId: user.googleData ? user.googleData.youtubeId : null   
+             youtubeId: user.googleData ? user.googleData.youtubeId : null,
+             twitchId: user.twitchId
             };
         
         const submissionData =
@@ -81,10 +82,13 @@ const customTagStyle={
 
     }
 
-    function test(user) {
+    function filterFriends(user) {
         console.log("Friends list)")
-        console.log(user.friendsData.friendsList)
-        return user.friendsData.friendsList;
+        console.log()
+        const friends = user.friendsData.friendsList;
+        const filteredFriends = friends.filter((friend=>{ return (friend.twitchId || friend.youtubeId)}
+        ));
+        return filteredFriends;
     }
 
     return(
@@ -127,7 +131,7 @@ const customTagStyle={
                     <label className={style.fieldLabel}>Invite Friends:</label>
                         <TeamBlock
                         maxGroups={1}
-                        friends={/*user.friendsData.friendList*/test(user)}
+                        friends={filterFriends(user)}
                         streamGroups={streamGroups}
                         setStreamGroups={setStreamGroups}/> 
                     </div>
