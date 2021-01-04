@@ -26,6 +26,30 @@ function Stream(props) {
         StreamActions.requestToJoinStream(data, streamData.creator.memberId).then();
     }
     
+    function flatten(arr) {
+        return arr.reduce(function (flat, toFlatten) {
+          return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+        }, []);
+      }
+
+    // True if user can request to join, false otherwise
+    function canRequestToJoin(){
+        const user = userContext.user;
+        if(!user) return false;
+        if(streamData.joinOnly) return false;
+        if(streamData.creator.memberId === user._id) return false;
+        const streamGroups = streamData.streamGroups;
+        if(streamGroups)
+        {
+            let filteredStreamers = flatten(streamData.streamGroups).filter(function(streamer){
+                return streamer.memberId === user._id;
+            });
+            if(filteredStreamers && filteredStreamers.length > 0) return false;
+        }
+        return true;
+
+    }
+
     return(
         <div>
             <Chat className={style.chatBox}
@@ -54,7 +78,7 @@ function Stream(props) {
                     </StreamDetails>
                 </div>
                 <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                <button onClick={requestToJoinStream}>Request to join</button>
+                {canRequestToJoin() && <button onClick={requestToJoinStream}>Request to join</button>}
             </div> 
         </div>
                 

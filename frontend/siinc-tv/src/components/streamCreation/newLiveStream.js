@@ -17,7 +17,7 @@ function NewLiveStream(props){
 
     const [name, setName]=useState("");
     const [privateStream, setPrivateStream]=useState(false);
-    const [inviteOnly, setInviteOnly]=useState(false);
+    const [inviteOnly, setInviteOnly]=useState(true);
     const [tags, setTags]=useState([]);
     const [date, setDate]=useState(new Date().toLocaleString());
     const [streamGroups, setStreamGroups]=useState([]);
@@ -38,6 +38,16 @@ const customTagStyle={
     multiValue: styles=>({...styles, textAlign:'center', bottom:20, height:30, backgroundColor:'#12343B', borderRadius:10}),
     multiValueLabel: styles=>({...styles, height:30, fontSize:16, top:15, color:'#FFFFFF', fontFamily:'Roboto'})
 };
+
+
+
+    /**
+     * @brief sets the value of inviteOnly
+     */
+    const inviteOnlyCheckboxOnChange=()=>{
+        setInviteOnly(!inviteOnly);
+    };
+
 
     /**
      * @brief handles new stream form submission
@@ -103,6 +113,12 @@ const customTagStyle={
                         <textarea className={style.descriptionText}  onChange={e => setDescription(e.target.value)} type="text" value={description}/>
                     </div>
                 </div>
+                                    
+                <div className={style.checkboxDiv}>
+                    <label className={style.fieldLabel}>Invite Only?
+                        <input className={style.checkbox} type="checkbox" checked={inviteOnly} onChange={inviteOnlyCheckboxOnChange}></input>
+                        </label>
+                    </div>
                 <div className={style.participants}>
                     <label className={style.titleLabel}>Participants</label>
                     <hr className={style.titleLine}/>
