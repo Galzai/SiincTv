@@ -67,6 +67,24 @@
     cursor:pointer;
 }
 
+.joinButton{
+    position: absolute;
+    display: inline-block;
+    bottom: 368px;
+    left: 616px;
+    width: 112px;
+    height:24px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #3C096C;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14.5px;
+    font-style: normal;
+    color: #E2DAE9;
+    cursor:pointer;
+}
+
 .streamTitle{
     display:relative;
     position: relative;

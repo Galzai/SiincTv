@@ -53,7 +53,7 @@ function Stream(props) {
                     </StreamDetails>
                 </div>
                 <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                <button onClick={requestToJoinStream}>Request to join</button>
+                <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>
             </div> 
         </div>
                 
