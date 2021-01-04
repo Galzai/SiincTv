@@ -5,7 +5,6 @@ const {emitReloadNotifications} = require("../sockets/sockets")
 var ObjectID = require('mongodb').ObjectID;
 
 
-
 function deleteNotification(userId, notificationId)
 {
     if(notificationId == null)
