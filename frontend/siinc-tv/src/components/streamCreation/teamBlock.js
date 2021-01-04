@@ -25,9 +25,9 @@ const customTagStyle={
     multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:14}),
     multiValueLabel: styles=>({...styles, cursor: 'default', textAlign: 'center', height:30, fontSize:16,
     top:15, color:'#FFFFFF', opacity: 0.7, fontFamily:'Roboto'}),
-    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black'}),
+    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black', color: '#111111'}),
     menuList:styles=>({...styles, width:580, borderRadius: 5, fontFamily:'Roboto',
-    fontWeight: 'normal', color: '#FFFFFF', opacity: 0.7, backgroundColor: '#251A37'})
+    fontWeight: 'normal', color: '#AFAFAF', opacity: 0.7, backgroundColor: '#251A37'})
 };
 
 /**
