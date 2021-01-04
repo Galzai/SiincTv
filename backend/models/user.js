@@ -81,6 +81,7 @@ const NotificationData = mongoose.model("NotificationData", notificationData );
 const notification = new mongoose.Schema({
   type: String,
   clearable: Boolean,
+  date: {type: Date, default: Date.now},
   data: mongoose.Schema.Types.Mixed
 });
 const Notification = mongoose.model("Notification", notification );
