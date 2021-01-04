@@ -46,6 +46,7 @@ function Stream(props) {
             });
             if(filteredStreamers && filteredStreamers.length > 0) return false;
         }
+        if((!(user.googleData && user.googleData.youtubeId)) && !user.twitchId) return false;
         return true;
 
     }

@@ -83,8 +83,6 @@ const customTagStyle={
     }
 
     function filterFriends(user) {
-        console.log("Friends list)")
-        console.log()
         const friends = user.friendsData.friendsList;
         const filteredFriends = friends.filter((friend=>{ return (friend.twitchId || friend.youtubeId)}
         ));
