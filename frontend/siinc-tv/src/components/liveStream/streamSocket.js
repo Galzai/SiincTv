@@ -1,38 +1,44 @@
-import { useEffect, useRef, useState } from "react";
-import socketIOClient from "socket.io-client";
+import { useEffect, useContext, useState } from "react";
+import SocketContext from "../../socketContext";
 
 const END_STREAM = "endStream"; // Name of the event
 const VIEWERS_CHANGED = "viewersChanged"; // Name of the event
-const SOCKET_SERVER_URL = "http://localhost:4000";
+const JOIN_ROOM = "joinRoom"; // Name of the event
+const LEAVE_ROOM = "leaveRoom"; // Name of the event
+
 
 const StreamSocket = (roomId) => {
   const [endStream, setEndStream] = useState(false); // Sent and received messages
   const [numOfViews, setNumViewers] = useState(0);
-  const socketRef = useRef();
+  const socketContext = useContext(SocketContext);
 
   useEffect(() => {
     if(roomId !== null){
-            // Creates a WebSocket connection
-        socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-            withCredentials: true,
-            query: { roomId },
-            transports: ['websocket']
-          });
-
+      // If not already in room join room
+      if(socketContext.streamRoomId == null)
+      {
+        console.log("here");
+        socketContext.socket.emit(JOIN_ROOM, roomId);
+        socketContext.setStreamRoomId(roomId);
+      }
         // Listens for incoming messages
-        socketRef.current.on(END_STREAM, () => {
+        socketContext.socket.on(END_STREAM, () => {
             window.location.assign("http://localhost:3000/stream_pages/ended");
         });
 
         // Listen for new viewers
-        socketRef.current.on(VIEWERS_CHANGED, (numViewers) => {
+        socketContext.socket.on(VIEWERS_CHANGED, (numViewers) => {
           setNumViewers(numViewers);
       });
         
-        // Destroys the socket reference
+        // leaves the room
         // when the connection is closed
         return () => {
-        socketRef.current.disconnect();
+          if(socketContext.streamRoomId != null)
+          {
+            socketContext.socket.emit(LEAVE_ROOM,roomId);
+            socketContext.setStreamRoomId(null);
+          }
         };
     }
   }, [roomId]);
@@ -40,9 +46,7 @@ const StreamSocket = (roomId) => {
   // Sends a message to the server that
   // forwards it to all users in the same room
   const sendEndStream = () => {
-    socketRef.current.emit(END_STREAM, {
-      senderId: socketRef.current.id,
-    });
+    socketContext.socket.emit(END_STREAM, roomId);
   };
 
   return { endStream, sendEndStream, numOfViews };

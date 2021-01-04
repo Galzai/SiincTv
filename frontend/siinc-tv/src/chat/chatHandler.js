@@ -1,45 +1,54 @@
-import { useEffect, useRef, useState } from "react";
-import socketIOClient from "socket.io-client";
+import { useEffect, useContext, useState } from "react";
+import SocketContext from "../socketContext";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
-const SOCKET_SERVER_URL = "http://localhost:4000";
+const JOIN_ROOM = "joinRoom"; // Name of the event
+const LEAVE_ROOM = "leaveRoom"; // Name of the event
 
 const ChatHandler = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
-  const socketRef = useRef();
-
+  const socketContext = useContext(SocketContext);
   useEffect(() => {
-    
-    // Creates a WebSocket connection
-    socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
-      withCredentials: true,
-      query: { roomId },
-      transports: ['websocket']
-    });
-    
-    // Listens for incoming messages
-    socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
-      const incomingMessage = {
-        ...message,
-        ownedByCurrentUser: message.senderId === socketRef.current.id,
+    console.log("cur id", socketContext.streamRoomId);
+    console.log("roomId", roomId);
+    if(roomId != null){
+      console.log(socketContext.streamRoomId);
+      if(socketContext.streamRoomId == null)
+      {
+        console.log("here");
+        socketContext.socket.emit(JOIN_ROOM, roomId);
+        socketContext.setStreamRoomId(roomId);
+      }
+
+      // Listens for incoming messages
+      socketContext.socket.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+        console.log("newmsg");
+        const incomingMessage = {
+          ...message,
+          ownedByCurrentUser: message.senderId === socketContext.socket.id,
+        };
+        setMessages((messages) => [...messages, incomingMessage]);
+      });
+      
+        // leaves the room
+        // when the connection is closed
+      return () => {
+        if(socketContext.streamRoomId != null)
+        {
+          socketContext.socket.emit(LEAVE_ROOM,roomId);
+          socketContext.setStreamRoomId(null);
+        }
       };
-      setMessages((messages) => [...messages, incomingMessage]);
-    });
-    
-    // Destroys the socket reference
-    // when the connection is closed
-    return () => {
-      socketRef.current.disconnect();
-    };
-  }, [roomId]);
+  }
+  }, [socketContext, roomId]);
 
   // Sends a message to the server that
   // forwards it to all users in the same room
   const sendMessage = (messageBody) => {
-    socketRef.current.emit(NEW_CHAT_MESSAGE_EVENT, {
+    socketContext.socket.emit(NEW_CHAT_MESSAGE_EVENT, {
       body: messageBody,
-      senderId: socketRef.current.id,
-    });
+      senderId: socketContext.socket.id,
+    }, socketContext.streamRoomId);
   };
 
   return { messages, sendMessage };

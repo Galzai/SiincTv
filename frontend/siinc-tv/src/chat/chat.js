@@ -6,7 +6,7 @@ import Textarea from 'react-expanding-textarea'
 function Chat(props){
 
     const { roomId } = props.roomId; // Gets roomId from URL
-    const { messages, sendMessage } = ChatHandler(roomId); // Creates a websocket and manages messaging
+    const { messages, sendMessage } = ChatHandler(props.roomId); // Creates a websocket and manages messaging
     const [newMessage, setNewMessage] = useState(""); // Message to be sent
     const userId = props.userId;
 
