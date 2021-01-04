@@ -22,7 +22,7 @@ const customTagStyle={
     input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',
     textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
-    multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:14}),
+    multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:5}),
     multiValueLabel: styles=>({...styles, cursor: 'default', textAlign: 'center', height:30, fontSize:16,
     top:15, color:'#FFFFFF', opacity: 0.7, fontFamily:'Roboto'}),
     menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black', color: '#111111'}),
