@@ -7,13 +7,43 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import Badge from '@material-ui/core/Badge';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import CloseIcon from '@material-ui/icons/Close';
-import Divider from '@material-ui/core/Divider';
 import 'react-toastify/dist/ReactToastify.css';
 import JoinStreamRequestNotification from './joinStreamRequestNotification'
+import JoinStreamRequestResponse from './JoinStreamRequestResponse'
 const { default: userActions } = require("../../user/userActions");
 
+
+function timeSince(date) {
+
+    console.log(date);
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = seconds / 31536000;
+  
+    if (interval > 1) {
+      return Math.floor(interval) + " years";
+    }
+    interval = seconds / 2592000;
+    if (interval > 1) {
+      return Math.floor(interval) + " months";
+    }
+    interval = seconds / 86400;
+    if (interval > 1) {
+      return Math.floor(interval) + " days";
+    }
+    interval = seconds / 3600;
+    if (interval > 1) {
+      return Math.floor(interval) + " hours";
+    }
+    interval = seconds / 60;
+    if (interval > 1) {
+      return Math.floor(interval) + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
 
 /**
  * @brief This displays details regarding the stream
@@ -31,10 +61,22 @@ function NotificationMenu(){
         switch(notification.type)
         {
             case "poke":
-                return "YOU JUST GOT POKED SON";
+                return "POKIE POKE POKE"
+
             case "joinStreamRequest":
                 return <JoinStreamRequestNotification
-                    notification={notification}
+                    notification={notification}/>;
+
+            case "rejectJoinStreamRequest":
+                return <JoinStreamRequestResponse
+                notification={notification}
+                response={false}
+                />;
+
+            case "acceptJoinStreamRequest":
+                return <JoinStreamRequestResponse
+                notification={notification}
+                response={true}
                 />;
         }
     }
@@ -52,14 +94,22 @@ function NotificationMenu(){
     function mapNotifications(){
         if(userContext.user && userContext.user.notifications){
             return(userContext.user.notifications.reverse().map(notification=>
+
                 <MenuItem divider>
-                    {buildNotificationByType(notification)}
-                    {notification.clearable && 
-                    <IconButton aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
-                        <CloseIcon
-                         className={style.closeButton}
-                        />
-                    </IconButton>}
+                    <List>
+                  <ListItem >
+                            {buildNotificationByType(notification)}
+                        {notification.clearable && 
+                        <IconButton edge="start" aria-haspopup="true" onClick={()=>clearNotification(notification._id)}>
+                            <CloseIcon
+                            className={style.closeButton}
+                            />
+                        </IconButton>}
+                        </ListItem>
+                     <ListItem >
+                    <label className={style.dateStyle}>{`${timeSince(new Date(notification.date))} ago`}</label>
+                    </ListItem>
+                    </List>
                 </MenuItem>        
                 )
             );
@@ -101,7 +151,7 @@ function NotificationMenu(){
                     anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                     transformOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                <div>
+                <div className={style.notificationTitleDiv}>
                     <label className={style.menuTitle}>Notifications</label>
                     {(numNotifications != 0) && <Button className={style.clearNotificationsButton} onClick={clearAllNotifications}>Clear Notifications</Button>}
                 </div>

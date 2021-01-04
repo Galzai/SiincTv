@@ -9,13 +9,10 @@ const ChatHandler = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketContext = useContext(SocketContext);
   useEffect(() => {
-    console.log("cur id", socketContext.streamRoomId);
-    console.log("roomId", roomId);
     if(roomId != null){
       console.log(socketContext.streamRoomId);
       if(socketContext.streamRoomId == null)
       {
-        console.log("here");
         socketContext.socket.emit(JOIN_ROOM, roomId);
         socketContext.setStreamRoomId(roomId);
       }

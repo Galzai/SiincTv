@@ -5,7 +5,6 @@ const {emitReloadNotifications} = require("../sockets/sockets")
 var ObjectID = require('mongodb').ObjectID;
 
 
-
 function deleteNotification(userId, notificationId)
 {
     if(notificationId == null)
@@ -17,7 +16,7 @@ function deleteNotification(userId, notificationId)
     console.log("id is", userId);
     User.updateOne(
         {_id:  new ObjectID(userId)},
-        { $pull: { "notifications": { _id:  new ObjectID(notificationId)} } }
+        { $pull: { notifications: { _id:  new ObjectID(notificationId)} } }
         ).then(err=>
            {
             emitReloadNotifications(userId);

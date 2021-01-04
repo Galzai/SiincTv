@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import style from './notifications.module.css';
+import UserContext from "../../userContext";
+import streamActions from '../../stream/streamActions.js'
 
 /**
  * @brief This holds all our streamers
@@ -13,7 +15,23 @@ import style from './notifications.module.css';
 function JoinStreamRequestNotification(props){
 
     const data = props.notification.data;
-    const notificationId = props.notification._id;
+    const notification = props.notification;
+
+    /**
+     * Rejects the request
+     */
+    function rejectStreamJoinRequest()
+    {
+        streamActions.rejectRequestToJoin(notification)
+    }
+
+    /**
+     * Accepts the request
+     */
+    function acceptStreamJoinRequest()
+    {
+        streamActions.acceptRequestToJoin(notification)
+    }
 
     return(
 
@@ -22,21 +40,20 @@ function JoinStreamRequestNotification(props){
             <ListItemAvatar>
             {data.userImage &&<img className={style.userProfileCircle}
                 src={data.userImage} 
-            > 
-            
+            >            
             </img>}
             </ListItemAvatar>
             <Grid>
             <Grid item>
-            <label>{`${data.displayName} would like to stream with you`}</label>
+            <label>{`${data.displayName} would like to stream with you.`}</label>
             </Grid>
             <Grid item>
                 <Box display="flex">
                 <Box  p={1}>
-                    <Button size="small" variant="outlined" color="primary">Accept</Button>
+                    <Button onClick={acceptStreamJoinRequest} size="small" variant="outlined" color="primary">Accept</Button>
                 </Box>
                 <Box p={1}>
-                    <Button   size="small" variant="outlined" color="primary">Reject</Button>
+                    <Button onClick={rejectStreamJoinRequest} size="small" variant="outlined" color="primary">Reject</Button>
                 </Box >
             </Box>
             </Grid>

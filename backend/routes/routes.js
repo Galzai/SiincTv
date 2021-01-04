@@ -87,6 +87,12 @@ router.post('/notifications/clearNotifications', notificationController.clearAll
 // POST request requestToJoinStream
 router.post('/streams/requestToJoinStream', streamController.requestToJoinStream);
 
+// POST request requestToJoinStream
+router.post('/streams/rejectRequestToJoin', streamController.rejectRequestToJoin);
+
+// POST request requestToJoinStream
+router.post('/streams/acceptRequestToJoin', streamController.acceptRequestToJoin);
+
 //TODO: Delete this
 // POST request poke yourself
 router.post('/test/selfPoke', notificationController.pokeYourself);
