@@ -23,7 +23,6 @@ function SplitScreenViewBox(props){
                 <div className={style.splitScreen}>
                 <LiveStream  key={streamer.displayName}
                 streamer={streamer}
-                dimensions={{width: "676", height:"370"}}
                 muted={true}
              ></LiveStream>
                 </div>

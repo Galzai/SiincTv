@@ -1,32 +1,29 @@
 .streamPage{
-    margin-top: -30px;
     position: relative;
-}
-
-.StreamBox{
-    display: inline-block;
+    margin-right: 30%;
 }
 
 .chatBox{
-    top:0px;
+    top: 0px;
     height: 100%;
-    display: inline;
+    position: inline-block;
     overflow: hidden;
+    float: right;
 }
 
 .streamSelectorBar{
     display:inline-block;
     position:relative;
-    width: 875px;
+    width: 100%;
     height: 180px;
     white-space: nowrap;
 }
 
 .streamSelector{
     position:relative;
-    width: 264px;
-    height: 180px;
-    margin-right: 27px;
+    width: 100%;
+    height: 200px;
+    margin-right: 0px;
     cursor:pointer;
     float:left;
 }
@@ -37,7 +34,7 @@
     position:relative;
     width: 129px;
     height:20.13px;
-    left:67.5px;
+    left:35%;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #3C096C;
     border: none;
@@ -46,14 +43,15 @@
     font-size: 14.5px;
     font-style: normal;
     color: #E2DAE9;
-    top:2px;
+    top:160px;
     cursor:pointer;
 }
 
-.viewButton{
+.joinButton{
     position: absolute;
-    bottom: 368px;
-    left: 737px;
+    display: inline-block;
+    right: 0%;
+    margin-top: 52px;
     width: 112px;
     height:24px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -67,11 +65,12 @@
     cursor:pointer;
 }
 
-.joinButton{
+.viewButton{
     position: absolute;
     display: inline-block;
-    bottom: 368px;
-    left: 616px;
+    right: 0%;
+    margin-top: 20px;
+    padding-right: 4px;
     width: 112px;
     height:24px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -132,8 +131,8 @@
 }
 
 .descriptionDiv{
-    width:875px;
-    height:300px;
+    width:100%;
+    height:100%;
 }
 
 .textStyle{
@@ -147,14 +146,13 @@
     padding-left: 0px;
     color: #FFFFFF;
     overflow: hidden;
+
     opacity: 0.7;
 }
 
 .numOfViews{
     position: relative;
-    display: inline;
-    left: 750px;
-    top:-40px;
+    right: 0px;
     border:none;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
@@ -178,9 +176,14 @@
 .splitScreen
 {
     /* display: inline-block; */
-    float:left;
+    float:inline-start;
 }
 .singleStreamViewBox
 {
-    display: inline-block;
+    position: relative;
+    padding-bottom: 52.68%;
+    padding-top: 30px;
+    height: 0;
+    overflow: auto;
+    -webkit-overflow-scrolling:touch;
 }
