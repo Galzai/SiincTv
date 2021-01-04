@@ -66,6 +66,15 @@ const streamActions={
             withCredentials:true,
         });
         return result.data;
+    },
+    requestToJoinStream: async function(data, creatorId){
+        const result = await axios({
+            method: 'POST',
+            data:{data, creatorId},
+            url:'http://localhost:4000/streams/requestToJoinStream',
+            withCredentials:true,
+        });
+        return result.data;
     }
 
 

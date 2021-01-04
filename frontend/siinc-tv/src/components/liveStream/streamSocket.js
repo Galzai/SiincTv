@@ -27,7 +27,6 @@ const StreamSocket = (roomId) => {
         // Listen for new viewers
         socketRef.current.on(VIEWERS_CHANGED, (numViewers) => {
           setNumViewers(numViewers);
-          console.log("NumVIewers", numViewers);
       });
         
         // Destroys the socket reference

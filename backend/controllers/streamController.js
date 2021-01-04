@@ -1,9 +1,10 @@
 const passport = require("passport");
 const {StreamData, StreamerData} = require("../models/streamModels");
-const {User} = require("../models/user");
+const {User,Notification} = require("../models/user");
 const e = require("express");
 const { UpComingEventData } = require("../models/user");
 var ObjectID = require('mongodb').ObjectID;
+var notificationController = require('../controllers/notificationController')
 
 /**
  * @brief creates a new stream
@@ -182,3 +183,41 @@ exports.closeStream = function(req, res){
         {$unset: {"currentStream": ""}}).then(obj=>{console.log("Object modified", obj)}
         );   
 }
+
+/**
+ * Request to join a currently live stream
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.requestToJoinStream = function(req, res){
+    const user = req.user;
+    const creatorId = req.body.creatorId;
+    data = req.body.data;
+    console.log("ehh");
+    console.log("creator id ",creatorId);
+    if(!user || !creatorId)
+    {
+        res.send("error");
+        return;
+    }
+    console.log("creator id ",creatorId);
+
+    streamerData = new StreamerData({
+        // Note: member id and userImage will need to change frontend side when friends are implemented
+        memberId: user._id,
+        displayName: data.displayName,
+        userImage: data.userImage,
+        youtubeId: data.youtubeId
+    });
+    console.log("data" , streamerData);
+
+    notificationData = new Notification({
+        type: "joinStreamRequest",
+        clearable: false,
+        data: streamerData
+    })
+    notificationController.addNotificationToUser(creatorId, notificationData, `${user.username} wants to stream with you.` )
+}
+// exports.addStreamer = function(req, result){
+//     if(req.user)
+// }

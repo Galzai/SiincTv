@@ -27,8 +27,8 @@ function NewLiveStream(props){
 
 // We use this to style our selector   
 const customTagStyle={
-    control: styles=>({...styles, width:613, marginTop:10, backgroundColor: '#251A37', borderRadius:3, height:40, 
-    minHeight: 40, border: 'none', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    control: (styles, state)=>({...styles, width:613, marginTop:10, backgroundColor: '#251A37', borderRadius:state.isFocused?3:3, height:40, 
+    minHeight: 40, border: state.isFocused?'1px solid rgb(153, 153, 153)':'none', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     ':hover': {borderRadius: 3, cursor: 'text', border: '1px solid rgb(153, 153, 153)'}}),
     valueContainer: styles=>({...styles, height:40, minHeight: 40}),
     indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),

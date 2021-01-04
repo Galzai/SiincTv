@@ -1,18 +1,21 @@
-import LiveStream from '../components/liveStream/liveStream.js'
-import {streamGroupsMock} from "../mocks/streamGroupsMock";
-import streamActions from "../stream/streamActions";
+import userActions from "../user/userActions";
 import LiveFeed from '../components/liveFeed/liveFeed.js'
 import React, {useState} from "react";
+
+
 function HomePage(props) {
 
+    function poke(){
+        userActions.pokeYourself().then();
+    }
 
- return(
+    return(
+    <div>
+        <LiveFeed/>
+        <button onClick={poke}>Poke yoself</button>
+    </div>
 
-<div>
-    <LiveFeed/>
-</div>
-
-    )
+        )
 }
 
 export default HomePage;

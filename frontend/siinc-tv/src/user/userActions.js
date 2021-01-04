@@ -57,7 +57,6 @@ const userActions ={
     },
     
     getUserData: async function( userName ){
-        console.log("Getting user data from : " + userName)
         const result = await axios({
             method:'POST',
             data:{
@@ -66,8 +65,6 @@ const userActions ={
             withCredentials:true,
             url:'http://localhost:4000/userdata'
         });
-        console.log(result.data)
-        console.log("Finished getting data")
         return result.data;
     },
 
@@ -182,7 +179,32 @@ const userActions ={
             url:'http://localhost:4000/user/getusernamelist'
         });
         return result.data;
-     }
+     },
+     deleteNotification: async function(id){
+        const result = await axios({
+            method: 'POST',
+            data:{notificationId: id},
+            url:'http://localhost:4000/notifications/deleteNotification',
+            withCredentials:true,
+        });
+        return result.data;
+    },
+     pokeYourself: async function(){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/test/selfPoke',
+            withCredentials:true,
+        });
+        return result.data;
+    },
+    clearNotifications: async function(){
+        const result = await axios({
+            method: 'POST',
+            url:'http://localhost:4000/notifications/clearNotifications',
+            withCredentials:true,
+        });
+        return result.data;
+    }
 
 };
 

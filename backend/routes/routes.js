@@ -8,6 +8,7 @@ var streamController = require('../controllers/streamController')
 var twitchController = require('../controllers/twitchController')
 var friendsController = require('../controllers/friendsController')
 var youtubeController = require('../controllers/youtubeController')
+var notificationController = require('../controllers/notificationController')
 
 // POST request to sign in
 router.post('/signin',userController.user_login);
@@ -74,8 +75,20 @@ router.post('/auth/setRedirectUrl', userController.setRedirectURL);
  
 router.post('/user/friends', friendsController.handleFriendsRequest);
 
+// POST request closeStream
 router.post('/streams/closeStream', streamController.closeStream);
 
+// POST request closeStream
+router.post('/notifications/deleteNotification', notificationController.deleteNotificationFromCurrentUser);
 
+// POST request clearNotifications
+router.post('/notifications/clearNotifications', notificationController.clearAllClearableNotifications);
+
+// POST request requestToJoinStream
+router.post('/streams/requestToJoinStream', streamController.requestToJoinStream);
+
+//TODO: Delete this
+// POST request poke yourself
+router.post('/test/selfPoke', notificationController.pokeYourself);
 
 module.exports = router;

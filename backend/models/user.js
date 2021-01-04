@@ -80,7 +80,8 @@ const NotificationData = mongoose.model("NotificationData", notificationData );
 */ 
 const notification = new mongoose.Schema({
   type: String,
-  data: [{type: mongoose.Schema.Types.Mixed, ref: 'NotificationData'}]
+  clearable: Boolean,
+  data: mongoose.Schema.Types.Mixed
 });
 const Notification = mongoose.model("Notification", notification );
 

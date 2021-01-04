@@ -11,14 +11,11 @@ class SocketProvider extends React.Component {
     constructor(props){
         super(props);
         this.state = { socket: null };
-        console.log("invoked socket provider constructor")
         
         let sock = socketIOClient(SOCKET_SERVER_URL, {
             withCredentials: true,
             transports: ['websocket']
         });
-        console.log("Created socket : ")
-        console.log(sock);
         this.state.socket = sock;    // setting state directly in constructor is fine 
         //this.setState( {socket: sock} )
         //console.log("Set state of socket provider : ")
@@ -29,17 +26,8 @@ class SocketProvider extends React.Component {
     }
 
     componentDidMount() {
-        /*
-        console.log("Creating socket ..... ")
-        let sock = socketIOClient(SOCKET_SERVER_URL, {
-            withCredentials: true,
-            transports: ['websocket']
-        });
-        console.log("Created socket : ")
-        console.log(sock);
-        this.setState( {socket: sock}, () => {console.log("finished setting socker state"); console.log(this.state.socket)} )
-        */
     }
+
 
     componentWillUnmount() {
         if(this.state.socket != null) {
