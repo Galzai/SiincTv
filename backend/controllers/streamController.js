@@ -5,7 +5,9 @@ const e = require("express");
 const { UpComingEventData } = require("../models/user");
 var ObjectID = require('mongodb').ObjectID;
 var notificationController = require('../controllers/notificationController')
-const {emitNewStreamerJoined} = require("../sockets/sockets")
+const {emitReloadNotifications, emitNewStreamerJoined} = require("../sockets/sockets")
+const NodeCache = require( "node-cache" );
+const myCache = new NodeCache({ stdTTL: 120, checkperiod: 60 } );
 
 /**
  * @brief creates a new stream
@@ -194,6 +196,13 @@ exports.requestToJoinStream = function(req, res){
     const user = req.user;
     const creatorId = req.body.creatorId;
     data = req.body.data;
+    if(myCache.has(String(user._id)))
+    {
+
+        emitReloadNotifications(user._id, `Please wait two minutes between requests.`);
+        res.send("wait between requests");
+        return;
+    };
     if(!user || !creatorId)
     {
         res.send("error");
@@ -210,11 +219,13 @@ exports.requestToJoinStream = function(req, res){
 
     console.log("data" , streamerData);
 
-    notificationData = new Notification({
+   const notificationData = new Notification({
         type: "joinStreamRequest",
         clearable: false,
         data: streamerData
     })
+    console.log("id is", String(user._id));
+    myCache.set(String(user._id));
     notificationController.addNotificationToUser(creatorId, notificationData, `${user.username} wants to stream with you.` )
 }
 
