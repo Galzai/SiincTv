@@ -43,11 +43,11 @@ const customTagStyle={
      * @brief handles new stream form submission
      */
     const submissionHandler=()=>{
-        if(streamGroups.length == 0)
-        {
-            setFormErrors("Must have at least one other streamer.");
-            return;
-        }
+        // if(streamGroups.length == 0)
+        // {
+        //     setFormErrors("Must have at least one other streamer.");
+        //     return;
+        // }
         const creatorData = {
              displayName: user.username,
              userImage: userUtils.assignImage(user),

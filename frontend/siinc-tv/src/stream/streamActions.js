@@ -75,6 +75,24 @@ const streamActions={
             withCredentials:true,
         });
         return result.data;
+    },
+    rejectRequestToJoin: async function(data){
+        const result = await axios({
+            method: 'POST',
+            data:data,
+            url:'http://localhost:4000/streams/rejectRequestToJoin',
+            withCredentials:true,
+        });
+        return result.data;
+    },
+    acceptRequestToJoin: async function(data){
+        const result = await axios({
+            method: 'POST',
+            data:data,
+            url:'http://localhost:4000/streams/acceptRequestToJoin',
+            withCredentials:true,
+        });
+        return result.data;
     }
 
 

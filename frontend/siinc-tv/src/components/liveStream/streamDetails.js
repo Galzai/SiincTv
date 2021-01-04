@@ -10,7 +10,7 @@ import StreamSocket from './streamSocket'
  */
 function StreamDetails(props){
     const id = props.id;
-    const {endStream, sendEndStream, numOfViews} = StreamSocket(id);
+    const {endStream, sendEndStream, numOfViews} = StreamSocket(id, props.setStreamData);
     const currentStreamer = props.currentStreamer;
     const streamGroups = props.streamGroups;
     const streamTitle = props.streamTitle;

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import LiveStream from "./liveStream";
 import style from './liveStream.module.css'
 
@@ -14,6 +14,9 @@ function SplitScreenViewBox(props){
     const [currentStreamer, setCurrentStreamer] = useState(props.currentStreamer);
     const [streamGroups, setStreamGroups] = useState(props.streamGroups);
 
+    useEffect(() => {
+        setStreamGroups(props.streamGroups);
+      }, [props.streamGroups]);
 
     function generateSplitStream(){
         const streamers = flatten(streamGroups);

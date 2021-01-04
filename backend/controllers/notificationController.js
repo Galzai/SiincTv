@@ -17,7 +17,7 @@ function deleteNotification(userId, notificationId)
     console.log("id is", userId);
     User.updateOne(
         {_id:  new ObjectID(userId)},
-        { $pull: { "notifications": { _id:  new ObjectID(notificationId)} } }
+        { $pull: { notifications: { _id:  new ObjectID(notificationId)} } }
         ).then(err=>
            {
             emitReloadNotifications(userId);

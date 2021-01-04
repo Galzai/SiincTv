@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import LiveStream from "./liveStream";
 import style from './liveStream.module.css'
 import StreamSelectorBar from "./streamSelectorBar";
@@ -9,6 +9,10 @@ function SingleStreamViewBox(props){
     const [currentStreamer, setCurrentStreamer] = useState(props.currentStreamer);
     const [streamGroups, setStreamGroups] = useState(props.streamGroups);
     
+
+    useEffect(() => {
+        setStreamGroups(props.streamGroups);
+      }, [props.streamGroups]);
 
     return(
         <div className={style.singleStreamViewBox}>

@@ -10,7 +10,7 @@ import style from '../components/liveStream/liveStream.module.css'
 
 function Stream(props) {
     const userContext= useContext(UserContext);
-    const [streamData] = useState(props.streamData);
+    const [streamData, setStreamData] = useState(props.streamData);
     const [isSplit, setIsSplit] = useState(false);
 
     // Sends a join stream request to the stream creator
@@ -49,6 +49,7 @@ function Stream(props) {
                     streamTitle={streamData.name}
                     streamGroups={streamData.streamGroups}  
                     description={streamData.description}
+                    setStreamData={setStreamData}
                     >
                     </StreamDetails>
                 </div>
