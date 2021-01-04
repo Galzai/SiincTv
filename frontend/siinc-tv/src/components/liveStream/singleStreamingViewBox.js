@@ -8,23 +8,24 @@ function SingleStreamViewBox(props){
     // The initial current streamer is the host
     const [currentStreamer, setCurrentStreamer] = useState(props.currentStreamer);
     const [streamGroups, setStreamGroups] = useState(props.streamGroups);
-    
+
 
     useEffect(() => {
         setStreamGroups(props.streamGroups);
       }, [props.streamGroups]);
 
     return(
-        <div className={style.singleStreamViewBox}>
-        <LiveStream key={currentStreamer.displayName}
-            streamer={currentStreamer}
-            dimensions={{width: "845", height:"463"}}
-            muted={false}
-         ></LiveStream>
-         <StreamSelectorBar
-            currentStreamer={currentStreamer}
-            setCurrentStreamer={setCurrentStreamer}
-            streamGroups={streamGroups}
+        <div>
+            <div className={style.singleStreamViewBox}>
+                <LiveStream key={currentStreamer.displayName}
+                    streamer={currentStreamer}
+                    muted={false}
+                ></LiveStream>
+            </div>
+            <StreamSelectorBar
+                currentStreamer={currentStreamer}
+                setCurrentStreamer={setCurrentStreamer}
+                streamGroups={streamGroups}
             ></StreamSelectorBar>
         </div>
 

@@ -97,24 +97,6 @@
     right: 15%;
 }
 
-.navNotificationButton
-{
-    box-sizing: border-box;
-    position: absolute;
-    width: 15px;
-    height: 17px;
-    top: 36px;
-    right: 140%;
-    border-radius: 40px;
-
-}
-
-.navNotificationButton:hover
-{
-    cursor: pointer;
-    box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
-}
-
 .navSearchContainer
 {
     position: absolute;

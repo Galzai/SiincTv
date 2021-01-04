@@ -7,6 +7,9 @@ import Chat from '../chat/chat'
 import {useContext, useState} from "react"
 import UserContext from "../userContext";
 import style from '../components/liveStream/liveStream.module.css'
+import Hidden from '@material-ui/core/Hidden'
+import Container from '@material-ui/core/Container'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function Stream(props) {
     const userContext= useContext(UserContext);
@@ -26,6 +29,18 @@ function Stream(props) {
         StreamActions.requestToJoinStream(data, streamData.creator.memberId).then();
     }
     
+    const theme = createMuiTheme({
+        breakpoints: {
+        values: {
+            xs: 0,
+            sm: 600,
+            md: 960,
+            lg: 1420,
+            xl: 1920,
+        },
+        },
+    })
+
     function flatten(arr) {
         return arr.reduce(function (flat, toFlatten) {
           return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
@@ -53,35 +68,41 @@ function Stream(props) {
 
     return(
         <div>
-            <Chat className={style.chatBox}
-                    userId = {userContext.user ? userContext.user.username : ""}
-                    roomId={streamData._id}
-                />
-            <div className={style.streamPage}>
-                <div className={style.StreamBox}>
-                    {(!isSplit) && <SingleStreamViewBox
-                        currentStreamer={streamData.creator}
+            <ThemeProvider theme={theme}>
+                <Hidden implementation='css' initialWidth='md' mdDown>
+                    <Chat className={style.chatBox}
+                            userId = {userContext.user ? userContext.user.username : ""}
+                            roomId={streamData._id}
+                        />
+                </Hidden>
+            <Container maxWidth="xl">
+                <div className={style.streamPage}>
+                    <div className={style.StreamBox}>
+                        {(!isSplit) && <SingleStreamViewBox
+                            currentStreamer={streamData.creator}
+                            streamGroups={streamData.streamGroups}  
+                            >
+                        </SingleStreamViewBox>}
+                        {(isSplit) && <SplitStreamViewBox
+                            currentStreamer={streamData.creator}
+                            streamGroups={streamData.streamGroups}  
+                            >
+                        </SplitStreamViewBox>}
+                        {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
+                        <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
+                        <StreamDetails
+                        id={streamData._id}
+                        streamTitle={streamData.name}
                         streamGroups={streamData.streamGroups}  
+                        description={streamData.description}
+                        setStreamData={setStreamData}
                         >
-                    </SingleStreamViewBox>}
-                    {(isSplit) && <SplitStreamViewBox
-                        currentStreamer={streamData.creator}
-                        streamGroups={streamData.streamGroups}  
-                        >
-                    </SplitStreamViewBox>}
-                    <StreamDetails
-                    id={streamData._id}
-                    streamTitle={streamData.name}
-                    streamGroups={streamData.streamGroups}  
-                    description={streamData.description}
-                    setStreamData={setStreamData}
-                    >
-                    </StreamDetails>
+                        </StreamDetails>
+                    </div>
                 </div>
-                <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                {canRequestToJoin() && <button onClick={requestToJoinStream}>Request to join</button>}
-            </div> 
-        </div>
+            </Container>
+        </ThemeProvider> 
+    </div>
                 
     )
 }

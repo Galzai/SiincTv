@@ -15,19 +15,20 @@ const generateKey = (pre) => {
 
 // We use this to style our selector   
 const customTagStyle={
-    control: styles=>({...styles, width:580, marginTop:10, borderRadius:3, border: 'none', backgroundColor: '#251A37', height:40, minHeight: 40,
-    ':hover': {borderRadius: 3, cursor: 'text', border: '1px solid rgb(153, 153, 153)'}}),
+    control: (styles, state)=>({...styles, width:580, marginTop:10, borderRadius:3, border: state.isFocused?'1px solid rgb(153, 153, 153)':'none',
+    backgroundColor: '#251A37', height:40, minHeight: 40, outline: 'none', ':hover': {borderRadius: 3, cursor: 'text', border: '1px solid rgb(153, 153, 153)'}}),
     valueContainer: styles=>({...styles, height:40, minHeight: 40}),
     indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),
     input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',
     textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
-    multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:14}),
+    multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:5}),
     multiValueLabel: styles=>({...styles, cursor: 'default', textAlign: 'center', height:30, fontSize:16,
     top:15, color:'#FFFFFF', opacity: 0.7, fontFamily:'Roboto'}),
-    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black'}),
+    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black', color: '#111111'}),
     menuList:styles=>({...styles, width:580, borderRadius: 5, fontFamily:'Roboto',
-    fontWeight: 'normal', color: '#FFFFFF', opacity: 0.7, backgroundColor: '#251A37'})
+    fontWeight: 'normal', color: '#AFAFAF', opacity: 0.7, backgroundColor: '#251A37'}),
+    multiValueRemove: styles=>({...styles, ':hover': {backgroundColor: '#071A0E', cursor: 'pointer', backgroud: '#AFAFAF'}}),
 };
 
 /**

@@ -5,7 +5,7 @@
     padding-left: 0px;
     margin: 0px;
     display: inline-block;
-    position: absolute;
+    position: fixed;
     width: 362px;
     height: 100%;
     right: 0px;
@@ -23,7 +23,6 @@
     right: 0px;
     height: 85%;
     overflow-y: auto;
-    overflow: hidden;
 }
 
 .messagesContainer::-webkit-scrollbar

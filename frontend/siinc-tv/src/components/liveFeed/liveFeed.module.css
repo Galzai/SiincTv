@@ -3,9 +3,9 @@
     position:relative;
     width: 1240px;
     height: 500px;
-    left: -32px;
+    left: 28px;
     white-space: nowrap;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 .liveFeedContainer{

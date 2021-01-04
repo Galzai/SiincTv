@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import LiveStream from "./liveStream";
 import style from './liveStream.module.css'
+import Container from '@material-ui/core/Container'
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 function flatten(arr) {
     return arr.reduce(function (flat, toFlatten) {
@@ -11,9 +13,19 @@ function flatten(arr) {
 function SplitScreenViewBox(props){
 
     // The initial current streamer is the host
-    const [currentStreamer, setCurrentStreamer] = useState(props.currentStreamer);
     const [streamGroups, setStreamGroups] = useState(props.streamGroups);
 
+    const theme = createMuiTheme({
+        breakpoints: {
+          values: {
+            xs: 470,
+            sm: 1000,
+            md: 1240,
+            lg: 1440,
+            xl: 1920,
+          },
+        },
+      });
     useEffect(() => {
         setStreamGroups(props.streamGroups);
       }, [props.streamGroups]);
@@ -23,14 +35,17 @@ function SplitScreenViewBox(props){
         console.log(streamers);
         return(streamers.map(streamer=>{
             return(
-                <div className={style.splitScreen}>
-                <LiveStream  key={streamer.displayName}
-                streamer={streamer}
-                dimensions={{width: "676", height:"370"}}
-                muted={true}
-             ></LiveStream>
-                </div>
-
+                <ThemeProvider theme={theme}>
+                        <Container maxWidth="xs"> 
+                            <div className={style.splitScreen}>
+                                <LiveStream
+                                    key={streamer.displayName}
+                                    streamer={streamer}
+                                    muted={true}
+                                ></LiveStream>
+                            </div>
+                        </Container>
+                </ThemeProvider>
             )}
         ));
     }

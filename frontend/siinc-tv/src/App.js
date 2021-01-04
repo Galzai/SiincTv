@@ -61,7 +61,7 @@ function App(){
             <Router history={history}>
             <SideBar></SideBar>
                 <NavigationBar></NavigationBar>        
-                <div style={{paddingLeft:"350px", paddingTop:"129px"}}>
+                <div style={{paddingLeft:"256px", paddingTop:"90px"}}>
                 <Switch >
                     <Route exact path="/">
                         <HomePage></HomePage>

@@ -21,9 +21,8 @@ function StreamSelector(props){
 
     return(
       <div className={style.streamSelector}>
-        <LiveStream style={{display:"relative", marginRight:"10px"}}
+        <LiveStream style={{display:"relative"}}
             streamer={streamer}
-            dimensions={{width: "264", height:"145.13"}}
             muted={true}
          />
          <button className={style.streamSelectorButton} onClick={selectAsMainStream}>

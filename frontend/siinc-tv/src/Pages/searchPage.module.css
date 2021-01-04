@@ -1,3 +1,8 @@
+.searchPage{
+    position: relative;
+    left: 32px;
+}
+
 .resultTypeButtons{
     top:0px;
     display:inline-block;
