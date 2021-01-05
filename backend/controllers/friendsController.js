@@ -5,6 +5,7 @@ const {User} = require("../models/user");
 var notification = require('../Notification/notification')
 var notificationController = require('../controllers/notificationController')
 const {Notification} = require("../models/user");
+const {emitReloadNotifications} = require("../sockets/sockets")
 
 
 const SEND_FRIEND_REQUEST = 0;
@@ -129,6 +130,8 @@ async function handleSendFriendRequest( req )
         }
     })
     notificationController.addNotificationToUser(toUser._id, notificationData, `Received friend request from ${toUser.username}.` )    
+    emitReloadNotifications(toUser._id, "");
+    emitReloadNotifications(fromUser._id, "")
 
     return true;
     
@@ -229,6 +232,9 @@ async function handleAnswerFriendRequest2( req )
 
     }
 
+    emitReloadNotifications(toUser._id, "");
+    emitReloadNotifications(fromUser._id, "")
+
     return true;       
 }
 
@@ -266,6 +272,9 @@ async function handleUnfriendRequest( req )
 
     // update the client that he got unfriended
     notification.notifyUnfriendFriend(fromUser, toUser)
+
+    emitReloadNotifications(toUser._id, "");
+    emitReloadNotifications(fromUser._id, "")
 
     return true;
 }
