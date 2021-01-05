@@ -46,6 +46,7 @@ function Profile(props) {
     const socketContext = useContext(SocketContext);
 
     // TODO : Move this as well together with friends stuff
+    /*
     useEffect(() => {
         console.log("Running profile useeffect. socket : ")
         console.log(socketContext.socket)
@@ -53,22 +54,22 @@ function Profile(props) {
         // setup socket event listeners
         socketContext.socket.on('receivedFriendRequest', (data) => {
             console.log("socket : received friend request from : " + data.name)
-            userContext.refreshUserData();
+            //userContext.refreshUserData();
         })
 
         socketContext.socket.on('friendRequestAccepted', (data) => {
             console.log("socket : friend request accepted from : " + data.name);
-            userContext.refreshUserData();
+            //userContext.refreshUserData();
         })
 
         socketContext.socket.on('friendRequestDeclined', (data) => {
             console.log("socket : friend request declined from : " + data.name + " (no need to notify about it visually)")
-            userContext.refreshUserData();
+            //userContext.refreshUserData();
         })
 
         socketContext.socket.on('receivedUnfriend', (data) => {
             console.log("socket : got unfriended by : " + data.name + " (no need to notify about it visually)")
-            userContext.refreshUserData();            
+            //userContext.refreshUserData();            
         })
         }
         return () => {
@@ -79,6 +80,7 @@ function Profile(props) {
             }
         }
      }, []);
+     */
 
     useEffect(()=>{
         let isMounted = true;
