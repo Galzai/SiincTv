@@ -14,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import 'react-toastify/dist/ReactToastify.css';
 import JoinStreamRequestNotification from './joinStreamRequestNotification'
 import JoinStreamRequestResponse from './JoinStreamRequestResponse'
+import {FriendRequestReceived, FriendRequestAccepted} from "./friendRequestNotification"
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -72,6 +73,16 @@ function NotificationMenu(){
                 notification={notification}
                 response={false}
                 />;
+
+            case "friendRequestReceived":
+                return <FriendRequestReceived
+                notification={notification}
+                />
+
+            case "friendRequestAccepted":
+                return <FriendRequestAccepted
+                notification={notification}
+                />
 
             case "acceptJoinStreamRequest":
                 return <JoinStreamRequestResponse

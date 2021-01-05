@@ -3,6 +3,8 @@
 
 const {User} = require("../models/user");
 var notification = require('../Notification/notification')
+var notificationController = require('../controllers/notificationController')
+const {Notification} = require("../models/user");
 
 
 const SEND_FRIEND_REQUEST = 0;
@@ -76,7 +78,7 @@ async function handleSendFriendRequest( req )
            fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)) != undefined ) */
       if( cmpIdsInList( fromUser.friendsData.friendsList, toUser ) || 
           cmpIdsInList( fromUser.friendsData.friendsList, toUser ) ) {
-        console.log("Cannot send request to this user, you already sent a request or he is your friend");
+       /* console.log("Cannot send request to this user, you already sent a request or he is your friend");
         console.log(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)===toString(toUser._id)))
         console.log(fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)))
         console.log(fromUser.friendsData.friendsList)
@@ -85,7 +87,7 @@ async function handleSendFriendRequest( req )
         console.log("Printing users : ")
         console.log(fromUser)
         console.log(toUser)
-        console.log("Print friends list")
+        console.log("Print friends list")*/
         return false;
     }
 
@@ -113,7 +115,20 @@ async function handleSendFriendRequest( req )
         return false;
     }
 
+    // update the client that he got unfriended
     notification.notifyReceivedFriendRequest(fromUser, toUser)
+
+    // send on screen notification to client 
+    const notificationData = new Notification({
+        type: "friendRequestReceived",
+        clearable: false,
+        data: {
+            userId: fromUser._id,
+            username: fromUser.username,
+            userImage: assignImage(fromUser)
+        }
+    })
+    notificationController.addNotificationToUser(toUser._id, notificationData, `Received friend request from ${toUser.username}.` )    
 
     return true;
     
@@ -176,7 +191,20 @@ async function handleAnswerFriendRequest2( req )
             return false;
         }
 
+        // update the client that he got unfriended
         notification.notifyFriendRequestAccepted(fromUser, toUser)
+
+        // send on screen notification that client got accepted
+        const notificationData = new Notification({
+            type: "friendRequestAccepted",
+            clearable: true,
+            data: {
+                userId: toUser._id,
+                username: toUser.username,
+                userImage: assignImage(toUser)
+            }
+        })
+        notificationController.addNotificationToUser(fromUser._id, notificationData, `${toUser.username} accepted your friend request.` )
 
     }
     else {
@@ -196,7 +224,7 @@ async function handleAnswerFriendRequest2( req )
             return false;
         }
 
-        
+        // update the client that he got unfriended
         notification.notifyFriendRequestDeclined(fromUser, toUser)
 
     }
@@ -209,8 +237,8 @@ async function handleUnfriendRequest( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling handleUnfriendRequest from users : " + fromUser.username + ", " + toUser.username)
-    console.log(fromUser)
-    console.log(toUser)
+    //console.log(fromUser)
+    //console.log(toUser)
 
     // verify that fromUser has toUser as a friend - verified only one side
     if( !(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined) ) {
@@ -236,6 +264,7 @@ async function handleUnfriendRequest( req )
         return false;
     }
 
+    // update the client that he got unfriended
     notification.notifyUnfriendFriend(fromUser, toUser)
 
     return true;

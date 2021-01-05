@@ -7,8 +7,9 @@ import AboutOnline from './aboutOnline'
 import Schedule from './schedule'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
+import userUtils from "../../user/userUtils";
 
-import profilePhoto from '../../assets/userProfilePic.png'; //todo
+//import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
 import blackStar from '../../assets/blackstar.png'; //todo
 import purpleStar from '../../assets/purpelstar.png'; //todo
@@ -38,7 +39,7 @@ function Profile(props) {
     const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
     const aboutInfo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum posuere. Consectetur adipiscing elit. Nulla elementum posuere.' //todo
     const [friendsData, setFriendsData] = useState(null)
-
+    const [profilePhoto, setProfilePhoto] = useState("")
 
 
     // TODO: Move all friends stuff into a different .js
@@ -85,6 +86,7 @@ function Profile(props) {
         .then(data=>{
             if( isMounted ) { 
                 setFriendsData(data.friendsData);
+                setProfilePhoto(userUtils.assignImage(data))
             }
         });
         return (() => {isMounted = false})
@@ -265,7 +267,7 @@ function Profile(props) {
                 <div className={style.container}>
                     <div className={style.div20}>
                         <div>
-                            <img className={style.profilePhoto} src={profilePhoto}/>
+                            <img className={style.profilePhoto} src={/*assignImage(userName)*/profilePhoto}/>
                         </div>
                     </div>
                     <div className={style.div80}>
