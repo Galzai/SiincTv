@@ -8,6 +8,7 @@ import Schedule from './schedule'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
+import {getFriendState, handleFriendAction} from "../../user/friends";
 
 //import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
@@ -41,46 +42,6 @@ function Profile(props) {
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
 
-
-    // TODO: Move all friends stuff into a different .js
-    const socketContext = useContext(SocketContext);
-
-    // TODO : Move this as well together with friends stuff
-    /*
-    useEffect(() => {
-        console.log("Running profile useeffect. socket : ")
-        console.log(socketContext.socket)
-        if( socketContext.socket != null) {
-        // setup socket event listeners
-        socketContext.socket.on('receivedFriendRequest', (data) => {
-            console.log("socket : received friend request from : " + data.name)
-            //userContext.refreshUserData();
-        })
-
-        socketContext.socket.on('friendRequestAccepted', (data) => {
-            console.log("socket : friend request accepted from : " + data.name);
-            //userContext.refreshUserData();
-        })
-
-        socketContext.socket.on('friendRequestDeclined', (data) => {
-            console.log("socket : friend request declined from : " + data.name + " (no need to notify about it visually)")
-            //userContext.refreshUserData();
-        })
-
-        socketContext.socket.on('receivedUnfriend', (data) => {
-            console.log("socket : got unfriended by : " + data.name + " (no need to notify about it visually)")
-            //userContext.refreshUserData();            
-        })
-        }
-        return () => {
-            if(socketContext.socker != null) {
-                socketContext.socket.off('receivedFriendRequest');
-                socketContext.socket.off('friendRequestAccepted');
-                socketContext.socket.off('friendRequestDeclined');
-            }
-        }
-     }, []);
-     */
 
     useEffect(()=>{
         let isMounted = true;
@@ -119,6 +80,7 @@ function Profile(props) {
         setUserInfoDisplay('friends')
     }
 
+    /*
     const debugFriendRepr=()=> {
         if( userContext.user == null || friendsData == null ) {
             return "Loading";
@@ -141,11 +103,35 @@ function Profile(props) {
         }
         return "Add Friend";
     }
+    */
+
+   const debugFriendRepr=()=> {
+    if( userContext.user == null || friendsData == null ) {
+        return "Loading";
+    }
+    if( !userContext.user ) {
+        return "Not logged";
+    }
+    if( userContext.user.username == userName ) {
+        return "Its you!";
+    }
+    if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
+        return "Unfriend";
+    }
+    if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
+        return "Pending";
+    }
+    if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
+        return "Accept";
+    }
+    return "Add Friend";
+}
 
     const handleLive=()=>{
         //todo - open a window to the live stream
     }
 
+    /*
     const handleAddFriends=()=>{
         const fun = async() => {
             console.log("Adding friend")
@@ -252,6 +238,12 @@ function Profile(props) {
         }
         handleAddFriends()
     }
+    */
+
+    const onClickFriendAction=()=>{
+        handleFriendAction(userContext.user, userName);
+        userContext.refreshUserData();
+    }
 
     const handleSubscribe=()=>{
         //todo
@@ -298,7 +290,7 @@ function Profile(props) {
                                 {subscribers} Subscribers
                             </span>
                             <span className={style.btns}>
-                                <a><button className={style.addFriends} onClick={handleFriendAction}/>{debugFriendRepr()}</a>
+                                <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a>
                                 <a><button className={style.subscribe} onClick={handleSubscribe} /> Subscribe</a>
                                 <a><button className={style.addFavorites} onClick={handleAddFavourites} /> Add to Favourites</a>
                             </span>
