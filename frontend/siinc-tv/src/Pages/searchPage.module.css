@@ -63,3 +63,37 @@
     background-color: #1C0D36;
     overflow: hidden;
 }
+
+.searchFilterTitle
+{
+    float:left;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24x;
+    color: #FFFFFF;
+}
+
+.searchingForTitle
+{
+    float:left;
+    clear: left;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #706d6d;
+}
+
+.optionTitle
+{
+    float:left;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24x;
+    color: #FFFFFF;
+}

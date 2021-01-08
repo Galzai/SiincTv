@@ -61,6 +61,24 @@
     line-height: 23px;
 }
 
+.joinableDiv{
+    position: relative;
+    display: inline-flex;
+    float:right;
+    border:none;
+    right:-75px;
+    top:40px;
+}
+
+.joinable{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 8px;
+    margin-right: 5px ;
+}
+
 .preloadDiv{
     background-color: rgb(46, 41, 41);
     height:240px;
