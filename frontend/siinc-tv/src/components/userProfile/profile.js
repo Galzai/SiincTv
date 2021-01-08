@@ -42,7 +42,7 @@ function Profile(props) {
     const aboutInfo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum posuere. Consectetur adipiscing elit. Nulla elementum posuere.' //todo
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
-
+    const socketContext = useContext(SocketContext);
 
     useEffect(()=>{
         let isMounted = true;
