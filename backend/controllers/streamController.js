@@ -5,6 +5,7 @@ const e = require("express");
 const { UpComingEventData } = require("../models/user");
 var ObjectID = require('mongodb').ObjectID;
 var notificationController = require('../controllers/notificationController')
+var followController = require("../controllers/followController")
 const {emitReloadNotifications, emitNewStreamerJoined} = require("../sockets/sockets")
 const NodeCache = require( "node-cache" );
 const myCache = new NodeCache({ stdTTL: 120, checkperiod: 60 } );
@@ -79,6 +80,20 @@ exports.createStream = function(req, res){
             }}).then(obj=>{console.log("Object modified", obj)}); 
     }
     console.log(req.user._id);
+
+    // send notifications to all followers
+    const notificationData = new Notification({
+        type: "followStartedStream",
+        clearable: true,
+        data: {
+            userId: req.user._id,
+            username: req.user.username,
+            userImage: req.user.userImage,
+            streamId: streamData._id
+        }
+    })
+    followController.addNotificationToFollowersOf( req.user._id, notificationData, req.user.username + " started a new stream")
+
     res.send(streamData._id);
 }
 

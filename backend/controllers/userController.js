@@ -1,6 +1,6 @@
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const {User, FriendsData} = require("../models/user");
+const {User, FriendsData, FollowData} = require("../models/user");
 const e = require("express");
 const NodeCache = require( "node-cache" );
 const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 } );
@@ -60,12 +60,17 @@ exports.user_login = function(req, res, next){
           friendsList: [],
           receivedRequests: [],
           sentRequests: []
-        })
+        });
+        const followData = new FollowData({
+          followersList: [],
+          followingList: []
+        });
         const newUser = new User({
           username: req.body.username,
           email: req.body.email,
           password: hashedPassword,
-          friendsData: friendsData
+          friendsData: friendsData,
+          followData: followData
         });
         await newUser.save();
         res.send("auth/user_created");

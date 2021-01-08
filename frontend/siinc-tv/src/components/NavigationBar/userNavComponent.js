@@ -4,7 +4,7 @@ import NotificationMenu from '../notifications/notificationMenu.js'
 import UserContext from "../../userContext";
 import userUtils from "../../user/userUtils" 
 import style from './navbar.module.css';
-import { Grow, Container } from '@material-ui/core';
+import { Fade } from '@material-ui/core';
 
 import {
         NavProfileMenuHeader,
@@ -24,23 +24,19 @@ function NavProfileMenu(props) {
     const styles = (props.open) ? {visibility: "visible"} : {visibility: "hidden"};
 
     return(
-        //<Grow >
-            <Container>
-                <div style={styles}>  
-                    <div className={style.navProfileMenu}>
-                        <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
-                        <NavProfileMenuRanking></NavProfileMenuRanking>
-                        <NavProfileMenuBreaker style={{top: "32.5%"}}></NavProfileMenuBreaker>
-                        <NavProfileMenuMyChannelLink></NavProfileMenuMyChannelLink>
-                        <NavProfileMenuFriendsLink></NavProfileMenuFriendsLink>
-                        <NavProfileMenuFavoritesLink></NavProfileMenuFavoritesLink>
-                        <NavProfileMenuMySettingsLink></NavProfileMenuMySettingsLink>
-                        <NavProfileMenuBreaker style={{top: "82%"}}></NavProfileMenuBreaker>
-                        <NavProfileMenuLogout></NavProfileMenuLogout>
-                    </div>
-                </div>
-            </Container>
-        //</Grow>
+        <Fade in={props.open}>
+            <div className={style.navProfileMenu}>
+                <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
+                <NavProfileMenuRanking></NavProfileMenuRanking>
+                <NavProfileMenuBreaker style={{top: "32.5%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuMyChannelLink></NavProfileMenuMyChannelLink>
+                <NavProfileMenuFriendsLink></NavProfileMenuFriendsLink>
+                <NavProfileMenuFavoritesLink></NavProfileMenuFavoritesLink>
+                <NavProfileMenuMySettingsLink></NavProfileMenuMySettingsLink>
+                <NavProfileMenuBreaker style={{top: "82%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuLogout></NavProfileMenuLogout>
+            </div>
+        </Fade>
     );
 }
 
@@ -89,7 +85,7 @@ function UserNavComponent(props) {
             >
             </SigningModal>
             {userContext.user && <NotificationMenu/>}
-            {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }   
+            {userContext.user && <NavProfileMenu open={profileMenuOpen} onProfileClick={handleProfileClick}></NavProfileMenu> }       
         </div>
     );
 }

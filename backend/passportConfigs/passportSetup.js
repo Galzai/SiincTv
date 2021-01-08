@@ -13,7 +13,7 @@ const { json } = require("body-parser");
 const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
 
 // our Models
-const {User, FriendsData} = require("../models/user");
+const {User, FriendsData, FollowData} = require("../models/user");
 const {GoogleData} = require("../models/user");
 const {TwitchData} = require("../models/user");
 const {FacebookData} = require("../models/user");
@@ -76,11 +76,16 @@ module.exports = function (passport) {
             receivedRequests: [],
             sentRequests: []
           });
+          const followData = new FollowData({
+            followersList: [],
+            followingList: []
+          });
           const newUser = new User({
             username: profile.display_name,
             twitchId: profile.id,
             twitchData:newTwitchData,
-            friendsData: friendsData
+            friendsData: friendsData,
+            followData: followData
           });
           // we save and finish
           await newUser.save();
@@ -132,11 +137,16 @@ passport.use(new GoogleStrategy({
           receivedRequests: [],
           sentRequests: []
         });
+        const followData = new FollowData({
+          followersList: [],
+          followingList: []
+        });
         const newUser = new User({
           username: profile.displayName,
           googleId: profile.id,
           googleData:newGoogleData,
-          friendsData: friendsData
+          friendsData: friendsData,
+          followData: followData
         });
         // we save and finish
         await newUser.save();
@@ -182,11 +192,16 @@ passport.use(new FacebookStrategy({
           receivedRequests: [],
           sentRequests: []
         });
+        const followData = new FollowData({
+          followersList: [],
+          followingList: []
+        });
         const newUser = new User({
           username: profile.displayName,
           facebookId: profile.id,
           facebookData:newFacebookData,
-          friendsData:friendsData
+          friendsData:friendsData,
+          followData: followData
         });
         // we save and finish
         await newUser.save();
@@ -226,7 +241,8 @@ passport.use(new FacebookStrategy({
         facebookData: user.facebookData,
         upcomingEvents :user.upcomingEvents,
         friendsData: user.friendsData,
-        notifications: user.notifications
+        notifications: user.notifications,
+        followData: user.followData
       };
       cb(err, userInformation);
     });

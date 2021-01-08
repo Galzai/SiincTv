@@ -9,6 +9,7 @@ var twitchController = require('../controllers/twitchController')
 var friendsController = require('../controllers/friendsController')
 var youtubeController = require('../controllers/youtubeController')
 var notificationController = require('../controllers/notificationController')
+var followController = require('../controllers/followController')
 
 // POST request to sign in
 router.post('/signin',userController.user_login);
@@ -73,7 +74,11 @@ router.post('/search/users', userController.searchUsers);
 // POST request redirectBack
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
  
+// POST request handle friends
 router.post('/user/friends', friendsController.handleFriendsRequest);
+
+// POST request handle follows
+router.post('/user/follow', followController.handleFollowRequest);
 
 // POST request closeStream
 router.post('/streams/closeStream', streamController.closeStream);
