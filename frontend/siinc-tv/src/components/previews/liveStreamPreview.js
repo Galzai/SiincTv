@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { HoverSlideshow } from "react-hover-slideshow";
 import style from './previews.module.css'
 import Streamers from "../liveStream/streamers";
+import BlockIcon from '@material-ui/icons/Block';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 const { default: streamActions } = require("../../stream/streamActions");
 
 
@@ -101,6 +103,14 @@ function LiveStreamPreview(props){
             </div>
         <h2 className={style.previewTitle}>{streamData.name}</h2>
         <h2 className={style.viewers}>Viewers: {streamData.numOfViewers}</h2>
+        <div>
+            {!streamData.joinOnly &&<div className={style.joinableDiv}>
+                <h2 className={style.joinable}> Joinable</h2>
+                {
+                <CheckCircleIcon style={{ color: 'green' }} />}
+            </div>}
+
+        </div>
         <div className={style.streamers}>
 
         <Streamers
