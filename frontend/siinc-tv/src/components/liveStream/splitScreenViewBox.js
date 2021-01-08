@@ -18,7 +18,7 @@ function SplitScreenViewBox(props){
     const theme = createMuiTheme({
         breakpoints: {
           values: {
-            xs: 470,
+            xs: 475,
             sm: 1000,
             md: 1240,
             lg: 1440,
@@ -36,7 +36,7 @@ function SplitScreenViewBox(props){
         return(streamers.map(streamer=>{
             return(
                 <ThemeProvider theme={theme}>
-                        <Container maxWidth="xs"> 
+                        <Container maxWidth="xs" disableGutters="true"> 
                             <div className={style.splitScreen}>
                                 <LiveStream
                                     key={streamer.displayName}
