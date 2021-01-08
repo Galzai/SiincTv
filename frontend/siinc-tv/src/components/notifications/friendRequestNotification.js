@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import style from './notifications.module.css';
 import UserContext from "../../userContext";
+import {getFriendState, handleFriendAction} from "../../user/friends";
 
 /**
  * @brief Notification representing received friend request
@@ -15,6 +16,7 @@ export function FriendRequestReceived(props){
 
     const data = props.notification.data;
     const notification = props.notification;
+    const userContext = useContext(UserContext)
 
     function rejectFriendRequest()
     {
@@ -27,8 +29,22 @@ export function FriendRequestReceived(props){
      */
     function acceptFriendRequest()
     {
-        //streamActions.acceptRequestToJoin(notification)
-        console.log("Add later accept friend request")
+        handleFriendAction(userContext.user, data.username);
+        userContext.refreshUserData();
+    }
+
+    function acceptButton() {
+        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+            return (<Button onClick={acceptFriendRequest} size="small" variant="outlined" color="primary">Accept</Button>)
+        else     
+            return (<Button size="small" variant="outlined" color="primary">Accepted</Button>)
+    }
+
+    function rejectButton() {
+        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+        return (<Button onClick={rejectFriendRequest} size="small" variant="outlined" color="primary">Reject</Button>)
+    else     
+        return (<Button size="small" variant="outlined" color="primary">----</Button>)       
     }
 
     return(
@@ -48,10 +64,10 @@ export function FriendRequestReceived(props){
             <Grid item>
                 <Box display="flex">
                 <Box  p={1}>
-                    <Button onClick={acceptFriendRequest} size="small" variant="outlined" color="primary">Accept</Button>
+                    {acceptButton()}
                 </Box>
                 <Box p={1}>
-                    <Button onClick={rejectFriendRequest} size="small" variant="outlined" color="primary">Reject</Button>
+                    {rejectButton()}
                 </Box >
             </Box>
             </Grid>

@@ -15,6 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import JoinStreamRequestNotification from './joinStreamRequestNotification'
 import JoinStreamRequestResponse from './JoinStreamRequestResponse'
 import {FriendRequestReceived, FriendRequestAccepted} from "./friendRequestNotification"
+import NewStreamFollowNotification from './newStreamFollowNotification'
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -89,6 +90,11 @@ function NotificationMenu(){
                 notification={notification}
                 response={true}
                 />;
+
+            case "followStartedStream":
+                return <NewStreamFollowNotification
+                    notification={notification}
+                    clearNotification={clearNotification}/>;
         }
     }
 

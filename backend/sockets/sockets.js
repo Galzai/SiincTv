@@ -90,7 +90,7 @@ module.exports.initializeSocket =  function(io){
         socket.on("userConnection", (userId) => { console.log("user : " + userId + " logged in")
                                                   socket.join(userId); })
         socket.on("userDisconnect", (userId) => { console.log("user : " + userId + " logged out");
-                                                  socket.leave(userId); })     
+                                                  socket.leave(userId); })    
 
     });   
 }
@@ -116,5 +116,3 @@ module.exports.emitReloadNotifications = function (userId, popUpText) {
 module.exports.emitNewStreamerJoined = function (streamId) {
     global_io.in(String(streamId)).emit(NEW_STREAMER);
 }
-
-

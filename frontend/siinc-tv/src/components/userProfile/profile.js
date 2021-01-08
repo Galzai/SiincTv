@@ -9,6 +9,7 @@ import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
 import {getFriendState, handleFriendAction} from "../../user/friends";
+import {isFollowing, handleFollowAction} from "../../user/follows";
 
 //import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
@@ -131,115 +132,6 @@ function Profile(props) {
         //todo - open a window to the live stream
     }
 
-    /*
-    const handleAddFriends=()=>{
-        const fun = async() => {
-            console.log("Adding friend")
-            if( userName == userContext.user.username ) {
-                console.log("Cant add yourself")
-                return;
-            }
-            let status = await userActions.sendFriendRequest( userContext.user.username, userName );
-            if( !status ) {
-                console.log("An error occured while adding friend")
-                return false;
-            }
-            
-            // update user context
-            await userContext.refreshUserData();
-    
-            // update friends data of this profile
-            let data = await userActions.getUserData( userName )
-            setFriendsData(data.friendsData);
-            return true;
-        }
-        fun().then(ret => {
-            console.log("Finished running add friend funciton")
-        })
-    }
-
-    const handleUnfriend = () => {
-        const fun = async() => {
-            console.log("Unfriending friend")
-            if( userName == userContext.user.username ) {
-                console.log("Cant unfriend yourself")
-                return;
-            }
-            let status = await userActions.unfriendFriendRequest( userContext.user.username, userName );
-            if( !status ) {
-                console.log("An error occured while unfriending")
-                return false;
-            }
-    
-            // update user context
-            await userContext.refreshUserData();
-    
-            // update friends data of this profile
-            let data = await userActions.getUserData( userName )
-            setFriendsData(data.friendsData);
-            return true;
-        }
-        fun().then(ret => {
-            console.log("Finished running unfriend funciton")
-        })       
-    }
-
-    const handleAcceptFriend = () => {
-        const fun = async() => {
-            console.log("Accepting friend")
-            if( userName == userContext.user.username ) {
-                console.log("Cant accpet yourself")
-                return;
-            }
-            let status = await userActions.answerFriendRequest( userName, userContext.user.username, true );
-            if( !status ) {
-                console.log("An error occured while accepting friend")
-                return false;
-            }
-    
-            // update user context
-            await userContext.refreshUserData();
-    
-            // update friends data of this profile
-            let data = await userActions.getUserData( userName )
-            setFriendsData(data.friendsData);
-            return true;
-        }
-        fun().then(ret => {
-            console.log("Finished running accept friend funciton")
-        })       
-    }
-
-    const handleFriendAction=()=>{
-        if( userContext.user == null || friendsData == null ) {
-            console.log("usercontext or profile friends data = null");
-            return;
-        }
-
-        if( !userContext.user ) {
-            console.log("Dont know why it is here if its included in above case - check later");
-            return;
-        }
-        if( userContext.user.username == userName ) {
-            console.log("Its you man");
-            return;
-        }
-        if( userContext.user.friendsData.friendsList.find(x=>x.displayName==userName) != undefined ) {
-            handleUnfriend();                                         
-            return;
-        }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username==userName) != undefined ) {
-            console.log("unimplemented - maybe cancell request");
-            return;
-        }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username==userName) != undefined ) {
-            handleAcceptFriend();
-            return;
-        }
-        handleAddFriends()
-    }
-    */
-
     const onClickFriendAction=()=>{
         handleFriendAction(userContext.user, userName);
         userContext.refreshUserData();
@@ -249,8 +141,19 @@ function Profile(props) {
         //todo
     }
 
-    const handleAddFavourites=()=>{
-        //todo
+    const onClickFollowAction=()=>{
+        handleFollowAction(userContext.user, userName);
+        userContext.refreshUserData();
+    }
+
+    const debugFollowRepr=()=> {
+        if( userContext.user == null )
+            return "";
+        if( userContext.user.username == userName )
+            return "you!";
+        if( userContext.user.followData.followingList.find(x=>x.userName===userName) != undefined )
+            return "Unfollow"
+        return "Follow"
     }
     
 
@@ -292,7 +195,7 @@ function Profile(props) {
                             <span className={style.btns}>
                                 <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a>
                                 <a><button className={style.subscribe} onClick={handleSubscribe} /> Subscribe</a>
-                                <a><button className={style.addFavorites} onClick={handleAddFavourites} /> Add to Favourites</a>
+                                <a><button className={style.addFavorites} onClick={onClickFollowAction} /> {debugFollowRepr()}</a>
                             </span>
                         </div>
                         <div className={style.aboutContent}>

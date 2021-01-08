@@ -1,17 +1,5 @@
-import React, {useState, useContext, useEffect} from 'react';
-import UserContext from "../userContext";
 import userActions from "../user/userActions";
-import SocketContext from "../socketContext"
 
-
-function FriendsButton(props) {
-
-        const otherUserName = props.otherUserName;  
-        const userContext = useContext(UserContext);
-        const socketContext = useContext(SocketContext);
-        
-
-}
 
 
 

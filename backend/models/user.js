@@ -67,6 +67,27 @@ const friendsData = new mongoose.Schema({
 const FriendsData = mongoose.model("FriendsData", friendsData);
 
 /**
+ * @brief holds information regarding the user's followers
+ */
+const followData = new mongoose.Schema({
+  followersList: [{
+    userId: mongoose.Schema.Types.ObjectId,
+    youtubeId: String,
+    twitchId: String,
+    userName : String,
+    userImage : String,
+  }],
+  followingList: [{
+    userId: mongoose.Schema.Types.ObjectId,
+    youtubeId: String,
+    twitchId: String,
+    userName : String,
+    userImage : String,
+  }],
+});
+const FollowData = mongoose.model("FollowData", followData);
+
+/**
  * @brief Schema for Notification data/fields ( each type of notification has different fields )
  */ 
 var notificationData = new mongoose.Schema({
@@ -105,7 +126,8 @@ const user = new mongoose.Schema({
   facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
   upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}],
   friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'},
-  notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}]
+  notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}],
+  followData:{type: mongoose.Schema.Types.Mixed, ref: 'FollowData'},
 });
 
 // This is necessery for quick text search
@@ -121,7 +143,8 @@ module.exports = {
       UpComingEventData:UpComingEventData,
       FriendsData:FriendsData,
       Notification:Notification,
-      NotificationData:NotificationData
+      NotificationData:NotificationData,
+      FollowData:FollowData,
 }
 
 

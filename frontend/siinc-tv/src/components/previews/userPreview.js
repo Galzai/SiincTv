@@ -1,7 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import { withRouter } from 'react-router-dom';
 import style from './previews.module.css'
 import userUtils from "../../user/userUtils" 
+import UserContext from "../../userContext"
+import {getFriendState, handleFriendAction} from "../../user/friends";
+import {isFollowing, handleFollowAction} from "../../user/follows";
 
 /**
  * @brief displays a preview of a user
@@ -15,11 +18,46 @@ function UserPreview(props){
     const numFollowers = user.numFollowers ? user.numFollowers +  " Followers" : "No Followers";
     const description = user.shortDescription ? user.shortDescription :" No Description";
     const currentstream = user.currentstream;
+    const userContext = useContext(UserContext);
     console.log(user);
 
     function handleRedirect() {
         props.history.push(`/users/${username}`);
       }
+
+      const debugFriendRepr=()=> {
+        if(  userContext.user == null ) 
+            return "";
+        if( userContext.user.username == username ) 
+            return "Its you!";
+        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===username) != undefined ) 
+            return "Unfriend";
+        if( userContext.user.friendsData.sentRequests.find(x=>x.username===username) != undefined ) 
+            return "Pending";
+        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===username) != undefined ) 
+            return "Accept";
+        return "Add Friend";
+    }
+
+    const onClickFriendAction=()=>{
+        handleFriendAction(userContext.user, username);
+        userContext.refreshUserData();
+    }
+
+    const debugFollowRepr=()=> {
+        if( userContext.user == null )
+            return "";
+        if( userContext.user.username == username )
+            return "you!";
+        if( userContext.user.followData.followingList.find(x=>x.userName===username) != undefined )
+            return "Unfollow"
+        return "Follow"
+    }
+
+    const onClickFollowAction=()=>{
+        handleFollowAction(userContext.user, username);
+        userContext.refreshUserData();
+    }
 
     return(
         <div className={style.UserPreviewBox} onClick={handleRedirect}>
@@ -34,8 +72,8 @@ function UserPreview(props){
 
             </div>
             <div className={style.UserButtons}>
-                <button className={style.favoriteFriendsButtons}>Follow</button>
-                <button className={style.favoriteFriendsButtons}>Add Friend</button>
+                <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button>
+                <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button>
              </div>
              
         </div>

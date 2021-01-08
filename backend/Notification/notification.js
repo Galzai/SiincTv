@@ -94,9 +94,9 @@ exports.notifyUnfriendFriend = function(fromUser, toUser) {
     emitToUser(fromUser._id, "receivedUnfriend", {id: toUser._id,
         name: toUser.username})   
     emitToUser(toUser._id, "receivedUnfriend", {id: fromUser._id,
-        name: fromUser.username})           
-         
+        name: fromUser.username})                    
 }
+
 
 
 

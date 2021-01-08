@@ -6,6 +6,8 @@ import axios from 'axios';
 const SEND_FRIEND_REQUEST = 0;
 const ANSWER_FRIEND_REQUEST = 1;
 const UNFRIEND_REQUEST = 2;
+const FOLLOW_REQUEST = 0;
+const UNFOLLOW_REQUEST = 1;
 
 const userActions ={
 
@@ -170,7 +172,43 @@ const userActions ={
      },
 
      // -------------------------------------------------------------
-      
+    
+     // ------------------------- FOLLOW -----------------------------
+
+    // String:fromUser - the follower
+    // String:toUser   - who the follower follows
+    sendFollowRequest: async function(fromUser, toUser) {
+        console.log("sending follow request from " + fromUser + " to user " + toUser)
+        const result = await axios({
+            method: 'POST',
+            data:{
+                action: FOLLOW_REQUEST,
+                fromUser: fromUser,
+                toUser: toUser
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/user/follow'
+        })
+        return result.data;
+    },
+
+     // String:fromUser - the follower
+     // String:toUser   - who the follower follows
+     sendUnfollowRequest: async function(fromUser, toUser) {
+        const result = await axios({
+            method: 'POST',
+            data:{
+                action: UNFOLLOW_REQUEST,
+                fromUser: fromUser,
+                toUser: toUser
+            },
+            withCredentials:true,
+            url:'http://localhost:4000/user/follow'
+        })
+        return result.data;
+     },    
+     // -------------------------------------------------------------
+
      getUsernameList: async function() {
         const result = await axios({
             method:'GET',
