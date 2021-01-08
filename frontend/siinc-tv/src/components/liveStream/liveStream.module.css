@@ -181,6 +181,7 @@
     height: 0;
     overflow: auto;
     -webkit-overflow-scrolling:touch;
+    align-content: center;
     
 }
 .singleStreamViewBox
