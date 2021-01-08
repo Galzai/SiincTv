@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import UserContext from "./../../userContext";
 import InfiniteScroll from 'react-infinite-scroller';
 import UserActions from '../../user/userActions';
 import UserPreview from '../previews/userPreview';
 
 function UserSearchResults(props) 
 {   
+    const userContext= useContext(UserContext);
     const [searchString, setSearchString] = useState(props.searchString);
     const [results, setResults] = useState({streamers:[], page: 1, hasMoreResults: true});
 
@@ -18,15 +20,12 @@ function UserSearchResults(props)
                 setResults({hasMoreResults : false});
                 return;
             }
-            console.log(results)
-                console.log("here")
                 setResults({streamers:[...results.streamers, ...resultPage], page : results.page + 1, 
                     hasMoreResults : resultPage.length >= 20});
             
         });
     }
     React.useEffect(() => {
-        console.log("useEffect")
         setResults({streamers:[], page: 1, hasMoreResults: true});
       }, [searchString]);
 
@@ -46,10 +45,14 @@ function UserSearchResults(props)
         else{
             return((results.streamers).map((result, index)=>
             {
-                return(
-                    <UserPreview key={index}
-                    user={result}/>
-                );
+                if(result._id !== userContext.user._id )
+                {
+                    return(
+                        <UserPreview key={index}
+                        user={result}/>
+                    );
+                }
+
 
             }))               
         }

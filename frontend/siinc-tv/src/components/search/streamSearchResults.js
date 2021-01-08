@@ -8,7 +8,7 @@ function StreamSearchResults(props)
     const [searchString, setSearchString] = useState(props.searchString);
     const status = props.status;
     const [results, setResults] = useState({streamers:[], page: 1, hasMoreResults: true});
-
+    const [joinableOnly, setJoinableOnly] = useState(props.joinableOnly);
 
     function fetchMoreData(){
         
@@ -29,7 +29,7 @@ function StreamSearchResults(props)
     React.useEffect(() => {
         console.log("useEffect")
         setResults({streamers:[], page: 1, hasMoreResults: true});
-      }, [searchString]);
+      }, [joinableOnly, searchString]);
 
     function displayResults(){
 
@@ -37,6 +37,10 @@ function StreamSearchResults(props)
         if(searchString != props.searchString)
         {
             setSearchString(props.searchString);
+        }
+        if(joinableOnly != props.joinableOnly)
+        {
+            setJoinableOnly(props.joinableOnly);
         }
 
         // We return different views depending on what we are searching for
@@ -46,12 +50,18 @@ function StreamSearchResults(props)
 
         if(status === "Live"){
             return((results.streamers).map((result, index)=>
-
+ 
             {
-                return(
-                    <LiveStreamPreview key={index}
-                    streamData={result}/>
-                );
+                if(joinableOnly !== result.joinOnly)
+                {
+                    console.log(joinableOnly);
+                    console.log(result);
+                    return(
+                        <LiveStreamPreview key={index}
+                        streamData={result}/>
+                    );
+                }
+
 
             }))
 
