@@ -8,7 +8,7 @@ import {useContext, useState} from "react"
 import UserContext from "../userContext";
 import style from '../components/liveStream/liveStream.module.css'
 import Hidden from '@material-ui/core/Hidden'
-import Container from '@material-ui/core/Container'
+import { Container } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function Stream(props) {
@@ -83,11 +83,12 @@ function Stream(props) {
                             streamGroups={streamData.streamGroups}  
                             >
                         </SingleStreamViewBox>}
-                        {(isSplit) && <SplitStreamViewBox
+                        {(isSplit) && 
+                            <SplitStreamViewBox
                             currentStreamer={streamData.creator}
                             streamGroups={streamData.streamGroups}  
                             >
-                        </SplitStreamViewBox>}
+                            </SplitStreamViewBox>}
                         {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
                         <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
                         <StreamDetails
