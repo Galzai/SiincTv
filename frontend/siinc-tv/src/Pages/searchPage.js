@@ -19,7 +19,7 @@ function SearchPage(props) {
   const searchString = props.match.params.searchString;
   const [resultType, setResultType] = useState("liveStream");
   const [joinableOnly, setjoinAbleOnly] = useState(false);
-  
+  const [liveOnly, setLiveOnly] = useState(false);
 
 
   const theme = createMuiTheme({
