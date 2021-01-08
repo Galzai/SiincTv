@@ -4,6 +4,8 @@ import NotificationMenu from '../notifications/notificationMenu.js'
 import UserContext from "../../userContext";
 import userUtils from "../../user/userUtils" 
 import style from './navbar.module.css';
+import { Fade } from '@material-ui/core';
+
 import {
         NavProfileMenuHeader,
         NavProfileMenuRanking,
@@ -22,7 +24,7 @@ function NavProfileMenu(props) {
     const styles = (props.open) ? {visibility: "visible"} : {visibility: "hidden"};
 
     return(
-        <div style={styles}>  
+        <Fade in={props.open}>
             <div className={style.navProfileMenu}>
                 <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
                 <NavProfileMenuRanking></NavProfileMenuRanking>
@@ -34,7 +36,7 @@ function NavProfileMenu(props) {
                 <NavProfileMenuBreaker style={{top: "82%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuLogout></NavProfileMenuLogout>
             </div>
-        </div>
+        </Fade>
     );
 }
 
