@@ -13,7 +13,8 @@ import VideoLabelIcon from "@material-ui/icons/VideoLabel";
 import PersonIcon from "@material-ui/icons/Person";
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
+import MuiListItem from "@material-ui/core/ListItem";
 
 function SearchPage(props) {
   const searchString = props.match.params.searchString;
@@ -34,16 +35,35 @@ function SearchPage(props) {
     },
   });
 
+  const ListItem = withStyles({
+    root: {
+      "&$selected": {
+        backgroundColor: "red",
+        color: "white"
+      },
+      "&$selected:hover": {
+        backgroundColor: "purple",
+        color: "white"
+      },
+      "&:hover": {
+        backgroundColor: "#30165B",
+        color: "white"
+      }
+    },
+    selected: {}
+  })(MuiListItem);
+
 
     function setCurrentFilters()
     {
         if(resultType==="liveStream"){
             return(
                 <div>
-                                  <ListItem>
+                                  <ListItem style={{opacity: "0.7"}}>
                 <FormControlLabel
-                    control={<Checkbox checked={joinableOnly} onClick={(event=>{setjoinAbleOnly(event.target.checked)})} name="checkedA" />}
-                    label="Joinable streams only"
+                    control={<Checkbox checked={joinableOnly} onClick={(event=>{setjoinAbleOnly(event.target.checked)})} name="checkedA" 
+                    style={{color: "#FFFFFF", opacity: "0.7"}}/>}
+                    label="Joinable streams only" 
                 />
                 </ListItem>
                 </div>
@@ -52,9 +72,10 @@ function SearchPage(props) {
         if(resultType==="users"){
             return(
                 <div>
-                                  <ListItem>
+                                  <ListItem style={{opacity: "0.7"}}>
                 <FormControlLabel
-                    control={<Checkbox checked={liveOnly} onClick={(event=>{setLiveOnly(event.target.checked)})} name="checkedA" />}
+                    control={<Checkbox checked={liveOnly} onClick={(event=>{setLiveOnly(event.target.checked)})} name="checkedA" 
+                    style={{color: "#FFFFFF", opacity: "0.7"}}/>}
                     label="Live users only"
                 />
                 </ListItem>
@@ -89,7 +110,7 @@ function SearchPage(props) {
                 >
                   <div>
                     <label className={style.searchFilterTitle}>
-                      Search result for...
+                      Search results for
                     </label>
                     <label className={style.searchingForTitle}>
                       {searchString}
@@ -98,11 +119,8 @@ function SearchPage(props) {
                 </ListSubheader>
               }
             >
-              <ListItem></ListItem>
-              <hr></hr>
-              <ListItem>
-                <label className={style.optionTitle}>Searching for...</label>
-              </ListItem>
+              <hr className={style.filterBreak}></hr>
+              <h2 className={style.optionTitle}>Searching for</h2>
               <ListItem
                 button
                 onClick={() => {
@@ -110,9 +128,9 @@ function SearchPage(props) {
                 }}
               >
                 <ListItemIcon>
-                  <VideoLabelIcon color="primary" />
+                  <VideoLabelIcon style={{color: "#FFFFFF", opacity: "0.7"}} />
                 </ListItemIcon>
-                <ListItemText primary="Live Streams" />
+                <ListItemText primary="Live Streams" style={{opacity: "0.7"}} />
               </ListItem>
               <ListItem
                 button
@@ -121,14 +139,12 @@ function SearchPage(props) {
                 }}
               >
                 <ListItemIcon>
-                  <PersonIcon color="primary" />
+                  <PersonIcon style={{color: "#FFFFFF", opacity: "0.7"}} />
                 </ListItemIcon>
-                <ListItemText primary="Users" />
+                <ListItemText primary="Users" style={{opacity: "0.7"}}/>
               </ListItem>
-              <hr></hr>
-              <ListItem>
-                <label className={style.optionTitle}>Filters</label>
-              </ListItem>
+              <hr className={style.filterBreak}></hr>
+              <h2 className={style.optionTitle}>Filters</h2>
               {setCurrentFilters()}
             </List>
           </div>
