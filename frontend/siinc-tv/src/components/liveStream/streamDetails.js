@@ -18,8 +18,8 @@ function StreamDetails(props){
 
     return(
     <div>
-        <h1 className={style.streamTitle}>{streamTitle}</h1>
-        <h3 className={style.numOfViews}>Viewing: {numOfViews}</h3>
+        <h3 className={style.streamTitle}>{streamTitle}</h3>
+        <h4 className={style.numOfViews}>Viewing: {numOfViews}</h4>
         <Streamers
             streamGroups={streamGroups}
         />
