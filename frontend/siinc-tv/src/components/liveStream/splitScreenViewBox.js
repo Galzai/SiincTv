@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import LiveStream from "./liveStream";
 import style from './liveStream.module.css'
-import Container from '@material-ui/core/Container'
+import { Container, Grid } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 function flatten(arr) {
@@ -36,15 +36,17 @@ function SplitScreenViewBox(props){
         return(streamers.map(streamer=>{
             return(
                 <ThemeProvider theme={theme}>
-                        <Container maxWidth="xs" disableGutters="true"> 
-                            <div className={style.splitScreen}>
-                                <LiveStream
-                                    key={streamer.displayName}
-                                    streamer={streamer}
-                                    muted={true}
-                                ></LiveStream>
-                            </div>
-                        </Container>
+                  <Grid alignItems="center" container item md={6} spacing={12}>
+                    <Container maxWidth="xl" disableGutters="true"> 
+                              <div className={style.splitScreen}>
+                                  <LiveStream
+                                      key={streamer.displayName}
+                                      streamer={streamer}
+                                      muted={true}
+                                  ></LiveStream>
+                              </div>
+                      </Container>
+                  </Grid>
                 </ThemeProvider>
             )}
         ));
