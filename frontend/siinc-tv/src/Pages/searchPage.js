@@ -37,17 +37,32 @@ function SearchPage(props) {
 
     function setCurrentFilters()
     {
-        if(resultType==="liveStream")
-        return(
-            <div>
-                              <ListItem>
-            <FormControlLabel
-                control={<Checkbox checked={joinableOnly} onClick={(event=>{setjoinAbleOnly(event.target.checked)})} name="checkedA" />}
-                label="Joinable streams only"
-            />
-            </ListItem>
-            </div>
-        )
+        if(resultType==="liveStream"){
+            return(
+                <div>
+                                  <ListItem>
+                <FormControlLabel
+                    control={<Checkbox checked={joinableOnly} onClick={(event=>{setjoinAbleOnly(event.target.checked)})} name="checkedA" />}
+                    label="Joinable streams only"
+                />
+                </ListItem>
+                </div>
+            )
+        }
+        if(resultType==="users"){
+            return(
+                <div>
+                                  <ListItem>
+                <FormControlLabel
+                    control={<Checkbox checked={liveOnly} onClick={(event=>{setLiveOnly(event.target.checked)})} name="checkedA" />}
+                    label="Live users only"
+                />
+                </ListItem>
+                </div>
+            )
+        }
+
+
     }
 
   return (
@@ -57,7 +72,7 @@ function SearchPage(props) {
         joinableOnly={joinableOnly} />
       )}
       {resultType === "users" && (
-        <UserSearchResults searchString={searchString} />
+        <UserSearchResults searchString={searchString} liveOnly={liveOnly}/>
       )}
       <ThemeProvider theme={theme}>
         <Hidden implementation="css" initialWidth="sm" smDown>
