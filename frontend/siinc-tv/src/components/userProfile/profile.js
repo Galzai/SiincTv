@@ -116,15 +116,19 @@ function Profile(props) {
     if( userContext.user.username == userName ) {
         return "Its you!";
     }
-    if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
-        return "Unfriend";
+    if(userContext.user.friendsData)
+    {
+        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
+            return "Unfriend";
+        }
+        if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
+            return "Pending";
+        }
+        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
+            return "Accept";
+        }
     }
-    if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
-        return "Pending";
-    }
-    if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
-        return "Accept";
-    }
+
     return "Add Friend";
 }
 
@@ -151,7 +155,7 @@ function Profile(props) {
             return "";
         if( userContext.user.username == userName )
             return "you!";
-        if( userContext.user.followData.followingList.find(x=>x.userName===userName) != undefined )
+        if(userContext.user.followData && userContext.user.followData.followingList.find(x=>x.userName===userName) != undefined )
             return "Unfollow"
         return "Follow"
     }

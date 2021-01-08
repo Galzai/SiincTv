@@ -30,12 +30,16 @@ function UserPreview(props){
             return "";
         if( userContext.user.username == username ) 
             return "Its you!";
-        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===username) != undefined ) 
-            return "Unfriend";
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username===username) != undefined ) 
-            return "Pending";
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===username) != undefined ) 
-            return "Accept";
+        if(userContext.user.friendsData)
+        {
+            if( userContext.user.friendsData.friendsList.find(x=>x.displayName===username) != undefined ) 
+                return "Unfriend";
+            if( userContext.user.friendsData.sentRequests.find(x=>x.username===username) != undefined ) 
+                return "Pending";
+            if( userContext.user.friendsData.receivedRequests.find(x=>x.username===username) != undefined ) 
+                return "Accept";
+        }
+
         return "Add Friend";
     }
 
@@ -49,7 +53,7 @@ function UserPreview(props){
             return "";
         if( userContext.user.username == username )
             return "you!";
-        if( userContext.user.followData.followingList.find(x=>x.userName===username) != undefined )
+        if(userContext.user.followData && userContext.user.followData.followingList.find(x=>x.userName===username) != undefined )
             return "Unfollow"
         return "Follow"
     }
