@@ -45,7 +45,8 @@ module.exports = function (passport) {
     {
       clientID: passportConfigs.TWITCH_CONFIG.clientID,
       clientSecret: passportConfigs.TWITCH_CONFIG.clientSecret,
-      callbackURL: "/auth/twitch/callback"
+      callbackURL: "/auth/twitch/callback",
+      proxy: true
     },
     // Twitch auth callback function
     function(accessToken, refreshToken, profile , done){
@@ -102,6 +103,7 @@ passport.use(new GoogleStrategy({
   clientID: GOOGLE_CONFIG.clientID,
   clientSecret: GOOGLE_CONFIG.clientSecret,
   callbackURL: "/auth/google/callback",
+  proxy: true,
   scope: ['profile', 'email', YOUTUBE_SCOPE]
 },
    // Google auth callback function
@@ -163,6 +165,7 @@ passport.use(new FacebookStrategy({
   clientID: FACEBOOK_CONFIG.clientID,
   clientSecret: FACEBOOK_CONFIG.clientSecret,
   callbackURL: "/auth/facebook/callback",
+  proxy: true,
   profileFields: ['id', 'displayName', 'name', 'link', 'picture.type(large)']
 },
    // Facebook auth callback function
