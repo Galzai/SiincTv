@@ -13,7 +13,7 @@ const streamActions={
             url:'/api/user/createstream'
         });
         // Redirect to create page
-        window.location.href = 'http://localhost:3000/stream_pages/' + result.data;
+        window.location.href = `${window.location.hostname}/stream_pages/` + result.data;
     },
 
     getStreamById: async function(streamId){

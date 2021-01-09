@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 var corsInf = cors({
-  origin: "http://localhost:3000", // <-- location of the react app were connecting to
+  origin: '*', // <-- location of the react app were connecting to
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 });
