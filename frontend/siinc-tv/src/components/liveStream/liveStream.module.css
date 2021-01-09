@@ -209,9 +209,9 @@
     overflow: auto;
     -webkit-overflow-scrolling:touch;
     align-content: center;
-    vertical-align: middle;
     
 }
+
 .singleStreamViewBox
 {
     position: relative;
@@ -220,4 +220,9 @@
     height: 0;
     overflow: auto;
     -webkit-overflow-scrolling:touch;
+}
+
+.StreamBox
+{
+    margin: auto;
 }

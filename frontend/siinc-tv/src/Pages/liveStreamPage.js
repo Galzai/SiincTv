@@ -89,17 +89,17 @@ function Stream(props) {
                             streamGroups={streamData.streamGroups}  
                             >
                             </SplitStreamViewBox>}
-                        {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
-                        <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
-                        <StreamDetails
-                        id={streamData._id}
-                        streamTitle={streamData.name}
-                        streamGroups={streamData.streamGroups}  
-                        description={streamData.description}
-                        setStreamData={setStreamData}
-                        >
-                        </StreamDetails>
                     </div>
+                    {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
+                    <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
+                    <StreamDetails
+                    id={streamData._id}
+                    streamTitle={streamData.name}
+                    streamGroups={streamData.streamGroups}  
+                    description={streamData.description}
+                    setStreamData={setStreamData}
+                    >
+                    </StreamDetails>
                 </div>
             </Container>
         </ThemeProvider> 

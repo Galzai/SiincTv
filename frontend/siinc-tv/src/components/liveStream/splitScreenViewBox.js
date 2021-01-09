@@ -36,7 +36,7 @@ function SplitScreenViewBox(props){
         return(streamers.map(streamer=>{
             return(
                 <ThemeProvider theme={theme}>
-                  <Grid container item md={6} spacing={12}>
+                  <Grid container item md={6} spacing={12} style={{margin: 'auto'}}>
                     <Container maxWidth="xl" disableGutters="true">
                       <div className={style.splitScreen}>
                         <LiveStream
