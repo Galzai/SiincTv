@@ -15,19 +15,20 @@ const generateKey = (pre) => {
 
 // We use this to style our selector   
 const customTagStyle={
-    control: (styles, state)=>({...styles, width:580, marginTop:10, borderRadius:3, border: state.isFocused?'1px solid rgb(153, 153, 153)':'none',
-    backgroundColor: '#251A37', height:40, minHeight: 40, outline: 'none', ':hover': {borderRadius: 3, cursor: 'text', border: '1px solid rgb(153, 153, 153)'}}),
-    valueContainer: styles=>({...styles, height:40, minHeight: 40}),
-    indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0}),
+    control: (styles, state)=>({...styles, width:580, marginTop:10, backgroundColor: '#251A37', borderRadius:state.isFocused?3:3, height:40, 
+    minHeight: 40, border: state.isFocused?'1px solid rgb(153, 153, 153)':'none', boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    ':hover': {borderRadius: 3, cursor: 'pointer', border: '1px solid rgb(153, 153, 153)'}}),
+    valueContainer: styles=>({...styles, height:40, minHeight: 40, cursor: 'text'}),
+    indicatorContainer: styles=>({...styles, height:40, minHeight: 40,paddingTop:0, paddingBottom:0, cursor: 'pointer'}),
     input: styles=>({...styles, top:20, lineHeight:0, fontFamilt:'Roboto',textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     placeholder: styles=>({...styles, top:20, lineHeight:0, fontFamily:'Roboto',
     textAlign:'center', fontWeight: 'normal', color: '#AFAFAF'}),
     multiValue: styles=>({...styles, textAlign: 'center', bottom:20, height:30, backgroundColor:'#123B22', borderRadius:5}),
     multiValueLabel: styles=>({...styles, cursor: 'default', textAlign: 'center', height:30, fontSize:16,
     top:15, color:'#FFFFFF', opacity: 0.7, fontFamily:'Roboto'}),
-    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black', color: '#111111'}),
+    menu:styles=>({...styles, width:580, borderRadius:5, backgroundColor: 'black', color: '#AFAFAF'}),
     menuList:styles=>({...styles, width:580, borderRadius: 5, fontFamily:'Roboto',
-    fontWeight: 'normal', color: '#AFAFAF', opacity: 0.7, backgroundColor: '#251A37'}),
+    fontWeight: 'normal', color: '#AFAFAF', opacity: 0.75, backgroundColor: '#251A37'}),
     multiValueRemove: styles=>({...styles, ':hover': {backgroundColor: '#071A0E', cursor: 'pointer', backgroud: '#AFAFAF'}}),
 };
 

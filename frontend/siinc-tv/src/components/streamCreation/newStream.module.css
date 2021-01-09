@@ -190,6 +190,11 @@
     background-color: #3C096C;
 }
 
+.removeTeamButton:focus
+{
+    outline: none;
+}
+
 
 .addTeamButton{
     border:none;
