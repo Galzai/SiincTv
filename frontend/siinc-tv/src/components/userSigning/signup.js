@@ -168,7 +168,7 @@ function Signup(props) {
                 </div>
 
                 <div className={style.signInButtonDiv}>
-                    <button className={style.signUpButton} disabled={!formValid()} onClick={handleSignup}>Sign up</button>
+                    <button className={style.signUpButton} disabled={!formValid()} onClick={handleSignup}>Sign Up</button>
                 </div>
             </div>
         </section>

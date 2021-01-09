@@ -25,13 +25,13 @@
     padding-left:80px !important; 
     padding-right:12px !important; 
     padding-bottom:0px;
-    text-transform: none !important; 
+    text-transform: none !important;
 }
 
 .notificationButton:hover
 {
     cursor: pointer;
-    box-shadow: 0 0 10px #E2DAE9, inset 0 0 10px #7b4da1;
+    color: #7b4da1;
 }
 
 .notificationDiv{
