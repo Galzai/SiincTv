@@ -244,6 +244,11 @@
     background-color: #E2DAE9;
 }
 
+.googleAuth:focus
+{
+    outline: none;
+}
+
 .twitchAuth
 {
     margin-top: 20px;
@@ -277,6 +282,11 @@
     background-color: #E2DAE9;
 }
 
+.twitchAuth:focus
+{
+    outline: none;
+}
+
 .facebookAuth
 {
     margin-top: 20px;
@@ -308,6 +318,11 @@
 {
     color: #5B10A3;
     background-color: #E2DAE9;
+}
+
+.facebookAuth:focus
+{
+    outline: none;
 }
 
 .line{

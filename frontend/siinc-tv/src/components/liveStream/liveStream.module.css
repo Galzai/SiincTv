@@ -47,6 +47,15 @@
     cursor:pointer;
 }
 
+.streamSelectorButton:hover{
+    color: #E2DAE9;
+    background-color: #5B10A3;
+}
+
+.streamSelectorButton:focus{
+    outline: none;
+}
+
 .joinButton{
     position: absolute;
     display: inline-block;
@@ -63,6 +72,15 @@
     font-style: normal;
     color: #E2DAE9;
     cursor:pointer;
+}
+
+.joinButton:hover{
+    color: #E2DAE9;
+    background-color: #5B10A3;
+}
+
+.joinButton:focus{
+    outline: none;
 }
 
 .viewButton{
@@ -82,6 +100,15 @@
     font-style: normal;
     color: #E2DAE9;
     cursor:pointer;
+}
+
+.viewButton:hover{
+    color: #E2DAE9;
+    background-color: #5B10A3;
+}
+
+.viewButton:focus{
+    outline: none;
 }
 
 .streamTitle{
