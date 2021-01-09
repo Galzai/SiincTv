@@ -6,6 +6,7 @@
     left: 28px;
     white-space: nowrap;
     overflow: hidden;
+    overflow-y: hidden;
 }
 
 .liveFeedContainer{
@@ -15,8 +16,9 @@
     height:368px;
     cursor: pointer;
     overflow: hidden;
+    overflow-y: hidden;
 }
 
-.liveFeedContainer::-webkit-scrollbar{
+.liveFeedBar::-webkit-scrollbar{
     display: none;
 }
