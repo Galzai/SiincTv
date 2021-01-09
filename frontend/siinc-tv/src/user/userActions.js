@@ -20,7 +20,7 @@ const userActions ={
                 password: regPassword,
             },
             withCredentials:true,
-            url:'http://localhost:4000/signup'
+            url:'/api/signup'
         })
         return result.data;
     },
@@ -33,7 +33,7 @@ const userActions ={
                 password: regPassword,
             },
             withCredentials:true,
-            url:'http://localhost:4000/signin'
+            url:'/api/signin'
         })
         return result.data;
     },
@@ -43,7 +43,7 @@ const userActions ={
             method:'POST',
             data:{},
             withCredentials:true,
-            url:'http://localhost:4000/signout'
+            url:'/api/signout'
         });
         return result.data;
     },
@@ -53,7 +53,7 @@ const userActions ={
             method:'GET',
             data:{},
             withCredentials:true,
-            url:'http://localhost:4000/user'
+            url:'/api/user'
         });
         return result.data;
     },
@@ -65,7 +65,7 @@ const userActions ={
                 username: userName,
             },
             withCredentials:true,
-            url:'http://localhost:4000/userdata'
+            url:'/api/userdata'
         });
         return result.data;
     },
@@ -77,7 +77,7 @@ const userActions ={
                 username: regUsername,
             },
             withCredentials:true,
-            url:'http://localhost:4000/check_username'
+            url:'/api/check_username'
         })
         return result.data;
     },
@@ -86,7 +86,7 @@ const userActions ={
         const result = await axios({
             method: 'POST',
             data:{searchString, page},
-            url:'http://localhost:4000/search/users'
+            url:'/api/search/users'
         });
         return result.data;
     },
@@ -95,7 +95,7 @@ const userActions ={
         const result = await axios({
             method: 'GET',
             data:{url:window.location.href },
-            url:'http://localhost:4000/auth/twitch/'
+            url:'/api/auth/twitch/'
         });
         return result.data;
     },
@@ -103,21 +103,21 @@ const userActions ={
     setRedirectURL: async function(searchString, page){
         const result = await axios({
             method: 'POST',
-            url:'http://localhost:4000/auth/setRedirectUrl'
+            url:'/api/auth/setRedirectUrl'
         });
     },
 
     // External authenticaiton redirects
     authenicateTwitch:  function(){
-      window.location.assign('http://localhost:4000/auth/twitch/');
+      window.location.assign('/api/auth/twitch/');
     },
 
     authenicateGoogle:  function(){
-        window.location.assign('http://localhost:4000/auth/google/');
+        window.location.assign('/api/auth/google/');
     },
 
     authenicateFacebook:  function(){
-        window.location.assign('http://localhost:4000/auth/facebook/');
+        window.location.assign('/api/auth/facebook/');
     },
 
     // ------------------------- FRIENDS -----------------------------
@@ -133,7 +133,7 @@ const userActions ={
                 toUser: toUser
             },
             withCredentials:true,
-            url:'http://localhost:4000/user/friends'
+            url:'/api/user/friends'
         })
         return result.data;
     },
@@ -150,7 +150,7 @@ const userActions ={
                 accepted: accepted   //boolean true for accepted, false for rejeceted.
             },
             withCredentials:true,
-            url:'http://localhost:4000/user/friends'
+            url:'/api/user/friends'
         })
         return result.data;
      },
@@ -166,7 +166,7 @@ const userActions ={
                 toUser: toUser
             },
             withCredentials:true,
-            url:'http://localhost:4000/user/friends'
+            url:'/api/user/friends'
         })
         return result.data;
      },
@@ -187,7 +187,7 @@ const userActions ={
                 toUser: toUser
             },
             withCredentials:true,
-            url:'http://localhost:4000/user/follow'
+            url:'/api/user/follow'
         })
         return result.data;
     },
@@ -203,7 +203,7 @@ const userActions ={
                 toUser: toUser
             },
             withCredentials:true,
-            url:'http://localhost:4000/user/follow'
+            url:'/api/user/follow'
         })
         return result.data;
      },    
@@ -214,7 +214,7 @@ const userActions ={
             method:'GET',
             data:{},
             withCredentials:true,
-            url:'http://localhost:4000/user/getusernamelist'
+            url:'/api/user/getusernamelist'
         });
         return result.data;
      },
@@ -222,7 +222,7 @@ const userActions ={
         const result = await axios({
             method: 'POST',
             data:{notificationId: id},
-            url:'http://localhost:4000/notifications/deleteNotification',
+            url:'/api/notifications/deleteNotification',
             withCredentials:true,
         });
         return result.data;
@@ -230,7 +230,7 @@ const userActions ={
      pokeYourself: async function(){
         const result = await axios({
             method: 'POST',
-            url:'http://localhost:4000/test/selfPoke',
+            url:'/api/test/selfPoke',
             withCredentials:true,
         });
         return result.data;
@@ -238,7 +238,7 @@ const userActions ={
     clearNotifications: async function(){
         const result = await axios({
             method: 'POST',
-            url:'http://localhost:4000/notifications/clearNotifications',
+            url:'/api/notifications/clearNotifications',
             withCredentials:true,
         });
         return result.data;

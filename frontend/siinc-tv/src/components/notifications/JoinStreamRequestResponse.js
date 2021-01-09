@@ -28,10 +28,10 @@ function JoinStreamRequestResponse(props){
             
             </img>}
             </ListItemAvatar>
-            <Grid>
-            <Grid item>
-            <label>{`${data.displayName} has ${messageString} your request to join the stream.`}</label>
-            </Grid>
+                <Grid>
+                <Grid item>
+                  <label>{`${data.displayName} has ${messageString} your request to join the stream.`}</label>
+                </Grid>
             </Grid>
 
         </ListItem>

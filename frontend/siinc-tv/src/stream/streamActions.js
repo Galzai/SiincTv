@@ -10,7 +10,7 @@ const streamActions={
             method:'POST',
             data:streamData,
             withCredentials:true,
-            url:'http://localhost:4000/user/createstream'
+            url:'/api/user/createstream'
         });
         // Redirect to create page
         window.location.href = 'http://localhost:3000/stream_pages/' + result.data;
@@ -21,7 +21,7 @@ const streamActions={
             method: 'POST',
             data:{streamId},
             withCredentials:true,
-            url:'http://localhost:4000/user/find_stream_data'
+            url:'/api/user/find_stream_data'
         });
         return result.data;
     },
@@ -29,7 +29,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:{streamGroups},
-            url:'http://localhost:4000/twitch/get_streams'
+            url:'/api/twitch/get_streams'
         });
         return result.data;
     },
@@ -37,7 +37,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:{channelId},
-            url:'http://localhost:4000/youtube/getLiveVideoId'
+            url:'/api/youtube/getLiveVideoId'
         });
         console.log(result.data);
         return result.data;
@@ -47,7 +47,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:{searchString, page, status},
-            url:'http://localhost:4000/search/streams'
+            url:'/api/search/streams'
         });
         return result.data;
     },
@@ -55,14 +55,14 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:{page, status},
-            url:'http://localhost:4000/feed/streams'
+            url:'/api/feed/streams'
         });
         return result.data;
     },
     closeStream: async function(){
         const result = await axios({
             method: 'POST',
-            url:'http://localhost:4000/streams/closeStream',
+            url:'/api/streams/closeStream',
             withCredentials:true,
         });
         return result.data;
@@ -71,7 +71,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:{data, creatorId},
-            url:'http://localhost:4000/streams/requestToJoinStream',
+            url:'/api/streams/requestToJoinStream',
             withCredentials:true,
         });
         return result.data;
@@ -80,7 +80,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:data,
-            url:'http://localhost:4000/streams/rejectRequestToJoin',
+            url:'/api/streams/rejectRequestToJoin',
             withCredentials:true,
         });
         return result.data;
@@ -89,7 +89,7 @@ const streamActions={
         const result = await axios({
             method: 'POST',
             data:data,
-            url:'http://localhost:4000/streams/acceptRequestToJoin',
+            url:'/api/streams/acceptRequestToJoin',
             withCredentials:true,
         });
         return result.data;
