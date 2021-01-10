@@ -5,7 +5,7 @@ import React from 'react'
 import SocketContext from './socketContext';
 import socketIOClient from "socket.io-client";
 
-const SOCKET_SERVER_URL = "/api";
+const SOCKET_SERVER_URL = "http://18.198.115.204";
 
 class SocketProvider extends React.Component {
     constructor(props){
@@ -13,6 +13,7 @@ class SocketProvider extends React.Component {
         this.state = { socket: null , streamRoomId: null};
         
         let sock = socketIOClient(SOCKET_SERVER_URL, {
+            path:"/io",
             withCredentials: true,
             transports: ['websocket']
         });

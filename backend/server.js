@@ -67,7 +67,10 @@ const server = app.listen(4000, () => {
   console.log("Server Has Started");});
 
 
-const io = socketio(server, {cors: {corsInf}});
+const io = socketio(server, 
+  {cors: {corsInf},
+  path:"/io"
+});
 io.use(function(socket, next) {
   expressSession(socket.request, socket.request.res || {}, next);
 });
