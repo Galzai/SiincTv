@@ -5,6 +5,8 @@ import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
 import StreamSocket from "../liveStream/streamSocket";
+import VideoCallIcon from '@material-ui/icons/VideoCall';
+
 const { default: streamActions } = require("../../stream/streamActions");
 
 function NavSiincHome(props) {
@@ -18,8 +20,7 @@ function NavSiincHome(props) {
 function NavCreateStreamButton(props) {
     return(
          <Link to="/create_stream">         
-             <div className={style.navCreateStreamButton}>
-             </div> 
+             <VideoCallIcon className={style.navCreateStreamButton} fontSize='large'/>
         </Link> 
     );  
 }

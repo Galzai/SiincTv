@@ -4,7 +4,6 @@
     height: 1100px;
     background-color:#10002B;
     margin: auto;
-    left: -80px;
 }
 .createStreamForm
 {
@@ -188,6 +187,11 @@
 {
     color: #3C096C;
     background-color: #3C096C;
+}
+
+.removeTeamButton:focus
+{
+    outline: none;
 }
 
 

@@ -169,6 +169,11 @@
     cursor: pointer;
 }
 
+.navClearButtonContainer:focus
+{
+    outline: none;
+}
+
 .navClearButton
 {
     position: absolute;
@@ -183,6 +188,11 @@
 .navClearButton:hover
 {
     cursor: pointer;
+}
+
+.navClearButton:focus
+{
+    outline: none;
 }
 
 .navSearchButtonContainer
@@ -203,6 +213,11 @@
     cursor: pointer;
 }
 
+.navSearchButtonContainer:focus
+{
+    outline: none;
+}
+
 .navSearchButton
 {
     position: absolute;
@@ -221,10 +236,13 @@
 
 .navSearchButton:focus{
     border:none;
+    outline: none;
 }
+
 .navSearchButton:active{
     border:none;
 }
+
 .navSearchButton:visited{
     border:none;
 }

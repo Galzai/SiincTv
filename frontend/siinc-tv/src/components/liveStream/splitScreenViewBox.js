@@ -36,16 +36,16 @@ function SplitScreenViewBox(props){
         return(streamers.map(streamer=>{
             return(
                 <ThemeProvider theme={theme}>
-                  <Grid alignItems="center" alignContent="center" container item md={6} spacing={12}>
-                    <Container maxWidth="xl" disableGutters="true"> 
-                              <div className={style.splitScreen}>
-                                  <LiveStream
-                                      key={streamer.displayName}
-                                      streamer={streamer}
-                                      muted={true}
-                                  ></LiveStream>
-                              </div>
-                      </Container>
+                  <Grid container item md={6} spacing={12} style={{margin: 'auto'}}>
+                    <Container maxWidth="xl" disableGutters="true">
+                      <div className={style.splitScreen}>
+                        <LiveStream
+                            key={streamer.displayName}
+                            streamer={streamer}
+                            muted={true}
+                          ></LiveStream>
+                      </div>
+                    </Container>
                   </Grid>
                 </ThemeProvider>
             )}
