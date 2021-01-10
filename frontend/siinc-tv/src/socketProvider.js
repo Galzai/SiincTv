@@ -5,7 +5,7 @@ import React from 'react'
 import SocketContext from './socketContext';
 import socketIOClient from "socket.io-client";
 
-const SOCKET_SERVER_URL = "http://18.198.115.204/api/";
+const SOCKET_SERVER_URL = "http://18.198.115.204/";
 
 class SocketProvider extends React.Component {
     constructor(props){
