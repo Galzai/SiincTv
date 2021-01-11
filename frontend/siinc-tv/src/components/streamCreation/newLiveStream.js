@@ -91,7 +91,6 @@ const customTagStyle={
     }
 
     return(
-        <div>
         <div className={style.createStreamBox}>
             <div className={style.createStreamForm}>
                 <div className={style.streamInformation}>
@@ -137,8 +136,6 @@ const customTagStyle={
 
                 </div>
             </div>
-        </div>
-        <NavigationBar></NavigationBar>
         </div>
     );
 }

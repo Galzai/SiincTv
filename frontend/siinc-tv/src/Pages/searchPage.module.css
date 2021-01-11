@@ -118,3 +118,10 @@
     height: 20px;
     position: absolute;
 }
+
+.errorDesign
+{
+    position: relative;
+    left: 32px;
+    line-height: 40px;
+}
