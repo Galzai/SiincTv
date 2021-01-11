@@ -50,7 +50,8 @@ var expressSession = session({
   secret: "siinctvsecretcode",
   resave: true,
   saveUninitialized: true,
-  store: mongoStore
+  store: mongoStore,
+  cookie:{domain:"siinc.tv"}
 })
 
 
