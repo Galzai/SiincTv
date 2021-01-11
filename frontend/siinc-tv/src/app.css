@@ -2,4 +2,15 @@ body
 {
     overflow:hidden;
     margin: auto;
+    width:100%
 }
+
+.noScroll {
+    -ms-overflow-style: none  !important;  /* IE and Edge */
+    scrollbar-width: none  !important;  /* Firefox */
+  }
+
+::-webkit-scrollbar {
+    display: none !important;
+  }
+  
