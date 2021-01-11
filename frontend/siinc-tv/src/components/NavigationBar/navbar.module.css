@@ -7,9 +7,8 @@
     top: 0%;
     bottom: 91.21%;
     z-index: 0;
-    background: #10002B;
-    border-bottom: 0.5px solid #2f273d;
- 
+    background: #150A26;
+    box-shadow: 1px 1px 10px #0d0618;
 }
 
 .navItem

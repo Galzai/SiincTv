@@ -2,14 +2,12 @@
 {
     position: absolute;
     width: 254px;
-    top: 60px;
+    top: 0px;
     height: 100%;
     left: 0px;
     padding: 0px;
     margin: 0px;
-    background-color: #1C0D36;
-
-    border-right: 0.5px solid #493D5E;
+    background-color: #190F2C;
 }
 
 .sidebarContent
