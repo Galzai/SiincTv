@@ -101,7 +101,7 @@ module.exports = function (passport) {
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CONFIG.clientID,
   clientSecret: GOOGLE_CONFIG.clientSecret,
-  callbackURL: "siinc.tv/auth/google/callback",
+  callbackURL: "callback",
   scope: ['profile', 'email', YOUTUBE_SCOPE]
 },
    // Google auth callback function
