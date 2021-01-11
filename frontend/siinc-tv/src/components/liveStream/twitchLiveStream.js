@@ -1,7 +1,7 @@
 import React, {useState, useRef} from "react";
 
 const srcPre = "https://player.twitch.tv/?channel=";
-const srcPost = "&parent=localhost" 
+const srcPost = "&parent=siinc.tv" 
 function LiveStream(props){
 
     const [displayName, setUserName] = useState(props.displayName);
