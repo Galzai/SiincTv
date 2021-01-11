@@ -20,7 +20,7 @@ const customStyles = {
         height                : 'fit-content',
         marginRight           : '-50%',
         transform             : 'translate(-50%, -50%)',
-        backgroundColor       : '#10002B',
+        backgroundColor       : '#0B001E',
         borderRadius          : '10px',
         padding               : '0px',
         border                : 'none',

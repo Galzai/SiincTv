@@ -2,13 +2,13 @@
 {
     position: absolute;
     width: 100%;
-    height: 90px;
-    left: 256px;
+    height: 60px;
+    left: 0px;
     top: 0%;
     bottom: 91.21%;
     z-index: 0;
-    background: #10002B;
- 
+    background: #150A26;
+    box-shadow: 1px 1px 5px #0d0618;
 }
 
 .navItem
@@ -94,7 +94,8 @@
     display: block;
     float: right;
     position: relative;
-    right: 260px;
+    right: 4px;
+    top: -15px;
 }
 
 .navSearchContainer
@@ -102,16 +103,15 @@
     position: absolute;
     width: 399px;
     height: 40px;
-    right: 440px;
-    top: 25px;
+    right: 184px;
+    top: 14px;
 }
 
 .navSearchInput
 {
     box-sizing: border-box;
     position: absolute;
-    left: -5px;
-    height: 38px;
+    height: 32px;
     width: 81%;
     background-color: #251A37;
     border: 0px solid #8f5dac;
@@ -122,7 +122,7 @@
 
     font-family: Roboto;
     font-style: thin;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 0;
     line-height: 21px;
     color: #AFAFAF;
@@ -131,9 +131,8 @@
 }
 .navSearchInput:hover
 {
-    height: 42px;
-    width: 399px;
-    left: -6px;
+    height: 35px;
+    width: 388px;
     top: -2px;
     border: 1px solid rgb(153, 153, 153);
     border-radius: 14px;
@@ -141,9 +140,8 @@
 
 .navSearchInput:focus
 {
-    height: 42px;
-    width: 399px;
-    left: -6px;
+    height: 35px;
+    width: 388px;
     top: -2px;
     background-color: #251A37;
     outline: none;
@@ -160,7 +158,7 @@
     background-size: cover;      
     background-color: #251A37;
     width: 9.5%;
-    height: 38px;
+    height: 31.5px;
     left: 312px;
 }
 
@@ -177,12 +175,12 @@
 .navClearButton
 {
     position: absolute;
-    background: url("../../assets/NavBar/NavBarClearButton.png");
     width: 14px;
     height: 14px;
-    top: 12px;
-    left: 13px;
+    top: 6px;
+    left: 8px;
     border:none;
+    color: #AFAFAF;
 }
 
 .navClearButton:hover
@@ -201,9 +199,9 @@
     position: relative;
     background-size: cover;      
     background-color: #251A37;
-    padding: 4px;
-    width: 9.5%;
-    height: 38px;
+    padding: 5px;
+    width: 8%;
+    height: 31.5px;
     left: 350px;
     border-radius: 0px 14px 14px 0px;
 }
@@ -220,13 +218,7 @@
 
 .navSearchButton
 {
-    position: absolute;
-    background: url("../../assets/NavBar/NavBarSearchButton.png");   
-    width: 19px;
-    height: 19px;
-    top: 10px;
-    left: 8px;
-    border:none;
+    color: #AFAFAF;
 }
 
 .navSearchButton:hover
@@ -250,14 +242,43 @@
 .navSearchSeperator
 {
     position: absolute;
-    width: 23px;
+    width: 19px;
     height: 0px;
     left: 338px;
-    top: 18px;
+    top: 16px;
     z-index: 1;
     border: 1px solid #AFAFAF;
     transform: rotate(90deg);
 }
 
+.siincIcon
+{
+    position: absolute;
+    width: 86px;
+    height: 46px;
+    left: 18px;
+    top: 8px;
+    background: url("../../assets/NavBar/NavBarSiincLogo.png");   
+}
 
+.navCreateStreamButton
+{
+    position: relative;
+    width: 34px;
+    height: 30px;
+    margin-top: 14px;
+    left: 200px;
+    color: #E2DAE9;
+}
+
+.navCreateStreamButton:hover
+{
+    cursor: pointer;
+    color: #7b4da1;
+}
+
+.navCreateStreamButton:focus
+{
+    outline:none;
+}
 

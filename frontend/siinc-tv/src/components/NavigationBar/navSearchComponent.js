@@ -2,6 +2,8 @@ import style from './navbar.module.css';
 import {useState} from "react"
 import useWindowDimensions from "../../useWindowDimensions.js"
 import { withRouter } from 'react-router-dom';
+import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
 
 function NavSearchComponent(props) {
     const [search, setSearch] = useState('');
@@ -36,11 +38,11 @@ function NavSearchComponent(props) {
             <input className={style.navSearchInput} type="text" required value={search}
                     placeholder={"Search stream names or users"} onKeyDown={handleKeypress} onChange={e => setSearch(e.target.value)}/>
             <div className={style.navClearButtonContainer}>
-                <button className={style.navClearButton} onClick={()=>{setSearch("")}}></button>
+                <ClearIcon className={style.navClearButton} fontSize="small" onClick={()=>{setSearch("")}}></ClearIcon>
             </div>  
             <div className={style.navSearchSeperator}></div>
             <div className={style.navSearchButtonContainer}>
-                <button className={style.navSearchButton} onClick={handleClick}></button>
+                <SearchIcon className={style.navSearchButton} fontSize="small" onClick={handleClick}></SearchIcon>
             </div>
         </div>
         

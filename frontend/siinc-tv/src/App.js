@@ -33,7 +33,7 @@ function App(){
         container : {
             width: window.width*0.997,
             height: window.height,
-            backgroundColor: "#10002B",
+            backgroundColor: "#0B001E",
             overflow: "auto",
         }
     }
@@ -59,9 +59,9 @@ function App(){
         <SocketProvider>
             <UserSocketConnector/>;
             <Router history={history}>
-            <SideBar></SideBar>
-                <NavigationBar></NavigationBar>        
-                <div style={{paddingLeft:"256px", paddingTop:"90px"}}>
+                <SideBar></SideBar> 
+                <NavigationBar></NavigationBar>  
+                <div style={{paddingLeft:"256px", paddingTop:"64px"}}>
                 <Switch >
                     <Route exact path="/">
                         <HomePage></HomePage>
@@ -79,8 +79,8 @@ function App(){
                     <Route path="/users/:username" component={Profile}>
                     </Route>
                 </Switch>
-                <NavigationBar></NavigationBar>
                 <SideBar></SideBar> 
+                <NavigationBar></NavigationBar>
                 </div>
             </Router>
         </SocketProvider>
