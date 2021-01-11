@@ -251,7 +251,7 @@ const userActions ={
                 userId: userId,
                 text: data
             },
-            url:'http://localhost:4000/user/update_field',
+            url:'/api/user/update_field',
             withCredentials:true,
         });
         return result.data;
