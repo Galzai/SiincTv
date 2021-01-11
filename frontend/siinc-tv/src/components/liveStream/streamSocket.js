@@ -24,7 +24,7 @@ const StreamSocket = (roomId, setStreamData) => {
       }
         // Listens for incoming messages
         socketContext.socket.on(END_STREAM, () => {
-            window.location.assign(`${window.location.hostname}/stream_pages/ended`);
+            window.location.assign(`https://siinc.tv/stream_pages/ended/`);
         });
 
         // Listen for new viewers
