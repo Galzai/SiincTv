@@ -10,6 +10,8 @@ import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
 import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
+import { withRouter } from 'react-router-dom'
+import LiveStreamPreview from "../previews/liveStreamPreview"
 
 //import profilePhoto from '../../assets/userProfilePic.png'; //todo
 
@@ -17,14 +19,7 @@ import blackStar from '../../assets/blackstar.png'; //todo
 import purpleStar from '../../assets/purpelstar.png'; //todo
 
 import SocketContext from "../../socketContext"
-
-
-
-function FriendButtonComponent(props) {
-
-    
-
-}
+import streamActions from '../../stream/streamActions';
 
 function Profile(props) {
     
@@ -32,12 +27,10 @@ function Profile(props) {
     const userContext = useContext(UserContext);
     const userNameOld = (userContext.user) ? userContext.user.username : "Null";//props.userName;
     const userName = props.match.params.username;
-    const [user, setUser] = useState(userName);
+    const [user, setUser] = useState(null);
     const userOnline = 'true';  //todo
-    const userStreaming = 'true'; //todo
     const userRating  = 3 ;  //todo
     const subscribers = '12k'; //todo
-    const friends = '200'; //todo
     const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
     const aboutInfo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum posuere. Consectetur adipiscing elit. Nulla elementum posuere.' //todo
     const [friendsData, setFriendsData] = useState(null)
@@ -51,13 +44,23 @@ function Profile(props) {
             if( isMounted ) { 
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
+                setUser(data);
             }
         });
         return (() => {isMounted = false})
     }, [props.match])
 
     const showDisplay = () => {
-        return display;
+        if( !user )
+            return 
+        if( display === 'live' ) {
+            if( !user.currentStream )
+                return
+            return <ProfileLiveDisplay streamId={user.currentStream.eventId}></ProfileLiveDisplay>
+        }
+        if( display === 'friends') {
+            return <ProfileFreindsDisplay></ProfileFreindsDisplay>
+        }
     }
 
     function About(userOnline){
@@ -71,8 +74,8 @@ function Profile(props) {
     }
 
     // Sets type of form to display
-    const setAboutDisplay=()=>{
-        setUserInfoDisplay('about')
+    const setLiveDisplay=()=>{
+        setUserInfoDisplay('live')
     }
     const setScheduleDisplay=()=>{
         setUserInfoDisplay('schedule')
@@ -80,31 +83,6 @@ function Profile(props) {
     const setFriendsDisplay=()=>{
         setUserInfoDisplay('friends')
     }
-
-    /*
-    const debugFriendRepr=()=> {
-        if( userContext.user == null || friendsData == null ) {
-            return "Loading";
-        }
-
-        if( !userContext.user ) {
-            return "Not logged";
-        }
-        if( userContext.user.username == userName ) {
-            return "Its you!";
-        }
-        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
-            return "Unfriend";
-        }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
-            return "Pending";
-        }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
-            return "Accept";
-        }
-        return "Add Friend";
-    }
-    */
 
    const debugFriendRepr=()=> {
     if( userContext.user == null || friendsData == null ) {
@@ -133,7 +111,7 @@ function Profile(props) {
 }
 
     const handleLive=()=>{
-        //todo - open a window to the live stream
+        props.history.push(`/stream_pages/${user.currentStream.eventId}`);
     }
 
     const onClickFriendAction=()=>{
@@ -160,7 +138,42 @@ function Profile(props) {
         return "Follow"
     }
     
+    const isMe=()=>{
+        if( !userContext.user || userContext.user.username !== userName )
+            return false
+        return true;
+        
+    }
 
+    const isUserStreaming=()=>{
+        if( !user || 
+            !user.currentStream || 
+            user.currentStream == "" )
+        {
+            return false;
+        }
+        return true;
+    }
+
+    const numOfFriends=()=>{
+        if( !user )
+            return 0;
+        return user.friendsData.friendsList.length;
+    }
+
+    const numOfFollowers=()=>{
+        if( !user )
+            return 0;
+        return user.followData.followersList.length;
+    }
+
+    const isUserOnline=()=>{
+        
+    }
+
+    const onClickEditDesc=()=>{
+        console.log("TODO onClickEditDesc")
+    }
 
     return (
         <div>        
@@ -175,7 +188,7 @@ function Profile(props) {
                         <div className={style.firstDiv}>
                             <span className={style.name}>{userName}</span>
                             {userOnline==='true' && <span className={style.online}/>}
-                            {userStreaming==='true' && <span className={style.live} onClick={handleLive}>Live</span>}
+                            { isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}
                             <span className={style.star}>
                                 {userRating>=1 && <img className={style.starImg} src={purpleStar}/>}
                                 {userRating>=2 && <img className={style.starImg} src={purpleStar}/>}
@@ -192,14 +205,14 @@ function Profile(props) {
                         <hr />
                         <div className={style.secondDiv}>
                             <span className={style.number}>
-                                {friends} Friends
+                                {numOfFriends()} Friends
                                 <br />
-                                {subscribers} Subscribers
+                                {numOfFollowers()} Followers
                             </span>
                             <span className={style.btns}>
-                                <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a>
-                                <a><button className={style.subscribe} onClick={handleSubscribe} /> Subscribe</a>
-                                <a><button className={style.addFavorites} onClick={onClickFollowAction} /> {debugFollowRepr()}</a>
+                                { !isMe() && <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a> }
+                                { !isMe() && <a><button className={style.addFavorites} onClick={onClickFollowAction} /> {debugFollowRepr()}</a>}
+                                { isMe() && <button className={style.editDescriptionButton} onClick={onClickEditDesc} > Edit </button> }
                             </span>
                         </div>
                         <div className={style.aboutContent}>
@@ -218,20 +231,54 @@ function Profile(props) {
                 <div className={style.container}>
                     <div className={style.div100}>
                         <div className={style.tabList}>
-                            <button className={style.tabListBtn} onClick={setAboutDisplay}>About</button>
-                            <button className={style.tabListBtn} onClick={setScheduleDisplay}>Schedule</button>
+                            { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button> }
+                            {/*<button className={style.tabListBtn} onClick={setScheduleDisplay}>Schedule</button>*/}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div className={style.container}>
-                {showDisplay()==='about' && <About userOnline = {userOnline}/>}
-                {showDisplay()==='schedule' && <Schedule userName = {userName}/>}
-                {showDisplay()==='friends' && <Friends userName = {userName} />}
+                {showDisplay()}
             </div>
         </div>
     );
 }
 
-export default Profile
+function ProfileLiveDisplay(props) {
+    const streamId = props.streamId;
+    const [streamData, setStreamData] = useState(null)
+
+    useEffect(() => {
+        streamActions.getStreamById(streamId)
+        .then(data => {
+            setStreamData(data);
+        })
+        .catch(error => {
+            console.log("Error in ProfileLiveDisplay")
+            console.log(error);
+        })
+    }, [props.streamId]) 
+
+
+    return (
+        <div>
+            <p>live stream</p>
+            { streamData && 
+              <LiveStreamPreview key={streamData._id} 
+                streamData={streamData} 
+              /> }
+        </div>
+    )
+}
+
+function ProfileFreindsDisplay(props) {
+
+    return (
+        <div>
+            <p>testingtesting12341234</p>
+        </div>
+    )
+}
+
+export default withRouter(Profile)

@@ -181,6 +181,16 @@ label {
     background-repeat: no-repeat;
 }
 
+.editDescriptionButton{
+    height: 20px;
+    width: 20px;
+    border:none;
+    float: left;
+    background-color: #e3cbf3;
+    margin-right: 5px;
+    background-repeat: no-repeat;
+}
+
 .secondDiv .btns {
     float: right;
 }
