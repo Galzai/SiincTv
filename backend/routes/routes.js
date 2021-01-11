@@ -102,4 +102,6 @@ router.post('/streams/acceptRequestToJoin', streamController.acceptRequestToJoin
 // POST request poke yourself
 router.post('/test/selfPoke', notificationController.pokeYourself);
 
+router.post('/user/update_field', userController.updateUserShortDescription)
+
 module.exports = router;
