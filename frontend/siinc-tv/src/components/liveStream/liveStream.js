@@ -4,7 +4,7 @@ import YoutubeLiveStream from "./youtubeLiveStream";
 import style from './liveStream.module.css'
 
 const srcPre = "https://player.twitch.tv/?channel=";
-const srcPost = "&parent=localhost" 
+const srcPost = "&parent=siinc.tv" 
 function LiveStream(props){
     const [streamer, setStreamer] = useState(props.streamer);
     const [dimensions, setDimension] = useState(props.dimensions);
