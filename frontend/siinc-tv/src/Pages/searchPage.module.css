@@ -74,10 +74,12 @@
     line-height: 24x;
     color: #FFFFFF;
     opacity: 0.7;
+    margin-top: 14px;
 }
 
 .searchingForTitle
 {
+    position: relative;
     float:left;
     clear: left;
     font-family: 'Roboto', sans-serif;
@@ -88,6 +90,8 @@
     color: #FFFFFF;
     opacity: 0.4;
     padding-bottom: 16px;
+    padding-right: 14px;
+    word-wrap: break-word;
 }
 
 .optionTitle
