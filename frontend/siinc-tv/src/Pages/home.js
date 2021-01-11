@@ -1,5 +1,6 @@
 import userActions from "../user/userActions";
 import LiveFeed from '../components/liveFeed/liveFeed.js'
+import style from './homepage.module.css'
 import React, {useState} from "react";
 
 
@@ -10,7 +11,7 @@ function HomePage(props) {
     }
 
     return(
-    <div>
+    <div className={style.homePage}>
         <LiveFeed/>
         <button onClick={poke}>Poke yoself</button>
     </div>

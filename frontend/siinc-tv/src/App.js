@@ -39,7 +39,7 @@ function App(){
     }
 
     return(
-        <div>
+        <div className={"noScroll"}>
             <ToastContainer
             position="bottom-right"
             paddingTop="50px"
