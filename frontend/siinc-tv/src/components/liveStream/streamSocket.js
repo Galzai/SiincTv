@@ -11,7 +11,7 @@ const NEW_STREAMER = "newStreamer"; // Name of the event
 const StreamSocket = (roomId, setStreamData) => {
   const [endStream, setEndStream] = useState(false); // Sent and received messages
   const [numOfViews, setNumViewers] = useState(0);
-  const socketContext = useContext(SocketContext);
+  const [socketContext] = useContext(SocketContext);
 
 
   useEffect(() => {
