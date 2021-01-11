@@ -59,6 +59,9 @@ app.use(expressSession)
 .use(passport.session());
 require("./passportConfigs/passportSetup")(passport);
 
+// Trust nginx proxy for https
+app.enable("trust proxy");
+
 //-------------------------------------------------------------------------------------------
 app.use('/',router);
 
