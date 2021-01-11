@@ -51,7 +51,7 @@
 .filterContainer
 {
     text-align: left;
-    top: 100px;
+    top: 60px;
     padding-left: 0px;
     margin: 0px;
     display: inline-block;
@@ -60,7 +60,7 @@
     height: 100%;
     right: 0px;
     z-index: 0;
-    background-color: #1C0D36;
+    background-color: #190F2C;
     overflow: hidden;
 }
 
