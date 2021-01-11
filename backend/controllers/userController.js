@@ -211,5 +211,15 @@ exports.google_auth = function(req, res, next){
       passport.authenticate("facebook", { failureRedirect: req.session.UrlToRedirect})(req, res, next)
   };
 
+  exports.updateUserShortDescription = function(req, res, next) {
+    const data = req.body;
+
+    User.updateOne(
+      {"_id": data.userId},
+      {$set : { "shortDescription" : data.text}
+      }).then(obj=>{console.log("Object modified", obj)})
+      .catch((error) => {console.log("Failed update") ; console.log(error)});
+  }
+
 
 

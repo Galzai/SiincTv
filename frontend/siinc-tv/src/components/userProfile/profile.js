@@ -25,19 +25,19 @@ function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
     const userContext = useContext(UserContext);
-    const userNameOld = (userContext.user) ? userContext.user.username : "Null";//props.userName;
     const userName = props.match.params.username;
     const [user, setUser] = useState(null);
     const userOnline = 'true';  //todo
     const userRating  = 3 ;  //todo
-    const subscribers = '12k'; //todo
     const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
-    const aboutInfo = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla elementum posuere. Consectetur adipiscing elit. Nulla elementum posuere.' //todo
+    const [aboutInfo, setAboutInfo] = useState('') 
+    const [editAboutInfo, setEditAboutInfo] = useState(false);
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
     const socketContext = useContext(SocketContext);
 
     useEffect(()=>{
+        console.log("MyReder1")
         let isMounted = true;
         userActions.getUserData( userName )
         .then(data=>{
@@ -45,10 +45,13 @@ function Profile(props) {
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
+                setAboutInfo(data.shortDescription)
             }
         });
         return (() => {isMounted = false})
     }, [props.match])
+
+    useEffect(()=>{if( user ) setAboutInfo(user.shortDescription)}, [user])
 
     const showDisplay = () => {
         if( !user )
@@ -59,8 +62,12 @@ function Profile(props) {
             return <ProfileLiveDisplay streamId={user.currentStream.eventId}></ProfileLiveDisplay>
         }
         if( display === 'friends') {
-            return <ProfileFreindsDisplay></ProfileFreindsDisplay>
+            return <ProfileFriendsDisplay user={user} routerHistory={props.history}></ProfileFriendsDisplay>
         }
+        if( display === 'followers') {
+            return <ProfileFollowersDisplay user={user} routerHistory={props.history}></ProfileFollowersDisplay>
+        }
+
     }
 
     function About(userOnline){
@@ -77,8 +84,8 @@ function Profile(props) {
     const setLiveDisplay=()=>{
         setUserInfoDisplay('live')
     }
-    const setScheduleDisplay=()=>{
-        setUserInfoDisplay('schedule')
+    const setFollowersDisplay=()=>{
+        setUserInfoDisplay('followers')
     }
     const setFriendsDisplay=()=>{
         setUserInfoDisplay('friends')
@@ -167,12 +174,32 @@ function Profile(props) {
         return user.followData.followersList.length;
     }
 
+    const shortDescription=()=>{
+        if( !user )
+            return ""
+        return user.shortDescription
+    }
+
     const isUserOnline=()=>{
         
     }
 
     const onClickEditDesc=()=>{
-        console.log("TODO onClickEditDesc")
+        setEditAboutInfo(true);
+    }
+
+    const onClickDoneEditDesc=()=>{
+        userActions.updateUserShortDescription(user._id, aboutInfo)
+        .then(() => {
+            userActions.getUserData( user.username )
+        .then(data => {
+            setUser(data)
+        })})
+        .catch(error => {
+            console.log("Error editing desc")
+            console.log(error)
+        })
+        setEditAboutInfo(false);
     }
 
     return (
@@ -212,13 +239,14 @@ function Profile(props) {
                             <span className={style.btns}>
                                 { !isMe() && <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a> }
                                 { !isMe() && <a><button className={style.addFavorites} onClick={onClickFollowAction} /> {debugFollowRepr()}</a>}
-                                { isMe() && <button className={style.editDescriptionButton} onClick={onClickEditDesc} > Edit </button> }
+                                { ( isMe() && (!editAboutInfo) ) &&
+                                    <a><button className={style.editDescriptionButton} onClick={onClickEditDesc} > Edit </button></a> }
+                                { ( isMe() && (editAboutInfo) ) &&
+                                    <a><button className={style.doneEditDescriptionButton} onClick={onClickDoneEditDesc} > Done </button></a> }
                             </span>
                         </div>
                         <div className={style.aboutContent}>
-                            <p>
-                                {aboutInfo}
-                            </p>
+                            <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
                         </div>                        
                         <div className={style.pointsSpan}>Points of Interest: </div>
                         {lables.map((value, index) => {
@@ -232,7 +260,7 @@ function Profile(props) {
                     <div className={style.div100}>
                         <div className={style.tabList}>
                             { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button> }
-                            {/*<button className={style.tabListBtn} onClick={setScheduleDisplay}>Schedule</button>*/}
+                            {<button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
                         </div>
                     </div>
@@ -244,6 +272,8 @@ function Profile(props) {
         </div>
     );
 }
+
+//---------------------- Live stream preview display -----------------------------
 
 function ProfileLiveDisplay(props) {
     const streamId = props.streamId;
@@ -272,13 +302,158 @@ function ProfileLiveDisplay(props) {
     )
 }
 
-function ProfileFreindsDisplay(props) {
+//------------------------------------------------------------------------------
+
+// ------------------------------- Friends display -----------------------------
+
+function FriendDisplayPreview(props) {
+    const friend = props.friend
+    const routerHistory = props.routerHistory
 
     return (
         <div>
-            <p>testingtesting12341234</p>
+                <div className={style.friendDiv}>
+                    <img className={style.streamerCircle}
+                        src={friend.userImage}/>
+                    <div className={style.friend}
+                    onClick={()=>(routerHistory.push(`/users/${friend.displayName}`))}> 
+                        {friend.displayName}
+                    </div>
+                </div>            
         </div>
     )
 }
+
+function ProfileFriendsDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFriends(){
+        if( !user )
+            return
+
+        if( user.friendsData.friendsList.length == 0 ) {
+            return "Friends list is empty"
+        }
+
+        return((user.friendsData.friendsList).map((friend, index)=>{
+            return(
+                    <FriendDisplayPreview friend={friend} routerHistory={props.routerHistory}></FriendDisplayPreview>
+            )
+            
+        })) ;
+    }
+
+    return (
+        <div>
+            <p>Friends</p>
+            <div>
+                {mapFriends()}
+            </div>
+        </div>
+    )
+}
+
+// ----------------------------------------------------------------------
+
+// ----------------------  Follower display ---------------------------
+
+function FollowerDisplayPreview(props) {
+    const follower = props.follower
+    const routerHistory = props.routerHistory
+
+    return (
+        <div>
+                <div className={style.friendDiv}>
+                    <img className={style.streamerCircle}
+                        src={follower.userImage}/>
+                    <div className={style.friend}
+                    onClick={()=>(routerHistory.push(`/users/${follower.userName}`))}> 
+                        {follower.userName}
+                    </div>
+                </div>            
+        </div>
+    )
+}
+
+function ProfileFollowersDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowers(){
+        if( !user )
+            return
+
+        if( user.followData.followersList.length == 0 ) {
+            return "No followers"
+        }
+
+        return((user.followData.followersList).map((follower, index)=>{
+            return(
+                    <FollowerDisplayPreview follower={follower} routerHistory={props.routerHistory}></FollowerDisplayPreview>
+            )
+        })) ;
+    }
+
+    return (
+        <div>
+            <p>Friends</p>
+            <div>
+                {mapFollowers()}
+            </div>
+        </div>
+    )
+
+}
+//-------------------------------------------------------------------
+
+// ---------------------   Short description  ---------------------
+
+function AboutContainerEdit(props) {
+    const setDescription = props.setDescription;
+
+    return (
+        <div>
+            <textarea className={style.descriptionTextEditor}  
+                onChange={e => setDescription(e.target.value)} 
+                type="text" value={props.desc}/>
+        </div>
+    )
+}
+
+function AboutContainerView(props) {
+
+    return (
+        <p>
+            {props.desc}
+        </p>
+    )
+}
+
+function AboutContainer(props) {
+    const description = props.desc;
+    const setDescription = props.setDescription;
+
+    if(props.editShortDesc) {
+        return (
+            <AboutContainerEdit desc={description} setDescription={setDescription}></AboutContainerEdit>
+        )
+    }
+    else {
+        return (
+            <AboutContainerView desc={description}></AboutContainerView>
+        )
+    }
+}
+
+// ---------------------------------------------------------
 
 export default withRouter(Profile)
