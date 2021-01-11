@@ -45,7 +45,7 @@ module.exports = function (passport) {
     {
       clientID: passportConfigs.TWITCH_CONFIG.clientID,
       clientSecret: passportConfigs.TWITCH_CONFIG.clientSecret,
-      callbackURL: "https://siinc.tv/auth/twitch/callback",
+      callbackURL: "https://siinc.tv/api/auth/twitch/callback",
     },
     // Twitch auth callback function
     function(accessToken, refreshToken, profile , done){
@@ -101,7 +101,7 @@ module.exports = function (passport) {
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CONFIG.clientID,
   clientSecret: GOOGLE_CONFIG.clientSecret,
-  callbackURL: "https://siinc.tv/auth/google/callback",
+  callbackURL: "https://siinc.tv/api/auth/google/callback",
   scope: ['profile', 'email', YOUTUBE_SCOPE]
 },
    // Google auth callback function
@@ -162,7 +162,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
   clientID: FACEBOOK_CONFIG.clientID,
   clientSecret: FACEBOOK_CONFIG.clientSecret,
-  callbackURL: "https://siinc.tv/auth/facebook/callback",
+  callbackURL: "https://siinc.tv/api/auth/facebook/callback",
   profileFields: ['id', 'displayName', 'name', 'link', 'picture.type(large)']
 },
    // Facebook auth callback function
