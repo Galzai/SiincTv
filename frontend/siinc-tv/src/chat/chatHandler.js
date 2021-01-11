@@ -13,8 +13,8 @@ const ChatHandler = (roomId) => {
       console.log(socketContext.streamRoomId);
       if(socketContext.streamRoomId == null)
       {
-        // The second socket will handler will handle this this
-        return;
+        socketContext.socket.emit(JOIN_ROOM, roomId);
+        socketContext.setStreamRoomId(roomId);
       }
 
       // Listens for incoming messages
@@ -31,6 +31,11 @@ const ChatHandler = (roomId) => {
         // leaves the room
         // when the connection is closed
       return () => {
+        if(socketContext.streamRoomId != null)
+        {
+          socketContext.socket.emit(LEAVE_ROOM,roomId);
+          socketContext.setStreamRoomId(null);
+        }
       };
   }
   }, []);
