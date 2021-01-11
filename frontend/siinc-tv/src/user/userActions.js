@@ -242,7 +242,21 @@ const userActions ={
             withCredentials:true,
         });
         return result.data;
-    }
+    },
+
+    updateUserShortDescription: async function(userId, data){
+        const result = await axios({
+            method: 'POST',
+            data:{
+                userId: userId,
+                text: data
+            },
+            url:'http://localhost:4000/user/update_field',
+            withCredentials:true,
+        });
+        return result.data;
+    },
+
 
 };
 

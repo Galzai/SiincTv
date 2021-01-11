@@ -17,7 +17,7 @@ function LiveStream(props){
                 displayName={streamer.displayName}
                 youtubeId = {streamer.youtubeId}
                 dimensions={dimensions}
-                muted={false}
+                muted={true}
                 />
             )
         }

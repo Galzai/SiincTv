@@ -5,25 +5,8 @@ import React, {useContext} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
 import StreamSocket from "../liveStream/streamSocket";
-import VideoCallIcon from '@material-ui/icons/VideoCall';
 
 const { default: streamActions } = require("../../stream/streamActions");
-
-function NavSiincHome(props) {
-    return(
-        <Link to="/">         
-            <div className={style.siincIcon}></div>
-        </Link>    
-    )
-}
-
-function NavCreateStreamButton(props) {
-    return(
-         <Link to="/create_stream">         
-             <VideoCallIcon className={style.navCreateStreamButton} fontSize='large'/>
-        </Link> 
-    );  
-}
 
 function SideBar(props) {
     const userContext = useContext(UserContext);
@@ -61,8 +44,6 @@ function SideBar(props) {
     }
     return(
         <div className={style.sidebar}>
-            <NavSiincHome></NavSiincHome>
-            {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
             <div className={style.sidebarContent}>
                 {currentStream && <div className={style.currentStreamDiv}>
                     <h3 className={style.sidebarTitle}>My current stream</h3>

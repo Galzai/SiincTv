@@ -2,7 +2,7 @@
     position:relative;
     width: 689px;
     height: 1100px;
-    background-color:#10002B;
+    background-color:#0B001E;
     margin: auto;
 }
 .createStreamForm
@@ -102,7 +102,7 @@
     border:2px;
     left:5px;
     top:1px;
-    background-color:#10002B;
+    background-color:#0B001E;
     width: 24px;
     height: 24px;
     display:inline-block;

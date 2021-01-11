@@ -2,24 +2,13 @@
 {
     position: absolute;
     width: 254px;
+    top: 0px;
     height: 100%;
     left: 0px;
-    top: 0px;
     padding: 0px;
     margin: 0px;
-    background-color: #1C0D36;
-
-    border-right: 2px solid #493D5E;
-}
-
-.siincIcon
-{
-    position: absolute;
-    width: 86px;
-    height: 46px;
-    left: 18px;
-    top: 22px;
-    background: url("../../assets/NavBar/NavBarSiincLogo.png");   
+    background-color: #190F2C;
+    margin-top: 14px;
 }
 
 .sidebarContent
@@ -74,27 +63,6 @@
 }
 
 .closeCurrentStreamBtn:focus
-{
-    outline:none;
-}
-
-.navCreateStreamButton
-{
-    position: relative;
-    width: 34px;
-    height: 30px;
-    margin-top: 32px;
-    left: 200px;
-    color: #E2DAE9;
-}
-
-.navCreateStreamButton:hover
-{
-    cursor: pointer;
-    color: #7b4da1;
-}
-
-.navCreateStreamButton:focus
 {
     outline:none;
 }
