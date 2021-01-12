@@ -64,20 +64,20 @@ function UserPreview(props){
     }
 
     return(
-        <div className={style.UserPreviewBox} onClick={handleRedirect}>
+        <div className={style.UserPreviewBox}>
             {image &&<img className={style.streamerCircle}
-                src={image} 
+                src={image} onClick={handleRedirect}
             > 
             </img>}
             <div className={style.UserTitle}>
-                <h2 className={style.userName}>{username}</h2>
+                <h2 className={style.userName} onClick={handleRedirect}>{username}</h2>
                 <h3 className={style.NumFollowers}>{numFollowers}</h3>
                 <span className={style.shortDescription}>{description}</span>
 
             </div>
             <div className={style.UserButtons}>
-                <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button>
-                <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button>
+                { userContext.user && <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button> }
+                { userContext.user && <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button> }
              </div>
              
         </div>

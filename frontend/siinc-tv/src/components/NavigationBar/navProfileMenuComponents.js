@@ -60,27 +60,6 @@ export function NavProfileMenuBreaker(props) {
     return(<div className={style.navProfileMenuBreak} style={props.style}></div>);
 }
 
-export function NavProfileMenuRanking() {
-    let rank = 5 * 2; //change with user contex rank data when field is added.
-
-    const stars = new Array(rank);
-    for(let i = 0 ; i < rank ; i++) {        
-        stars[i] = (i%2==0) ? <div className={style.navProfileMenuRankLeftHalf} key={i}></div>
-                            : <div className={style.navProfileMenuRankRightHalf} key={i}></div>;
-    }
-
-    return(
-        <div>
-            <div className={style.navProfileMenuRankingText}>
-                Ranking
-            </div>
-            <div className={style.navProfileMenuStarContainer}>
-                {stars}
-            </div>
-        </div>
-    );
-}
-
 export function NavProfileMenuMyChannelLink() {
     const userContext = useContext(UserContext);
     const mychannel = "/users/" + userContext.user.username;

@@ -8,7 +8,6 @@ import { Fade } from '@material-ui/core';
 
 import {
         NavProfileMenuHeader,
-        NavProfileMenuRanking,
         NavProfileMenuBreaker,
         NavProfileMenuMyChannelLink,
         NavProfileMenuFriendsLink,
@@ -27,8 +26,7 @@ function NavProfileMenu(props) {
         <Fade in={props.open}>
             <div className={style.navProfileMenu}>
                 <NavProfileMenuHeader onProfileClick={props.onProfileClick}></NavProfileMenuHeader>
-                <NavProfileMenuRanking></NavProfileMenuRanking>
-                <NavProfileMenuBreaker style={{top: "32.5%"}}></NavProfileMenuBreaker>
+                <NavProfileMenuBreaker style={{top: "27%"}}></NavProfileMenuBreaker>
                 <NavProfileMenuMyChannelLink></NavProfileMenuMyChannelLink>
                 <NavProfileMenuFriendsLink></NavProfileMenuFriendsLink>
                 <NavProfileMenuFavoritesLink></NavProfileMenuFavoritesLink>

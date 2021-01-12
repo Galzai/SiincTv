@@ -40,8 +40,7 @@ function JoinStreamRequestNotification(props){
             <ListItemAvatar>
             {data.userImage &&<img className={style.userProfileCircle}
                 src={data.userImage} 
-            >            
-            </img>}
+            />}
             </ListItemAvatar>
             <Grid>
             <Grid item>

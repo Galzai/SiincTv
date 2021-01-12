@@ -1,5 +1,6 @@
 import LiveStreamPage from "./liveStreamPage";
 import {useContext, useState} from "react"
+import style from './searchPage.module.css';
 const { default: streamActions } = require("../stream/streamActions");
 
 function LivetreamPage(props) {
@@ -15,7 +16,7 @@ function LivetreamPage(props) {
         if(id == "ended")
         {
             return(
-                <div>
+                <div className={style.endStream}>
                     <h1>This stream has ended!</h1>
                 </div>);
         }
@@ -29,7 +30,7 @@ function LivetreamPage(props) {
         if(streamData === "stream/invalid_id")
         {
             return(
-            <div>
+            <div className={style.endStream}>
                 <h1>Oh No, there is no stream with such id! = (</h1>
             </div>);
         }

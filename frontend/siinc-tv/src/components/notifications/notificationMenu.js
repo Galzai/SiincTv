@@ -16,6 +16,8 @@ import JoinStreamRequestNotification from './joinStreamRequestNotification'
 import JoinStreamRequestResponse from './JoinStreamRequestResponse'
 import {FriendRequestReceived, FriendRequestAccepted} from "./friendRequestNotification"
 import NewStreamFollowNotification from './newStreamFollowNotification'
+import NewFollowerNotification from './newFollowerNotification'
+import userUtils from "../../user/userUtils"
 const { default: userActions } = require("../../user/userActions");
 
 
@@ -44,7 +46,7 @@ function timeSince(date) {
     if (interval > 1) {
       return Math.floor(interval) + " minutes";
     }
-    return Math.floor(seconds) + " seconds";
+    return "0 minutes";
   }
 
 /**
@@ -60,6 +62,11 @@ function NotificationMenu(){
 
     function buildNotificationByType(notification)
     {
+        // temporary 
+        if( notification.data && notification.data.userImage === "")
+            notification.data.userImage = userUtils.assignImage(null)
+        // ---------
+
         switch(notification.type)
         {
             case "poke":
@@ -93,6 +100,11 @@ function NotificationMenu(){
 
             case "followStartedStream":
                 return <NewStreamFollowNotification
+                    notification={notification}
+                    clearNotification={clearNotification}/>;
+
+            case "newFollower":
+                return <NewFollowerNotification
                     notification={notification}
                     clearNotification={clearNotification}/>;
         }
