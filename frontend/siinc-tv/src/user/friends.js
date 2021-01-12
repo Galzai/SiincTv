@@ -73,6 +73,29 @@ const handleAcceptFriend = (myUser, otherUserName) => {
     })       
 }
 
+const handleRejectFriend = (myUser, otherUserName) => {
+    const fun = async() => {
+        console.log("Rejecting friend")
+        if( otherUserName == myUser.username ) {
+            console.log("Cant reject yourself")
+            return;
+        }
+        let status = await userActions.answerFriendRequest( otherUserName, myUser.username, false );
+        if( !status ) {
+            console.log("An error occured while rejecting friend")
+            return false;
+        }
+
+        // update user context
+        //await userContext.refreshUserData();
+
+        return true;
+    }
+    fun().then(ret => {
+        console.log("Finished running accept friend funciton")
+    })       
+}
+
 export const handleFriendAction=(myUser, otherUserName)=>{
     if( myUser == null ) {
         console.log("usercontext or provided user is null <handleFriendAction>");
@@ -95,6 +118,11 @@ export const handleFriendAction=(myUser, otherUserName)=>{
         return;
     }
     handleAddFriends(myUser, otherUserName)
+}
+
+export const handleFriendActionRejectTemp=(myUser, otherUserName)=>{
+    handleRejectFriend(myUser, otherUserName);
+    return;
 }
 
 export const getFriendState = (myUser, otherUserName) => {

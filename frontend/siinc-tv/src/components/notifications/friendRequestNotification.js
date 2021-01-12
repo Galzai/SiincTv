@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import style from './notifications.module.css';
 import UserContext from "../../userContext";
-import {getFriendState, handleFriendAction} from "../../user/friends";
+import {getFriendState, handleFriendAction, handleFriendActionRejectTemp} from "../../user/friends";
 import userActions from "../../user/userActions"
 
 /**
@@ -26,6 +26,7 @@ export function FriendRequestReceived(props){
 
     function rejectFriendRequest()
     {
+        handleFriendActionRejectTemp(userContext.user, data.username);
         removeFriendNotification();
     }
 

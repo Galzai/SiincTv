@@ -213,17 +213,18 @@ async function handleAnswerFriendRequest2( req )
     else {
         try {
             await User.updateOne( 
-                { username: fromUser },
+                { username: fromUser.username },
                 { $pull: { "friendsData.sentRequests": { id: toUser._id } } }
             ).exec();
     
             await User.updateOne( 
-                { username: toUser },
+                { username: toUser.username },
                 { $pull: { "friendsData.receivedRequests": { id: fromUser._id } } }
             ).exec();
         }
         catch (error) {
             console.log("error occured in : <handleAnswerFriendRequest>")
+            console.log(error)
             return false;
         }
 
