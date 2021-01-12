@@ -139,7 +139,7 @@
 {
     position: absolute;
     width: 83%;
-    height: 7%;
+    height: 9%;
     border-radius: 5px;
 }
 .navProfileMenuMyChannelDiv:hover, .navProfileMenuFriendsDiv:hover, .navProfileMenuFavoritesDiv:hover, .navProfileMenuSubscribedDiv:hover, .navProfileMenuSettingsDiv:hover, .navProfileMenuLogoutDiv:hover
@@ -177,7 +177,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 37%;   
+    top: 32%;   
 }
 
 .navProfileMenuFriendsIcon
@@ -201,7 +201,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 47.2%;   
+    top: 44%;   
 }
 
 .navProfileMenuFavoritesIcon
@@ -225,7 +225,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 57.4%;
+    top: 55%
 }
 
 .navProfileMenuSettingsIcon
