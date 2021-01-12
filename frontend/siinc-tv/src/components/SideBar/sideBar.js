@@ -13,6 +13,7 @@ function SideBar(props) {
     const currentStream = userContext.user ? userContext.user.currentStream : null;
     const {endStream, sendEndStream} = StreamSocket(currentStream ? currentStream.eventId : null);
     const friends = userContext.user && userContext.user.friendsData ?userContext.user.friendsData.friendsList : [];
+    const followings = userContext.user && userContext.user.followData ?userContext.user.followData.followingList : [];
 
     function handleRedirect() {
         props.history.push(`/stream_pages/${currentStream.eventId}`);
@@ -42,6 +43,25 @@ function SideBar(props) {
             
         })) ;
     }
+    // change later css styles to followers specific styles
+    function mapFollowings(){
+        return((followings).map((following, index)=>{
+            return(
+                    <div className={style.friendDiv}>
+                        <img className={style.streamerCircle}
+                            src={following.userImage}/>
+                        <div className={style.friend}
+                        onClick={()=>(props.history.push(`/users/${following.userName}`))}> 
+                            {following.userName}
+                        </div>
+                    </div>
+
+
+            )
+            
+        })) ;
+    }
+
     return(
         <div className={style.sidebar}>
             <div className={style.sidebarContent}>
@@ -56,6 +76,10 @@ function SideBar(props) {
                 {(friends.length != 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
+                </div>}
+                {(followings.length != 0) && <div>
+                <h3 className={style.sidebarTitle}>Following</h3> 
+                {mapFollowings()}
                 </div>}
 
 

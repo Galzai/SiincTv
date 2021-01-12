@@ -78,7 +78,6 @@ export const handleFriendAction=(myUser, otherUserName)=>{
         console.log("usercontext or provided user is null <handleFriendAction>");
         return;
     }
-
     if( myUser.username === otherUserName ) {
         console.log("Its you man" + myUser.username + ", " + otherUserName);
         return;

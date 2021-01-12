@@ -59,9 +59,8 @@ export function FriendRequestReceived(props){
         <ListItem alignItems="flex-start">
             <ListItemAvatar>
             {data.userImage &&<img className={style.userProfileCircle}
-                src={data.userImage} 
-            >            
-            </img>}
+                src={data.userImage} />            
+            }
             </ListItemAvatar>
             <Grid>
             <Grid item>

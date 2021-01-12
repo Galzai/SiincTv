@@ -13,26 +13,27 @@ import { withRouter } from "react-router-dom";
 /**
  * @param {*} props 
  */
-function NewStreamFollowNotification(props){
+function NewFollowerNotification(props){
 
     const data = props.notification.data;
 
     function handleRedirect() {
         props.clearNotification(props.notification._id)
-        props.history.push(`/stream_pages/${data.streamId}`);
+        props.history.push(`/users/${data.username}`);
     }
 
     return(
 
         <ListItem alignItems="flex-start" onClick={()=>{ handleRedirect() }}>
             <ListItemAvatar>
+            {console.log(data.userImage)}
             {data.userImage &&
-                <img className={style.userProfileCircle} src={data.userImage}/>
+                <img className={style.userProfileCircle} src={data.userImage} />
             }   
             </ListItemAvatar>
             <Grid>
             <Grid item>
-            <label>{`${data.username} started a new stream.`}</label>
+            <label>{`${data.username} is now following you!`}</label>
             </Grid>
             </Grid>
         </ListItem>
@@ -40,4 +41,4 @@ function NewStreamFollowNotification(props){
     );
 }
 
-export default withRouter(NewStreamFollowNotification)
+export default withRouter(NewFollowerNotification)

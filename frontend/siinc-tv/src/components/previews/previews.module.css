@@ -100,7 +100,6 @@
     margin-bottom:0px;
     width:600px;
     height:200px;
-    cursor: pointer;
     vertical-align: top;
 }    
 
@@ -135,6 +134,11 @@
     font-size: 25px;
     line-height: 25px;
 }
+.userName:hover
+{
+    cursor: pointer;
+}
+
 
 .ShortDescription{
     top:0px;
@@ -164,6 +168,10 @@
     width: 120px;
     height: 120px; 
     border-radius: 60px;
+}
+.streamerCircle:hover
+{
+    cursor: pointer;
 }
 
 

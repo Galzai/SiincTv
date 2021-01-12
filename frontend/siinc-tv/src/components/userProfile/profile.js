@@ -40,6 +40,8 @@ function Profile(props) {
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
                 setAboutInfo(data.shortDescription)
+                if( data.currentStream && data.currentStream !== "" )
+                    setUserInfoDisplay("live")
             }
         });
         return (() => {isMounted = false})
@@ -159,6 +161,8 @@ function Profile(props) {
     const numOfFriends=()=>{
         if( !user )
             return 0;
+        console.log("Print user from numOffriends")
+        console.log(user)
         return user.friendsData.friendsList.length;
     }
 
@@ -224,14 +228,14 @@ function Profile(props) {
                             return <label className={style.pointsLabel} key={index}>{value}</label>
                         })}
             </div>
-            <div className={style.responsiveButtons}>
+            { userContext.user && <div className={style.responsiveButtons}>
                 { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
                 { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
                 { ( isMe() && (!editAboutInfo) ) &&
                                     <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
                                 { ( isMe() && (editAboutInfo) ) &&
                                     <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
-            </div>
+            </div> }
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
                 { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
