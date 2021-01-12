@@ -10,14 +10,8 @@ import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
 import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
-import { withRouter } from 'react-router-dom'
-import LiveStreamPreview from "../previews/liveStreamPreview"
-
-//import profilePhoto from '../../assets/userProfilePic.png'; //todo
-
-import blackStar from '../../assets/blackstar.png'; //todo
-import purpleStar from '../../assets/purpelstar.png'; //todo
-
+import { withRouter } from 'react-router-dom';
+import LiveStreamPreview from "../previews/liveStreamPreview";
 import SocketContext from "../../socketContext"
 import streamActions from '../../stream/streamActions';
 
@@ -203,71 +197,49 @@ function Profile(props) {
     }
 
     return (
-        <div>        
-            <div className={style.mt40}>
-                <div className={style.container}>
-                    <div className={style.div20}>
-                        <div>
-                            <img className={style.profilePhoto} src={/*assignImage(userName)*/profilePhoto}/>
-                        </div>
-                    </div>
-                    <div className={style.div80}>
-                        <div className={style.firstDiv}>
-                            <span className={style.name}>{userName}</span>
-                            {userOnline==='true' && <span className={style.online}/>}
-                            { isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}
-                            <span className={style.star}>
-                                {userRating>=1 && <img className={style.starImg} src={purpleStar}/>}
-                                {userRating>=2 && <img className={style.starImg} src={purpleStar}/>}
-                                {userRating>=3 && <img className={style.starImg} src={purpleStar}/>}
-                                {userRating>=4 && <img className={style.starImg} src={purpleStar}/>}
-                                {userRating>=5 && <img className={style.starImg} src={purpleStar}/>}
-                                {userRating<1 && <img className={style.starImg} src={blackStar}/>}
-                                {userRating<2 && <img className={style.starImg} src={blackStar}/>}
-                                {userRating<3 && <img className={style.starImg} src={blackStar}/>}
-                                {userRating<4 && <img className={style.starImg} src={blackStar}/>}
-                                {userRating<5 && <img className={style.starImg} src={blackStar}/>}
-                            </span>
-                        </div>
-                        <hr />
-                        <div className={style.secondDiv}>
-                            <span className={style.number}>
+        <div>  
+            <hr className={style.seperatorTitle}></hr>      
+            <div>
+                <img className={style.profilePhoto} src={profilePhoto}/>
+            </div>
+            <div className={style.userInfo}>
+                <div className={style.userTitle}>
+                    <span className={style.name}>{userName}</span>
+                    {userOnline==='true' && <span className={style.online}/>}
+                    { isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}
+                </div>
+                <div className={style.userSocial}>
+                    <span className={style.number}>
                                 {numOfFriends()} Friends
                                 <br />
                                 {numOfFollowers()} Followers
-                            </span>
-                            <span className={style.btns}>
-                                { !isMe() && <a><button className={style.addFriends} onClick={onClickFriendAction}/>{debugFriendRepr()}</a> }
-                                { !isMe() && <a><button className={style.addFavorites} onClick={onClickFollowAction} /> {debugFollowRepr()}</a>}
-                                { ( isMe() && (!editAboutInfo) ) &&
-                                    <a><button className={style.editDescriptionButton} onClick={onClickEditDesc} > Edit </button></a> }
-                                { ( isMe() && (editAboutInfo) ) &&
-                                    <a><button className={style.doneEditDescriptionButton} onClick={onClickDoneEditDesc} > Done </button></a> }
-                            </span>
-                        </div>
-                        <div className={style.aboutContent}>
-                            <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
-                        </div>                        
-                        <div className={style.pointsSpan}>Points of Interest: </div>
+                    </span>
+                </div>
+                <br />
+                <div className={style.aboutContent}>
+                    <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
+                </div>
+                <div className={style.pointsSpan}>Points of Interest: </div>
                         {lables.map((value, index) => {
                             return <label className={style.pointsLabel} key={index}>{value}</label>
                         })}
-                    </div>
-                </div>
             </div>
-            <div className={style.mt40}>
-                <div className={style.container}>
-                    <div className={style.div100}>
-                        <div className={style.tabList}>
-                            { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button> }
+            <div className={style.responsiveButtons}>
+                { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
+                { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
+                { ( isMe() && (!editAboutInfo) ) &&
+                                    <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
+                                { ( isMe() && (editAboutInfo) ) &&
+                                    <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
+            </div>
+            <div className={style.userPageSelector}>
+                <hr className={style.seperatorSelector}></hr>
+                { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
                             {<button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
-                        </div>
-                    </div>
+                <div className={style.displayContainer}>
+                    {showDisplay()}
                 </div>
-            </div>
-            <div className={style.container}>
-                {showDisplay()}
             </div>
         </div>
     );
@@ -292,8 +264,8 @@ function ProfileLiveDisplay(props) {
 
 
     return (
-        <div>
-            <p>live stream</p>
+        <div className={style.relevantContent}>
+            <br />
             { streamData && 
               <LiveStreamPreview key={streamData._id} 
                 streamData={streamData} 
@@ -349,9 +321,9 @@ function ProfileFriendsDisplay(props) {
     }
 
     return (
-        <div>
-            <p>Friends</p>
-            <div>
+        <div className={style.relevantContentText}>
+            <br />
+            <div className={style.aboutContent}>
                 {mapFriends()}
             </div>
         </div>
@@ -404,9 +376,9 @@ function ProfileFollowersDisplay(props) {
     }
 
     return (
-        <div>
-            <p>Friends</p>
-            <div>
+        <div className={style.relevantContentText}>
+            <br />
+            <div className={style.aboutContent}>
                 {mapFollowers()}
             </div>
         </div>
