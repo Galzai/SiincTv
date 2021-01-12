@@ -44,7 +44,7 @@ function timeSince(date) {
     if (interval > 1) {
       return Math.floor(interval) + " minutes";
     }
-    return Math.floor(seconds) + " seconds";
+    return "0 minutes";
   }
 
 /**
