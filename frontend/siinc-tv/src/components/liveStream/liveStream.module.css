@@ -43,7 +43,6 @@
 .streamSelectorButton:hover{
     background-color: #FFFFFF;
     opacity: 0.4;
-
 }
 
 .streamSelectorButton:focus{
@@ -54,7 +53,7 @@
     position: absolute;
     display: inline-block;
     right: 0%;
-    margin-top: 60px;
+    margin-top: 80px;
     width: 112px;
     height:24px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -77,14 +76,14 @@
     outline: none;
 }
 
-.viewButton{
+.setMainButton{
     position: absolute;
     display: inline-block;
     right: 0%;
     margin-top: 28px;
     padding-right: 4px;
-    width: 112px;
-    height:24px;
+    width: 41px;
+    height: 36px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #3C096C;
     border: none;
@@ -94,14 +93,46 @@
     font-style: normal;
     color: #E2DAE9;
     cursor:pointer;
+    background-image: url('../../assets/mainscreen.png');
+    background-repeat: no-repeat;
 }
 
-.viewButton:hover{
+.setMainButton:hover{
     color: #E2DAE9;
     background-color: #5B10A3;
 }
 
-.viewButton:focus{
+.setMainButton:focus{
+    outline: none;
+}
+
+.setSplitButton{
+    position: absolute;
+    display: inline-block;
+    right: 0%;
+    margin-top: 28px;
+    padding-right: 4px;
+    width: 41px;
+    height: 36px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #3C096C;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14.5px;
+    font-style: normal;
+    color: #E2DAE9;
+    cursor:pointer;
+    background-image: url('../../assets/splitscreen.png');
+    background-repeat: no-repeat;
+}
+
+.setSplitButton:hover{
+    color: #E2DAE9;
+    background-color: #5B10A3;
+}
+
+.setSplitButton:focus{
     outline: none;
 }
 

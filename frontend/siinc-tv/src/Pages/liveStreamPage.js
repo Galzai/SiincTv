@@ -91,7 +91,8 @@ function Stream(props) {
                             </SplitStreamViewBox>}
                     </div>
                     {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
-                    <button className={style.viewButton} onClick={()=>{setIsSplit(!isSplit)}} >{isSplit ? "Single main": "Split screen"}</button>
+                    {(isSplit) && <button className={style.setMainButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>}
+                    {(!isSplit) && <button className={style.setSplitButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>}
                     <StreamDetails
                     id={streamData._id}
                     streamTitle={streamData.name}
