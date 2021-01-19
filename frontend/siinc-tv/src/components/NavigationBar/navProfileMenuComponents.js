@@ -105,7 +105,7 @@ export function NavProfileMenuFavoritesLink() {
                 </img>
             </div>
             <div className={style.navProfileMenuFavoritesText}>
-                Favorites
+                Followers
             </div>
         </div>
     );   

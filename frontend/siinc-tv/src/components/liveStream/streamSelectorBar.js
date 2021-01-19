@@ -32,7 +32,7 @@ function StreamSelectorBar(props){
 
     const responsive = {
       desktop: {
-        breakpoint: { max: 3000, min: 1156 },
+        breakpoint: { max: 5000, min: 1156 },
         items: 3,
         slidesToSlide: 3 // optional, default to 1.
       },
