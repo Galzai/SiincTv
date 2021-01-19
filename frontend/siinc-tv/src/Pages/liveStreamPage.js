@@ -10,6 +10,7 @@ import style from '../components/liveStream/liveStream.module.css'
 import Hidden from '@material-ui/core/Hidden'
 import { Container } from '@material-ui/core'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import Tooltip from "@material-ui/core/Tooltip";
 
 function Stream(props) {
     const userContext= useContext(UserContext);
@@ -91,8 +92,14 @@ function Stream(props) {
                             </SplitStreamViewBox>}
                     </div>
                     {canRequestToJoin() && <button className={style.joinButton} onClick={requestToJoinStream}>Request to join</button>}
-                    {(isSplit) && <button className={style.setMainButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>}
-                    {(!isSplit) && <button className={style.setSplitButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>}
+                    {(isSplit) && 
+                        <Tooltip title="Main screen" placement='top'>
+                            <button className={style.setMainButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>
+                        </Tooltip>}
+                    {(!isSplit) && 
+                        <Tooltip title="Split screen" placement='top'>
+                            <button className={style.setSplitButton} onClick={()=>{setIsSplit(!isSplit)}}> </button>
+                        </Tooltip>}
                     <StreamDetails
                     id={streamData._id}
                     streamTitle={streamData.name}
