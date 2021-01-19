@@ -8,12 +8,12 @@ function CreateStreamPage(props) {
     const userContext = useContext(UserContext);
     console.log(userContext.user);
     return(
-        <div className={style.errorDesign}>
+        <div>
             {/* { user && user.twitchData && <NewScheduledStream user={user}/> } */}
             {userContext.user && (userContext.user.twitchData || userContext.user.googleData) && (!userContext.user.currentStream) && <NewLiveStream user={userContext.user}/> }
             {(!userContext.user || (!userContext.user.twitchData && !userContext.user.googleData)) && 
-            <h1>Must have a twitch or youtube account in order to create a stream! </h1>}
-            {(userContext.user && (userContext.user.currentStream)) && <h1>You already have a a current stream!</h1>}
+            <h1 className={style.endStream}>Must have a twitch or youtube account in order to create a stream! </h1>}
+            {(userContext.user && (userContext.user.currentStream)) && <h1 className={style.endStream}>You already have a a current stream!</h1>}
   
         </div>
     );

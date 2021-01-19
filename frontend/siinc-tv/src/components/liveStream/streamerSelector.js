@@ -20,14 +20,13 @@ function StreamSelector(props){
     }
 
     return(
-      <div className={style.streamSelector}>
-        <LiveStream style={{display:"relative"}}
+        <div className={style.streamSelector}>
+          <LiveStream style={{display:"relative"}}
             streamer={streamer}
             muted={true}
-         />
-         <button className={style.streamSelectorButton} onClick={selectAsMainStream}>
-           Set as main
-         </button>
+          />
+          <button className={style.streamSelectorButton} onClick={selectAsMainStream}>
+          </button>
         </div>
     );
 }
