@@ -9,7 +9,12 @@ import UserContext from "../../userContext";
 import streamActions from '../../stream/streamActions.js'
 
 /**
- * @param {*} props 
+ * This Componenet is in charge of the resonse notification received to join stream request
+ * 
+ * @prop {notificationData} notification the data of the notification
+ * @prop {String} response accepted or rejected
+ * @component
+ * @category Frontend
  */
 function JoinStreamRequestResponse(props){
 

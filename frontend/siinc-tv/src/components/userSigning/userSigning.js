@@ -6,8 +6,12 @@ import style from './authGeneral.module.css'
 import style2 from './auth.module.css'
 import SocketContext from "../../socketContext"
 
-/*
+/** 
  * This components will be used to hold the signIn/signup components
+ * @prop {String} type login or signup
+ * @prop {Function} setUser setter for the current user
+ * @component
+ * @category Frontend
  */
 function UserSigning(props) {
 

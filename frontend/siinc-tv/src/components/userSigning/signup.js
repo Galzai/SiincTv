@@ -3,7 +3,25 @@ import userActions from "../../user/userActions"
 import style from './auth.module.css'
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-
+/**
+ * This componenet is in charge of custom user sign up
+ * 
+ * @prop  {String} userName
+ * @prop  {Function} setUserName
+ * @prop  {String} userNameError
+ * @prop  {Function} setUserNameError
+ * @prop  {String} email
+ * @prop  {Function} setEmailError
+ * @prop  {String} emailError
+ * @prop  {Function} setEmail
+ * @prop  {String} password
+ * @prop  {Function} setPassword
+ * @prop  {String} passwordError
+ * @prop  {Function} setPasswordError
+ * 
+ * @component
+ * @category Frontend
+ */
 function Signup(props) {
 
     const [passwordConfirmation, setPasswordConfirmation] = useState('');

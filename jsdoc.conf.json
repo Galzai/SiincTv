@@ -1,0 +1,30 @@
+{
+    "plugins": ["node_modules/better-docs/component"
+                ,"node_modules/better-docs/category"
+    ],
+    "recurseDepth": 10,
+    "source": {
+        "include": ["backend", "frontend/siinc-tv"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_|node_modules|passportConfigs.js"
+    },
+    "sourceType": "module",
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "better-docs": {
+            "name": "SiincTv"
+          }
+        
+    },
+    "opts": {
+        "template": "node_modules/better-docs",
+        "destination": "docs",
+        "readme": "README.md",
+        "recurse": true
+      }
+}

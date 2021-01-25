@@ -3,9 +3,13 @@ import {friendsMock} from "../../mocks/friendsMock";
 import Select from 'react-select';
 
 /**
- * @brief This basically defines a team of streamers
+ * This basically defines a team of streamers
  * 
- * @param {*} props styles, group, and setGroup should be passed.
+ * @prop {streamGroup} group the current group of streamers
+ * @prop {Function} setGroup setter for the streamer group
+ * @prop {friendsData[]} friends user's friends
+ * @component
+ * @category Frontend
  */
 function FriendFinder(props){
     const styles = props.styles;

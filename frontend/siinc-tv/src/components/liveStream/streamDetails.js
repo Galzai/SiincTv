@@ -5,8 +5,15 @@ import ShowMoreText from 'react-show-more-text';
 import StreamSocket from './streamSocket'
 
 /**
- * @brief This displays details regarding the stream
- * @param {*} props 
+ * This displays details regarding the stream
+ * 
+ * @prop {Function} setStreamData setter for current stream data
+ * @prop {streamerData} currentStreamer current main streamer
+ * @prop {streamGroup[]} streamGroups groups of streamers in the stream
+ * @prop {String} streamTitle title of the stream
+ * @prop {String} description description of the stream
+ * @category Frontend
+ * @component
  */
 function StreamDetails(props){
     const id = props.id;

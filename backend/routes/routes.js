@@ -1,3 +1,10 @@
+/**
+ * This modules defines all the routes in our backend API
+ * 
+ * @module Routes
+ * @category Backend
+ */
+
 var express = require('express')
 const passport = require("passport");
 var router = express.Router()
@@ -52,9 +59,6 @@ router.post('/user/createstream', streamController.createStream);
 
 // POST request getStreamById
 router.post('/user/find_stream_data', streamController.getStreamById);
-
-// GET request getUsernameList
-router.get('/user/getusernamelist', userController.getUsernameList);
 
 // POST request searchStreams
 router.post('/search/streams', streamController.searchStreams);

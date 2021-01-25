@@ -1,5 +1,7 @@
-/*
+/**
  * We use this module for access to twitch API that requires an auth token
+ * @module TwitchController
+ * @category Backend
  */
 
 const axios = require('axios');
@@ -10,9 +12,11 @@ const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 } );
 const twitchAuthenticatedKey = "TWITCH_AUTH42069"
 
 let accessToken = "NO TOKEN";
-// We need to get a twitch auth token in order to get full streamer data
-// Tokens need to be refreshed every set interval - we validate the token on each call and if it's invalid we refresh it
-// Token resets every 60 days, we clear it from the cache every 30
+/**
+ * We need to get a twitch auth token in order to get full streamer data
+ * Tokens need to be refreshed every set interval - we validate the token on each call and if it's invalid we refresh it
+ * Token resets every 60 days, we clear it from the cache every 30
+ */
 const refreshTwitchAuth = async function(){
     const result = await axios({
         method: 'POST',
@@ -24,7 +28,9 @@ const refreshTwitchAuth = async function(){
 
     return result;
 };
-// This is where we validate our token before making a call
+/**
+ * This is where we validate our token before making a call
+ */
 const validateTwitchAuth = async function(){
     const result = await axios({
         method: 'get',
@@ -63,7 +69,10 @@ const getTwitchAuth = async function(){
 }
 
 
-// We first try to get twitch authentication
+/**
+ * Returns all the data regarding the current twitch streams of the users with twitch streams in the groups
+ * @param {*} req.body.streamGroups the groups of streamers in the stream;
+ */
 exports.getAllStreamGroupsStreams = function(req, res)
 {
     // Make sure we have an auth key

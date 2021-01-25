@@ -7,9 +7,11 @@ import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
 
 /**
- * @brief displays a preview of a user
+ * displays a preview of a user
  * 
- * @param {*user} props 
+ * @prop {userData} user  the data of the user to display
+ * @component
+ * @category Frontend
  */
 function UserPreview(props){
     const user = props.user;
