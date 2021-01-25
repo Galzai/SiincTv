@@ -1,5 +1,7 @@
 /**
  * This controller is in charge of handling actions relating to notifications
+ * @module NotificationController
+ * @category Backend
  */
 const { User, Notification } = require("../models/user");
 const { emitReloadNotifications } = require("../sockets/sockets");

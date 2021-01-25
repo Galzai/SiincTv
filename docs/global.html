@@ -1,0 +1,4073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Global</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNotificationToFollowersOf">addNotificationToFollowersOf</a></li><li><a href="global.html#bcrypt">bcrypt</a></li><li><a href="global.html#emitNewStreamerJoined">emitNewStreamerJoined</a></li><li><a href="global.html#emitReloadNotifications">emitReloadNotifications</a></li><li><a href="global.html#emitToUser">emitToUser</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#FriendFinder">FriendFinder</a></li><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#handleFollowRequest">handleFollowRequest</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#JoinStreamRequestNotification">JoinStreamRequestNotification</a></li><li><a href="global.html#JoinStreamRequestResponse">JoinStreamRequestResponse</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewLiveStream">NewLiveStream</a></li><li><a href="global.html#NewScheduledStream">NewScheduledStream</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li><li><a href="global.html#NotificationMenu">NotificationMenu</a></li><li><a href="global.html#StreamDatePicker">StreamDatePicker</a></li><li><a href="global.html#StreamDetails">StreamDetails</a></li><li><a href="global.html#StreamerCircle">StreamerCircle</a></li><li><a href="global.html#Streamers">Streamers</a></li><li><a href="global.html#streamGroup">streamGroup</a></li><li><a href="global.html#StreamSelector">StreamSelector</a></li><li><a href="global.html#TeamBlock">TeamBlock</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#UserPreview">UserPreview</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules</h3><ul><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Classes</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Title</p>
+                    <h1>Global</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2></h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+<h4 class="name" id="bcrypt">
+    <a class="href-link" href="#bcrypt">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        bcrypt
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    This module is in charge of settings up passport for our various authentication methods
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_passportConfigs_passportSetup.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_passportConfigs_passportSetup.js.html">backend/passportConfigs/passportSetup.js</a>, <a href="backend_passportConfigs_passportSetup.js.html#line18">line 18</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="express">
+    <a class="href-link" href="#express">#</a>
+    
+    <span class="code-name">
+        express
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    This modules defines all the routes in our backend API
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_routes_routes.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_routes_routes.js.html">backend/routes/routes.js</a>, <a href="backend_routes_routes.js.html#line5">line 5</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="streamGroup">
+    <a class="href-link" href="#streamGroup">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        streamGroup
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_models_streamModels.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_models_streamModels.js.html">backend/models/streamModels.js</a>, <a href="backend_models_streamModels.js.html#line45">line 45</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+<h4 class="name" id="user">
+    <a class="href-link" href="#user">#</a>
+    
+        
+            <span class='tag'>constant</span>
+        
+    
+    <span class="code-name">
+        user
+    </span>
+    
+</h4>
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_models_user.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_models_user.js.html">backend/models/user.js</a>, <a href="backend_models_user.js.html#line172">line 172</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="addNotificationToFollowersOf">
+        <a class="href-link" href="#addNotificationToFollowersOf">#</a>
+        
+        <span class="code-name">
+            
+                addNotificationToFollowersOf<span class="signature">(userId, notification)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>userId</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>notification</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_controllers_followController.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_controllers_followController.js.html">backend/controllers/followController.js</a>, <a href="backend_controllers_followController.js.html#line189">line 189</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="emitNewStreamerJoined">
+        <a class="href-link" href="#emitNewStreamerJoined">#</a>
+        
+        <span class="code-name">
+            
+                emitNewStreamerJoined<span class="signature">(userId)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Emites a newStreamerJoined event
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>userId</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_sockets_sockets.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_sockets_sockets.js.html">backend/sockets/sockets.js</a>, <a href="backend_sockets_sockets.js.html#line123">line 123</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="emitReloadNotifications">
+        <a class="href-link" href="#emitReloadNotifications">#</a>
+        
+        <span class="code-name">
+            
+                emitReloadNotifications<span class="signature">(userId)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Emites a notifications change
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>userId</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_sockets_sockets.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_sockets_sockets.js.html">backend/sockets/sockets.js</a>, <a href="backend_sockets_sockets.js.html#line115">line 115</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="emitToUser">
+        <a class="href-link" href="#emitToUser">#</a>
+        
+        <span class="code-name">
+            
+                emitToUser<span class="signature">(userId, event, data)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Emits an even to a user
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>userId</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">id of the user</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>event</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">event type</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>data</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">event data</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_sockets_sockets.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_sockets_sockets.js.html">backend/sockets/sockets.js</a>, <a href="backend_sockets_sockets.js.html#line107">line 107</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="FriendFinder">
+        <a class="href-link" href="#FriendFinder">#</a>
+        
+        <span class="code-name">
+            
+                FriendFinder<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">styles, group, and setGroup should be passed.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_selectors_friendFinder.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_selectors_friendFinder.js.html">frontend/siinc-tv/src/components/selectors/friendFinder.js</a>, <a href="frontend_siinc-tv_src_components_selectors_friendFinder.js.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="FriendRequestAccepted">
+        <a class="href-link" href="#FriendRequestAccepted">#</a>
+        
+        <span class="code-name">
+            
+                FriendRequestAccepted<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html">frontend/siinc-tv/src/components/notifications/friendRequestNotification.js</a>, <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html#line90">line 90</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="FriendRequestReceived">
+        <a class="href-link" href="#FriendRequestReceived">#</a>
+        
+        <span class="code-name">
+            
+                FriendRequestReceived<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html">frontend/siinc-tv/src/components/notifications/friendRequestNotification.js</a>, <a href="frontend_siinc-tv_src_components_notifications_friendRequestNotification.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="generateKey">
+        <a class="href-link" href="#generateKey">#</a>
+        
+        <span class="code-name">
+            
+                generateKey<span class="signature">(pre)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>pre</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html">frontend/siinc-tv/src/components/streamCreation/teamBlock.js</a>, <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html#line14">line 14</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="handleFollowRequest">
+        <a class="href-link" href="#handleFollowRequest">#</a>
+        
+        <span class="code-name">
+            
+                handleFollowRequest<span class="signature">(req, res)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>req</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_controllers_followController.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_controllers_followController.js.html">backend/controllers/followController.js</a>, <a href="backend_controllers_followController.js.html#line34">line 34</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="handleFriendsRequest">
+        <a class="href-link" href="#handleFriendsRequest">#</a>
+        
+        <span class="code-name">
+            
+                handleFriendsRequest<span class="signature">(req, res)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>req</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>res</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="backend_controllers_friendsController.js.html" class="button">View Source</a>
+            <span>
+                <a href="backend_controllers_friendsController.js.html">backend/controllers/friendsController.js</a>, <a href="backend_controllers_friendsController.js.html#line39">line 39</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="JoinStreamRequestNotification">
+        <a class="href-link" href="#JoinStreamRequestNotification">#</a>
+        
+        <span class="code-name">
+            
+                JoinStreamRequestNotification<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_joinStreamRequestNotification.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_joinStreamRequestNotification.js.html">frontend/siinc-tv/src/components/notifications/joinStreamRequestNotification.js</a>, <a href="frontend_siinc-tv_src_components_notifications_joinStreamRequestNotification.js.html#line15">line 15</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="JoinStreamRequestResponse">
+        <a class="href-link" href="#JoinStreamRequestResponse">#</a>
+        
+        <span class="code-name">
+            
+                JoinStreamRequestResponse<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html">frontend/siinc-tv/src/components/notifications/JoinStreamRequestResponse.js</a>, <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html#line14">line 14</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NewFollowerNotification">
+        <a class="href-link" href="#NewFollowerNotification">#</a>
+        
+        <span class="code-name">
+            
+                NewFollowerNotification<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_newFollowerNotification.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_newFollowerNotification.js.html">frontend/siinc-tv/src/components/notifications/newFollowerNotification.js</a>, <a href="frontend_siinc-tv_src_components_notifications_newFollowerNotification.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NewLiveStream">
+        <a class="href-link" href="#NewLiveStream">#</a>
+        
+        <span class="code-name">
+            
+                NewLiveStream<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type"><a href="global.html#user">user</a></span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">expects the current user to be passed as props</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_streamCreation_newLiveStream.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_streamCreation_newLiveStream.js.html">frontend/siinc-tv/src/components/streamCreation/newLiveStream.js</a>, <a href="frontend_siinc-tv_src_components_streamCreation_newLiveStream.js.html#line13">line 13</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NewScheduledStream">
+        <a class="href-link" href="#NewScheduledStream">#</a>
+        
+        <span class="code-name">
+            
+                NewScheduledStream<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type"><a href="global.html#user">user</a></span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">expects the current user to be passed as props</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_streamCreation_newScheduledStream.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_streamCreation_newScheduledStream.js.html">frontend/siinc-tv/src/components/streamCreation/newScheduledStream.js</a>, <a href="frontend_siinc-tv_src_components_streamCreation_newScheduledStream.js.html#line17">line 17</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NewStreamFollowNotification">
+        <a class="href-link" href="#NewStreamFollowNotification">#</a>
+        
+        <span class="code-name">
+            
+                NewStreamFollowNotification<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_newStreamFollowNotification.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_newStreamFollowNotification.js.html">frontend/siinc-tv/src/components/notifications/newStreamFollowNotification.js</a>, <a href="frontend_siinc-tv_src_components_notifications_newStreamFollowNotification.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="NotificationMenu">
+        <a class="href-link" href="#NotificationMenu">#</a>
+        
+        <span class="code-name">
+            
+                NotificationMenu<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_notifications_notificationMenu.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_notifications_notificationMenu.js.html">frontend/siinc-tv/src/components/notifications/notificationMenu.js</a>, <a href="frontend_siinc-tv_src_components_notifications_notificationMenu.js.html#line56">line 56</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="StreamDatePicker">
+        <a class="href-link" href="#StreamDatePicker">#</a>
+        
+        <span class="code-name">
+            
+                StreamDatePicker<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">Should contain an updateDate member for setting the selected date</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_streamCreation_streamDatePicker.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_streamCreation_streamDatePicker.js.html">frontend/siinc-tv/src/components/streamCreation/streamDatePicker.js</a>, <a href="frontend_siinc-tv_src_components_streamCreation_streamDatePicker.js.html#line16">line 16</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="StreamDetails">
+        <a class="href-link" href="#StreamDetails">#</a>
+        
+        <span class="code-name">
+            
+                StreamDetails<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_liveStream_streamDetails.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_liveStream_streamDetails.js.html">frontend/siinc-tv/src/components/liveStream/streamDetails.js</a>, <a href="frontend_siinc-tv_src_components_liveStream_streamDetails.js.html#line11">line 11</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="StreamerCircle">
+        <a class="href-link" href="#StreamerCircle">#</a>
+        
+        <span class="code-name">
+            
+                StreamerCircle<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_liveStream_streamerCircle.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_liveStream_streamerCircle.js.html">frontend/siinc-tv/src/components/liveStream/streamerCircle.js</a>, <a href="frontend_siinc-tv_src_components_liveStream_streamerCircle.js.html#line13">line 13</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="Streamers">
+        <a class="href-link" href="#Streamers">#</a>
+        
+        <span class="code-name">
+            
+                Streamers<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_liveStream_streamers.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_liveStream_streamers.js.html">frontend/siinc-tv/src/components/liveStream/streamers.js</a>, <a href="frontend_siinc-tv_src_components_liveStream_streamers.js.html#line21">line 21</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="StreamSelector">
+        <a class="href-link" href="#StreamSelector">#</a>
+        
+        <span class="code-name">
+            
+                StreamSelector<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_liveStream_streamerSelector.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_liveStream_streamerSelector.js.html">frontend/siinc-tv/src/components/liveStream/streamerSelector.js</a>, <a href="frontend_siinc-tv_src_components_liveStream_streamerSelector.js.html#line12">line 12</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="TeamBlock">
+        <a class="href-link" href="#TeamBlock">#</a>
+        
+        <span class="code-name">
+            
+                TeamBlock<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+      
+<span class="param-type">*</span>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">props should have a member streamGroups and setStreamGroups for updating the current groups</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html">frontend/siinc-tv/src/components/streamCreation/teamBlock.js</a>, <a href="frontend_siinc-tv_src_components_streamCreation_teamBlock.js.html#line119">line 119</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="UserPreview">
+        <a class="href-link" href="#UserPreview">#</a>
+        
+        <span class="code-name">
+            
+                UserPreview<span class="signature">(props)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>props</code></td>
+  
+
+  <td class="type">
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="frontend_siinc-tv_src_components_previews_userPreview.js.html" class="button">View Source</a>
+            <span>
+                <a href="frontend_siinc-tv_src_components_previews_userPreview.js.html">frontend/siinc-tv/src/components/previews/userPreview.js</a>, <a href="frontend_siinc-tv_src_components_previews_userPreview.js.html#line14">line 14</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

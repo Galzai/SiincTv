@@ -2,7 +2,14 @@ const mongoose = require("mongoose");
 
 
 /**
- * @brief Streamer data for streamers in stream
+ * Streamer data for streamers in stream
+ * @class
+ * @category Backend
+ * @param  {mongoose.Schema.Types.ObjectId} memberId
+ * @param  {String} youtubeId
+ * @param  {String} twitchId
+ * @param  {String} displayName
+ * @param  {String} userImage
  */
 const streamerData = new mongoose.Schema({
     memberId: mongoose.Schema.Types.ObjectId,
@@ -14,7 +21,11 @@ const streamerData = new mongoose.Schema({
 const StreamerData =  mongoose.model("StreamerData", streamerData );
 
 /**
- * @brief information regarding registered viewers
+ *information regarding registered viewers
+ * @class
+ * @category Backend
+ * @param  {mongoose.Schema.Types.ObjectId} memberId
+ * @param  {String} displayName
  */
 const registeredViewerData = new mongoose.Schema({
     memberId: mongoose.Schema.Types.ObjectId,
@@ -23,7 +34,13 @@ const registeredViewerData = new mongoose.Schema({
 const RegisteredViewerData =  mongoose.model("RegisteredViewerData", registeredViewerData );
 
 /**
- * @brief describes a group of streamers that can hold up to maxNumOfMembers
+ * describes a group of streamers that can hold up to maxNumOfMembers
+ * @class
+ * @category Backend
+ */
+/**
+ * @param  {Number} maxNumOfMembers
+ * @param  {StreamerData members
  */
 const streamGroup = new mongoose.Schema({
     maxNumOfMembers: Number,
@@ -32,7 +49,20 @@ const streamGroup = new mongoose.Schema({
 const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
 
 /**
- * @brief describes a siinc stream
+ * describes a siinc stream
+ * @class
+ * @category Backend
+ * @param  {StreamerData} creator
+ * @param  {String} name
+ * @param  {String} status
+ * @param  {Boolean} privateStream
+ * @param  {Boolean} joinOnly
+ * @param  {String[]} tags
+ * @param  {Date} date
+ * @param  {String} description
+ * @param  {StreamGrou[]} streamGroups
+ * @param  {{type:mongoose.Schema.Types.ObjectId}[]} registeredViewers
+ * @param  {Number}} numOfViewers
  */
 const streamData = new mongoose.Schema({
     creator : {type: mongoose.Schema.Types.Mixed, ref: 'StreamerData'},

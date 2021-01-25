@@ -1,5 +1,8 @@
 /**
  * This controller is in charge of all the actions relating to calling the youtube API 
+ * 
+ * @module YoutubeController
+ * @category Backend
  */
 const axios = require("axios");
 var { google } = require("googleapis");

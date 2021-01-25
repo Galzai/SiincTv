@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> frontend/siinc-tv/src/user/userActions.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNotificationToFollowersOf">addNotificationToFollowersOf</a></li><li><a href="global.html#bcrypt">bcrypt</a></li><li><a href="global.html#emitNewStreamerJoined">emitNewStreamerJoined</a></li><li><a href="global.html#emitReloadNotifications">emitReloadNotifications</a></li><li><a href="global.html#emitToUser">emitToUser</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#FriendFinder">FriendFinder</a></li><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#handleFollowRequest">handleFollowRequest</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#JoinStreamRequestNotification">JoinStreamRequestNotification</a></li><li><a href="global.html#JoinStreamRequestResponse">JoinStreamRequestResponse</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewLiveStream">NewLiveStream</a></li><li><a href="global.html#NewScheduledStream">NewScheduledStream</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li><li><a href="global.html#NotificationMenu">NotificationMenu</a></li><li><a href="global.html#StreamDatePicker">StreamDatePicker</a></li><li><a href="global.html#StreamDetails">StreamDetails</a></li><li><a href="global.html#StreamerCircle">StreamerCircle</a></li><li><a href="global.html#Streamers">Streamers</a></li><li><a href="global.html#streamGroup">streamGroup</a></li><li><a href="global.html#StreamSelector">StreamSelector</a></li><li><a href="global.html#TeamBlock">TeamBlock</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#UserPreview">UserPreview</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules</h3><ul><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Classes</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/user/userActions.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
+ * We use this module to access our user related backend API
+ * All the calls here are to the backend of the web-app
+ */
+import axios from "axios";
+
+const SEND_FRIEND_REQUEST = 0;
+const ANSWER_FRIEND_REQUEST = 1;
+const UNFRIEND_REQUEST = 2;
+const FOLLOW_REQUEST = 0;
+const UNFOLLOW_REQUEST = 1;
+
+const userActions = {
+  /**
+   * Tries to register a custom user with given username , email and password
+   *
+   * @param {*} regUsername userName to register with
+   * @param {*} regEmail email to registerwith
+   * @param {*} regPassword password tor register with
+   *
+   * @return "auth/user_created" if succesful, otherwise the relevant error (username exists, etc..)
+   */
+  createNewUser: async function (regUsername, regEmail, regPassword) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        username: regUsername,
+        email: regEmail,
+        password: regPassword,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/signup",
+    });
+    return result.data;
+  },
+
+  /**
+   * Tries to sign in a user with a given username and password
+   *
+   * @param {*} regUsername username
+   * @param {*} regPassword password
+   * @return if failed, a string describing the failure, otherwise the data of the user that signed in
+   */
+  signinWithUsernameAndPassword: async function (regUsername, regPassword) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        username: regUsername,
+        password: regPassword,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/signin",
+    });
+    return result.data;
+  },
+
+  /**
+   * Logs the current user on the session out
+   */
+  signOut: async function () {
+    const result = await axios({
+      method: "POST",
+      data: {},
+      withCredentials: true,
+      url: "http://localhost:4000/signout",
+    });
+    return result.data;
+  },
+
+  /**
+   * Returns the up-to-date data of the currently signed in user (or null if no user exist)
+   */
+  getUser: async function () {
+    const result = await axios({
+      method: "GET",
+      data: {},
+      withCredentials: true,
+      url: "http://localhost:4000/user",
+    });
+    return result.data;
+  },
+
+  /**
+   * Returns data regarding a specific requested user by username
+   * @param {*} userName username of the user to search for
+   */
+  getUserData: async function (userName) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        username: userName,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/userdata",
+    });
+    return result.data;
+  },
+
+  /**
+   * Checks if a username exists in the databaase
+   * @param {*} regUsername username to check for
+   * @returns true if username exists false otherwise
+   */
+  checkUsernameExists: async function (regUsername) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        username: regUsername,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/check_username",
+    });
+    return result.data;
+  },
+
+  /**
+   * Searches user by a search string (looks at their username and various data) and what page to look in
+   * Results are paginated to pages with 20 entries each
+   *
+   * @param {*} searchString string to search in
+   * @param {*} page what page of the results we are looking for
+   */
+  searchUsers: async function (searchString, page) {
+    const result = await axios({
+      method: "POST",
+      data: { searchString, page },
+      url: "http://localhost:4000/search/users",
+    });
+    return result.data;
+  },
+
+  /**
+   * Sets the redirect URI for authentication calls to be the current URI
+   */
+  setRedirectURL: async function () {
+    const result = await axios({
+      method: "POST",
+      url: "http://localhost:4000/auth/setRedirectUrl",
+    });
+    return result.data;
+  },
+
+  /**
+   * Prompts to authenticate with twitch
+   */
+  authenicateTwitch: function () {
+    window.location.assign("http://localhost:4000/auth/twitch/");
+  },
+
+  /**
+   * Prompts to authenticate with google
+   */
+  authenicateGoogle: function () {
+    window.location.assign("http://localhost:4000/auth/google/");
+  },
+
+  /**
+   * Prompts to authenticate with facebook
+   */
+  authenicateFacebook: function () {
+    window.location.assign("http://localhost:4000/auth/facebook/");
+  },
+
+  // ------------------------- FRIENDS -----------------------------
+
+  // String:fromUser - friend request sender
+  // String:toUser   - friend request receiver
+  sendFriendRequest: async function (fromUser, toUser) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        action: SEND_FRIEND_REQUEST,
+        fromUser: fromUser,
+        toUser: toUser,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/friends",
+    });
+    return result.data;
+  },
+
+  // String:fromUser - the sender of the request which is now being responded to
+  // String:toUser   - the one who responds to the requests
+  answerFriendRequest: async function (fromUser, toUser, accepted) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        action: ANSWER_FRIEND_REQUEST,
+        fromUser: fromUser,
+        toUser: toUser,
+        accepted: accepted, //boolean true for accepted, false for rejeceted.
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/friends",
+    });
+    return result.data;
+  },
+
+  // String:fromUser - the one who unfriends
+  // String:toUser   - the one being unfriended
+  unfriendFriendRequest: async function (fromUser, toUser) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        action: UNFRIEND_REQUEST,
+        fromUser: fromUser,
+        toUser: toUser,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/friends",
+    });
+    return result.data;
+  },
+
+  // -------------------------------------------------------------
+
+  // ------------------------- FOLLOW -----------------------------
+
+  // String:fromUser - the follower
+  // String:toUser   - who the follower follows
+  sendFollowRequest: async function (fromUser, toUser) {
+    console.log(
+      "sending follow request from " + fromUser + " to user " + toUser
+    );
+    const result = await axios({
+      method: "POST",
+      data: {
+        action: FOLLOW_REQUEST,
+        fromUser: fromUser,
+        toUser: toUser,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/follow",
+    });
+    return result.data;
+  },
+
+  // String:fromUser - the follower
+  // String:toUser   - who the follower follows
+  sendUnfollowRequest: async function (fromUser, toUser) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        action: UNFOLLOW_REQUEST,
+        fromUser: fromUser,
+        toUser: toUser,
+      },
+      withCredentials: true,
+      url: "http://localhost:4000/user/follow",
+    });
+    return result.data;
+  },
+  // -------------------------------------------------------------
+
+  /**
+   * Removes a notification with given id from current user
+   * @param {*} id
+   */
+  deleteNotification: async function (id) {
+    const result = await axios({
+      method: "POST",
+      data: { notificationId: id },
+      url: "http://localhost:4000/notifications/deleteNotification",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+
+  /**
+   * Temporary test function - sends a notification to your own user
+   */
+  pokeYourself: async function () {
+    const result = await axios({
+      method: "POST",
+      url: "http://localhost:4000/test/selfPoke",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+
+  /**
+   * Deletes all clearable notifications from current user
+   */
+  clearNotifications: async function () {
+    const result = await axios({
+      method: "POST",
+      url: "http://localhost:4000/notifications/clearNotifications",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+
+  updateUserShortDescription: async function (userId, data) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        userId: userId,
+        text: data,
+      },
+      url: "http://localhost:4000/user/update_field",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+};
+
+export default userActions;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

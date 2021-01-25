@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> frontend/siinc-tv/src/components/search/streamSearchResults.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNotificationToFollowersOf">addNotificationToFollowersOf</a></li><li><a href="global.html#bcrypt">bcrypt</a></li><li><a href="global.html#emitNewStreamerJoined">emitNewStreamerJoined</a></li><li><a href="global.html#emitReloadNotifications">emitReloadNotifications</a></li><li><a href="global.html#emitToUser">emitToUser</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#FriendFinder">FriendFinder</a></li><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#handleFollowRequest">handleFollowRequest</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#JoinStreamRequestNotification">JoinStreamRequestNotification</a></li><li><a href="global.html#JoinStreamRequestResponse">JoinStreamRequestResponse</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewLiveStream">NewLiveStream</a></li><li><a href="global.html#NewScheduledStream">NewScheduledStream</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li><li><a href="global.html#NotificationMenu">NotificationMenu</a></li><li><a href="global.html#StreamDatePicker">StreamDatePicker</a></li><li><a href="global.html#StreamDetails">StreamDetails</a></li><li><a href="global.html#StreamerCircle">StreamerCircle</a></li><li><a href="global.html#Streamers">Streamers</a></li><li><a href="global.html#streamGroup">streamGroup</a></li><li><a href="global.html#StreamSelector">StreamSelector</a></li><li><a href="global.html#TeamBlock">TeamBlock</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#UserPreview">UserPreview</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules</h3><ul><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Classes</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/components/search/streamSearchResults.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This modules is in charge of displaying the results of searching for streams
+ */
+import React, { useState } from "react";
+import InfiniteScroll from "react-infinite-scroller";
+import StreamActions from "../../stream/streamActions";
+import LiveStreamPreview from "../previews/liveStreamPreview";
+
+function StreamSearchResults(props) {
+  const [searchString, setSearchString] = useState(props.searchString);
+  const status = props.status;
+  const [results, setResults] = useState({
+    streamers: [],
+    page: 1,
+    hasMoreResults: true,
+  });
+  const [joinableOnly, setJoinableOnly] = useState(props.joinableOnly);
+
+  /**
+   * Fetches more data (next page)
+   */
+  function fetchMoreData() {
+    StreamActions.searchStreams(searchString, results.page, status).then(
+      (resultPage) => {
+        console.log(resultPage);
+        if (
+          !resultPage ||
+          resultPage.length === 0 ||
+          resultPage === "stream/no_results"
+        ) {
+          setResults({ hasMoreResults: false });
+          return;
+        }
+        setResults({
+          streamers: [...results.streamers, ...resultPage],
+          page: results.page + 1,
+          hasMoreResults: resultPage.length >= 20,
+        });
+      }
+    );
+  }
+  React.useEffect(() => {
+    setResults({ streamers: [], page: 1, hasMoreResults: true });
+  }, [joinableOnly, searchString]);
+
+  /**
+   * Displays the results of the search
+   */
+  function displayResults() {
+    // If the search string changed we reset everything
+    if (searchString !== props.searchString) {
+      setSearchString(props.searchString);
+    }
+    if (joinableOnly !== props.joinableOnly) {
+      setJoinableOnly(props.joinableOnly);
+    }
+
+    // We return different views depending on what we are searching for
+    if (!results.streamers || results.streamers.length === 0) {
+      return &lt;h1>0 Results found.&lt;/h1>;
+    }
+
+    if (status === "Live") {
+      return results.streamers.map((result, index) => {
+        if (!joinableOnly || joinableOnly !== result.joinOnly) {
+          console.log(joinableOnly);
+          console.log(result);
+          return &lt;LiveStreamPreview key={index} streamData={result} />;
+        }
+      });
+    }
+  }
+
+  return (
+    &lt;InfiniteScroll
+      pageStart={0}
+      loadMore={fetchMoreData}
+      style={{ display: "flex", flexDirection: "column-reverse" }}
+      hasMore={results.hasMoreResults}
+      loader={&lt;h4>Loading...&lt;/h4>}
+    >
+      {displayResults()}
+    &lt;/InfiniteScroll>
+  );
+}
+export default StreamSearchResults;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

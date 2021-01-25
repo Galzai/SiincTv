@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> backend/models/user.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNotificationToFollowersOf">addNotificationToFollowersOf</a></li><li><a href="global.html#bcrypt">bcrypt</a></li><li><a href="global.html#emitNewStreamerJoined">emitNewStreamerJoined</a></li><li><a href="global.html#emitReloadNotifications">emitReloadNotifications</a></li><li><a href="global.html#emitToUser">emitToUser</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#FriendFinder">FriendFinder</a></li><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#handleFollowRequest">handleFollowRequest</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#JoinStreamRequestNotification">JoinStreamRequestNotification</a></li><li><a href="global.html#JoinStreamRequestResponse">JoinStreamRequestResponse</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewLiveStream">NewLiveStream</a></li><li><a href="global.html#NewScheduledStream">NewScheduledStream</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li><li><a href="global.html#NotificationMenu">NotificationMenu</a></li><li><a href="global.html#StreamDatePicker">StreamDatePicker</a></li><li><a href="global.html#StreamDetails">StreamDetails</a></li><li><a href="global.html#StreamerCircle">StreamerCircle</a></li><li><a href="global.html#Streamers">Streamers</a></li><li><a href="global.html#streamGroup">streamGroup</a></li><li><a href="global.html#StreamSelector">StreamSelector</a></li><li><a href="global.html#TeamBlock">TeamBlock</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#UserPreview">UserPreview</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules</h3><ul><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Classes</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>backend/models/user.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const mongoose = require("mongoose");
+
+/**
+ * Schema for twitch data   
+ * @class
+ * @category Backend
+ * @param  {String} login
+ * @param  {String} display_name
+ * @param  {String} description
+ * @param  {String} profile_image_url
+ * @param  {Number} view_count
+ */
+const twitchData = new mongoose.Schema({
+  login: String,
+  display_name: String,
+  description: String,
+  profile_image_url: String,
+  view_count: Number
+});
+const TwitchData = mongoose.model("TwitchData", twitchData );
+
+/**
+ * Schema for google
+ * @class
+ * @category Backend
+ * @param  {String} displayName
+ * @param  {String} youtubeId
+ * @param  {String} youtubeName
+ * @param  {Object} name
+ * @param  {Object[]} emails
+ * @param  {String[]} photos
+ */
+const googleData = new mongoose.Schema({
+  displayName: String,
+  youtubeId: String,
+  youtubeName: String,
+  name: {familyName: String,givenName: String},
+  emails:[{value: String, verified: Boolean}],
+  photos:[{value:String}],
+});
+const GoogleData =  mongoose.model("GoogleData", googleData );
+
+/**
+ * Schema for facebook
+ * @class
+ * @category Backend
+ * @param  {String} displayName
+ * @param  {String} profileUrl
+ * @param  {Object} name
+ * @param  {String} photos
+ */
+const facebookData = new mongoose.Schema({
+  displayName: String,
+  profileUrl: String,
+  name: {familyName: String,givenName: String},
+  photos:[{value:String}],
+});
+const FacebookData =  mongoose.model("FacebookData", facebookData );
+
+/**
+ * holds information regarding the user's upcoming events
+ * @class
+ * @category Backend
+ * @param  {String} name
+ * @param  {Date} date
+ * @param  {mongoose.Schema.Types.ObjectId} eventId
+ */
+const upComingEventData = new mongoose.Schema({
+  name : String,
+  date: Date,
+  eventId: mongoose.Schema.Types.ObjectId
+});
+const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData );
+
+/**
+ * holds information regarding the user's friends and friend requests
+ * @class
+ * @category Backend
+ */
+const friendsData = new mongoose.Schema({
+  friendsList: [{
+      value: String,
+      memberId: mongoose.Schema.Types.ObjectId,
+      youtubeId: String,
+      twitchId: String,
+      displayName : String,
+      userImage : String,
+      label: String,
+      userImage: String
+    }],
+    //{userId : mongoose.Schema.Types.ObjectId, username: String, }],
+  receivedRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}],
+  sentRequests: [{userId : mongoose.Schema.Types.ObjectId, username: String}]
+});
+const FriendsData = mongoose.model("FriendsData", friendsData);
+
+/**
+ * holds information regarding the user's followers
+ * @class
+ * @category Backend
+ */
+const followData = new mongoose.Schema({
+  followersList: [{
+    userId: mongoose.Schema.Types.ObjectId,
+    youtubeId: String,
+    twitchId: String,
+    userName : String,
+    userImage : String,
+  }],
+  followingList: [{
+    userId: mongoose.Schema.Types.ObjectId,
+    youtubeId: String,
+    twitchId: String,
+    userName : String,
+    userImage : String,
+  }],
+});
+const FollowData = mongoose.model("FollowData", followData);
+
+/**
+ * Schema for Notification data/fields ( each type of notification has different fields )
+ * @class
+ * @category Backend
+ */ 
+var notificationData = new mongoose.Schema({
+  type: Map,
+  of: String
+});
+const NotificationData = mongoose.model("NotificationData", notificationData );
+
+/**
+* Schema for notifications
+ * @class
+ * @category Backend
+ * @param  {String} type
+ * @param  {Boolean} clearable
+ * @param  {Date} date
+ * @param  {mongoose.Schema.Types.Mixed} data
+ */
+const notification = new mongoose.Schema({
+  type: String,
+  clearable: Boolean,
+  date: {type: Date, default: Date.now},
+  data: mongoose.Schema.Types.Mixed
+});
+const Notification = mongoose.model("Notification", notification );
+
+/**
+ * Schema for user account
+ * @class
+ * @category Backend
+ */
+/**
+ * @param  {String} username
+ * @param  {String} email
+ * @param  {String} password
+ * @param  {String} twitchId
+ * @param  {String} googleId
+ * @param  {String} facebookId
+ * @param  {String} image
+ * @param  {String} shortDescription
+ * @param  {String} description
+ * @param  {UpComingEventData} currentStream
+ * @param  {TwitchData} twitchData
+ * @param  {GoogleData} googleData
+ * @param  {FacebookData} facebookData
+ * @param  {UpComingEventData[]} upcomingEvents
+ * @param  {FriendsData[]} friendsData
+ * @param  {Notification[]} notifications
+ * @param  {FollowData} followData
+ */
+const user = new mongoose.Schema({
+  username: String,
+  email: String,
+  password: String,
+  twitchId: String,
+  googleId: String,
+  facebookId: String,
+  image: String,
+  shortDescription: String,
+  description: String,
+  currentStream: {type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'},
+  twitchData: {type: mongoose.Schema.Types.Mixed, ref: 'TwitchData'} ,
+  googleData: {type: mongoose.Schema.Types.Mixed, ref: 'GoogleData'},
+  facebookData:{type: mongoose.Schema.Types.Mixed, ref: 'FacebookData'},
+  upcomingEvents:[{type: mongoose.Schema.Types.Mixed, ref: 'UpComingEventData'}],
+  friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'},
+  notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}],
+  followData:{type: mongoose.Schema.Types.Mixed, ref: 'FollowData'},
+});
+
+// This is necessery for quick text search
+user.index({username: 'text', shortDescription: 'text', description: 'text'}, 
+{name: 'Search index', weights: {username: 10, shortDescription: 8, description: 5}});
+const User = mongoose.model("User", user);
+
+module.exports = {
+      User:User,
+      GoogleData:GoogleData,
+      TwitchData:TwitchData,
+      FacebookData:FacebookData,
+      UpComingEventData:UpComingEventData,
+      FriendsData:FriendsData,
+      Notification:Notification,
+      NotificationData:NotificationData,
+      FollowData:FollowData,
+}
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

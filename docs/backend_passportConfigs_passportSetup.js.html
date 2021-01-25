@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> backend/passportConfigs/passportSetup.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Global</h3><ul><li><a href="global.html#addNotificationToFollowersOf">addNotificationToFollowersOf</a></li><li><a href="global.html#bcrypt">bcrypt</a></li><li><a href="global.html#emitNewStreamerJoined">emitNewStreamerJoined</a></li><li><a href="global.html#emitReloadNotifications">emitReloadNotifications</a></li><li><a href="global.html#emitToUser">emitToUser</a></li><li><a href="global.html#express">express</a></li><li><a href="global.html#FriendFinder">FriendFinder</a></li><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#handleFollowRequest">handleFollowRequest</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#JoinStreamRequestNotification">JoinStreamRequestNotification</a></li><li><a href="global.html#JoinStreamRequestResponse">JoinStreamRequestResponse</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewLiveStream">NewLiveStream</a></li><li><a href="global.html#NewScheduledStream">NewScheduledStream</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li><li><a href="global.html#NotificationMenu">NotificationMenu</a></li><li><a href="global.html#StreamDatePicker">StreamDatePicker</a></li><li><a href="global.html#StreamDetails">StreamDetails</a></li><li><a href="global.html#StreamerCircle">StreamerCircle</a></li><li><a href="global.html#Streamers">Streamers</a></li><li><a href="global.html#streamGroup">streamGroup</a></li><li><a href="global.html#StreamSelector">StreamSelector</a></li><li><a href="global.html#TeamBlock">TeamBlock</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#UserPreview">UserPreview</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules</h3><ul><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Classes</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>backend/passportConfigs/passportSetup.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This module is in charge of settings up passport for our various authentication methods
+ * 
+ * @Twitch_strategy - If twitch returns with a user with user id that already exists we - we sign the user in.
+ * If it returns with a user id that we do not have - we create a new user.
+ * Otherwise - indication that an error occured.
+ * 
+ * @Google_strategy - If youtube returns with a user id that already exists we sign the user in.
+ * If it returns with a new user id- we use the youtube API to retrieve the google account's linked youtube account.
+ * Otherwise - error.
+ * 
+ * @Facebook_strategy - If twitch returns with a user with user id that already exists we - we sign the user in.
+ * If it returns with a user id that we do not have - we create a new user.
+ * Otherwise - indication that an error occured.
+ * 
+ */
+
+const bcrypt = require("bcryptjs");
+var youtubeController = require("../controllers/youtubeController");
+//all our strategies
+const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
+const TwitchStrategy = require("passport-twitch.js").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+//our keys
+const passportConfigs = require("./passportConfigs.js");
+const { response } = require("express");
+const { json } = require("body-parser");
+const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
+
+// our Models
+const { User, FriendsData, FollowData } = require("../models/user");
+const { GoogleData } = require("../models/user");
+const { TwitchData } = require("../models/user");
+const { FacebookData } = require("../models/user");
+
+const YOUTUBE_SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
+
+// Used for authenticating users, passport is passed to not create new instance
+module.exports = function (passport) {
+  // Local strategy
+  passport.use(
+    new LocalStrategy((username, password, done) => {
+      User.findOne({ username: username }, (err, user) => {
+        if (err) throw err;
+        if (!user) return done(null, false);
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (err) throw err;
+          if (result === true) {
+            return done(null, user);
+          } else {
+            return done(null, false);
+          }
+        });
+      });
+    })
+  );
+
+  // Twitch Strategy
+  passport.use(
+    new TwitchStrategy(
+      {
+        clientID: passportConfigs.TWITCH_CONFIG.clientID,
+        clientSecret: passportConfigs.TWITCH_CONFIG.clientSecret,
+        callbackURL: "/auth/twitch/callback",
+      },
+      // Twitch auth callback function
+      function (accessToken, refreshToken, profile, done) {
+        // We try to see if we have an existing user with this id
+        User.findOne(
+          { twitchId: profile.id },
+          // findOne callback function
+          async function (err, doc) {
+            if (err) {
+              console.log("error occured");
+              throw err;
+            }
+            // If we find a user with the existing twitch id we just sign in
+            if (doc) {
+              console.log(profile.id);
+              return done(null, doc);
+            }
+            //Otherwise we create a new user
+            else {
+              const newTwitchData = new TwitchData({
+                login: profile.login,
+                display_name: profile.display_name,
+                description: profile.description,
+                profile_image_url: profile.profile_image_url,
+                view_count: profile.view_count,
+              });
+              const friendsData = new FriendsData({
+                friendsList: [],
+                receivedRequests: [],
+                sentRequests: [],
+              });
+              const followData = new FollowData({
+                followersList: [],
+                followingList: [],
+              });
+              const newUser = new User({
+                username: profile.display_name,
+                twitchId: profile.id,
+                twitchData: newTwitchData,
+                friendsData: friendsData,
+                followData: followData,
+              });
+              // we save and finish
+              await newUser.save();
+              console.log("Added new user");
+              return done(null, newUser);
+            }
+          }
+        );
+      }
+    )
+  );
+
+  // Google strategy
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: GOOGLE_CONFIG.clientID,
+        clientSecret: GOOGLE_CONFIG.clientSecret,
+        callbackURL: "/auth/google/callback",
+        scope: ["profile", "email", YOUTUBE_SCOPE],
+      },
+      // Google auth callback function
+      async function (accessToken, refreshToken, profile, done) {
+        console.log(profile);
+        // We try to see if we have an existing user with this id
+        User.findOne(
+          { googleId: profile.id },
+          // findOne callback function
+          async function (err, doc) {
+            if (err) {
+              console.log("error occured");
+            }
+
+            // If we find a user with the existing google id we just sign in
+            if (doc) {
+              return done(null, doc);
+            }
+            //Otherwise we create a new user
+            else {
+              var channels = await youtubeController.getYoutubeChannelFromGoogle(
+                accessToken,
+                refreshToken
+              );
+              console.log(channels);
+              const newGoogleData = new GoogleData({
+                displayName: profile.displayName,
+                youtubeId: channels.length > 0 ? channels[0].id : null,
+                youtubeName:
+                  channels.length > 0 ? channels[0].snippet.title : null,
+                name: profile.name,
+                emails: profile.emails,
+                photos: profile.photos,
+              });
+              const friendsData = new FriendsData({
+                friendsList: [],
+                receivedRequests: [],
+                sentRequests: [],
+              });
+              const followData = new FollowData({
+                followersList: [],
+                followingList: [],
+              });
+              const newUser = new User({
+                username: profile.displayName,
+                googleId: profile.id,
+                googleData: newGoogleData,
+                friendsData: friendsData,
+                followData: followData,
+              });
+              // we save and finish
+              await newUser.save();
+              console.log("Added new user");
+              return done(null, newUser);
+            }
+          }
+        );
+      }
+    )
+  );
+
+  // Facebook strategy
+  passport.use(
+    new FacebookStrategy(
+      {
+        clientID: FACEBOOK_CONFIG.clientID,
+        clientSecret: FACEBOOK_CONFIG.clientSecret,
+        callbackURL: "/auth/facebook/callback",
+        profileFields: [
+          "id",
+          "displayName",
+          "name",
+          "link",
+          "picture.type(large)",
+        ],
+      },
+      // Facebook auth callback function
+      async function (accessToken, refreshToken, profile, done) {
+        // We try to see if we have an existing user with this id
+        User.findOne(
+          { facebookId: profile.id },
+          // findOne callback function
+          async function (err, doc) {
+            if (err) {
+              console.log("error occured");
+              throw err;
+            }
+            // If we find a user with the existing facebook id we just sign in
+            if (doc) {
+              return done(null, doc);
+            }
+            //Otherwise we create a new user
+            else {
+              const newFacebookData = new FacebookData({
+                displayName: profile.displayName,
+                profileUrl: profile.profileUrl,
+                name: profile.name,
+                photos: profile.photos,
+              });
+              const friendsData = new FriendsData({
+                friendsList: [],
+                receivedRequests: [],
+                sentRequests: [],
+              });
+              const followData = new FollowData({
+                followersList: [],
+                followingList: [],
+              });
+              const newUser = new User({
+                username: profile.displayName,
+                facebookId: profile.id,
+                facebookData: newFacebookData,
+                friendsData: friendsData,
+                followData: followData,
+              });
+              // we save and finish
+              await newUser.save();
+              console.log("Added new user");
+              return done(null, newUser);
+            }
+          }
+        );
+      }
+    )
+  );
+
+  passport.serializeUser((user, cb) => {
+    cb(null, user.id);
+  });
+
+  passport.deserializeUser((id, cb) => {
+    User.findOne({ _id: id }, (err, user) => {
+      if (err || user == null) {
+        return cb(err, null);
+      }
+
+      // We only return relevant data
+      const userInformation = {
+        _id: user._id,
+        username: user.username,
+        image: user.image,
+        shortDescription: user.shortDescription,
+        description: user.description,
+        currentStream: user.currentStream,
+        twitchId: user.twitchId,
+        googleId: user.googleId,
+        twitchData: user.twitchData,
+        googleData: user.googleData,
+        facebookData: user.facebookData,
+        upcomingEvents: user.upcomingEvents,
+        friendsData: user.friendsData,
+        notifications: user.notifications,
+        followData: user.followData,
+      };
+      cb(err, userInformation);
+    });
+  });
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>
