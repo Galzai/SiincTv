@@ -1,3 +1,6 @@
+/**
+ * This modules is in charge of displaying the results of searching for streams
+ */
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import StreamActions from "../../stream/streamActions";
@@ -13,8 +16,10 @@ function StreamSearchResults(props) {
   });
   const [joinableOnly, setJoinableOnly] = useState(props.joinableOnly);
 
+  /**
+   * Fetches more data (next page)
+   */
   function fetchMoreData() {
-    console.log("Fetch");
     StreamActions.searchStreams(searchString, results.page, status).then(
       (resultPage) => {
         console.log(resultPage);
@@ -26,8 +31,6 @@ function StreamSearchResults(props) {
           setResults({ hasMoreResults: false });
           return;
         }
-        console.log(results);
-        console.log("here");
         setResults({
           streamers: [...results.streamers, ...resultPage],
           page: results.page + 1,
@@ -37,16 +40,18 @@ function StreamSearchResults(props) {
     );
   }
   React.useEffect(() => {
-    console.log("useEffect");
     setResults({ streamers: [], page: 1, hasMoreResults: true });
   }, [joinableOnly, searchString]);
 
+  /**
+   * Displays the results of the search
+   */
   function displayResults() {
     // If the search string changed we reset everything
-    if (searchString != props.searchString) {
+    if (searchString !== props.searchString) {
       setSearchString(props.searchString);
     }
-    if (joinableOnly != props.joinableOnly) {
+    if (joinableOnly !== props.joinableOnly) {
       setJoinableOnly(props.joinableOnly);
     }
 

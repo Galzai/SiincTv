@@ -1,16 +1,17 @@
-import LiveFeed from '../components/liveFeed/liveFeed.js'
-import style from './homepage.module.css'
-import React, {useState} from "react";
+/**
+ * Thie page is in charge of the default home page
+ */
 
+import LiveFeed from "../components/liveFeed/liveFeed.js";
+import style from "./homepage.module.css";
+import React from "react";
 
 function HomePage(props) {
-
-    return(
+  return (
     <div className={style.homePage}>
-        <LiveFeed/>
+      <LiveFeed />
     </div>
-
-        )
+  );
 }
 
 export default HomePage;

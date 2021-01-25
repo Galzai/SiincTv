@@ -1,3 +1,6 @@
+/**
+ * This module is in charge of handling chat emits from the socket
+ */
 import { useEffect, useContext, useState } from "react";
 import SocketContext from "../socketContext";
 
@@ -9,10 +12,9 @@ const ChatHandler = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketContext = useContext(SocketContext);
   useEffect(() => {
-    if(roomId != null){
+    if (roomId != null) {
       console.log(socketContext.streamRoomId);
-      if(socketContext.streamRoomId == null)
-      {
+      if (socketContext.streamRoomId == null) {
         socketContext.socket.emit(JOIN_ROOM, roomId);
         socketContext.setStreamRoomId(roomId);
       }
@@ -27,26 +29,29 @@ const ChatHandler = (roomId) => {
         };
         setMessages((messages) => [...messages, incomingMessage]);
       });
-      
-        // leaves the room
-        // when the connection is closed
+
+      // leaves the room
+      // when the connection is closed
       return () => {
-        if(socketContext.streamRoomId != null)
-        {
-          socketContext.socket.emit(LEAVE_ROOM,roomId);
+        if (socketContext.streamRoomId != null) {
+          socketContext.socket.emit(LEAVE_ROOM, roomId);
           socketContext.setStreamRoomId(null);
         }
       };
-  }
+    }
   }, []);
 
   // Sends a message to the server that
   // forwards it to all users in the same room
   const sendMessage = (messageBody) => {
-    socketContext.socket.emit(NEW_CHAT_MESSAGE_EVENT, {
-      body: messageBody,
-      senderId: socketContext.socket.id,
-    }, socketContext.streamRoomId);
+    socketContext.socket.emit(
+      NEW_CHAT_MESSAGE_EVENT,
+      {
+        body: messageBody,
+        senderId: socketContext.socket.id,
+      },
+      socketContext.streamRoomId
+    );
   };
 
   return { messages, sendMessage };
