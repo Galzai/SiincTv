@@ -7,11 +7,11 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const app = express();
 const router = require("./routes/routes");
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require("connect-mongo")(session);
 // Socket io stuff
-const socketio = require('socket.io');
+const socketio = require("socket.io");
 
-mongoose.set('useCreateIndex', true)
+mongoose.set("useCreateIndex", true);
 mongoose.connect(
   "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&w=majority",
   {
@@ -24,8 +24,8 @@ mongoose.connect(
 );
 
 // checking for connection and schema erros
-mongoose.connection.on('error', function(err) {
-    console.error('MongoDB error: %s', err);
+mongoose.connection.on("error", function (err) {
+  console.error("MongoDB error: %s", err);
 });
 
 //--------------------------Middleware--------------------------------------------------------- \\
@@ -39,41 +39,36 @@ var corsInf = cors({
 });
 app.use(corsInf);
 
-
 // our session store on mogo
-const mongoStore = new MongoStore({mongooseConnection: mongoose.connection });
+const mongoStore = new MongoStore({ mongooseConnection: mongoose.connection });
 
 // set a session for reusability
 var expressSession = session({
   secret: "siinctvsecretcode",
   resave: true,
   saveUninitialized: true,
-  store: mongoStore
-})
-
+  store: mongoStore,
+});
 
 // The secret is used to compute the hash for the session to sign cookies with
-app.use(expressSession)
-.use(cookieParser("siinctvsecretcode"))
-.use(passport.initialize())
-.use(passport.session());
+app
+  .use(expressSession)
+  .use(cookieParser("siinctvsecretcode"))
+  .use(passport.initialize())
+  .use(passport.session());
 require("./passportConfigs/passportSetup")(passport);
 
 //-------------------------------------------------------------------------------------------
-app.use('/',router);
+app.use("/", router);
 
 //Start Server
 const server = app.listen(4000, () => {
-  console.log("Server Has Started");});
+  console.log("Server Has Started");
+});
 
-
-const io = socketio(server, {cors: {corsInf}});
-io.use(function(socket, next) {
+const io = socketio(server, { cors: { corsInf } });
+io.use(function (socket, next) {
   expressSession(socket.request, socket.request.res || {}, next);
 });
 
-require('./sockets/sockets').initializeSocket(io);
-
-
-
-
+require("./sockets/sockets").initializeSocket(io);
