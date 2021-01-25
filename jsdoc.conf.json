@@ -4,6 +4,7 @@
     ],
     "recurseDepth": 10,
     "source": {
+        "include": ["backend", "frontend/siinc-tv"],
         "includePattern": ".+\\.js(doc|x)?$",
         "excludePattern": "(^|\\/|\\\\)_|node_modules|passportConfigs.js"
     },
@@ -21,7 +22,7 @@
         
     },
     "opts": {
-        "template": "node_modules/better-docs",
+        "template": "better-docs",
         "destination": "docs",
         "readme": "README.md",
         "recurse": true
