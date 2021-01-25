@@ -63,7 +63,10 @@ const getTwitchAuth = async function(){
 }
 
 
-// We first try to get twitch authentication
+/**
+ * Returns all the data regarding the current twitch streams of the users with twitch streams in the groups
+ * @param {*} req.body.streamGroups the groups of streamers in the stream;
+ */
 exports.getAllStreamGroupsStreams = function(req, res)
 {
     // Make sure we have an auth key
