@@ -1,6 +1,3 @@
-/**
- * This module is in charge of displayin the search page
- */
 import { useState } from "react";
 import style from "./searchPage.module.css";
 import StreamSearchResults from "../components/search/streamSearchResults";
@@ -23,6 +20,13 @@ import {
 } from "@material-ui/core/styles";
 import MuiListItem from "@material-ui/core/ListItem";
 
+/**
+ * This class is in charge of handling the search page
+ * 
+ * @prop {String} match.params.searchString the string that of the search phrase that redirected to this page
+ * @component
+ * @category Frontend
+ */
 function SearchPage(props) {
   const searchString = props.match.params.searchString;
   const [resultType, setResultType] = useState("liveStream");

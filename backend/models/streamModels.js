@@ -37,10 +37,8 @@ const RegisteredViewerData =  mongoose.model("RegisteredViewerData", registeredV
  * describes a group of streamers that can hold up to maxNumOfMembers
  * @class
  * @category Backend
- */
-/**
  * @param  {Number} maxNumOfMembers
- * @param  {StreamerData members
+ * @param  {StreamerData} members
  */
 const streamGroup = new mongoose.Schema({
     maxNumOfMembers: Number,
@@ -60,8 +58,8 @@ const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
  * @param  {String[]} tags
  * @param  {Date} date
  * @param  {String} description
- * @param  {StreamGrou[]} streamGroups
- * @param  {{type:mongoose.Schema.Types.ObjectId}[]} registeredViewers
+ * @param  {StreamGroup[]} streamGroups
+ * @param  {type:mongoose.Schema.Types.ObjectId[]} registeredViewers
  * @param  {Number} numOfViewers
  */
 const streamData = new mongoose.Schema({

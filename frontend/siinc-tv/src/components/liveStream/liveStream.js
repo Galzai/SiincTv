@@ -1,10 +1,15 @@
-/**
- * This module is in charge of displaying the live stream from the source according to type
- */
 import React, { useState } from "react";
 import TwitchLiveStream from "./twitchLiveStream";
 import YoutubeLiveStream from "./youtubeLiveStream";
 
+/**
+ * This component is in charge of displaying the live stream from the source according to type
+ * 
+ * @prop {streamData} streamer data of the streamer to display live stream of
+ * @prop {Object} dimensions dimensions of the requested stream
+ * @category Frontend
+ * @component
+ */
 function LiveStream(props) {
   const [streamer, setStreamer] = useState(props.streamer);
   const [dimensions, setDimension] = useState(props.dimensions);

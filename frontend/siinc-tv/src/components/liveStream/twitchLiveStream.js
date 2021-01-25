@@ -1,13 +1,17 @@
-/**
- * This module is in charge of displaying twitch streams
- */
 import React, { useState } from "react";
 
 const srcPre = "https://player.twitch.tv/?channel=";
 const srcPost = "&parent=localhost";
+
+/**
+ * This component is in charge of displaying twitch streams
+ * 
+ * @prop {String} displayName display name of the streamer
+ * @prop {Boolean} muted should the stream be displayed as muted
+ * @category Frontend
+ * @component
+ */
 function LiveStream(props) {
-  const [displayName, setUserName] = useState(props.displayName);
-  const [dimensions, setDimension] = useState(props.dimensions);
   const [streamSrc, setStreamSrc] = useState(
     srcPre + props.displayName + srcPost
   );

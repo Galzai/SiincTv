@@ -1,7 +1,3 @@
-/**
- * This module is in charge of the split screen viewbox
- */
-
 import React, { useState, useEffect } from "react";
 import LiveStream from "./liveStream";
 import style from "./liveStream.module.css";
@@ -16,6 +12,13 @@ function flatten(arr) {
   }, []);
 }
 
+/**
+ * This component is in charge of the split screen viewbox
+ * 
+ * @prop {streamGroup[]} streamGroups all the groups of streamers in the stream
+ * @category Frontend
+ * @component
+ */
 function SplitScreenViewBox(props) {
   // The initial current streamer is the host
   const [streamGroups, setStreamGroups] = useState(props.streamGroups);

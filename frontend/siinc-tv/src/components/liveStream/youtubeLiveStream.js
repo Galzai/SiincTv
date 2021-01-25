@@ -5,10 +5,16 @@ import React, { useState, useRef } from "react";
 
 const srcPre = "https://www.youtube.com/embed/live_stream?channel=";
 const srcPost = "&autoplay=1";
+
+/**
+ * This component is in charge of displaying youtube streams
+ * 
+ * @prop {String} youtubeId youtube id of the streamer
+ * @prop {Boolean} muted should the stream be displayed as muted
+ * @category Frontend
+ * @component
+ */
 function YoutubeLiveStream(props) {
-  const [displayName, setdisplayName] = useState(props.displayName);
-  const [youtubeId, setYoutubeId] = useState(props.youtubeId);
-  const [dimensions, setDimension] = useState(props.dimensions);
   const [streamSrc, setStreamSrc] = useState(
     srcPre + props.youtubeId + srcPost
   );

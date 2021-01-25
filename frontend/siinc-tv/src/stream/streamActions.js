@@ -1,12 +1,14 @@
-/*
- * We use this modules for calls to our backend API for actiosn relating to streams
- */
 import axios from "axios";
 
+/**
+ * We use this modules for calls to our backend API for actiosn relating to streams
+ * @class
+ * @category Frontend
+ */
 const streamActions = {
   /**
    * Tries to create a new stream using the streamData and redirects to newly created page upon success
-   * Note: Thhis will fail if now user is signed in/ or the user already has a current stream
+   * Note: This will fail if now user is signed in/ or the user already has a current stream
    * @param {*} streamData the data of the stream we wish to create
    */
   createNewStream: async function (streamData) {

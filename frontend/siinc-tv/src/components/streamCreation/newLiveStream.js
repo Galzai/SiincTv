@@ -7,8 +7,9 @@ import NavigationBar from "../NavigationBar/navigationBar";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
- * @brief stream creation page
- * @param {user} props expects the current user to be passed as props
+ * Component used for creating new live streams
+ * @component
+ * @category Frontend
  */
 function NewLiveStream(props) {
   const { user } = props;

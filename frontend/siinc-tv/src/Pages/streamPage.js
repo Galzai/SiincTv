@@ -1,11 +1,15 @@
-/**
- * This module is in charge of rendering the correct stream page according to id
- */
 import LiveStreamPage from "./liveStreamPage";
 import { useState } from "react";
 import style from "./searchPage.module.css";
 const { default: streamActions } = require("../stream/streamActions");
 
+/**
+ * This class is in charge of rendering the correct stream page according to id
+ * 
+ * @prop {String} props.match.params.id; the id of the stream we are trying to show
+ * @component
+ * @category Frontend
+ */
 function LivetreamPage(props) {
   const [streamData, setStreamData] = useState(null);
   const id = props.match.params.id;

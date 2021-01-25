@@ -1,12 +1,15 @@
-/**
- * This is the stream creation page
- */
 import UserContext from "../userContext";
 import { useContext } from "react";
 import NewScheduledStream from "../components/streamCreation/newScheduledStream";
 import NewLiveStream from "../components/streamCreation/newLiveStream";
 import style from "./searchPage.module.css";
 
+/**
+ * This is the stream creation page
+ * 
+ * @component
+ * @category Frontend
+ */
 function CreateStreamPage(props) {
   const userContext = useContext(UserContext);
   console.log(userContext.user);

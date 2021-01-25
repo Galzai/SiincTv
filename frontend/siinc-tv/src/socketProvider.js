@@ -1,5 +1,8 @@
-/*
+/**
  * Socket provider for an always active socket, provides a socket for every client
+ * 
+ * @module UserProvider
+ * @category Frontend
  */
 import React from "react";
 import SocketContext from "./socketContext";

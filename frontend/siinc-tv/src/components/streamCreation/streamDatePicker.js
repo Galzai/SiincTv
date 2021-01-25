@@ -1,6 +1,3 @@
-/**
- * Used for picking dates on scheduled streams
- */
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import React, { useState, useRef } from "react";
@@ -8,10 +5,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepickerStyle.css";
 
-/**
- * @brief Used for date selection on stream scheueling
- *
- * @param {*} props Should contain an updateDate member for setting the selected date
+/** Used for date selection on stream scheueling
+ * @prop {Date} updateDate The date to set as default
+ * @component
+ * @category Frontend
  */
 function StreamDatePicker(props) {
   const updateDate = props.updateDate;

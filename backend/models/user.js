@@ -149,8 +149,6 @@ const Notification = mongoose.model("Notification", notification );
  * Schema for user account
  * @class
  * @category Backend
- */
-/**
  * @param  {String} username
  * @param  {String} email
  * @param  {String} password

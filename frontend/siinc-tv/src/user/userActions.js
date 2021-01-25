@@ -1,7 +1,3 @@
-/*
- * We use this module to access our user related backend API
- * All the calls here are to the backend of the web-app
- */
 import axios from "axios";
 
 const SEND_FRIEND_REQUEST = 0;
@@ -10,6 +6,13 @@ const UNFRIEND_REQUEST = 2;
 const FOLLOW_REQUEST = 0;
 const UNFOLLOW_REQUEST = 1;
 
+/** 
+ * We use this module to access our user related backend API
+ * All the calls here are to the backend of the web-app
+ * 
+ * @class
+ * @category Frontend
+ */
 const userActions = {
   /**
    * Tries to register a custom user with given username , email and password

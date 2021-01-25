@@ -1,6 +1,3 @@
-/**
- * This module is in charge of the selector bar in the "single main" viewbox
- */
 
 import style from "./liveStream.module.css";
 import React from "react";
@@ -16,6 +13,14 @@ function flatten(arr) {
   }, []);
 }
 
+/**
+ * This component is in charge of the selector bar in the "single main" viewbox
+ * 
+ * @prop {streamerData} currentStreamer current main streamer
+ * @prop {Function} setCurrentStreamer setter for the main streamer
+ * @category Frontend
+ * @component
+ */
 function StreamSelectorBar(props) {
   // The initial current streamer is the host
   const currentStreamer = props.currentStreamer;

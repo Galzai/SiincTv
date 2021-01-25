@@ -1,6 +1,3 @@
-/**
- * Handles entering tags to our react-select componenet
- */
 import React, { Component } from "react";
 
 import CreatableSelect from "react-select/creatable";
@@ -14,6 +11,15 @@ const createOption = (label) => ({
   value: label,
 });
 
+/**
+ * Handles entering tags to our react-select componenet
+ * 
+ * @prop {String} inputValue current value to enter
+ * @prop {String[]} value current values
+ * @prop {Function} updateTags setter for updating tags
+ * @component
+ * @category Frontend
+ */
 export default class CreatableInputOnly extends Component {
   constructor(props) {
     super(props);

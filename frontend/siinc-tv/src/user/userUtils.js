@@ -1,10 +1,13 @@
+import NoProfilePic from "../assets/NoProfilePic.svg";
+
 /**
  * This module holds re-usable utility functions for users
+ * @class
+ * @category Frontend
  */
-import NoProfilePic from "../assets/NoProfilePic.svg";
 const userUtils = {
   /**
-   * @brief Assigns a user image according to what image data is stored within the user
+   *Assigns a user image according to what image data is stored within the user
    */
   assignImage: function (user) {
     if (!user) return NoProfilePic;

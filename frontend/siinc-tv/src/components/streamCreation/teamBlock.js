@@ -1,13 +1,10 @@
-/**
- * This is the block in the stream creations in charge of selecting friends
- */
 import React, { useState, useRef } from "react";
 import style from "./newStream.module.css";
 import update from "immutability-helper";
 import FriendFinder from "../selectors/friendFinder";
 
 /**
- * @brief This is a utility function for generating keys
+ * This is a utility function for generating keys
  *
  * @param {*} pre
  */
@@ -113,8 +110,14 @@ const customTagStyle = {
 };
 
 /**
- * @brief defines a group of streamers
- * @param {*} props props should have a member streamGroups and setStreamGroups for updating the current groups
+ * This is the block in the stream creations in charge of selecting friends
+ * 
+ * @prop {Number} maxGroups maximum amount of groups to allow
+ * @prop {friendsData[]} friends the users friends
+ * @prop {streamGroup[]} streamGroups the currently selected groups of streamers
+ * @prop {Function} setStreamGroups setter for stream groups
+ * @component
+ * @category Frontend
  */
 function TeamBlock(props) {
   const maxGroups = props.maxGroups;
@@ -125,7 +128,7 @@ function TeamBlock(props) {
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
   /**
-   * @brief adds a new group, if the number of groups exceeds 4 it does not allow to add a new group
+   * adds a new group, if the number of groups exceeds 4 it does not allow to add a new group
    */
   const addGroup = () => {
     if (streamGroups.length >= maxGroups) {
@@ -139,7 +142,7 @@ function TeamBlock(props) {
   };
 
   /**
-   * @brief deletes a group in certain index
+   * deletes a group in certain index
    *
    * @param {*} key the key of the group
    */

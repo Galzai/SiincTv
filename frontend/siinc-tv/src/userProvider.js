@@ -1,5 +1,8 @@
-/*
+/** 
  * User context to be used for sharing current user data between components
+ * 
+ * @module UserProvider
+ * @category Frontend
  */
 import React from "react";
 import UserContext from "./userContext";

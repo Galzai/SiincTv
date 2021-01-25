@@ -1,7 +1,3 @@
-/**
- * Handles creation of scheduled streams
- * Note: not currently in use
- */
 import React, { useState, useRef } from "react";
 import style from "./newStream.module.css";
 import CreateableInputOnly from "../selectors/createableInputOnly";
@@ -11,8 +7,10 @@ import UserContext from "../../userContext";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
- * @brief stream creation page
- * @param {user} props expects the current user to be passed as props
+ * Component used for creating new scheduled streams
+ * Note: This is currently unused
+ * @component
+ * @category Frontend
  */
 function NewScheduledStream(props) {
   const { user } = props;

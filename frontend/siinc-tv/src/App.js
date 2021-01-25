@@ -1,5 +1,8 @@
 /**
  * Our entry point to the app
+ * 
+ * @module App
+ * @category Frontend
  */
 import React, { useState } from "react";
 import UserProvider from "./userProvider";

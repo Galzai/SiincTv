@@ -3,8 +3,17 @@ import React, {useState} from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 const { default: userActions } = require("../../user/userActions");
 
-/*
- * This components will be used for user login
+/** 
+ * This components will be used for user login (with custom user or authentication)
+ * 
+ * @prop {String} userName
+ * @prop {String} emailError
+ * @prop {Function} setUserName
+ * @prop {String} password
+ * @prop {Function} setPassword
+ * @prop {String} passwordError
+ * @component
+ * @category Frontend
  */
 function SignIn(props) {
     const {

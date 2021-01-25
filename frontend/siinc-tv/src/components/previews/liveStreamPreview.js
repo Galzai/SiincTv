@@ -1,6 +1,3 @@
-/**
- * This module is in charge of displaying the preview of a single stream
- */
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { HoverSlideshow } from "react-hover-slideshow";
@@ -12,6 +9,14 @@ const { default: streamActions } = require("../../stream/streamActions");
 
 const height = "240";
 const width = "426";
+
+/**
+ * This module is in charge of displaying the preview of a single stream
+ * 
+ * @prop {streamData} streamData The data describing the stream
+ * @component
+ * @category Frontend
+ */
 function LiveStreamPreview(props) {
   const streamData = props.streamData;
   const streamers = flatten(streamData.streamGroups);

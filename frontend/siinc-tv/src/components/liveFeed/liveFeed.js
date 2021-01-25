@@ -1,7 +1,3 @@
-/**
- * This module is in charge of displaying the currently live feed in the homepage
- */
-
 import style from "./liveFeed.module.css";
 import React, { useState } from "react";
 import LiveStreamPreview from "../previews/liveStreamPreview";
@@ -32,6 +28,12 @@ const responsive = {
   },
 };
 
+/**
+ * This component is in charge of displaying the currently live feed in the homepage
+ * 
+ * @category Frontend
+ * @component
+ */
 function LiveStreamFeed(props) {
   // Take a streamData and display it in a carousel
   const [streamDatas, setStreamDatas] = useState([]);

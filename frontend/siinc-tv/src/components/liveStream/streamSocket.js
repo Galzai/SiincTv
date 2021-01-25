@@ -1,7 +1,3 @@
-/**
- * This module is in charge of the socket handler for stream related emits
- */
-
 import { useEffect, useContext, useState } from "react";
 import SocketContext from "../../socketContext";
 const { default: streamActions } = require("../../stream/streamActions");
@@ -11,6 +7,13 @@ const VIEWERS_CHANGED = "viewersChanged"; // Name of the event
 const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
 const NEW_STREAMER = "newStreamer"; // Name of the event
+
+/**
+ * This component is in charge of the socket handler for stream related emits
+ * 
+ * @category Frontend
+ * @component
+ */
 
 const StreamSocket = (roomId, setStreamData) => {
   const [endStream, setEndStream] = useState(false); // Sent and received messages

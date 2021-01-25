@@ -1,12 +1,17 @@
-/**
- * This module is in charge of searching for users
- */
 import React, { useState, useContext } from "react";
 import UserContext from "./../../userContext";
 import InfiniteScroll from "react-infinite-scroller";
 import UserActions from "../../user/userActions";
 import UserPreview from "../previews/userPreview";
 
+/**
+ * This module is in charge of searching for users
+ * 
+ * @prop {string} searchString string describing what to search
+ * @prop {Boolean} liveOnly true if the user has an active stream
+ * @component
+ * @category Frontend
+ */
 function UserSearchResults(props) {
   const userContext = useContext(UserContext);
   const [searchString, setSearchString] = useState(props.searchString);

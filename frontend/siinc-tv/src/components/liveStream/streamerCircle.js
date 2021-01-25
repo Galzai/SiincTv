@@ -1,14 +1,13 @@
-/**
- * This is the module in charge of displaying the user icon and data in the streamer
- */
-
 import style from "./liveStream.module.css";
 import React, { useState } from "react";
 import Tooltip from "@material-ui/core/Tooltip";
 
 /**
- * @brief This a circle describing the streamer
- * @param {*} props
+ * This a circle describing the streamer with a tooltip
+ * 
+ * @prop {streamData} streamer data of the streamer to display live stream of
+ * @category Frontend
+ * @component
  */
 function StreamerCircle(props) {
   const streamer = props.streamer;

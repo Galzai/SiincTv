@@ -28,9 +28,16 @@ const customStyles = {
     }
 };
 
+/**
+ * This components holds the modal that pops up when clicking the login button
+ * 
+ * @prop {user} user current user (or null)
+ * @prop {Function} setUser setter for the current user
+ * @prop {Function} refreshUserData data refresh function
+ * @component
+ * @category Frontend
+ */
 function SigningModal(props){
-    // Example for a hook , we now also have a setter function
-    // const context = React.useContext(UserContext)
     const user = props.user;
     const setUser = props.setUser;
     const refreshUserData = props.refreshUserData;

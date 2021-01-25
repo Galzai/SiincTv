@@ -1,7 +1,3 @@
-/**
- * This modules holds all the streamers in our stream
- */
-
 import style from "./liveStream.module.css";
 import StreamerCircle from "./streamerCircle";
 import React, { useState } from "react";
@@ -15,8 +11,11 @@ function flatten(arr) {
 }
 
 /**
- * @brief This holds all our streamers
- * @param {*} props
+ * This holds all our streamers
+ * 
+ * @prop {streamGroup[]} streamGroups all the groups of streamers in the stream
+ * @category Frontend
+ * @component
  */
 function Streamers(props) {
   const streamGroups = props.streamGroups;

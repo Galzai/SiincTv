@@ -1,11 +1,16 @@
-/**
- * This modules is in charge of displaying the results of searching for streams
- */
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import StreamActions from "../../stream/streamActions";
 import LiveStreamPreview from "../previews/liveStreamPreview";
 
+/**
+ * This modules is in charge of displaying the results of searching for streams
+ * 
+ * @prop {string} searchString string describing what to search
+ * @prop {Boolean} joinableOnly true if the stream is not invite only
+ * @component
+ * @category Frontend
+ */
 function StreamSearchResults(props) {
   const [searchString, setSearchString] = useState(props.searchString);
   const status = props.status;

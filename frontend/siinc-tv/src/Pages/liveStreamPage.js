@@ -1,7 +1,3 @@
-/**
- * This module implements the page of a currently live stream
- */
-
 import SingleStreamViewBox from "../components/liveStream/singleStreamingViewBox";
 import SplitStreamViewBox from "../components/liveStream/splitScreenViewBox";
 import StreamDetails from "../components/liveStream/streamDetails";
@@ -16,6 +12,13 @@ import { Container } from "@material-ui/core";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 
+/**
+ * This class implements the page of a currently live stream
+ * 
+ * @prop {streamData} streamData the data describing the stream
+ * @component
+ * @category Frontend
+ */
 function Stream(props) {
   const userContext = useContext(UserContext);
   const [streamData, setStreamData] = useState(props.streamData);
