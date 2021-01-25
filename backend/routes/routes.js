@@ -1,5 +1,8 @@
 /**
  * This modules defines all the routes in our backend API
+ * 
+ * @module Routes
+ * @category Backend
  */
 
 var express = require('express')

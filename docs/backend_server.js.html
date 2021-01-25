@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> notificationData</title>
+  <title> backend/server.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,158 +79,104 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>notificationData</h1>
+                    <p>Source</p>
+                    <h1>backend/server.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>notificationData<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="notificationData">
-        <a class="href-link" href="#notificationData">#</a>
-        
-        <span class="code-name">
-            
-                new notificationData<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Schema for Notification data/fields ( each type of notification has different fields )
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="backend_models_user.js.html" class="button">View Source</a>
-            <span>
-                <a href="backend_models_user.js.html">backend/models/user.js</a>, <a href="backend_models_user.js.html#line125">line 125</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This is the entry point to our server, we intialize:
+ * MongoDb connection
+ * Express server
+ * Cors
+ * sessioneStore
+ * socketIo
+ * @module Server
+ * @category Backend
+ */
+
+const mongoose = require("mongoose");
+const express = require("express");
+const cors = require("cors");
+const passport = require("passport");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const app = express();
+const router = require("./routes/routes");
+const MongoStore = require("connect-mongo")(session);
+// Socket io stuff
+const socketio = require("socket.io");
+
+mongoose.set("useCreateIndex", true);
+mongoose.connect(
+  "mongodb+srv://siincdb:siincdacat@siinccluster.usjl1.mongodb.net/siincDb?retryWrites=true&amp;w=majority",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+  () => {
+    console.log("Mongoose Is Connected");
+  }
+);
+
+// checking for connection and schema erros
+mongoose.connection.on("error", function (err) {
+  console.error("MongoDB error: %s", err);
+});
+
+//--------------------------Middleware--------------------------------------------------------- \\
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var corsInf = cors({
+  origin: "http://localhost:3000", // &lt;-- location of the react app were connecting to
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+});
+app.use(corsInf);
+
+// our session store on mogo
+const mongoStore = new MongoStore({ mongooseConnection: mongoose.connection });
+
+// set a session for reusability
+var expressSession = session({
+  secret: "siinctvsecretcode",
+  resave: true,
+  saveUninitialized: true,
+  store: mongoStore,
+});
+
+// The secret is used to compute the hash for the session to sign cookies with
+app
+  .use(expressSession)
+  .use(cookieParser("siinctvsecretcode"))
+  .use(passport.initialize())
+  .use(passport.session());
+require("./passportConfigs/passportSetup")(passport);
+
+//-------------------------------------------------------------------------------------------
+app.use("/", router);
+
+//Start Server
+const server = app.listen(4000, () => {
+  console.log("Server Has Started");
+});
+
+const io = socketio(server, { cors: { corsInf } });
+io.use(function (socket, next) {
+  expressSession(socket.request, socket.request.res || {}, next);
+});
+
+require("./sockets/sockets").initializeSocket(io);
+</code></pre>
+        </article>
+    </section>
 
 
 

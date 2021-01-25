@@ -1,18 +1,24 @@
 /**
  * This module is in charge of settings up passport for our various authentication methods
  * 
- * @Twitch_strategy - If twitch returns with a user with user id that already exists we - we sign the user in.
+ * Twitch_strategy - 
+ * If twitch returns with a user with user id that already exists we - we sign the user in.
  * If it returns with a user id that we do not have - we create a new user.
  * Otherwise - indication that an error occured.
  * 
- * @Google_strategy - If youtube returns with a user id that already exists we sign the user in.
- * If it returns with a new user id- we use the youtube API to retrieve the google account's linked youtube account.
- * Otherwise - error.
+ * Google strategy 
+ * If youtube returns with a user id that already exists we sign the user in.
+ * If it returns with a new user id - we use the youtube API to retrieve the google account's linked youtube account.
+ * We then create a new user
+ * Otherwise - indication that an error occured.
  * 
- * @Facebook_strategy - If twitch returns with a user with user id that already exists we - we sign the user in.
+ * Facebook Strategy   
+ * If twitch returns with a user with user id that already exists we - we sign the user in.
  * If it returns with a user id that we do not have - we create a new user.
  * Otherwise - indication that an error occured.
  * 
+ * @module PassportSetup
+ * @category Backend
  */
 
 const bcrypt = require("bcryptjs");

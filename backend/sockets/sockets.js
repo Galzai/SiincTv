@@ -1,6 +1,9 @@
 /**
  * This module is in charge of actions relating to sockets
  * Note that the socket also uses the session data to retrieve current user
+ * 
+ * @module Sockets
+ * @category Backend
  */
 const { StreamData } = require("../models/streamModels");
 const { User } = require("../models/user");

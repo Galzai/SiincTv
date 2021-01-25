@@ -1,3 +1,14 @@
+/**
+ * This is the entry point to our server, we intialize:
+ * MongoDb connection
+ * Express server
+ * Cors
+ * sessioneStore
+ * socketIo
+ * @module Server
+ * @category Backend
+ */
+
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");

@@ -62,7 +62,7 @@ const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
  * @param  {String} description
  * @param  {StreamGrou[]} streamGroups
  * @param  {{type:mongoose.Schema.Types.ObjectId}[]} registeredViewers
- * @param  {Number}} numOfViewers
+ * @param  {Number} numOfViewers
  */
 const streamData = new mongoose.Schema({
     creator : {type: mongoose.Schema.Types.Mixed, ref: 'StreamerData'},
