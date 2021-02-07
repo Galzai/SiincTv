@@ -42,7 +42,7 @@ function LivetreamPage(props) {
     // We select what type of page to display depending on the status
     switch (streamData.status) {
       case "Live":
-        return <LiveStreamPage streamData={streamData} />;
+        return <LiveStreamPage streamData={streamData} id={id} />;
       case "Scheduled":
         return (
           <div>

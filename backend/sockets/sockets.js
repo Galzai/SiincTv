@@ -31,6 +31,7 @@ module.exports.initializeSocket = function (io) {
 
     // Join a stream room
     socket.on(JOIN_ROOM, async (roomId) => {
+      console.log("Join room called");
       // Join a conversation
       socket.join(roomId);
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
@@ -46,6 +47,7 @@ module.exports.initializeSocket = function (io) {
 
     // Leave a stream room
     socket.on(LEAVE_ROOM, async (roomId) => {
+      console.log("Leave room called", roomId);
       socket.leave(roomId);
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;

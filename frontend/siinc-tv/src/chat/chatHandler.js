@@ -13,12 +13,6 @@ const ChatHandler = (roomId) => {
   const socketContext = useContext(SocketContext);
   useEffect(() => {
     if (roomId != null) {
-      console.log(socketContext.streamRoomId);
-      if (socketContext.streamRoomId == null) {
-        socketContext.socket.emit(JOIN_ROOM, roomId);
-        socketContext.setStreamRoomId(roomId);
-      }
-
       // Listens for incoming messages
       socketContext.socket.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
         console.log(socketContext.socket.id);
@@ -29,15 +23,6 @@ const ChatHandler = (roomId) => {
         };
         setMessages((messages) => [...messages, incomingMessage]);
       });
-
-      // leaves the room
-      // when the connection is closed
-      return () => {
-        if (socketContext.streamRoomId != null) {
-          socketContext.socket.emit(LEAVE_ROOM, roomId);
-          socketContext.setStreamRoomId(null);
-        }
-      };
     }
   }, []);
 

@@ -44,16 +44,14 @@ const StreamSocket = (roomId, setStreamData) => {
           setStreamData(result);
         });
       });
-
-      // leaves the room
-      // when the connection is closed
-      return () => {
-        if (socketContext.streamRoomId != null) {
-          socketContext.socket.emit(LEAVE_ROOM, roomId);
-          socketContext.setStreamRoomId(null);
-        }
-      };
-    }
+    }  
+    // leaves the room
+    // when the connection is closed
+    return () => {
+      console.log("Leaving", socketContext.streamRoomId);
+        socketContext.socket.emit(LEAVE_ROOM, roomId);
+        socketContext.setStreamRoomId(null);
+    };
   }, []);
 
   /**
