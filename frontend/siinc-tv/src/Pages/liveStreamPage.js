@@ -20,6 +20,7 @@ import Tooltip from "@material-ui/core/Tooltip";
  * @category Frontend
  */
 function Stream(props) {
+  const id = props.id;
   const userContext = useContext(UserContext);
   const [streamData, setStreamData] = useState(props.streamData);
   const [isSplit, setIsSplit] = useState(false);
@@ -87,7 +88,7 @@ function Stream(props) {
           <Chat
             className={style.chatBox}
             userId={userContext.user ? userContext.user.username : ""}
-            roomId={streamData._id}
+            roomId={id}
           />
         </Hidden>
         <Container maxWidth="xl">
@@ -139,7 +140,7 @@ function Stream(props) {
               </Tooltip>
             )}
             <StreamDetails
-              id={streamData._id}
+              id={id}
               streamTitle={streamData.name}
               streamGroups={streamData.streamGroups}
               description={streamData.description}

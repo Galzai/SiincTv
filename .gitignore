@@ -40,3 +40,4 @@ jspm_packages
 #Excluding build directory
 public/
 node_modules
+node_modules

@@ -1,7 +1,7 @@
 /**
  * This module is in charge of the chats with a give room id
  */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatHandler from "./chatHandler";
 import style from "./chat.module.css";
 import Textarea from "react-expanding-textarea";
@@ -11,6 +11,9 @@ function Chat(props) {
   const [newMessage, setNewMessage] = useState(""); // Message to be sent
   const userId = props.userId;
 
+  useEffect(() => {
+
+  },[props.roomId]);
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
