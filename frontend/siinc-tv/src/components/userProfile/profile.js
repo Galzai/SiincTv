@@ -15,6 +15,10 @@ import LiveStreamPreview from "../previews/liveStreamPreview";
 import SocketContext from "../../socketContext"
 import streamActions from '../../stream/streamActions';
 
+import YoutubeLogo from "../../assets/YoutubeIcon.ico"
+import TwitchLogo from "../../assets/TwitchIcon.ico"
+
+
 function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
@@ -33,6 +37,7 @@ function Profile(props) {
     useEffect(()=>{
         console.log("MyReder1")
         let isMounted = true;
+        //TODO : ChangeToId
         userActions.getUserData( userName )
         .then(data=>{
             if( isMounted ) { 
@@ -151,7 +156,7 @@ function Profile(props) {
     const isUserStreaming=()=>{
         if( !user || 
             !user.currentStream || 
-            user.currentStream == "" )
+            user.currentStream === "" )
         {
             return false;
         }
@@ -186,6 +191,14 @@ function Profile(props) {
         setEditAboutInfo(true);
     }
 
+    const onYoutubeClick=()=>{
+        console.log("redirect to youtube channel : " + String(user.googleId))
+    }
+
+    const onTwitchClick=()=>{
+        console.log("redirect to twitch channel : " + String(user.twitchId))
+    }
+
     const onClickDoneEditDesc=()=>{
         userActions.updateUserShortDescription(user._id, aboutInfo)
         .then(() => {
@@ -208,9 +221,14 @@ function Profile(props) {
             </div>
             <div className={style.userInfo}>
                 <div className={style.userTitle}>
-                    <span className={style.name}>{userName}</span>
-                    {userOnline==='true' && <span className={style.online}/>}
-                    { isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}
+                    <ul className={style.testMyUl}>
+                    <li className={style.testMyLi}><span className={style.name}>{userName}</span></li>
+                    <li className={style.testMyLi}>{userOnline==='true' && <span className={style.online}/>}</li>
+                    <li className={style.testMyLi}>{ isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}</li>
+                    <li className={style.testMyLi}><TwitchLogoLink  user={user} onClick={onTwitchClick}></TwitchLogoLink></li>
+                    <li className={style.testMyLi}><YoutubeLogoLink user={user} onClick={onYoutubeClick}></YoutubeLogoLink></li>
+                    
+                    </ul>
                 </div>
                 <div className={style.userSocial}>
                     <span className={style.number}>
@@ -430,6 +448,72 @@ function AboutContainer(props) {
     }
 }
 
+// ---------------------------------------------------------
+
+// ------------ Twitch and Youtube logos -------------------
+
+function TwitchLogoLink(props) {
+    const user = props.user;
+
+    const isTwitchUser=()=>{
+        if( !user ||
+            !user.twitchId ||
+            user.twitchId === "")
+        {
+            console.log("No twitch")
+            return false;
+        }
+        console.log("Yes twitch")
+        return true;
+    }
+
+    return(
+        <div className={style.twitchLogoLink} >
+        {
+            isTwitchUser() && 
+            <a href={String("https://www.twitch.tv/" + user.username)} target="_blank">
+                <img Style="width:100%;height:100%;"
+                   src={TwitchLogo}
+                   onClick={props.onClick}
+                >
+                </img>
+            </a>
+        }
+        </div>
+    )
+
+}
+
+function YoutubeLogoLink(props) {
+    const user = props.user;
+    
+    const isYoutubeUser=()=>{
+        if( !user ||
+            !user.googleId ||
+            user.googleId === "")
+        {
+            console.log("Not youtube")
+            return false;
+        }
+        console.log("Yes youtube")
+        return true;
+    }
+
+    return(
+        <div>
+        {   
+            isYoutubeUser() && 
+            <a href={String("https://www.youtube.com/channel/" + user.googleData.youtubeId)} target="_blank">
+                <img className={style.youtubeLogoLink} 
+                   src={YoutubeLogo}
+                   onClick={props.onClick}
+                >
+                </img>
+            </a>
+        }     
+        </div>
+    )
+}
 // ---------------------------------------------------------
 
 export default withRouter(Profile)

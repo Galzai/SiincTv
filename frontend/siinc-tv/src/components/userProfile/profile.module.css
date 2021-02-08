@@ -486,3 +486,38 @@ label {
     align-items: center;
     align-content: center;
 }
+
+.youtubeLogoLink
+{
+    position: relative;   
+    height: 30px;
+    width: 30px;
+    top: 10px;   
+    left: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.twitchLogoLink
+{
+    position: relative;   
+    height: 30px;
+    width: 30px;
+    top: 10px;   
+    left: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.testMyUl
+{
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.testMyLi
+{
+    display: inline;
+}
