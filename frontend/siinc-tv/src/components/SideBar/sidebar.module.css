@@ -94,8 +94,15 @@
     cursor:pointer;
     float:left;
 }
+
 .friendDiv
 {
     margin-top:10px;
     height: 30px;  
+}
+
+.seeAllStyle{
+    font-size: 14px;
+    opacity: 0.4;
+    cursor:pointer;
 }

@@ -39,8 +39,7 @@ function SignIn(props) {
             setLoading(false);
           }, 2000);
         }
-      };
-
+      };  
 
     return (
         <section>
