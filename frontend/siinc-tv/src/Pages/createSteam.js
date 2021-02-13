@@ -17,14 +17,16 @@ function CreateStreamPage(props) {
     <div>
       {/* { user && user.twitchData && <NewScheduledStream user={user}/> } */}
       {userContext.user &&
-        (userContext.user.twitchData || userContext.user.googleData) &&
+        (userContext.user.twitchData || (userContext.user.googleData && 
+          userContext.user.googleData.youtubeId)) &&
         !userContext.user.currentStream && (
           <NewLiveStream user={userContext.user} />
         )}
       {(!userContext.user ||
-        (!userContext.user.twitchData && !userContext.user.googleData)) && (
+        (!userContext.user.twitchData && !(userContext.user.googleData && 
+          userContext.user.googleData.youtubeId))) && (
         <h1 className={style.endStream}>
-          Must have a twitch or youtube account in order to create a stream!{" "}
+          Must have a twitch account or youtube channel in order to create a stream!{" "}
         </h1>
       )}
       {userContext.user && userContext.user.currentStream && (

@@ -157,9 +157,9 @@ module.exports = function (passport) {
               console.log(channels);
               const newGoogleData = new GoogleData({
                 displayName: profile.displayName,
-                youtubeId: channels.length > 0 ? channels[0].id : null,
+                youtubeId: (channels && (channels.length > 0)) ? channels[0].id : null,
                 youtubeName:
-                  channels.length > 0 ? channels[0].snippet.title : null,
+                (channels && (channels.length > 0))? channels[0].snippet.title : null,
                 name: profile.name,
                 emails: profile.emails,
                 photos: profile.photos,
