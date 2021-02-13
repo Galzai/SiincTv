@@ -29,6 +29,7 @@
     display: block;
     height:100vh;
     overflow-y: auto !important;
+    max-width:600px;
  }
 
  .scrollableDivUsers{
@@ -36,11 +37,12 @@
     display: block;
     max-height:30vh;
     overflow-y: auto !important;
+    max-width:600px;
  }
 
  .scrollableDivStreams{
     position:relative;
     display: block;
-    max-height:60vh;
+    max-height:80vh;
     overflow-y: auto !important;
  }
