@@ -27,39 +27,43 @@ function SideBar(props) {
     }
 
     function mapFriends(){
-        return((friends).map((friend, index)=>{
+        return((friends).slice(0, 10).map((friend, index)=>{
             return(
                     <div className={style.friendDiv}>
-                        <img className={style.streamerCircle}
+                        <img alt="" className={style.streamerCircle}
                             src={friend.userImage}/>
                         <div className={style.friend}
                         onClick={()=>(props.history.push(`/users/${friend.displayName}`))}> 
                             {friend.displayName}
                         </div>
                     </div>
-
-
             )
             
         })) ;
     }
     // change later css styles to followers specific styles
     function mapFollowings(){
-        return((followings).map((following, index)=>{
+        return((followings).slice(0, 10).map((following, index)=>{
             return(
                     <div className={style.friendDiv}>
-                        <img className={style.streamerCircle}
+                        <img alt="" className={style.streamerCircle}
                             src={following.userImage}/>
                         <div className={style.friend}
                         onClick={()=>(props.history.push(`/users/${following.userName}`))}> 
                             {following.userName}
                         </div>
                     </div>
-
-
             )
             
         })) ;
+    }
+
+    function redirectToFriends(){
+        props.history.push(`users/${userContext.user._id}/friends`);
+    }
+
+    function redirectoToFollowing(){
+        props.history.push(`users/${userContext.user._id}/following`);
     }
 
     return(
@@ -73,13 +77,15 @@ function SideBar(props) {
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
                 </div>}
-                {(friends.length != 0) && <div>
+                {(friends.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
+                {(friends.length >= 10 ) && <label className={style.seeAllStyle} onClick={redirectToFriends}>See all friends...</label>}
                 </div>}
-                {(followings.length != 0) && <div>
+                {(followings.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Following</h3> 
                 {mapFollowings()}
+                {(followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
                 </div>}
 
 
