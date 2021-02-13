@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import style from "./searchPage.module.css";
 import StreamSearchResults from "../components/search/streamSearchResults";
-import UserSearchResults from "../components/search/userSearchResults";
+import UserSearchResults from "../components/search/userSearchResults"; 
+import CombinedSearch from "../components/search/combinedSearch";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -29,10 +30,14 @@ import MuiListItem from "@material-ui/core/ListItem";
  */
 function SearchPage(props) {
   const searchString = props.match.params.searchString;
-  const [resultType, setResultType] = useState("liveStream");
+  const [resultType, setResultType] = useState("combined");
   const [joinableOnly, setjoinAbleOnly] = useState(false);
   const [liveOnly, setLiveOnly] = useState(false);
 
+  useEffect(()=>{
+
+  }, [props.match.params.searchString])
+  
   const theme = createMuiTheme({
     breakpoints: {
       values: {
@@ -110,6 +115,11 @@ function SearchPage(props) {
 
   return (
     <div className={style.searchPage}>
+        {resultType === "combined" && (
+        <CombinedSearch
+          searchString={searchString}
+        />
+      )}
       {resultType === "liveStream" && (
         <StreamSearchResults
           searchString={searchString}

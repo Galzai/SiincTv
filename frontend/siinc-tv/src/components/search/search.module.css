@@ -6,6 +6,41 @@
     width: 10px;
   }
   
-  .searchResults{
+.searchResults{
       height: 500px;
   }
+
+.filterBreak
+{
+    position: relative;
+    align-self: flex-start;
+    background-color: #FFFFFF;
+    border-radius: 70px;
+    opacity: 0.3;
+}
+ .noResults{
+     font-size: 15px;
+     color: #FFFFFF;
+     opacity: 0.4;
+ }
+
+ .scrollableDivFullPage{
+    position:relative;
+    display: block;
+    height:100vh;
+    overflow-y: auto !important;
+ }
+
+ .scrollableDivUsers{
+    position:relative;
+    display: block;
+    max-height:30vh;
+    overflow-y: auto !important;
+ }
+
+ .scrollableDivStreams{
+    position:relative;
+    display: block;
+    max-height:60vh;
+    overflow-y: auto !important;
+ }

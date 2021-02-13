@@ -154,14 +154,14 @@ exports.check_username_exists = function (req, res) {
 exports.searchUsers = function (req, res) {
   const page = req.body.page;
   const searchString = req.body.searchString;
-  const PAGE_SIZE = 20; // Similar to 'limit'
+  const PAGE_SIZE = 5; // Similar to 'limit'
   const skip = (page - 1) * PAGE_SIZE; // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
   User.find(
     { $and: [{ $text: { $search: searchString } }] },
     { score: { $meta: "textScore" } }
   )
-    .limit(PAGE_SIZE)
     .skip(skip)
+    .limit(PAGE_SIZE)
     .exec(async function (err, result) {
       if (err) {
         console.log(err);
