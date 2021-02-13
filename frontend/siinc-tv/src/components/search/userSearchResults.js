@@ -1,8 +1,10 @@
 import React, { useState, useContext } from "react";
 import UserContext from "./../../userContext";
-import InfiniteScroll from "react-infinite-scroller";
+import InfiniteScroll from "react-infinite-scroll-component";
 import UserActions from "../../user/userActions";
 import UserPreview from "../previews/userPreview";
+import style from "./search.module.css";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 /**
  * This module is in charge of searching for users
@@ -21,6 +23,8 @@ function UserSearchResults(props) {
     hasMoreResults: true,
   });
   const [liveOnly, setLiveOnly] = useState(props.liveOnly);
+  const [combinedDisplay] = useState(props.combinedDisplay);  
+  const resStyle = combinedDisplay ? style.scrollableDivUsers : style.scrollableDivFullPage;
 
   /**
    * Fetches the next result page
@@ -43,7 +47,7 @@ function UserSearchResults(props) {
     });
   }
   React.useEffect(() => {
-    setResults({ streamers: [], page: 1, hasMoreResults: true });
+    fetchMoreData();
   }, [searchString]);
 
   /**
@@ -61,27 +65,38 @@ function UserSearchResults(props) {
 
     // We return different views depending on what we are searching for
     if (!results.streamers || results.streamers.length === 0) {
-      return <h1>0 Results found.</h1>;
+      return <h1 className={style.noResults}>0 Results found.</h1>;
     } else {
-      return results.streamers.map((result, index) => {
+
+      var resultComponenets = [];
+      results.streamers.forEach((result, index) => {
         if (!userContext.user || result._id !== userContext.user._id) {
           if (!liveOnly || result.currentStream)
-            return <UserPreview key={index} user={result} />;
+          resultComponenets.push(<UserPreview key={index} user={result} />);
         }
       });
+      if(resultComponenets.length !== 0) return resultComponenets;
+      return <h1 className={style.noResults}>0 Results found.</h1>;
     }
   }
 
   return (
+    <div id="scrollableDiv" className={resStyle}>
     <InfiniteScroll
-      pageStart={0}
-      loadMore={fetchMoreData}
-      style={{ display: "flex", flexDirection: "column-reverse" }}
+      dataLength={results.streamers ? results.streamers.length : 0} 
+      next={() => {fetchMoreData()}}
       hasMore={results.hasMoreResults}
-      loader={<h4>Loading...</h4>}
+      scrollableTarget="scrollableDiv"
+      loader={<CircularProgress></CircularProgress>}
+      endMessage={
+        <p style={{ textAlign: 'left' }}>
+          <b>No more results</b>
+        </p>
+      }
     >
       {displayResults()}
     </InfiniteScroll>
+    </div>
   );
 }
 export default UserSearchResults;

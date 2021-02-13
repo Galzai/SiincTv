@@ -21,7 +21,6 @@ function UserPreview(props){
     const description = user.shortDescription ? user.shortDescription :" No Description";
     const currentstream = user.currentstream;
     const userContext = useContext(UserContext);
-    console.log(user);
 
     function handleRedirect() {
         props.history.push(`/users/${username}`);

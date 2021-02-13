@@ -77,7 +77,7 @@ const streamData = new mongoose.Schema({
   });
   // This is necessery for quick text search
   streamData.index({name: 'text', tags: 'text', description: 'text'}, 
-  {name: 'Search index', weights: {name: 10, tags: 8, description: 5}});
+  {name: 'Search index', weights: {name: 3, tags: 2, description: 1}});
 
   const StreamData =  mongoose.model("StreamData", streamData );
 
