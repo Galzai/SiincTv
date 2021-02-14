@@ -15,6 +15,7 @@ const NEW_NOTIFICATON = "newNotification";
 const NEW_STREAMER = "newStreamer"; // Name of the event
 const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
+var streamMap = new Map();
 
 var global_io = null;
 
@@ -34,6 +35,16 @@ module.exports.initializeSocket = function (io) {
       console.log("Join room called");
       // Join a conversation
       socket.join(roomId);
+      // If this is the first time creating a room we initialize it
+      if(streamMap.get(roomId == null)){
+        streamMap.set(roomId, new Map());
+      }
+      else{
+        if(user != null){
+          // add user to room
+          streamMap.get(roomId).set(user._id, {banned: false, userData: user});
+        }
+      }
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;
         StreamData.updateOne(
@@ -49,6 +60,11 @@ module.exports.initializeSocket = function (io) {
     socket.on(LEAVE_ROOM, async (roomId) => {
       console.log("Leave room called", roomId);
       socket.leave(roomId);
+
+      // remove user from room  
+      if(user != null){
+        streamMap.get(roomId).delete(user._id);
+      }
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;
         StreamData.updateOne(
@@ -88,7 +104,8 @@ module.exports.initializeSocket = function (io) {
     // end stream event
     socket.on(END_STREAM, async (roomId) => {
       console.log("endStream");
-      console.log(roomId);
+      // remove room from map
+      streamMap.delete(roomId);
       io.in(roomId).emit(END_STREAM);
     });
 
