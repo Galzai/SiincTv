@@ -21,7 +21,6 @@ const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 });
 exports.user_login = function (req, res, next) {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
-      console.log(err);
       throw err;
     }
     if (!user) {
@@ -30,7 +29,6 @@ exports.user_login = function (req, res, next) {
       req.logIn(user, (err) => {
         if (err) throw err;
         res.send("auth/login_success");
-        console.log(info);
       });
     }
   })(req, res, next);
@@ -131,7 +129,6 @@ exports.check_username_exists = function (req, res) {
   if (exists === undefined) {
     User.findOne({ username: username }, async function (err, doc) {
       if (err) {
-        console.log("error occured");
       }
       // user exists
       if (doc) {
@@ -164,8 +161,7 @@ exports.searchUsers = function (req, res) {
     .limit(PAGE_SIZE)
     .exec(async function (err, result) {
       if (err) {
-        console.log(err);
-        console.log("user/no_results");
+        res.send("user/no_results");
       }
       // id exists
       if (result) res.send(result);
@@ -217,7 +213,6 @@ exports.google_auth = function (req, res, next) {
  * Callback after authentication, redirects user to previously set URI
  */
 exports.google_auth_callback = function (req, res, next) {
-  console.log(req.session.UrlToRedirect);
   passport.authenticate("google", {
     failureRedirect: req.session.UrlToRedirect,
   })(req, res, next);
@@ -227,7 +222,6 @@ exports.google_auth_callback = function (req, res, next) {
  * Uses passport for authentication
  */
 exports.facebook_auth = function (req, res, next) {
-  console.log(req.session.UrlToRedirect);
   passport.authenticate("facebook")(req, res, next);
 };
 
@@ -235,7 +229,6 @@ exports.facebook_auth = function (req, res, next) {
  * Callback after authentication, redirects user to previously set URI
  */
 exports.facebook_auth_callback = function (req, res, next) {
-  console.log(req.session.UrlToRedirect);
   passport.authenticate("facebook", {
     failureRedirect: req.session.UrlToRedirect,
   })(req, res, next);
@@ -250,10 +243,7 @@ exports.updateUserShortDescription = function (req, res, next) {
     { $set: { shortDescription: data.text } }
   )
     .then((obj) => {
-      console.log("Object modified", obj);
     })
     .catch((error) => {
-      console.log("Failed update");
-      console.log(error);
     });
 };

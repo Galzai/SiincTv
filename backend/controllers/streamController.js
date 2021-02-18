@@ -32,7 +32,6 @@ exports.createStream = function (req, res) {
   // We can't allow stream creation for a non logged in user
   if (!req.user) {
     res.send("user/not_logged_in");
-    console.log("no user");
   }
   const data = req.body;
 
@@ -86,7 +85,6 @@ exports.createStream = function (req, res) {
       },
     }
   ).then((obj) => {
-    console.log("Object modified", obj);
   });
   // If it's live we set it to the current stream
   if (data.status === "Live") {
@@ -101,11 +99,9 @@ exports.createStream = function (req, res) {
           },
         },
       }
-    ).then((obj) => {
-      console.log("Object modified", obj);
+    ).then((obj) => {;
     });
   }
-  console.log(req.user._id);
 
   // send notifications to all followers
   const notificationData = new Notification({
@@ -137,10 +133,8 @@ exports.getStreamById = function (req, res) {
     res.send("stream/invalid_id");
   }
   const id = req.body.streamId;
-  console.log(id);
   StreamData.findById(id, async function (err, doc) {
     if (err) {
-      console.log("Couldn't find this id");
     }
     // id exists
     if (doc) res.send(doc);
@@ -162,7 +156,6 @@ exports.searchStreams = function (req, res) {
   const status = req.body.status;
   const PAGE_SIZE = 5; // Similar to 'limit'
   const skip = (page - 1) * PAGE_SIZE; // For page 1, the skip is: (1 - 1) * 20 => 0 * 20 = 0
-  console.log(page);
   StreamData.find(
     { $and: [{ $text: { $search: searchString } }, { status: status }] },
     { score: { $meta: "textScore" } }
@@ -171,11 +164,9 @@ exports.searchStreams = function (req, res) {
     .limit(PAGE_SIZE)
     .exec(async function (err, result) {
       if (err) {
-        console.log(err);
-        console.log("stream/no_results");
+        res.send("stream/no_results");
       }
       // id exists
-      console.log(result);
       if (result) res.send(result);
       else res.send("stream/no_results");
     });
@@ -197,9 +188,8 @@ exports.getStreamsByStatus = function (req, res) {
     .limit(PAGE_SIZE)
     .sort("-numOfViewers")
     .exec(async function (err, result) {
-      if (err) {
-        console.log(err);
-        console.log("stream/no_results");
+      if (err) {;
+        res.send("stream/no_results");
       }
       // id exists
       if (result) res.send(result);
@@ -213,18 +203,14 @@ exports.getStreamsByStatus = function (req, res) {
 exports.closeStream = function (req, res) {
   const user = req.user;
   const streamId = user.currentStream ? user.currentStream.eventId : null;
-  console.log(user.currentStream);
   if (streamId == null) {
     res.send("/stream/no_current_stream");
   }
-  console.log(streamId);
   StreamData.deleteOne({ _id: new ObjectID(streamId) }, function (err) {
-    console.log("could not remove current stream");
   });
 
   User.updateOne({ _id: req.user._id }, { $unset: { currentStream: "" } }).then(
     (obj) => {
-      console.log("Object modified", obj);
     }
   );
 };
@@ -283,7 +269,6 @@ exports.requestToJoinStream = function (req, res) {
 exports.rejectRequestToJoin = function (req, res) {
   const user = req.user;
   const data = req.body.data;
-  console.log(req.body);
   const fromId = data.memberId;
   const notificationId = req.body._id;
 
@@ -292,8 +277,6 @@ exports.rejectRequestToJoin = function (req, res) {
     return;
   }
   // Remove the notification from the user
-  console.log("id is", user._id);
-  console.log("notification id is ", notificationId);
   notificationController.deleteNotificationFromUser(user._id, notificationId);
 
   streamerData = new StreamerData({
@@ -331,7 +314,6 @@ function addStreamer(streamId, streamerData) {
     { _id: new ObjectID(streamId) },
     { $push: { streamGroups: newGroup } }
   ).then((obj) => {
-    console.log(obj);
     emitNewStreamerJoined(streamId);
   });
 }
@@ -352,9 +334,6 @@ exports.acceptRequestToJoin = function (req, res) {
     return;
   }
   // Remove the notification from the user
-  console.log("id is", user._id);
-  console.log("notification id is ", notificationId);
-  console.log("stream id is ", streamId);
   notificationController.deleteNotificationFromUser(user._id, notificationId);
 
   streamerData = new StreamerData({
@@ -377,7 +356,6 @@ exports.acceptRequestToJoin = function (req, res) {
     notificationData,
     `${user.username} accepted your request to join the stream.`
   );
-  console.log("here");
   // Add the streamer to the stream
   addStreamer(streamId, streamerData);
 };

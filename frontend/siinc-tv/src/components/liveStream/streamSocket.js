@@ -14,7 +14,6 @@ const NEW_STREAMER = "newStreamer"; // Name of the event
  * @category Frontend
  * @component
  */
-
 const StreamSocket = (roomId, setStreamData) => {
   const [endStream, setEndStream] = useState(false); // Sent and received messages
   const [numOfViews, setNumViewers] = useState(0);
