@@ -40,7 +40,7 @@ export function FriendRequestReceived(props){
     }
 
     function acceptButton() {
-        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+        if( getFriendState(userContext.user, data.username) === "ACCEPT" ) 
             return (<Button onClick={acceptFriendRequest} size="small" variant="outlined" color="primary">Accept</Button>)
         else {
             removeFriendNotification(); // bad solution 
@@ -49,7 +49,7 @@ export function FriendRequestReceived(props){
     }
 
     function rejectButton() {
-        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+        if( getFriendState(userContext.user, data.username) === "ACCEPT" ) 
             return (<Button onClick={rejectFriendRequest} size="small" variant="outlined" color="primary">Reject</Button>)
     else     
         return (<Button size="small" variant="outlined" color="primary">----</Button>)       

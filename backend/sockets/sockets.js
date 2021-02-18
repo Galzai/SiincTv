@@ -15,7 +15,12 @@ const NEW_NOTIFICATON = "newNotification";
 const NEW_STREAMER = "newStreamer"; // Name of the event
 const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
+const LOGGED_VIEWERS_CHANGED = "loggedViewersChanged";
+const BAN_UNBAN = "banUnban";
 
+
+var streamMap = new Map();
+var userToStreams = new Map();
 var global_io = null;
 
 // This is called to initialize the socket
@@ -31,9 +36,23 @@ module.exports.initializeSocket = function (io) {
 
     // Join a stream room
     socket.on(JOIN_ROOM, async (roomId) => {
-      console.log("Join room called");
       // Join a conversation
       socket.join(roomId);
+      // If this is the first time creating a room we initialize it
+      if(streamMap.get(roomId) ===  undefined){
+        streamMap.set(roomId, new Map());
+      }
+      if(user !== null){
+        // add user to room if not already in room
+        if(streamMap.get(roomId).get(user._id.toString()) === undefined){
+          streamMap.get(roomId).set(user._id.toString(), {banned: false, userData: user});
+          // We also need a mapping for each user to the rooms hes in
+          if(!userToStreams.get(user._id)){
+            userToStreams.set(user._id.toString(), new Set());
+          }
+          userToStreams.get(user._id.toString()).add(roomId);
+        }
+      }
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;
         StreamData.updateOne(
@@ -43,12 +62,22 @@ module.exports.initializeSocket = function (io) {
         // result
         io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
       }
+      io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId)));
     });
 
     // Leave a stream room
     socket.on(LEAVE_ROOM, async (roomId) => {
-      console.log("Leave room called", roomId);
+      if(user != null && streamMap.get(roomId).get(user._id.toString())){
+        streamMap.get(roomId).delete(user._id.toString());
+        io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId))); 
+        if(userToStreams.get(user._id.toString())){
+          userToStreams.get(user._id.toString()).delete(roomId);
+        }
+      }
       socket.leave(roomId);
+
+      // remove user from room  
+
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;
         StreamData.updateOne(
@@ -63,7 +92,6 @@ module.exports.initializeSocket = function (io) {
             { _id: roomId },
             { $set: { numOfViewers: 0 } }
           ).then((obj) => {
-            console.log("Object modified", obj);
           });
         }
       }
@@ -81,23 +109,40 @@ module.exports.initializeSocket = function (io) {
           user = await User.findById(id);
         }
       }
-      if (user) io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-      console.log("NewMessage");
+      if (user && !streamMap.get(roomId).get(user._id.toString()).banned) io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+    });
+    // Ban or unban user from stream chat
+    socket.on(BAN_UNBAN, async (userId, roomId) => {
+      let userData = streamMap.get(roomId).get(userId);
+      // remove room from map
+      let banUnban = !userData.banned;
+      streamMap.get(roomId).get(userId).banned = banUnban;
+      io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId)));
+      const text = banUnban ? "You have been banned from the chat." : "You have been unbanned from the chat.";
+      global_io.in(String(userId)).emit(NEW_NOTIFICATON, text);
     });
 
     // end stream event
     socket.on(END_STREAM, async (roomId) => {
-      console.log("endStream");
-      console.log(roomId);
+      // remove room from map
+      streamMap.delete(roomId);
       io.in(roomId).emit(END_STREAM);
     });
 
     socket.on("userConnection", (userId) => {
-      console.log("user : " + userId + " logged in");
       socket.join(userId);
     });
     socket.on("userDisconnect", (userId) => {
-      console.log("user : " + userId + " logged out");
+      const streams = userToStreams.get(userId);
+      if(streams){
+        streams.forEach((roomId)=>{
+          if(streamMap.get(roomId)){
+            streamMap.get(roomId).delete(userId);
+            io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId))); 
+          }
+        });
+        userToStreams.delete(userId);
+      }
       socket.leave(userId);
     });
   });

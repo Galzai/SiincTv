@@ -87,8 +87,9 @@ function Stream(props) {
         <Hidden implementation="css" initialWidth="md" mdDown>
           <Chat
             className={style.chatBox}
-            userId={userContext.user ? userContext.user.username : ""}
+            username={userContext.user ? userContext.user.username : ""}
             roomId={id}
+            isOwner={(userContext.user) && (userContext.user._id === streamData.creator.memberId)}
           />
         </Hidden>
         <Container maxWidth="xl">

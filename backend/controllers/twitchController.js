@@ -21,7 +21,7 @@ const refreshTwitchAuth = async function(){
     const result = await axios({
         method: 'POST',
         url:`https://id.twitch.tv/oauth2/token?client_id=${passportConfigs.TWITCH_CONFIG.clientID}&client_secret=${passportConfigs.TWITCH_CONFIG.clientSecret}&grant_type=client_credentials`
-    }).catch((e)=>{console.log(e.result.data)} );
+    }).catch((e)=>{} );
     // We check if any user with such name was found
     const success = myCache.set(twitchAuthenticatedKey, result.data, 30 * 24 * 60 * 60);
     accessToken = result.data;
@@ -38,8 +38,7 @@ const validateTwitchAuth = async function(){
         headers: {
             "Authorization": "OAuth " + accessToken.access_token
         }
-    }).catch((e)=>{console.log(e.response.data)});
-    console.log(result ? "Validated" : " Not validated");
+    }).catch((e)=>{});
     return result;
 }
 
