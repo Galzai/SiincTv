@@ -5,9 +5,10 @@ import React, { useEffect, useState } from "react";
 import ChatHandler from "./chatHandler";
 import style from "./chat.module.css";
 import Textarea from "react-expanding-textarea";
+import LoggedViewers from "./loggedViewers";
 
 function Chat(props) {
-  const { messages, sendMessage } = ChatHandler(props.roomId); // Creates a websocket and manages messaging
+  const { messages, sendMessage, loggedViewers } = ChatHandler(props.roomId); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = useState(""); // Message to be sent
   const userId = props.userId;
 
@@ -33,6 +34,7 @@ function Chat(props) {
 
   return (
     <div className={style.chatContainer}>
+      {loggedViewers &&<LoggedViewers loggedViewers={loggedViewers}/>}
       <Textarea
         className={style.messageTextArea}
         value={newMessage}

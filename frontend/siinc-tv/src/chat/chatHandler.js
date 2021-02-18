@@ -5,12 +5,12 @@ import { useEffect, useContext, useState } from "react";
 import SocketContext from "../socketContext";
 
 const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
-const JOIN_ROOM = "joinRoom"; // Name of the event
-const LEAVE_ROOM = "leaveRoom"; // Name of the event
+const LOGGED_VIEWERS_CHANGED = "loggedViewersChanged";
 
 const ChatHandler = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketContext = useContext(SocketContext);
+  const [loggedViewers, setLoggedViewers] = useState(null);
   useEffect(() => {
     if (roomId != null) {
       // Listens for incoming messages
@@ -22,6 +22,11 @@ const ChatHandler = (roomId) => {
           ownedByCurrentUser: message.senderId === socketContext.socket.id,
         };
         setMessages((messages) => [...messages, incomingMessage]);
+      });
+      // Listen for changes in logged viewers
+      socketContext.socket.on(LOGGED_VIEWERS_CHANGED, (loggedViewersData) =>{
+        console.log(loggedViewersData);
+        setLoggedViewers(loggedViewersData);
       });
     }
   }, []);
@@ -39,7 +44,7 @@ const ChatHandler = (roomId) => {
     );
   };
 
-  return { messages, sendMessage };
+  return { messages, sendMessage, loggedViewers};
 };
 
 export default ChatHandler;

@@ -15,6 +15,8 @@ const NEW_NOTIFICATON = "newNotification";
 const NEW_STREAMER = "newStreamer"; // Name of the event
 const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
+const LOGGED_VIEWERS_CHANGED = "loggedViewersChanged";
+
 var streamMap = new Map();
 
 var global_io = null;
@@ -32,17 +34,16 @@ module.exports.initializeSocket = function (io) {
 
     // Join a stream room
     socket.on(JOIN_ROOM, async (roomId) => {
-      console.log("Join room called");
       // Join a conversation
       socket.join(roomId);
       // If this is the first time creating a room we initialize it
-      if(streamMap.get(roomId == null)){
+      if(streamMap.get(roomId) ===  undefined){
         streamMap.set(roomId, new Map());
       }
-      else{
-        if(user != null){
-          // add user to room
-          streamMap.get(roomId).set(user._id, {banned: false, userData: user});
+      if(user !== null){
+        // add user to room if not already in room
+        if(streamMap.get(roomId).get(user._id.toString()) === undefined){
+          streamMap.get(roomId).set(user._id.toString(), {banned: false, userData: user});
         }
       }
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
@@ -54,17 +55,20 @@ module.exports.initializeSocket = function (io) {
         // result
         io.in(roomId).emit(VIEWERS_CHANGED, numViewers);
       }
+      io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId)));
     });
 
     // Leave a stream room
     socket.on(LEAVE_ROOM, async (roomId) => {
       console.log("Leave room called", roomId);
+      if(user != null){
+        streamMap.get(roomId).delete(user._id.toString());
+        io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId))); 
+      }
       socket.leave(roomId);
 
       // remove user from room  
-      if(user != null){
-        streamMap.get(roomId).delete(user._id);
-      }
+
       if (roomId != "undefined" && io.sockets.adapter.rooms.get(roomId)) {
         let numViewers = io.sockets.adapter.rooms.get(roomId).size;
         StreamData.updateOne(
