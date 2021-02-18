@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> followData</title>
+  <title> frontend/siinc-tv/src/chat/chatHandler.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,158 +79,80 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>followData</h1>
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/chat/chatHandler.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>followData<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="followData">
-        <a class="href-link" href="#followData">#</a>
-        
-        <span class="code-name">
-            
-                new followData<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        holds information regarding the user's followers
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="backend_models_user.js.html" class="button">View Source</a>
-            <span>
-                <a href="backend_models_user.js.html">backend/models/user.js</a>, <a href="backend_models_user.js.html#line102">line 102</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This module is in charge of handling chat emits from the socket
+ */
+import { useEffect, useContext, useState } from "react";
+import SocketContext from "../socketContext";
+
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage"; // Name of the event
+const LOGGED_VIEWERS_CHANGED = "loggedViewersChanged";
+const BAN_UNBAN = "banUnban";
+
+/**
+ * This component is in charge of the socket handler for chat related emits
+ * 
+ * @category Frontend
+ * @component
+ */
+const ChatHandler = (roomId) => {
+  const [messages, setMessages] = useState([]); // Sent and received messages
+  const socketContext = useContext(SocketContext);
+  const [loggedViewers, setLoggedViewers] = useState(null);
+  useEffect(() => {
+    if (roomId != null) {
+      // Listens for incoming messages
+      socketContext.socket.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
+        const incomingMessage = {
+          ...message,
+          ownedByCurrentUser: message.senderId === socketContext.socket.id,
+        };
+        setMessages((messages) => [...messages, incomingMessage]);
+      });
+      // Listen for changes in logged viewers
+      socketContext.socket.on(LOGGED_VIEWERS_CHANGED, (loggedViewersData) =>{
+        setLoggedViewers(loggedViewersData);
+      });
+    }
+  }, []);
+
+  // Sends a message to the server that
+  // forwards it to all users in the same room
+  const sendMessage = (messageBody) => {
+    socketContext.socket.emit(
+      NEW_CHAT_MESSAGE_EVENT,
+      {
+        body: messageBody,
+        senderId: socketContext.socket.id,
+      },
+      socketContext.streamRoomId
+    );
+  };
+
+  // Ban or unban user from chat
+  const banUnban = (id) =>{
+    socketContext.socket.emit(
+      BAN_UNBAN, id,
+      socketContext.streamRoomId
+    );
+  }
+  return { messages, sendMessage, loggedViewers, banUnban};
+};
+
+export default ChatHandler;
+</code></pre>
+        </article>
+    </section>
 
 
 

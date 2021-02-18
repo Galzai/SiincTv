@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> followData</title>
+  <title> frontend/siinc-tv/src/chat/chat.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,158 +79,94 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>followData</h1>
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/chat/chat.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>followData<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="followData">
-        <a class="href-link" href="#followData">#</a>
-        
-        <span class="code-name">
-            
-                new followData<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        holds information regarding the user's followers
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="backend_models_user.js.html" class="button">View Source</a>
-            <span>
-                <a href="backend_models_user.js.html">backend/models/user.js</a>, <a href="backend_models_user.js.html#line102">line 102</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * This module is in charge of the chats with a give room id
+ */
+import React, { useEffect, useState } from "react";
+import ChatHandler from "./chatHandler";
+import style from "./chat.module.css";
+import Textarea from "react-expanding-textarea";
+import LoggedViewers from "./loggedViewers";
+
+/**
+ * @brief This is a small clickable stream window used to select current streamer in "single main" view
+ * 
+ * @prop {String} roomId id of the room the chat is in
+ * @prop {String} username name of the user in the chat
+ * @prop {Boolean} isOwner true if the user is the owner of the stream
+ * @category Frontend
+ * @component
+ */
+function Chat(props) {
+  const { messages, sendMessage, loggedViewers, banUnban } = ChatHandler(props.roomId); // Creates a websocket and manages messaging
+  const [newMessage, setNewMessage] = useState(""); // Message to be sent
+  const username = props.username;
+  const isOwner = props.isOwner; 
+
+  useEffect(() => {
+
+  },[props.roomId]);
+  const handleNewMessageChange = (event) => {
+    setNewMessage(event.target.value);
+  };
+
+  const handleSendMessage = () => {
+    if (username) sendMessage(username + ": " + newMessage);
+    setNewMessage("");
+  };
+
+  function handleKeypress(e) {
+    //it triggers by pressing the enter key
+    if (e.keyCode === 13) {
+      handleSendMessage();
+      e.preventDefault();
+    }
+  }
+
+  return (
+    &lt;div className={style.chatContainer}>
+      {loggedViewers &amp;&amp;&lt;LoggedViewers loggedViewers={loggedViewers} banUnban={banUnban} isOwner={isOwner}/>}
+      &lt;Textarea
+        className={style.messageTextArea}
+        value={newMessage}
+        onChange={handleNewMessageChange}
+        placeholder="Click enter to send message..."
+        maxLength="200"
+        onKeyDown={handleKeypress}
+      />
+      &lt;div className={style.messagesContainer}>
+        &lt;ol className={style.messageList}>
+          {messages.map((message, i) => (
+            &lt;li
+              key={i}
+              className={` ${
+                message.ownedByCurrentUser
+                  ? style.myMessage
+                  : style.otherMessage
+              }`}
+            >
+              {message.body}
+            &lt;/li>
+          ))}
+        &lt;/ol>
+      &lt;/div>
+    &lt;/div>
+  );
+}
+export default Chat;
+</code></pre>
+        </article>
+    </section>
 
 
 

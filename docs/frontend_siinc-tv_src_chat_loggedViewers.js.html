@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> followData</title>
+  <title> frontend/siinc-tv/src/chat/loggedViewers.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,158 +79,109 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Class</p>
-                    <h1>followData</h1>
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/chat/loggedViewers.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>followData<span class="signature">()</span><span class="type-signature"></span></h2>
-        
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState, useContext } from "react";
+import style from "./chat.module.css";
+import userUtils from "../user/userUtils"
+import Menu from "@material-ui/core/Menu";
+import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/IconButton";
+import PeopleIcon from '@material-ui/icons/People';
+import MenuItem from "@material-ui/core/MenuItem";
+const dataIndex = 1;
+
+/**
+ * This displays all the logged in users currently in the stream
+ * 
+ * @prop {Function} banUnban function for banning or unbanning a user from chat
+ * @prop {Object} loggedViewers all the users that are currently logged to the stream
+ * @prop {Boolean} isOwner true if the user is the owner of the stream
+ * @category Frontend
+ * @component
+ */
+function LoggedViewers(props) {
+    const banUnbanFunc = props.banUnban;
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [loggedViewers, setLoggedViewers] = useState(props.loggedViewers);
+    const [isOwner] = useState(props.isOwner);
+    useEffect(() => {
+        setLoggedViewers(props.loggedViewers);
+    },[props.loggedViewers]);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
     
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="followData">
-        <a class="href-link" href="#followData">#</a>
-        
-        <span class="code-name">
-            
-                new followData<span class="signature">()</span><span class="type-signature"></span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        holds information regarding the user's followers
-    </div>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="backend_models_user.js.html" class="button">View Source</a>
-            <span>
-                <a href="backend_models_user.js.html">backend/models/user.js</a>, <a href="backend_models_user.js.html#line102">line 102</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
+
+    function banUnban(id){
+        console.log(id);
+        banUnbanFunc(id);
+    };
+    function mapViewers(){
+        return((loggedViewers).map((viewer, index)=>{
+            return(
+                &lt;MenuItem>
+                    &lt;div className={style.viewerDiv}>
+                        &lt;img alt="" className={style.streamerCircle}
+                            src={userUtils.assignImage(viewer[dataIndex].userData)}/>
+                        &lt;div className={style.viewer}
+                        onClick={()=>(props.history.push(`/users/${viewer[dataIndex].userData.username}`))}> 
+                            {viewer[dataIndex].userData.username}
+                        &lt;/div>
+                        {isOwner &amp;&amp; !viewer[dataIndex].banned &amp;&amp; &lt;Button onClick={()=>banUnban(viewer[0])} size="small" variant="outlined" color="primary">Ban&lt;/Button>}
+                        {isOwner &amp;&amp; viewer[dataIndex].banned &amp;&amp; &lt;Button onClick={()=>banUnban(viewer[0])} size="small" variant="outlined" color="primary">Unban&lt;/Button>}
+                    &lt;/div>
+                    &lt;/MenuItem>
+            )          
+        })) ;
+    }
+
+    return (
+        &lt;div>
+            &lt;IconButton
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}>
+                &lt;PeopleIcon className={style.notificationButton} />
+            &lt;/IconButton>
+            &lt;Menu
+            classes={{
+            paper: style.menuPaper,
+            list: style.menuList,
+            }}
+            id="simple-menu"
+            anchorEl={anchorEl}
+            getContentAnchorEl={null}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+            transformOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+        &lt;div className={style.notificationTitleDiv}>
+          &lt;label className={style.menuTitle}>Viewers&lt;/label>
+          &lt;/div>
+            {mapViewers()}
+            &lt;/Menu>
+        &lt;/div>
+    )
+}
+
+export default LoggedViewers</code></pre>
+        </article>
+    </section>
 
 
 
