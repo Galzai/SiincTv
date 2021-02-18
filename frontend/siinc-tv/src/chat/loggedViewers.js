@@ -10,9 +10,10 @@ const dataIndex = 1;
 
 function LoggedViewers(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [loggedViewers] = useState(props.loggedViewers);
+    const [loggedViewers, setLoggedViewers] = useState(props.loggedViewers);
     useEffect(() => {
-    },[]);
+        setLoggedViewers(props.loggedViewers);
+    },[props.loggedViewers]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -34,6 +35,7 @@ function LoggedViewers(props) {
                             {viewer[dataIndex].userData.username}
                         </div>
                         {!viewer[dataIndex].banned && <Button size="small" variant="outlined" color="primary">Ban</Button>}
+                        {viewer[dataIndex].banned && <Button size="small" variant="outlined" color="primary">Unban</Button>}
                     </div>
                     </MenuItem>
             )          
