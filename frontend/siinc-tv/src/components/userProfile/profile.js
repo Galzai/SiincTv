@@ -21,9 +21,10 @@ import TwitchLogo from "../../assets/TwitchIcon.ico"
 
 function Profile(props) {
     
-    const [display, setUserInfoDisplay] = useState('about');
+    const [display, setUserInfoDisplay] = useState('friends');
     const userContext = useContext(UserContext);
     const userid = props.match.params.userid;
+    const initTab = props.initTab;
     const [user, setUser] = useState(null);
     const userOnline = 'true';  //todo
     const userRating  = 3 ;  //todo
@@ -46,8 +47,13 @@ function Profile(props) {
                 setUser(data);
                 setAboutInfo(data.shortDescription)
                 setUserName(data.username)
+                setUserInfoDisplay('friends')
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
+                if( initTab == "FOLLOWING")
+                    setUserInfoDisplay('followers')
+                if( initTab == "FRIENDS")
+                    setUserInfoDisplay('friends')
             }
         });
         return (() => {isMounted = false})

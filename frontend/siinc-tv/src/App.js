@@ -85,6 +85,12 @@ function App() {
                   <Route path="/my_channel">
                     <Profile></Profile>
                   </Route>
+                  <Route path="/users/:userid/following" render={(props) => (
+                      <Profile initTab={"FOLLOWING"} />
+                  )} ></Route>
+                  <Route path="/users/:userid/friends" render={(props) => (
+                      <Profile initTab={"FRIENDS"} />
+                  )} ></Route>
                   <Route path="/users/:userid" component={Profile}></Route>
                 </Switch>
                 <SideBar></SideBar>

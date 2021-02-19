@@ -59,11 +59,11 @@ function SideBar(props) {
     }
 
     function redirectToFriends(){
-        props.history.push(`users/${userContext.user._id}/friends`);
+        props.history.push(`/users/${userContext.user._id}/friends`);
     }
 
     function redirectoToFollowing(){
-        props.history.push(`users/${userContext.user._id}/following`);
+        props.history.push(`/users/${userContext.user._id}/following`);
     }
 
     return(
