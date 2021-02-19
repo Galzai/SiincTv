@@ -3,6 +3,7 @@
  * 
  * @module UserProvider
  * @category Frontend
+ * @subcategory Provider
  */
 import React from "react";
 import UserContext from "./userContext";

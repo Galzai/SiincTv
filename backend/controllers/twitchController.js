@@ -2,6 +2,7 @@
  * We use this module for access to twitch API that requires an auth token
  * @module TwitchController
  * @category Backend
+ * @subcategory Controllers
  */
 
 const axios = require('axios');

@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
  * Streamer data for streamers in stream
  * @class
  * @category Backend
+ * @subcategory Stream Models
  * @param  {mongoose.Schema.Types.ObjectId} memberId
  * @param  {String} youtubeId
  * @param  {String} twitchId
@@ -24,6 +25,7 @@ const StreamerData =  mongoose.model("StreamerData", streamerData );
  *information regarding registered viewers
  * @class
  * @category Backend
+ * @subcategory Stream Models
  * @param  {mongoose.Schema.Types.ObjectId} memberId
  * @param  {String} displayName
  */
@@ -37,8 +39,9 @@ const RegisteredViewerData =  mongoose.model("RegisteredViewerData", registeredV
  * describes a group of streamers that can hold up to maxNumOfMembers
  * @class
  * @category Backend
+ * @subcategory Stream Models
  * @param  {Number} maxNumOfMembers
- * @param  {StreamerData} members
+ * @param  {streamerData} members
  */
 const streamGroup = new mongoose.Schema({
     maxNumOfMembers: Number,
@@ -50,7 +53,8 @@ const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
  * describes a siinc stream
  * @class
  * @category Backend
- * @param  {StreamerData} creator
+ * @subcategory Stream Models
+ * @param  {streamerData} creator
  * @param  {String} name
  * @param  {String} status
  * @param  {Boolean} privateStream
@@ -58,7 +62,7 @@ const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
  * @param  {String[]} tags
  * @param  {Date} date
  * @param  {String} description
- * @param  {StreamGroup[]} streamGroups
+ * @param  {streamGroup[]} streamGroups
  * @param  {type:mongoose.Schema.Types.ObjectId[]} registeredViewers
  * @param  {Number} numOfViewers
  */

@@ -118,6 +118,7 @@ const customTagStyle = {
  * @prop {Function} setStreamGroups setter for stream groups
  * @component
  * @category Frontend
+ * @subcategory Stream Creation
  */
 function TeamBlock(props) {
   const maxGroups = props.maxGroups;

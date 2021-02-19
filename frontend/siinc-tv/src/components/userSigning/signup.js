@@ -21,6 +21,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
  * 
  * @component
  * @category Frontend
+ * @subcategory User Signing
  */
 function Signup(props) {
 

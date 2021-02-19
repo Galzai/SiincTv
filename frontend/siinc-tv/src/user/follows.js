@@ -1,4 +1,4 @@
-import userActions from "../user/userActions";
+import userActions from "./userActions";
 
 const handleFollow=(myUser, otherUserName)=>{
     const fun = async() => {

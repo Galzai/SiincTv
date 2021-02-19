@@ -12,6 +12,7 @@ import {isFollowing, handleFollowAction} from "../../user/follows";
  * @prop {userData} user  the data of the user to display
  * @component
  * @category Frontend
+ * @subcategory Previews
  */
 function UserPreview(props){
     const user = props.user;

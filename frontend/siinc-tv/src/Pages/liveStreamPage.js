@@ -18,6 +18,7 @@ import Tooltip from "@material-ui/core/Tooltip";
  * @prop {streamData} streamData the data describing the stream
  * @component
  * @category Frontend
+ * @subcategory Pages
  */
 function Stream(props) {
   const id = props.id;

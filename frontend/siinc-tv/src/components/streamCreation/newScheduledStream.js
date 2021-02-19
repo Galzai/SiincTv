@@ -11,6 +11,7 @@ const { default: streamActions } = require("../../stream/streamActions");
  * Note: This is currently unused
  * @component
  * @category Frontend
+ * @subcategory Stream Creation
  */
 function NewScheduledStream(props) {
   const { user } = props;

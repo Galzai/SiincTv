@@ -13,6 +13,7 @@ const srcPost = "&autoplay=1";
  * @prop {Boolean} muted should the stream be displayed as muted
  * @category Frontend
  * @component
+ * @subcategory Live stream
  */
 function YoutubeLiveStream(props) {
   const [streamSrc, setStreamSrc] = useState(

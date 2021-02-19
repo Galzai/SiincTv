@@ -2,6 +2,7 @@
  * This controller is in charge of all of the actions relating to a user/users
  * @module UserController
  * @category Backend
+ * @subcategory Controllers
  */
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
@@ -103,7 +104,7 @@ exports.get_user = function (req, res) {
 
 /**
  * Returns data regarding a specific requested user by username
- * @param {*} req.body.usernam username of the user to search for
+ * @param {*} req.body.username username of the user to search for
  */
 exports.get_user_data = function (req, res) {
   User.findOne({ username: req.body.username }, async function (err, doc) {

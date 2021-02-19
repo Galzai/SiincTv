@@ -1,6 +1,6 @@
 {
     "plugins": ["node_modules/better-docs/component"
-                ,"node_modules/better-docs/category"
+                ,"node_modules/better-docs/category", "node_modules/jsdoc-route-plugin"
     ],
     "recurseDepth": 10,
     "source": {

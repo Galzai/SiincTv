@@ -7,6 +7,7 @@ import React from "react";
  * 
  * @component
  * @category Frontend
+ * @subcategory Pages
  */
 
 function HomePage(props) {

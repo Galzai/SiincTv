@@ -13,6 +13,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
  * @prop {Boolean} liveOnly true if the user has an active stream
  * @component
  * @category Frontend
+ * @subcategory Search
  */
 function UserSearchResults(props) {
   const userContext = useContext(UserContext);

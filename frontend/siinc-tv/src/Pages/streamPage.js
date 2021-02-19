@@ -9,6 +9,7 @@ const { default: streamActions } = require("../stream/streamActions");
  * @prop {String} props.match.params.id; the id of the stream we are trying to show
  * @component
  * @category Frontend
+ * @subcategory Pages
  */
 function LivetreamPage(props) {
   const [streamData, setStreamData] = useState(null);

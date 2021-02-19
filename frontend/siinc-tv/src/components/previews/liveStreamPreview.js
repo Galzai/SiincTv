@@ -16,6 +16,7 @@ const width = "426";
  * @prop {streamData} streamData The data describing the stream
  * @component
  * @category Frontend
+ * @subcategory Previews
  */
 function LiveStreamPreview(props) {
   const streamData = props.streamData;

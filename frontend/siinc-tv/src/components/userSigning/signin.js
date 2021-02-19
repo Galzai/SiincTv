@@ -14,6 +14,7 @@ const { default: userActions } = require("../../user/userActions");
  * @prop {String} passwordError
  * @component
  * @category Frontend
+ * @subcategory User Signing
  */
 function SignIn(props) {
     const {

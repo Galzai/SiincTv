@@ -11,6 +11,7 @@ const NEW_NOTIFICATON = "newNotification";
  * 
  * @component 
  * @category Frontend
+ * @subcategory Notifications
  */
 const NotificationHandler = () => {
   const [newNotification, setNewNotifications] = useState(false);

@@ -36,6 +36,7 @@ const customStyles = {
  * @prop {Function} refreshUserData data refresh function
  * @component
  * @category Frontend
+ * @subcategory User Signing
  */
 function SigningModal(props){
     const user = props.user;

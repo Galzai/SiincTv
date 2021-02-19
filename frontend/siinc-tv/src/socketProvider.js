@@ -3,6 +3,7 @@
  * 
  * @module UserProvider
  * @category Frontend
+ * @subcategory Provider
  */
 import React from "react";
 import SocketContext from "./socketContext";

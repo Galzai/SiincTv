@@ -10,6 +10,7 @@ const { default: streamActions } = require("../../stream/streamActions");
  * Component used for creating new live streams
  * @component
  * @category Frontend
+ * @subcategory Stream Creation
  */
 function NewLiveStream(props) {
   const { user } = props;

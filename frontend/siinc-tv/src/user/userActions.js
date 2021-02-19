@@ -12,6 +12,7 @@ const UNFOLLOW_REQUEST = 1;
  * 
  * @class
  * @category Frontend
+ * @subcategory Actions
  */
 const userActions = {
   /**

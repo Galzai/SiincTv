@@ -12,6 +12,7 @@ import style from "./search.module.css";
  * @prop {Boolean} joinableOnly true if the stream is not invite only
  * @component
  * @category Frontend
+ * @subcategory Search
  */
 function StreamSearchResults(props) {
   const [searchString, setSearchString] = useState(props.searchString);

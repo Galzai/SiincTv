@@ -9,6 +9,7 @@ import style from "./searchPage.module.css";
  * 
  * @component
  * @category Frontend
+ * @subcategory Pages
  */
 function CreateStreamPage(props) {
   const userContext = useContext(UserContext);

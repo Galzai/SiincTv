@@ -2,6 +2,7 @@
  *This controller is in charge of handling requests relating to streams
  * @module StreamController
  * @category Backend
+ * @subcategory Controllers
  */
 
 const {

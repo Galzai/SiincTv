@@ -59,6 +59,7 @@ function timeSince(date) {
  *
  * @component
  * @category Frontend
+ * @subcategory Notifications
  */
 function NotificationMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);

@@ -8,6 +8,7 @@ import YoutubeLiveStream from "./youtubeLiveStream";
  * @prop {streamData} streamer data of the streamer to display live stream of
  * @prop {Object} dimensions dimensions of the requested stream
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function LiveStream(props) {

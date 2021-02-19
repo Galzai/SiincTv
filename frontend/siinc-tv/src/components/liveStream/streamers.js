@@ -15,6 +15,7 @@ function flatten(arr) {
  * 
  * @prop {streamGroup[]} streamGroups all the groups of streamers in the stream
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function Streamers(props) {

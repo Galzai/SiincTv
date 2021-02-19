@@ -14,6 +14,7 @@ import streamActions from '../../stream/streamActions.js'
  * @prop {notificationData} notification the data of the notification
  * @component
  * @category Frontend
+ * @subcategory Notifications
  */
 function JoinStreamRequestNotification(props){
 

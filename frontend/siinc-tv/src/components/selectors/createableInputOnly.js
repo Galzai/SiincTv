@@ -19,6 +19,7 @@ const createOption = (label) => ({
  * @prop {Function} updateTags setter for updating tags
  * @component
  * @category Frontend
+ * @subcategory Selectors
  */
 export default class CreatableInputOnly extends Component {
   constructor(props) {

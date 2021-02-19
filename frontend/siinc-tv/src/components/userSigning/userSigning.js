@@ -12,6 +12,7 @@ import SocketContext from "../../socketContext"
  * @prop {Function} setUser setter for the current user
  * @component
  * @category Frontend
+ * @subcategory User Signing
  */
 function UserSigning(props) {
 

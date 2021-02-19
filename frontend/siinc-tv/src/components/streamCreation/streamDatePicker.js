@@ -9,6 +9,7 @@ import "./datepickerStyle.css";
  * @prop {Date} updateDate The date to set as default
  * @component
  * @category Frontend
+ * @subcategory Stream Creation
  */
 function StreamDatePicker(props) {
   const updateDate = props.updateDate;

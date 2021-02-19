@@ -13,6 +13,7 @@ import StreamSocket from './streamSocket'
  * @prop {String} streamTitle title of the stream
  * @prop {String} description description of the stream
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function StreamDetails(props){

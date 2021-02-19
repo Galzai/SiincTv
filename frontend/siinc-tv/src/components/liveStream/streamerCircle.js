@@ -7,6 +7,7 @@ import Tooltip from "@material-ui/core/Tooltip";
  * 
  * @prop {streamData} streamer data of the streamer to display live stream of
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function StreamerCircle(props) {

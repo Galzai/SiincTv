@@ -10,6 +10,7 @@ import Select from 'react-select';
  * @prop {friendsData[]} friends user's friends
  * @component
  * @category Frontend
+ * @subcategory Selectors
  */
 function FriendFinder(props){
     const styles = props.styles;

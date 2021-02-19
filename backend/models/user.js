@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
  * Schema for twitch data   
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} login
  * @param  {String} display_name
  * @param  {String} description
@@ -23,6 +24,7 @@ const TwitchData = mongoose.model("TwitchData", twitchData );
  * Schema for google
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} displayName
  * @param  {String} youtubeId
  * @param  {String} youtubeName
@@ -44,6 +46,7 @@ const GoogleData =  mongoose.model("GoogleData", googleData );
  * Schema for facebook
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} displayName
  * @param  {String} profileUrl
  * @param  {Object} name
@@ -61,6 +64,7 @@ const FacebookData =  mongoose.model("FacebookData", facebookData );
  * holds information regarding the user's upcoming events
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} name
  * @param  {Date} date
  * @param  {mongoose.Schema.Types.ObjectId} eventId
@@ -76,6 +80,7 @@ const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData 
  * holds information regarding the user's friends and friend requests
  * @class
  * @category Backend
+ * @subcategory User Models
  */
 const friendsData = new mongoose.Schema({
   friendsList: [{
@@ -98,6 +103,7 @@ const FriendsData = mongoose.model("FriendsData", friendsData);
  * holds information regarding the user's followers
  * @class
  * @category Backend
+ * @subcategory User Models
  */
 const followData = new mongoose.Schema({
   followersList: [{
@@ -121,6 +127,7 @@ const FollowData = mongoose.model("FollowData", followData);
  * Schema for Notification data/fields ( each type of notification has different fields )
  * @class
  * @category Backend
+ * @subcategory User Models
  */ 
 var notificationData = new mongoose.Schema({
   type: Map,
@@ -132,6 +139,7 @@ const NotificationData = mongoose.model("NotificationData", notificationData );
 * Schema for notifications
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} type
  * @param  {Boolean} clearable
  * @param  {Date} date
@@ -149,6 +157,7 @@ const Notification = mongoose.model("Notification", notification );
  * Schema for user account
  * @class
  * @category Backend
+ * @subcategory User Models
  * @param  {String} username
  * @param  {String} email
  * @param  {String} password
@@ -158,14 +167,14 @@ const Notification = mongoose.model("Notification", notification );
  * @param  {String} image
  * @param  {String} shortDescription
  * @param  {String} description
- * @param  {UpComingEventData} currentStream
- * @param  {TwitchData} twitchData
- * @param  {GoogleData} googleData
- * @param  {FacebookData} facebookData
- * @param  {UpComingEventData[]} upcomingEvents
- * @param  {FriendsData[]} friendsData
- * @param  {Notification[]} notifications
- * @param  {FollowData} followData
+ * @param  {upComingEventData} currentStream
+ * @param  {twitchData} twitchData
+ * @param  {googleData} googleData
+ * @param  {facebookData} facebookData
+ * @param  {upComingEventData[]} upcomingEvents
+ * @param  {friendsData[]} friendsData
+ * @param  {notification[]} notifications
+ * @param  {followData} followData
  */
 const user = new mongoose.Schema({
   username: String,

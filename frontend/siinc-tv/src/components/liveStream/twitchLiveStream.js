@@ -9,6 +9,7 @@ const srcPost = "&parent=localhost";
  * @prop {String} displayName display name of the streamer
  * @prop {Boolean} muted should the stream be displayed as muted
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function LiveStream(props) {

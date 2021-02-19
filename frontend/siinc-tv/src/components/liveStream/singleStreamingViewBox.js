@@ -9,6 +9,7 @@ import StreamSelectorBar from "./streamSelectorBar";
  * @prop {streamData} currentStreamer data of the streamer to display live stream of as main
  * @prop {streamGroup[]} streamGroups all the groups of streamers in the stream
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function SingleStreamViewBox(props) {

@@ -19,6 +19,7 @@ function flatten(arr) {
  * @prop {streamerData} currentStreamer current main streamer
  * @prop {Function} setCurrentStreamer setter for the main streamer
  * @category Frontend
+ * @subcategory Live stream
  * @component
  */
 function StreamSelectorBar(props) {

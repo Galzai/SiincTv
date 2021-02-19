@@ -4,6 +4,7 @@ import axios from "axios";
  * We use this modules for calls to our backend API for actiosn relating to streams
  * @class
  * @category Frontend
+ * @subcategory Actions
  */
 const streamActions = {
   /**

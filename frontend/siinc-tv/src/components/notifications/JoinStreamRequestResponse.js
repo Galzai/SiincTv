@@ -15,6 +15,7 @@ import streamActions from '../../stream/streamActions.js'
  * @prop {String} response accepted or rejected
  * @component
  * @category Frontend
+ * @subcategory Notifications
  */
 function JoinStreamRequestResponse(props){
 

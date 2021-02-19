@@ -9,6 +9,7 @@ import UserSearchResults from "./userSearchResults";
  * @prop {String} match.params.searchString the string that of the search phrase that redirected to this page
  * @component
  * @category Frontend
+ * @subcategory Search
  */
 function CombinedSearch(props){
     const [searchString, setSearchString] = useState(props.searchString);

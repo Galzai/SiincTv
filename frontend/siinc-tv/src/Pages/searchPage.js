@@ -27,6 +27,7 @@ import MuiListItem from "@material-ui/core/ListItem";
  * @prop {String} match.params.searchString the string that of the search phrase that redirected to this page
  * @component
  * @category Frontend
+ * @subcategory Pages
  */
 function SearchPage(props) {
   const searchString = props.match.params.searchString;
