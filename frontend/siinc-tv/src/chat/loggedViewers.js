@@ -40,13 +40,13 @@ function LoggedViewers(props) {
     };
     function mapViewers(){
         return((loggedViewers).map((viewer, index)=>{
-            return(
+            return( 
                 <MenuItem>
                     <div className={style.viewerDiv}>
                         <img alt="" className={style.streamerCircle}
                             src={userUtils.assignImage(viewer[dataIndex].userData)}/>
                         <div className={style.viewer}
-                        onClick={()=>(props.history.push(`/users/${viewer[dataIndex].userData.username}`))}> 
+                        onClick={()=>(props.history.push(`/users/${viewer[dataIndex].userData._id}`))}> 
                             {viewer[dataIndex].userData.username}
                         </div>
                         {isOwner && !viewer[dataIndex].banned && <Button onClick={()=>banUnban(viewer[0])} size="small" variant="outlined" color="primary">Ban</Button>}

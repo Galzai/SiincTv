@@ -107,7 +107,7 @@ exports.get_user = function (req, res) {
  * @param {*} req.body.username username of the user to search for
  */
 exports.get_user_data = function (req, res) {
-  User.findOne({ username: req.body.username }, async function (err, doc) {
+  User.findOne({ _id: req.body.userId }, async function (err, doc) {
     if (err) {
       res.send([]);
     }

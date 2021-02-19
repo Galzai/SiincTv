@@ -70,7 +70,7 @@ async function handleFollowRequest( req )
     // now update toUser and fromUser
     try {
        await User.updateOne( 
-            { username: fromUser.username },
+            { _id: fromUser._id },
             { $push: { "followData.followingList": {
                 userId: toUser._id,
                 youtubeId: toUser.youtubeId,
@@ -81,7 +81,7 @@ async function handleFollowRequest( req )
         ).exec();
         
         await User.updateOne( 
-            { username: toUser.username },
+            { _id: toUser._id },
             { $push: { "followData.followersList": {
                 userId: fromUser._id,
                 youtubeId: fromUser.youtubeId,
@@ -129,12 +129,12 @@ async function handleUnfollowRequest( req )
     // update fromUser and toUser
     try {
         await User.updateOne( 
-            { username: fromUser.username },
+            { _id: fromUser._id },
             { $pull: { "followData.followingList": { userId: toUser._id } } }
         ).exec();
 
         await User.updateOne( 
-            { username: toUser.username },
+            { _id: toUser._id },
             { $pull: { "followData.followersList": { userId: fromUser._id } } }
         ).exec();
     }
@@ -152,11 +152,13 @@ async function handleUnfollowRequest( req )
 
 async function getUsersFromRequest( req ) 
 {
+
+        console.log(req.body);
         // get sender user
         let fromUser = null;
         let toUser = null;
         try {
-            fromUser = await User.findOne({username: req.body.fromUser}).exec();
+            fromUser = await User.findOne({_id: req.body.fromUser}).exec();
         }
         catch (error) {
             console.log("error occured in : <handleUnfriendRequest>")
@@ -170,7 +172,7 @@ async function getUsersFromRequest( req )
     
         // get receiver user
         try {
-            toUser = await User.findOne({username: req.body.toUser}).exec();
+            toUser = await User.findOne({_id: req.body.toUser}).exec();
         }
         catch (error) {
             console.log("error occured in : <handleSendFriendRequest>")

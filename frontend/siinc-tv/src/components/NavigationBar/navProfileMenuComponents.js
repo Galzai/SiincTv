@@ -62,7 +62,7 @@ export function NavProfileMenuBreaker(props) {
 
 export function NavProfileMenuMyChannelLink() {
     const userContext = useContext(UserContext);
-    const mychannel = "/users/" + userContext.user.username;
+    const mychannel = "/users/" + userContext.user._id;
 
     return(
         <Link to={mychannel} className={style.link} underline="none">

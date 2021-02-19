@@ -19,7 +19,7 @@ function NewFollowerNotification(props){
 
     function handleRedirect() {
         props.clearNotification(props.notification._id)
-        props.history.push(`/users/${data.username}`);
+        props.history.push(`/users/${data.userId}`);
     }
 
     return(

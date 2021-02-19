@@ -23,7 +23,7 @@ function Profile(props) {
     
     const [display, setUserInfoDisplay] = useState('about');
     const userContext = useContext(UserContext);
-    const userName = props.match.params.username;
+    const userid = props.match.params.userid;
     const [user, setUser] = useState(null);
     const userOnline = 'true';  //todo
     const userRating  = 3 ;  //todo
@@ -32,19 +32,20 @@ function Profile(props) {
     const [editAboutInfo, setEditAboutInfo] = useState(false);
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
+    const [userName, setUserName] = useState("")
     const socketContext = useContext(SocketContext);
 
     useEffect(()=>{
         console.log("MyReder1")
         let isMounted = true;
-        //TODO : ChangeToId
-        userActions.getUserData( userName )
+        userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
                 setAboutInfo(data.shortDescription)
+                setUserName(data.username)
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
             }
@@ -93,24 +94,26 @@ function Profile(props) {
     }
 
    const debugFriendRepr=()=> {
-    if( userContext.user == null || friendsData == null ) {
+    if( userContext.user == null || user == null || friendsData == null ) {
         return "Loading";
     }
     if( !userContext.user ) {
         return "Not logged";
     }
-    if( userContext.user.username == userName ) {
+    if( String(userContext.user._id) === String(user._id) ) {
         return "Its you!";
     }
     if(userContext.user.friendsData)
     {
-        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
+        console.log(userContext.user.friendsData)
+        console.log(String(user._id))
+        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) {     
             return "Unfriend";
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
+        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
             return "Pending";
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
+        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
             return "Accept";
         }
     }
@@ -123,7 +126,7 @@ function Profile(props) {
     }
 
     const onClickFriendAction=()=>{
-        handleFriendAction(userContext.user, userName);
+        handleFriendAction(userContext.user, {username: user.username, userId: user._id});
         userContext.refreshUserData();
     }
 
@@ -132,22 +135,24 @@ function Profile(props) {
     }
 
     const onClickFollowAction=()=>{
-        handleFollowAction(userContext.user, userName);
+        if( user )
+            handleFollowAction(userContext.user, user);
         userContext.refreshUserData();
     }
 
     const debugFollowRepr=()=> {
-        if( userContext.user == null )
+        if( userContext.user == null || user == null )
             return "";
-        if( userContext.user.username == userName )
+        if( String(userContext.user._id) === String(user._id) )
             return "you!";
-        if(userContext.user.followData && userContext.user.followData.followingList.find(x=>x.userName===userName) != undefined )
+        if(userContext.user.followData && 
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) != undefined )
             return "Unfollow"
         return "Follow"
     }
     
     const isMe=()=>{
-        if( !userContext.user || userContext.user.username !== userName )
+        if( !userContext.user || !user || String(userContext.user._id) !== String(user._id) )
             return false
         return true;
         
@@ -202,7 +207,7 @@ function Profile(props) {
     const onClickDoneEditDesc=()=>{
         userActions.updateUserShortDescription(user._id, aboutInfo)
         .then(() => {
-            userActions.getUserData( user.username )
+            userActions.getUserData( user._id )
         .then(data => {
             setUser(data)
         })})
@@ -310,7 +315,7 @@ function FriendDisplayPreview(props) {
                     <img className={style.streamerCircle}
                         src={friend.userImage}/>
                     <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${friend.displayName}`))}> 
+                    onClick={()=>(routerHistory.push(`/users/${friend.memberId}`))}> 
                         {friend.displayName}
                     </div>
                 </div>            
@@ -366,7 +371,7 @@ function FollowerDisplayPreview(props) {
                     <img className={style.streamerCircle}
                         src={follower.userImage}/>
                     <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${follower.userName}`))}> 
+                    onClick={()=>(routerHistory.push(`/users/${follower.userId}`))}> 
                         {follower.userName}
                     </div>
                 </div>            

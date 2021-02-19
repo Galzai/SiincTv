@@ -85,7 +85,7 @@ function App() {
                   <Route path="/my_channel">
                     <Profile></Profile>
                   </Route>
-                  <Route path="/users/:username" component={Profile}></Route>
+                  <Route path="/users/:userid" component={Profile}></Route>
                 </Switch>
                 <SideBar></SideBar>
                 <NavigationBar></NavigationBar>

@@ -86,13 +86,13 @@ const userActions = {
 
   /**
    * Returns data regarding a specific requested user by username
-   * @param {*} userName username of the user to search for
+   * @param {*} userId userId of the user to search for
    */
-  getUserData: async function (userName) {
+  getUserData: async function (userId) {
     const result = await axios({
       method: "POST",
       data: {
-        username: userName,
+        userId: userId,
       },
       withCredentials: true,
       url: "http://localhost:4000/userdata",
@@ -167,8 +167,8 @@ const userActions = {
 
   // ------------------------- FRIENDS -----------------------------
 
-  // String:fromUser - friend request sender
-  // String:toUser   - friend request receiver
+  // String:fromUser(id) - friend request sender
+  // String:toUser(id)   - friend request receiver
   sendFriendRequest: async function (fromUser, toUser) {
     const result = await axios({
       method: "POST",
@@ -183,8 +183,8 @@ const userActions = {
     return result.data;
   },
 
-  // String:fromUser - the sender of the request which is now being responded to
-  // String:toUser   - the one who responds to the requests
+  // String:fromUser - the sender of the request which is now being responded to (id)
+  // String:toUser   - the one who responds to the requests (id)
   answerFriendRequest: async function (fromUser, toUser, accepted) {
     const result = await axios({
       method: "POST",
@@ -200,8 +200,8 @@ const userActions = {
     return result.data;
   },
 
-  // String:fromUser - the one who unfriends
-  // String:toUser   - the one being unfriended
+  // String:fromUser(id) - the one who unfriends
+  // String:toUser(id)   - the one being unfriended
   unfriendFriendRequest: async function (fromUser, toUser) {
     const result = await axios({
       method: "POST",
@@ -224,14 +224,14 @@ const userActions = {
   // String:toUser   - who the follower follows
   sendFollowRequest: async function (fromUser, toUser) {
     console.log(
-      "sending follow request from " + fromUser + " to user " + toUser
+      "sending follow request from " + fromUser.username + " to user " + toUser.username
     );
     const result = await axios({
       method: "POST",
       data: {
         action: FOLLOW_REQUEST,
-        fromUser: fromUser,
-        toUser: toUser,
+        fromUser: fromUser._id,
+        toUser: toUser._id,
       },
       withCredentials: true,
       url: "http://localhost:4000/user/follow",
@@ -246,8 +246,8 @@ const userActions = {
       method: "POST",
       data: {
         action: UNFOLLOW_REQUEST,
-        fromUser: fromUser,
-        toUser: toUser,
+        fromUser: fromUser._id,
+        toUser: toUser._id,
       },
       withCredentials: true,
       url: "http://localhost:4000/user/follow",

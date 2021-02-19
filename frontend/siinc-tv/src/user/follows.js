@@ -1,9 +1,9 @@
 import userActions from "./userActions";
 
-const handleFollow=(myUser, otherUserName)=>{
+const handleFollow=(myUser, otherUser)=>{
     const fun = async() => {
         console.log("Attempting to follow")
-        let status = await userActions.sendFollowRequest( myUser.username, otherUserName );
+        let status = await userActions.sendFollowRequest( myUser, otherUser );
         if( !status ) {
             console.log("An error occured while following")
             return false;
@@ -16,10 +16,10 @@ const handleFollow=(myUser, otherUserName)=>{
     })
 }
 
-const handleUnfollow = (myUser, otherUserName) => {
+const handleUnfollow = (myUser, otherUser) => {
     const fun = async() => {
         console.log("Unfollow")
-        let status = await userActions.sendUnfollowRequest( myUser.username, otherUserName );
+        let status = await userActions.sendUnfollowRequest( myUser, otherUser );
         if( !status ) {
             console.log("An error occured while unfollowing")
             return false;
@@ -32,29 +32,30 @@ const handleUnfollow = (myUser, otherUserName) => {
     })       
 }
 
-export const handleFollowAction=(myUser, otherUserName)=>{
-    if( myUser == null ) {
+// receive 2 user objects
+export const handleFollowAction=(myUser, otherUser)=>{
+    if( myUser == null || otherUser == null ) {
         console.log("usercontext or provided user is null <handleFollowAction>");
         return;
     }
 
-    if( myUser.username === otherUserName ) {
-        console.log("cant follow/unfollow yourself! " + myUser.username + ", " + otherUserName);
+    if( String(myUser._id) === String(otherUser._id) ) {
+        console.log("cant follow/unfollow yourself! " + myUser.username + ", " + otherUser.username);
         return;
     }
-    if( myUser.followData.followingList.find(x=>x.userName==otherUserName) != undefined ) {
-        handleUnfollow(myUser, otherUserName);                                         
+    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) != undefined ) {
+        handleUnfollow(myUser, otherUser);                                         
         return;
     }
-    handleFollow(myUser, otherUserName)
+    handleFollow(myUser, otherUser)
 }
 
-export const isFollowing = (myUser, otherUserName) => {
-    if( myUser == null ) 
+export const isFollowing = (myUser, otherUser) => {
+    if( myUser == null || otherUser == null ) 
         return false;
-    if( myUser.username == otherUserName ) 
+    if( String(myUser._id) === String(otherUser._id) ) 
         return false;
-    if( myUser.followData.followingList.find(x=>x.userName==otherUserName) != undefined ) 
+    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) != undefined ) 
         return true;
     return false;
 }

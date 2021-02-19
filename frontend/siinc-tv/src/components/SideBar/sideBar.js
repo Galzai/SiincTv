@@ -33,7 +33,7 @@ function SideBar(props) {
                         <img alt="" className={style.streamerCircle}
                             src={friend.userImage}/>
                         <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${friend.displayName}`))}> 
+                        onClick={()=>(props.history.push(`/users/${friend.memberId}`))}> 
                             {friend.displayName}
                         </div>
                     </div>
@@ -49,7 +49,7 @@ function SideBar(props) {
                         <img alt="" className={style.streamerCircle}
                             src={following.userImage}/>
                         <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${following.userName}`))}> 
+                        onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
                             {following.userName}
                         </div>
                     </div>
