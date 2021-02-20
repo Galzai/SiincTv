@@ -24,8 +24,8 @@ import SearchPage from "./Pages/searchPage";
 const history = createBrowserHistory();
 function App() {
   const windowDim = useWindowDimensions();
-  const [width, setWidth] = useState(windowDim.width);
-  const [height, setHeight] = useState(windowDim.height);
+  const [width, setWidth] = useState(window.width);
+  const [height, setHeight] = useState(window.height);
   toast.configure();
   if (width !== windowDim.width) {
     setWidth(windowDim.width);
