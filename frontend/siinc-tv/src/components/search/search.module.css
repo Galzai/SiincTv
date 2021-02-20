@@ -16,7 +16,9 @@
     align-self: flex-start;
     background-color: #FFFFFF;
     border-radius: 70px;
+    width: 70%;
     opacity: 0.3;
+    margin-left: 0px;
 }
  .noResults{
      font-size: 15px;
