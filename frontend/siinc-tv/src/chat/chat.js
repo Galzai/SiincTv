@@ -6,6 +6,8 @@ import ChatHandler from "./chatHandler";
 import style from "./chat.module.css";
 import Textarea from "react-expanding-textarea";
 import LoggedViewers from "./loggedViewers";
+import ScrollToBottom from 'react-scroll-to-bottom';
+import { Picker } from 'emoji-mart'
 
 /**
  * @brief This is a small clickable stream window used to select current streamer in "single main" view
@@ -53,7 +55,7 @@ function Chat(props) {
         maxLength="200"
         onKeyDown={handleKeypress}
       />
-      <div className={style.messagesContainer}>
+      <ScrollToBottom className={style.messagesContainer}>
         <ol className={style.messageList}>
           {messages.map((message, i) => (
             <li
@@ -68,7 +70,7 @@ function Chat(props) {
             </li>
           ))}
         </ol>
-      </div>
+      </ScrollToBottom>
     </div>
   );
 }
