@@ -14,6 +14,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import "react-toastify/dist/ReactToastify.css";
 import JoinStreamRequestNotification from "./joinStreamRequestNotification";
 import JoinStreamRequestResponse from "./JoinStreamRequestResponse";
+import NoYoutubeAccount from "./noYoutubeAcc";
 import {
   FriendRequestReceived,
   FriendRequestAccepted,
@@ -26,6 +27,8 @@ const { default: userActions } = require("../../user/userActions");
 /**
  * Returns string describing time since date
  * @param {Date} date
+ * @category Frontend
+ * @subcategory Notifications
  */
 function timeSince(date) {
   console.log(date);
@@ -125,6 +128,9 @@ function NotificationMenu() {
             clearNotification={clearNotification}
           />
         );
+        case "noYoutubeAccount":
+          return (
+            <NoYoutubeAccount/>);
       default:
         return;
     }
@@ -222,7 +228,7 @@ function NotificationMenu() {
           )}
         </div>
 
-        {numNotifications == 0 && (
+        {numNotifications === 0 && (
           <MenuItem>
             <div>You have no notifications.</div>
           </MenuItem>

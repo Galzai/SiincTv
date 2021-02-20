@@ -23,6 +23,7 @@
 
 const bcrypt = require("bcryptjs");
 var youtubeController = require("../controllers/youtubeController");
+var notificationController = require("../controllers/notificationController");
 //all our strategies
 const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
@@ -36,7 +37,7 @@ const { json } = require("body-parser");
 const { GOOGLE_CONFIG, FACEBOOK_CONFIG } = require("./passportConfigs.js");
 
 // our Models
-const { User, FriendsData, FollowData } = require("../models/user");
+const { User, FriendsData, FollowData, Notification } = require("../models/user");
 const { GoogleData } = require("../models/user");
 const { TwitchData } = require("../models/user");
 const { FacebookData } = require("../models/user");
@@ -134,7 +135,6 @@ module.exports = function (passport) {
       },
       // Google auth callback function
       async function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
         // We try to see if we have an existing user with this id
         User.findOne(
           { googleId: profile.id },
@@ -146,6 +146,17 @@ module.exports = function (passport) {
 
             // If we find a user with the existing google id we just sign in
             if (doc) {
+              // If we didnt have a youtube account we try and find one
+              if(!doc.googleData.youtubeId){
+                var channels = await youtubeController.getYoutubeChannelFromGoogle(
+                  accessToken,
+                  refreshToken
+                );
+                doc.googleData.youtubeId = (channels && (channels.length > 0)) ? channels[0].id : null;
+                doc.googleData.youtubeName = (channels && (channels.length > 0))? channels[0].snippet.title : null;
+                doc.markModified('googleData');
+                await doc.save();
+              }
               return done(null, doc);
             }
             //Otherwise we create a new user
@@ -154,7 +165,6 @@ module.exports = function (passport) {
                 accessToken,
                 refreshToken
               );
-              console.log(channels);
               const newGoogleData = new GoogleData({
                 displayName: profile.displayName,
                 youtubeId: (channels && (channels.length > 0)) ? channels[0].id : null,
@@ -182,7 +192,14 @@ module.exports = function (passport) {
               });
               // we save and finish
               await newUser.save();
-              console.log("Added new user");
+              // Add notification about youtube missing
+              if(!newUser.youtubeId){
+                const notificationData = new Notification({
+                  type: "noYoutubeAccount",
+                  clearable: true,
+                });
+                notificationController.addNotificationToUser(newUser._id,notificationData ,null);
+              }
               return done(null, newUser);
             }
           }
