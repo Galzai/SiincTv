@@ -1,9 +1,11 @@
 .notificationButton
 {
+    position: relative;
     width: 30px;
     height: 34px;   
     color:#E2DAE9;
     margin-top: 2px;
+    left: 8px;
 }
 
 .closeButton

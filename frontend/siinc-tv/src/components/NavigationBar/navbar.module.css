@@ -263,11 +263,10 @@
 
 .navCreateStreamButton
 {
-    position: relative;
+    position: absolute;
     width: 34px;
     height: 30px;
-    margin-top: 14px;
-    left: 200px;
+    right: 140px;
     color: #E2DAE9;
 }
 
