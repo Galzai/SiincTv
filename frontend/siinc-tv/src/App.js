@@ -23,21 +23,21 @@ import SearchPage from "./Pages/searchPage";
 
 const history = createBrowserHistory();
 function App() {
-  const window = useWindowDimensions();
-  const [width, setWidth] = useState(window.width);
-  const [height, setHeight] = useState(window.height);
+  const windowDim = useWindowDimensions();
+  const [width, setWidth] = useState(windowDim.width);
+  const [height, setHeight] = useState(windowDim.height);
   toast.configure();
-  if (width !== window.width) {
-    setWidth(window.width);
+  if (width !== windowDim.width) {
+    setWidth(windowDim.width);
   }
   if (height !== window.height) {
-    setHeight(window.height);
+    setHeight(windowDim.height);
   }
 
   const wrapperStyle = {
     container: {
-      width: window.width * 0.997,
-      height: window.height,
+      width: windowDim.width * 0.997,
+      height: windowDim.height,
       backgroundColor: "#0B001E",
       overflow: "auto",
     },
