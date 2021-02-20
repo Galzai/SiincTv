@@ -141,7 +141,7 @@
     position: relative;
     top: 8px;
     text-align: left;
-    width: 100%;
+    width: 80%;
     align-self: left;
     color: #FFFFFF;
     opacity: 0.7;
@@ -205,6 +205,7 @@
 .numOfViews{
     position: relative;
     right: 0px;
+    width: 80%;
     border:none;
     font-family: 'Roboto', sans-serif;
     font-style: normal;
