@@ -1,10 +1,9 @@
 // temporary
 // ======================
 
-const {User} = require("../models/user");
+const {User, Notification} = require("../models/user");
 var notification = require('../Notification/notification')
 var notificationController = require('../controllers/notificationController')
-const {Notification} = require("../models/user");
 const {emitReloadNotifications} = require("../sockets/sockets")
 
 

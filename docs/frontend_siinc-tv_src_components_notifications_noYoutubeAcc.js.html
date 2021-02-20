@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> JoinStreamRequestResponse</title>
+  <title> frontend/siinc-tv/src/components/notifications/noYoutubeAcc.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -77,239 +79,53 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p>Components</p>
-                    <h1>JoinStreamRequestResponse</h1>
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/components/notifications/noYoutubeAcc.js</h1>
                 </header>
                 
 
 
 
-
-<section>
-
-<header>
     
-        <h2>
-            &ltJoinStreamRequestResponse  /&gt
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-            <div class='vertical-section'>
-                <div class="members">
-                    <div class="member">
-                        <div class=name>
-                            <span class="tag">Constructor</span>
-                        </div>
-                        
-
-
-    
-    <h4 class="name" id="JoinStreamRequestResponse">
-        <a class="href-link" href="#JoinStreamRequestResponse">#</a>
-        
-        <span class="code-name">
-            
-                &ltJoinStreamRequestResponse  /&gt
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        This Componenet is in charge of the resonse notification received to join stream request
-    </div>
-    
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-<div class="table-container">
-    <table class="props table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>notification</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type"><a href="notificationData.html">notificationData</a></span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last">the data of the notification</td>
-</tr>
-
-        
-            
-<tr class="deep-level-0">
-    
-        <td class="name"><code>response</code></td>
-    
-
-    <td class="type">
-    
-        
-<span class="param-type">String</span>
-
-
-    
-    </td>
-
-    
-
-    
-
-    <td class="description last">accepted or rejected</td>
-</tr>
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html" class="button">View Source</a>
-            <span>
-                <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html">frontend/siinc-tv/src/components/notifications/JoinStreamRequestResponse.js</a>, <a href="frontend_siinc-tv_src_components_notifications_JoinStreamRequestResponse.js.html#line17">line 17</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        
-    
-    </div>
-    
-        
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState} from "react";
+import Grid from '@material-ui/core/Grid';
+import ListItem from '@material-ui/core/ListItem';
+import Link from '@material-ui/core/Link';
+/**
+ * This Componenet is in the notification for when a google user has no youtube account
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory Notifications
+ */
+function NoYoutubeAccount(){
+
+    return(
+
+
+        &lt;ListItem alignItems="flex-start">
+            &lt;Grid>
+            &lt;Grid item>
+            &lt;label>{`No youtube channel was detected for this google account`}&lt;/label>
+            &lt;/Grid>
+            &lt;Grid item>
+            &lt;label>{`Please create a youtube account than logout and login to siinc.tv to link it`}&lt;/label>
+            &lt;/Grid>
+            &lt;Grid item>
+            &lt;Link
+            href="https://www.youtube.com/create_channel" >{`Click here to create a youtube channel`}&lt;/Link>
+            &lt;/Grid>
+            &lt;/Grid>
+
+        &lt;/ListItem>
+
+    );
+}
+export default NoYoutubeAccount;</code></pre>
+        </article>
+    </section>
 
 
 

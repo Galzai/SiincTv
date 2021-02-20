@@ -79,62 +79,65 @@ reactComponents['NotificationHandler'] = Component17;
 import Component18 from '../frontend/siinc-tv/src/components/notifications/notificationMenu.js';
 reactComponents['NotificationMenu'] = Component18;
 
-import Component19 from '../frontend/siinc-tv/src/Pages/searchPage.js';
-reactComponents['SearchPage'] = Component19;
+import Component19 from '../frontend/siinc-tv/src/components/notifications/noYoutubeAcc.js';
+reactComponents['NoYoutubeAccount'] = Component19;
 
-import Component20 from '../frontend/siinc-tv/src/components/userSigning/signin.js';
-reactComponents['SignIn'] = Component20;
+import Component20 from '../frontend/siinc-tv/src/Pages/searchPage.js';
+reactComponents['SearchPage'] = Component20;
 
-import Component21 from '../frontend/siinc-tv/src/components/userSigning/signingModal.js';
-reactComponents['SigningModal'] = Component21;
+import Component21 from '../frontend/siinc-tv/src/components/userSigning/signin.js';
+reactComponents['SignIn'] = Component21;
 
-import Component22 from '../frontend/siinc-tv/src/components/userSigning/signup.js';
-reactComponents['Signup'] = Component22;
+import Component22 from '../frontend/siinc-tv/src/components/userSigning/signingModal.js';
+reactComponents['SigningModal'] = Component22;
 
-import Component23 from '../frontend/siinc-tv/src/components/liveStream/singleStreamingViewBox.js';
-reactComponents['SingleStreamViewBox'] = Component23;
+import Component23 from '../frontend/siinc-tv/src/components/userSigning/signup.js';
+reactComponents['Signup'] = Component23;
 
-import Component24 from '../frontend/siinc-tv/src/components/liveStream/splitScreenViewBox.js';
-reactComponents['SplitScreenViewBox'] = Component24;
+import Component24 from '../frontend/siinc-tv/src/components/liveStream/singleStreamingViewBox.js';
+reactComponents['SingleStreamViewBox'] = Component24;
 
-import Component25 from '../frontend/siinc-tv/src/Pages/liveStreamPage.js';
-reactComponents['Stream'] = Component25;
+import Component25 from '../frontend/siinc-tv/src/components/liveStream/splitScreenViewBox.js';
+reactComponents['SplitScreenViewBox'] = Component25;
 
-import Component26 from '../frontend/siinc-tv/src/components/streamCreation/streamDatePicker.js';
-reactComponents['StreamDatePicker'] = Component26;
+import Component26 from '../frontend/siinc-tv/src/Pages/liveStreamPage.js';
+reactComponents['Stream'] = Component26;
 
-import Component27 from '../frontend/siinc-tv/src/components/liveStream/streamDetails.js';
-reactComponents['StreamDetails'] = Component27;
+import Component27 from '../frontend/siinc-tv/src/components/streamCreation/streamDatePicker.js';
+reactComponents['StreamDatePicker'] = Component27;
 
-import Component28 from '../frontend/siinc-tv/src/components/liveStream/streamerCircle.js';
-reactComponents['StreamerCircle'] = Component28;
+import Component28 from '../frontend/siinc-tv/src/components/liveStream/streamDetails.js';
+reactComponents['StreamDetails'] = Component28;
 
-import Component29 from '../frontend/siinc-tv/src/components/liveStream/streamers.js';
-reactComponents['Streamers'] = Component29;
+import Component29 from '../frontend/siinc-tv/src/components/liveStream/streamerCircle.js';
+reactComponents['StreamerCircle'] = Component29;
 
-import Component30 from '../frontend/siinc-tv/src/components/search/streamSearchResults.js';
-reactComponents['StreamSearchResults'] = Component30;
+import Component30 from '../frontend/siinc-tv/src/components/liveStream/streamers.js';
+reactComponents['Streamers'] = Component30;
 
-import Component31 from '../frontend/siinc-tv/src/components/liveStream/streamerSelector.js';
-reactComponents['StreamSelector'] = Component31;
+import Component31 from '../frontend/siinc-tv/src/components/search/streamSearchResults.js';
+reactComponents['StreamSearchResults'] = Component31;
 
-import Component32 from '../frontend/siinc-tv/src/components/liveStream/streamSelectorBar.js';
-reactComponents['StreamSelectorBar'] = Component32;
+import Component32 from '../frontend/siinc-tv/src/components/liveStream/streamerSelector.js';
+reactComponents['StreamSelector'] = Component32;
 
-import Component33 from '../frontend/siinc-tv/src/components/liveStream/streamSocket.js';
-reactComponents['StreamSocket'] = Component33;
+import Component33 from '../frontend/siinc-tv/src/components/liveStream/streamSelectorBar.js';
+reactComponents['StreamSelectorBar'] = Component33;
 
-import Component34 from '../frontend/siinc-tv/src/components/streamCreation/teamBlock.js';
-reactComponents['TeamBlock'] = Component34;
+import Component34 from '../frontend/siinc-tv/src/components/liveStream/streamSocket.js';
+reactComponents['StreamSocket'] = Component34;
 
-import Component35 from '../frontend/siinc-tv/src/components/previews/userPreview.js';
-reactComponents['UserPreview'] = Component35;
+import Component35 from '../frontend/siinc-tv/src/components/streamCreation/teamBlock.js';
+reactComponents['TeamBlock'] = Component35;
 
-import Component36 from '../frontend/siinc-tv/src/components/search/userSearchResults.js';
-reactComponents['UserSearchResults'] = Component36;
+import Component36 from '../frontend/siinc-tv/src/components/previews/userPreview.js';
+reactComponents['UserPreview'] = Component36;
 
-import Component37 from '../frontend/siinc-tv/src/components/userSigning/userSigning.js';
-reactComponents['UserSigning'] = Component37;
+import Component37 from '../frontend/siinc-tv/src/components/search/userSearchResults.js';
+reactComponents['UserSearchResults'] = Component37;
 
-import Component38 from '../frontend/siinc-tv/src/components/liveStream/youtubeLiveStream.js';
-reactComponents['YoutubeLiveStream'] = Component38;
+import Component38 from '../frontend/siinc-tv/src/components/userSigning/userSigning.js';
+reactComponents['UserSigning'] = Component38;
+
+import Component39 from '../frontend/siinc-tv/src/components/liveStream/youtubeLiveStream.js';
+reactComponents['YoutubeLiveStream'] = Component39;
