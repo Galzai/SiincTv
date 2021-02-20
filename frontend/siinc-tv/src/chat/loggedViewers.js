@@ -6,6 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/IconButton";
 import PeopleIcon from '@material-ui/icons/People';
 import MenuItem from "@material-ui/core/MenuItem";
+import { withRouter } from 'react-router-dom';
 const dataIndex = 1;
 
 /**
@@ -88,4 +89,4 @@ function LoggedViewers(props) {
     )
 }
 
-export default LoggedViewers
+export default withRouter(LoggedViewers);
