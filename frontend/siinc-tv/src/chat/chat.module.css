@@ -13,16 +13,17 @@
     background-color: #190F2C;
     overflow: hidden;
     border-left: 0.5px solid #493d5e;
+    overflow-y: auto;
 }
 
 .messagesContainer
 {
-    display: inline-block;
+    display:flex;
     padding-left: 0px;
     text-align: left;
-    top: 10px;
+    top: 8px;
     right: 0px;
-    height: 85%;
+    height: 80%;
     overflow-y: auto;
 }
 
@@ -43,27 +44,29 @@
 
 .myMessage
 {
+    position: relative;
     list-style-type: none;
     font-family: Roboto;
     font-style: normal;
     font-weight: 900;
-    padding-right: 2px;
     word-wrap: break-word;
-    font-size: 18px;
-    padding-left: 0px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 28px;
+    right: 18px;
     color: #EFEFEF;
 }
 
 .otherMessage
 {
+    position: relative;
     list-style-type: none;
     font-family: Roboto;
     font-style: normal;
     font-weight: 900;
-    font-size: 18px;
-    line-height: 32px;
+    font-size: 16px;
+    line-height: 28px;
     color: #929292;
+    right: 18px;
 }
 
 
@@ -79,7 +82,7 @@
     font-style: normal;
     font-weight: 0;
     font-size: 16px;
-    line-height: 32px;
+    line-height: 28px;
     color: #c0c0c0;
     background: #2e2044;
     columns: 1;
