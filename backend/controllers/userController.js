@@ -244,26 +244,28 @@ exports.facebook_auth_callback = function (req, res, next) {
 
 exports.updateUserShortDescription = function (req, res, next) {
   const data = req.body;
-
   User.updateOne(
     { _id: data.userId },
     { $set: { shortDescription: data.text } }
   )
     .then((obj) => {
+      res.send([]);
     })
     .catch((error) => {
+      console.log("error updating short desc")
     });
 };
 
 exports.updateUserInterests = function (req, res, next) {
   const data = req.body;
-
   User.updateOne(
     { _id: data.userId },
     { $set: { interests: data.interests } }
   )
     .then((obj) => {
+      res.send([]);
     })
     .catch((error) => {
+      console.log("error updating interests")
     });
 };

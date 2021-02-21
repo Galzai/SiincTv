@@ -79,7 +79,6 @@ export default class CreatableInputOnly extends Component {
         }
 
         event.preventDefault();
-        console.log(value);
         break;
       default:
         return;

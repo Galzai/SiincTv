@@ -307,19 +307,26 @@ function Profile(props) {
     }
 
     const onClickDoneEditDesc=()=>{
-        Promise.all([userActions.updateUserShortDescription(user._id, aboutInfo),
-                     userActions.updateUserInterests(user._id, labels)])
-        .then(() => {
+        /*Promise.all([userActions.updateUserShortDescription(user._id, aboutInfo),
+                     userActions.updateUserInterests(user._id, labels)])*/
+        userActions.updateUserShortDescription(user._id, aboutInfo)
+        .then((res) => {
+            console.log("res = ")
+            console.log(res)
+            userActions.updateUserInterests(user._id, labels)
+        .then((res) => {        
+            console.log("Finished doing both actions")
             userActions.getUserData( user._id )
         .then(data => {
             setUser(data)
-        })})
+            props.history.replace("/users/"+user._id);
+        })})})
         .catch(error => {
             console.log("Error editing channel")
             console.log(error)
         })
         setEditAboutInfo(false);
-        props.history.replace("/users/"+user._id);
+        
     }
 
     return (
@@ -359,7 +366,7 @@ function Profile(props) {
                 </div>
                 <div className={style.pointsSpan}>Points of Interest: </div>
                         { !editAboutInfo && 
-                          labels.map((value, index) => {console.log("value = ");console.log(value);
+                          labels.map((value, index) => {
                             return <label className={style.pointsLabel} key={index}>{value.value}</label>
                         })}
                         { editAboutInfo && 
