@@ -264,4 +264,6 @@ router.post('/test/selfPoke', notificationController.pokeYourself);
 
 router.post('/user/update_field', userController.updateUserShortDescription)
 
+router.post('/user/update_interests', userController.updateUserInterests)
+
 module.exports = router;

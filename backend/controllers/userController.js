@@ -248,3 +248,16 @@ exports.updateUserShortDescription = function (req, res, next) {
     .catch((error) => {
     });
 };
+
+exports.updateUserInterests = function (req, res, next) {
+  const data = req.body;
+
+  User.updateOne(
+    { _id: data.userId },
+    { $set: { interests: data.interests } }
+  )
+    .then((obj) => {
+    })
+    .catch((error) => {
+    });
+};

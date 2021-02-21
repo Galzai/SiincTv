@@ -300,6 +300,7 @@ module.exports = function (passport) {
         friendsData: user.friendsData,
         notifications: user.notifications,
         followData: user.followData,
+        interests: user.interests,
       };
       cb(err, userInformation);
     });

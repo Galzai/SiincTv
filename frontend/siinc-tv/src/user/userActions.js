@@ -306,6 +306,19 @@ const userActions = {
     });
     return result.data;
   },
+
+  updateUserInterests: async function (userId, data) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        userId: userId,
+        interests: data,
+      },
+      url: "http://localhost:4000/user/update_interests",
+      withCredentials: true,
+    });
+    return result.data;
+  },
 };
 
 export default userActions;

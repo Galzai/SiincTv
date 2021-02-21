@@ -194,6 +194,7 @@ const user = new mongoose.Schema({
   friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'},
   notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}],
   followData:{type: mongoose.Schema.Types.Mixed, ref: 'FollowData'},
+  interests:[{label: String, value: String}]
 });
 
 // This is necessery for quick text search

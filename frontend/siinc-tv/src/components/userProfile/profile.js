@@ -8,12 +8,15 @@ import Schedule from './schedule'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
+import UserPreview from "../previews/userPreview";
+
 import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
 import { withRouter } from 'react-router-dom';
 import LiveStreamPreview from "../previews/liveStreamPreview";
 import SocketContext from "../../socketContext"
 import streamActions from '../../stream/streamActions';
+import CreateableInputOnly from "../selectors/createableInputOnly";
 
 import YoutubeLogo from "../../assets/YoutubeIcon.ico"
 import TwitchLogo from "../../assets/TwitchIcon.ico"
@@ -28,13 +31,95 @@ function Profile(props) {
     const [user, setUser] = useState(null);
     const userOnline = 'true';  //todo
     const userRating  = 3 ;  //todo
-    const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
+    const [labels, setLabels] = useState([]) //todo
     const [aboutInfo, setAboutInfo] = useState('') 
     const [editAboutInfo, setEditAboutInfo] = useState(false);
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
     const [userName, setUserName] = useState("")
     const socketContext = useContext(SocketContext);
+    const maxTagLength = 15;
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  // We use this to style our selector
+  const customTagStyle = {
+    control: (styles, state) => ({
+      ...styles,
+      width: 613,
+      marginTop: 10,
+      backgroundColor: "#251A37",
+      borderRadius: state.isFocused ? 3 : 3,
+      height: 40,
+      minHeight: 40,
+      lineHeight: "150%",
+      border: state.isFocused ? "1px solid rgb(153, 153, 153)" : "none",
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      ":hover": {
+        borderRadius: 3,
+        cursor: "text",
+        border: "1px solid rgb(153, 153, 153)",
+      },
+    }),
+    valueContainer: (styles) => ({ ...styles, height: 40, minHeight: 40 }),
+    indicatorContainer: (styles) => ({
+      ...styles,
+      height: 40,
+      minHeight: 40,
+      paddingTop: 0,
+      paddingBottom: 0,
+    }),
+    input: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamilt: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    placeholder: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamily: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    multiValue: (styles) => ({
+      ...styles,
+      textAlign: "center",
+      bottom: 20,
+      height: 30,
+      backgroundColor: "#12343B",
+      borderRadius: 5,
+    }),
+    multiValueLabel: (styles) => ({
+      ...styles,
+      height: 30,
+      textAlign: "center",
+      fontSize: 16,
+      top: 15,
+      color: "#FFFFFF",
+      fontFamily: "Roboto",
+    }),
+    multiValueRemove: (styles) => ({
+      ...styles,
+      ":hover": {
+        backgroundColor: "#071416",
+        color: "#AFAFAF",
+        cursor: "pointer",
+      },
+    }),
+  };
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
     useEffect(()=>{
         console.log("MyReder1")
@@ -46,6 +131,7 @@ function Profile(props) {
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
                 setAboutInfo(data.shortDescription)
+                setLabels(data.interests)
                 setUserName(data.username)
                 setUserInfoDisplay('friends')
                 if( data.currentStream && data.currentStream !== "" )
@@ -59,7 +145,11 @@ function Profile(props) {
         return (() => {isMounted = false})
     }, [props.match])
 
-    useEffect(()=>{if( user ) setAboutInfo(user.shortDescription)}, [user])
+    useEffect(()=>{ 
+        if( user ) { 
+            setAboutInfo(user.shortDescription);
+            setLabels(user.interests);
+        }}, [user])
 
     const showDisplay = () => {
         if( !user )
@@ -211,14 +301,15 @@ function Profile(props) {
     }
 
     const onClickDoneEditDesc=()=>{
-        userActions.updateUserShortDescription(user._id, aboutInfo)
+        Promise.all([userActions.updateUserShortDescription(user._id, aboutInfo),
+                     userActions.updateUserInterests(user._id, labels)])
         .then(() => {
             userActions.getUserData( user._id )
         .then(data => {
             setUser(data)
         })})
         .catch(error => {
-            console.log("Error editing desc")
+            console.log("Error editing channel")
             console.log(error)
         })
         setEditAboutInfo(false);
@@ -253,16 +344,19 @@ function Profile(props) {
                     <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
                 </div>
                 <div className={style.pointsSpan}>Points of Interest: </div>
-                        {lables.map((value, index) => {
-                            return <label className={style.pointsLabel} key={index}>{value}</label>
+                        { !editAboutInfo && 
+                          labels.map((value, index) => {console.log("value = ");console.log(value);
+                            return <label className={style.pointsLabel} key={index}>{value.value}</label>
                         })}
+                        { editAboutInfo && 
+                          <CreateableInputOnly style={customTagStyle} value={labels} updateTags={setLabels} maxLen={maxTagLength} /> }
             </div>
             { userContext.user && <div className={style.responsiveButtons}>
                 { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
                 { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
                 { ( isMe() && (!editAboutInfo) ) &&
                                     <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
-                                { ( isMe() && (editAboutInfo) ) &&
+                { ( isMe() && (editAboutInfo) ) &&
                                     <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
             </div> }
             <div className={style.userPageSelector}>
@@ -404,6 +498,7 @@ function ProfileFollowersDisplay(props) {
         return((user.followData.followersList).map((follower, index)=>{
             return(
                     <FollowerDisplayPreview follower={follower} routerHistory={props.routerHistory}></FollowerDisplayPreview>
+                    //<UserPreview key={index} user={follower} />
             )
         })) ;
     }
