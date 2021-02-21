@@ -30,13 +30,12 @@ const responsive = {
 };
 
 /**
- * This component is in charge of displaying the currently live feed in the homepage
+ * This component is in charge of displaying the reccomendations for the current users
  * 
  * @category Frontend
  * @component
  */
 function ReccomendedFeed(props) {
-  // Take a streamData and display it in a caro
   const userContext = useContext(UserContext);
   const [streamDatas, setStreamDatas] = useState([]);
   const streamPreviews = streamDatas.map((streamData) => {
@@ -72,7 +71,7 @@ function ReccomendedFeed(props) {
           {streamPreviews}
         </Carousel>}
         {(!(userContext.user.interests && userContext.user.interests.length > 0)) && <label>Add interest to your profile to help us reccomend streams!</label>}
-        {((userContext.user.interests && userContext.user.interests.length > 0) && streamPreviews.length > 0) && <label>Could not find any reccomendations for your interests.</label>}
+        {((userContext.user.interests && userContext.user.interests.length > 0) && (streamPreviews.length === 0)) && <label>Could not find any reccomendations for your interests.</label>}
       </div>
     </div>
   );

@@ -115,7 +115,11 @@ module.exports = function (passport) {
               });
               // we save and finish
               await newUser.save();
-              console.log("Added new user");
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }
@@ -200,6 +204,11 @@ module.exports = function (passport) {
                 });
                 notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               }
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }
@@ -264,7 +273,11 @@ module.exports = function (passport) {
               });
               // we save and finish
               await newUser.save();
-              console.log("Added new user");
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }

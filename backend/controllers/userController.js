@@ -6,7 +6,8 @@
  */
 const passport = require("passport");
 const bcrypt = require("bcryptjs");
-const { User, FriendsData, FollowData } = require("../models/user");
+const { User, FriendsData, FollowData, Notification  } = require("../models/user");
+var notificationController = require("./notificationController");
 const e = require("express");
 const NodeCache = require("node-cache");
 const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 });
@@ -89,6 +90,11 @@ exports.user_signup = function (req, res) {
           followData: followData,
         });
         await newUser.save();
+        const notificationData = new Notification({
+          type: "welcomeNotification",
+          clearable: true,
+        });
+        notificationController.addNotificationToUser(newUser._id,notificationData ,null);
         res.send("auth/user_created");
       }
     }
