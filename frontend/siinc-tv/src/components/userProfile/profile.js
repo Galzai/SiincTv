@@ -126,6 +126,11 @@ function Profile(props) {
         userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
+                if( data.length === 0 ) {
+                    console.log("Couldnt get user!!");
+                    setUser(null)
+                    return;
+                }
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
@@ -141,7 +146,7 @@ function Profile(props) {
                 if( initTab == "FRIENDS")
                     setUserInfoDisplay('friends')
             }
-        });
+        })
         return (() => {isMounted = false})
     }, [props.match])
 
@@ -318,7 +323,14 @@ function Profile(props) {
     }
 
     return (
-        <div>  
+        <div>
+        { (user == null ) && 
+          <div className={style.badUser}>
+            <h1>Sorry, there appears to be a problem displaying this user</h1>
+         </div>
+        }
+        { (user != null ) &&
+         <div>  
             <hr className={style.seperatorTitle}></hr>      
             <div>
                 <img className={style.profilePhoto} src={profilePhoto}/>
@@ -370,6 +382,7 @@ function Profile(props) {
                     {showDisplay()}
                 </div>
             </div>
+        </div>}
         </div>
     );
 }
