@@ -115,7 +115,11 @@ module.exports = function (passport) {
               });
               // we save and finish
               await newUser.save();
-              console.log("Added new user");
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }
@@ -193,13 +197,18 @@ module.exports = function (passport) {
               // we save and finish
               await newUser.save();
               // Add notification about youtube missing
-              if(!newUser.youtubeId){
+              if(!newUser.googleData.youtubeId){
                 const notificationData = new Notification({
                   type: "noYoutubeAccount",
                   clearable: true,
                 });
                 notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               }
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }
@@ -264,7 +273,11 @@ module.exports = function (passport) {
               });
               // we save and finish
               await newUser.save();
-              console.log("Added new user");
+              const notificationData = new Notification({
+                type: "welcomeNotification",
+                clearable: true,
+              });
+              notificationController.addNotificationToUser(newUser._id,notificationData ,null);
               return done(null, newUser);
             }
           }

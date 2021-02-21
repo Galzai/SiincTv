@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import JoinStreamRequestNotification from "./joinStreamRequestNotification";
 import JoinStreamRequestResponse from "./JoinStreamRequestResponse";
 import NoYoutubeAccount from "./noYoutubeAcc";
+import WelcomeNotification from "./welcomeNotification";
 import {
   FriendRequestReceived,
   FriendRequestAccepted,
@@ -120,7 +121,6 @@ function NotificationMenu() {
             clearNotification={clearNotification}
           />
         );
-
       case "newFollower":
         return (
           <NewFollowerNotification
@@ -131,6 +131,9 @@ function NotificationMenu() {
         case "noYoutubeAccount":
           return (
             <NoYoutubeAccount/>);
+          case "welcomeNotification":
+            return (
+              <WelcomeNotification/>);
       default:
         return;
     }
