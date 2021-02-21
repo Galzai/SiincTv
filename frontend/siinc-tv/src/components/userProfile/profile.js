@@ -346,10 +346,12 @@ function Profile(props) {
                 <div className={style.userTitle}>
                     <ul className={style.testMyUl}>
                     <li className={style.testMyLi}><span className={style.name}>{userName}</span></li>
-                    <li className={style.testMyLi}>{userOnline==='true' && <span className={style.online}/>}</li>
+                    <li className={style.testMyLi}>{
+                        (userOnline==='true' && <span className={style.online}/>) ||
+                        (userOnline==='false'&& <span className={style.offline}/>)}</li>
                     <li className={style.testMyLi}>{ isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}</li>
-                    <li className={style.testMyLi}><TwitchLogoLink  user={user} onClick={onTwitchClick}></TwitchLogoLink></li>
-                    <li className={style.testMyLi}><YoutubeLogoLink user={user} onClick={onYoutubeClick}></YoutubeLogoLink></li>
+                    <li className={style.testMyLi}><TwitchLogoLink  user={user} onClick={onTwitchClick}></TwitchLogoLink>
+                                                   <YoutubeLogoLink user={user} onClick={onYoutubeClick}></YoutubeLogoLink></li>
                     
                     </ul>
                 </div>
@@ -558,9 +560,9 @@ function TwitchLogoLink(props) {
     }
 
     return(
-        <div className={style.twitchLogoLink} >
+        <div style={{display: "inline"}}>
+        {isTwitchUser() && <div className={style.twitchLogoLink} >
         {
-            isTwitchUser() && 
             <a href={String("https://www.twitch.tv/" + user.username)} target="_blank">
                 <img Style="width:100%;height:100%;"
                    src={TwitchLogo}
@@ -569,6 +571,7 @@ function TwitchLogoLink(props) {
                 </img>
             </a>
         }
+        </div>}
         </div>
     )
 
@@ -590,7 +593,7 @@ function YoutubeLogoLink(props) {
     }
 
     return(
-        <div>
+        <div style={{display: "inline"}}>
         {   
             isYoutubeUser() && 
             <a href={String("https://www.youtube.com/channel/" + user.googleData.youtubeId)} target="_blank">

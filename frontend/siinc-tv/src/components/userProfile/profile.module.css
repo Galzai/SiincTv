@@ -115,6 +115,14 @@ label {
     margin: 0px 10px;
 }
 
+.offline {
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: gray;
+    margin: 0px 10px;
+}
+
 .live {
     color: white;
     padding: 2px 11px;

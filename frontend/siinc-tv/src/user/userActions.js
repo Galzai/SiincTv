@@ -294,8 +294,7 @@ const userActions = {
     return result.data;
   },
 
-  updateUserShortDescription: async function (userId, data) {
-    console.log("begin updateUserShortDescription")    
+  updateUserShortDescription: async function (userId, data) {  
     const result = await axios({
       method: "POST",
       data: {
@@ -305,12 +304,10 @@ const userActions = {
       url: "http://localhost:4000/user/update_field",
       withCredentials: true,
     });
-    console.log("returned from updateUserShortDescription")
     return result.data;
   },
 
   updateUserInterests: async function (userId, data) {
-    console.log("begin updateUserInterests")
     const result = await axios({
       method: "POST",
       data: {
@@ -320,10 +317,6 @@ const userActions = {
       url: "http://localhost:4000/user/update_interests",
       withCredentials: true,
     });
-    console.log("returned from updateUserInterests")
-    console.log("returned from updateUserInterests")
-    console.log("returned from updateUserInterests")
-    console.log("returned from updateUserInterests")
     return result.data;
   },
 };
