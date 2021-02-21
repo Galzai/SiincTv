@@ -245,40 +245,6 @@ label {
     outline:none;
 }
 
-.friendDiv
-{
-    margin-top:10px;
-    height: 30px;  
-}
-
-.streamerCircle
-{
-    display:relative;
-    margin-top: 2px;
-    width: 24x;
-    height: 24px;  
-    float: left;
-    border-radius: 12px;
-}
-
-.friend
-{
-    margin-top:5px;
-    margin-left: 15px;
-    width:180px;
-    overflow: hidden;
-    margin-bottom:2px;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 16px;
-    cursor:pointer;
-    float:left;
-}
-
 .descriptionTextEditor{
     top:10px;
     position:relative;
@@ -520,4 +486,38 @@ label {
 .testMyLi
 {
     display: inline;
+}
+
+.friendsOuterDisplayContainer
+{
+    position:relative;
+    width: 1200px;
+    height: 500px;
+    border-width: 5px;
+    overflow: scroll;
+}
+
+.friendsInnerDisplayContainer
+{
+    position: relative;
+    float:left;
+    height:100%;
+    margin: 20px;
+}
+
+.followersOuterDisplayContainer
+{
+    position:relative;
+    width: 1200px;
+    height: 500px;
+    border-width: 5px;
+    overflow: scroll;
+}
+
+.followersInnerDisplayContainer
+{
+    position: relative;
+    float:left;
+    height:100%;
+    margin: 20px;
 }

@@ -16,8 +16,6 @@ import {isFollowing, handleFollowAction} from "../../user/follows";
  */
 function UserPreview(props){
     const user = props.user;
-    const username = user.username;
-    const userid = user._id;
     const image = userUtils.assignImage(user);
     const numFollowers = user.numFollowers ? user.numFollowers +  " Followers" : "No Followers";
     const description = user.shortDescription ? user.shortDescription :" No Description";
@@ -25,7 +23,7 @@ function UserPreview(props){
     const userContext = useContext(UserContext);
 
     function handleRedirect() {
-        props.history.push(`/users/${userid}`);
+        props.history.push(`/users/${user._id}`);
       }
 
       const debugFriendRepr=()=> {
@@ -75,9 +73,9 @@ function UserPreview(props){
             > 
             </img>}
             <div className={style.UserTitle}>
-                <h2 className={style.userName} onClick={handleRedirect}>{username}</h2>
-                <h3 className={style.NumFollowers}>{numFollowers}</h3>
-                <span className={style.shortDescription}>{description}</span>
+                <h2 className={style.userName} onClick={handleRedirect}>{user.username}</h2>
+                { (user.numFollowers != undefined)     && <h3 className={style.NumFollowers}>{numFollowers}</h3>}
+                { (user.shortDescription != undefined) && <span className={style.shortDescription}>{description}</span>}
 
             </div>
             <div className={style.UserButtons}>

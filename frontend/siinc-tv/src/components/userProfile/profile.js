@@ -122,7 +122,6 @@ function Profile(props) {
 
 
     useEffect(()=>{
-        console.log("MyReder1")
         let isMounted = true;
         userActions.getUserData( userid )
         .then(data=>{
@@ -134,6 +133,7 @@ function Profile(props) {
                 setLabels(data.interests)
                 setUserName(data.username)
                 setUserInfoDisplay('friends')
+                setEditAboutInfo( (props.editMode != undefined) ? props.editMode : false );
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
                 if( initTab == "FOLLOWING")
@@ -152,6 +152,7 @@ function Profile(props) {
         }}, [user])
 
     const showDisplay = () => {
+        console.log(editAboutInfo)
         if( !user )
             return 
         if( display === 'live' ) {
@@ -313,6 +314,7 @@ function Profile(props) {
             console.log(error)
         })
         setEditAboutInfo(false);
+        props.history.replace("/users/"+user._id);
     }
 
     return (
@@ -405,24 +407,6 @@ function ProfileLiveDisplay(props) {
 
 // ------------------------------- Friends display -----------------------------
 
-function FriendDisplayPreview(props) {
-    const friend = props.friend
-    const routerHistory = props.routerHistory
-
-    return (
-        <div>
-                <div className={style.friendDiv}>
-                    <img className={style.streamerCircle}
-                        src={friend.userImage}/>
-                    <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${friend.memberId}`))}> 
-                        {friend.displayName}
-                    </div>
-                </div>            
-        </div>
-    )
-}
-
 function ProfileFriendsDisplay(props) {
 
     const [user, setUser] = useState(props.user);
@@ -441,43 +425,25 @@ function ProfileFriendsDisplay(props) {
 
         return((user.friendsData.friendsList).map((friend, index)=>{
             return(
-                    <FriendDisplayPreview friend={friend} routerHistory={props.routerHistory}></FriendDisplayPreview>
+                    <UserPreview key={index} user={ {_id: friend.memberId, username: friend.displayName, image: friend.userImage } } />
             )
             
         })) ;
     }
 
     return (
-        <div className={style.relevantContentText}>
-            <br />
-            <div className={style.aboutContent}>
+        <div className={style.friendsOuterDisplayContainer}>
+            <div className={style.friendsInnerDisplayContainer}>
                 {mapFriends()}
             </div>
         </div>
+
     )
 }
 
 // ----------------------------------------------------------------------
 
 // ----------------------  Follower display ---------------------------
-
-function FollowerDisplayPreview(props) {
-    const follower = props.follower
-    const routerHistory = props.routerHistory
-
-    return (
-        <div>
-                <div className={style.friendDiv}>
-                    <img className={style.streamerCircle}
-                        src={follower.userImage}/>
-                    <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${follower.userId}`))}> 
-                        {follower.userName}
-                    </div>
-                </div>            
-        </div>
-    )
-}
 
 function ProfileFollowersDisplay(props) {
 
@@ -497,16 +463,14 @@ function ProfileFollowersDisplay(props) {
 
         return((user.followData.followersList).map((follower, index)=>{
             return(
-                    <FollowerDisplayPreview follower={follower} routerHistory={props.routerHistory}></FollowerDisplayPreview>
-                    //<UserPreview key={index} user={follower} />
+                    <UserPreview key={index} user={ {_id: follower.userId, username: follower.userName, image: follower.userImage } } />
             )
         })) ;
     }
 
     return (
-        <div className={style.relevantContentText}>
-            <br />
-            <div className={style.aboutContent}>
+        <div className={style.followersOuterDisplayContainer}>
+            <div className={style.followersInnerDisplayContainer}>
                 {mapFollowers()}
             </div>
         </div>
