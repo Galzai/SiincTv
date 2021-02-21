@@ -199,7 +199,7 @@ const user = new mongoose.Schema({
 
 // This is necessery for quick text search
 user.index({username: 'text', shortDescription: 'text', description: 'text'}, 
-{name: 'Search index', weights: {username: 3, shortDescription: 2, description: 1}});
+{name: 'Search index', weights: {username: 3, shortDescription: 2, description: 1, interest: 2}});
 const User = mongoose.model("User", user);
 
 module.exports = {
