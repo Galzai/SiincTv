@@ -39,6 +39,8 @@ export default class CreatableInputOnly extends Component {
    * @param {*} actionMeta
    */
   handleChange = (value, actionMeta) => {
+    if(value == null || value == undefined)
+      value = []
     this.setState({ value });
     this.state.updateTags(value);
   };
