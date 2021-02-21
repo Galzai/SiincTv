@@ -197,7 +197,7 @@ module.exports = function (passport) {
               // we save and finish
               await newUser.save();
               // Add notification about youtube missing
-              if(!newUser.youtubeId){
+              if(!newUser.googleData.youtubeId){
                 const notificationData = new Notification({
                   type: "noYoutubeAccount",
                   clearable: true,

@@ -70,7 +70,7 @@ function ReccomendedFeed(props) {
         {(userContext.user.interests && userContext.user.interests.length > 0) && <Carousel responsive={responsive} infinite={true}>
           {streamPreviews}
         </Carousel>}
-        {(!(userContext.user.interests && userContext.user.interests.length > 0)) && <label>Add interest to your profile to help us reccomend streams!</label>}
+        {(!(userContext.user.interests && userContext.user.interests.length > 0)) && <label>Add interests to your profile to help us reccomend streams!</label>}
         {((userContext.user.interests && userContext.user.interests.length > 0) && (streamPreviews.length === 0)) && <label>Could not find any reccomendations for your interests.</label>}
       </div>
     </div>
