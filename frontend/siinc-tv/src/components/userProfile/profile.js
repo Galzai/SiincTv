@@ -356,14 +356,14 @@ function Profile(props) {
 
     return (
         <div>
-        { (user == null && userFetchFail ) && 
-          <div className={style.badUser}>
-            <h1>Sorry, there appears to be a problem displaying this user</h1>
-         </div>
-        }
+            { (user == null && userFetchFail ) && 
+            <div className={style.badUser}>
+                <h1>Sorry, there appears to be a problem displaying this user</h1>
+            </div>
+            }
         { (user != null ) &&
-         <div>  
-            <hr className={style.seperatorTitle}></hr>      
+         <div>
+            <hr className={style.seperatorTitle}></hr>    
             <div>
                 <img className={style.profilePhoto} src={profilePhoto}/>
             </div>
@@ -377,7 +377,14 @@ function Profile(props) {
                     <li className={style.testMyLi}>{ isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}</li>
                     <li className={style.testMyLi}><TwitchLogoLink  user={user} onClick={onTwitchClick}></TwitchLogoLink>
                                                    <YoutubeLogoLink user={user} onClick={onYoutubeClick}></YoutubeLogoLink></li>
-                    
+                    { userContext.user && <div className={style.responsiveButtons}>
+                        { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
+                        { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
+                        { ( isMe() && (!editAboutInfo) ) &&
+                                            <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
+                        { ( isMe() && (editAboutInfo) ) &&
+                                            <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
+                    </div> }  
                     </ul>
                 </div>
                 <div className={style.userSocial}>
@@ -400,14 +407,7 @@ function Profile(props) {
                         { editAboutInfo && 
                           <CreateableInputOnly style={customTagStyle} value={labels} updateTags={setLabels} maxLen={maxTagLength} /> }
             </div>
-            { userContext.user && <div className={style.responsiveButtons}>
-                { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
-                { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
-                { ( isMe() && (!editAboutInfo) ) &&
-                                    <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
-                { ( isMe() && (editAboutInfo) ) &&
-                                    <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
-            </div> }
+            
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
                 { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}

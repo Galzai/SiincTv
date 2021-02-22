@@ -417,9 +417,12 @@ label {
 
 .responsiveButtons
 {
-    position: absolute;;
-    right: 12px;
-    top: 188px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+    top: 16px;
+    right: 6px;
 }
 
 .userPageSelector
