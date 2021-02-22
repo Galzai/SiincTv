@@ -23,7 +23,7 @@ import TwitchLogo from "../../assets/TwitchIcon.ico"
 
 
 function Profile(props) {
-    
+
     const [display, setUserInfoDisplay] = useState('friends');
     const userContext = useContext(UserContext);
     const userid = props.match.params.userid;
@@ -39,6 +39,7 @@ function Profile(props) {
     const [userName, setUserName] = useState("")
     const socketContext = useContext(SocketContext);
     const maxTagLength = 15;
+    const [userFetchFail, setUserFetchFail] = useState(false);
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -128,9 +129,12 @@ function Profile(props) {
         .then(data=>{
             if( isMounted ) { 
                 if( data.length === 0 ) {
+                    console.log("Couldnt get user!!");
+                    setUserFetchFail(true)
                     setUser(null)
                     return;
                 }
+                setUserFetchFail(false)
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
@@ -189,7 +193,9 @@ function Profile(props) {
         if( display === 'followers') {
             return <ProfileFollowersDisplay user={user} routerHistory={props.history}></ProfileFollowersDisplay>
         }
-
+        if( display === 'following') {
+            return <ProfileFollowingDisplay user={user} routerHistory={props.history}></ProfileFollowingDisplay>
+        }
     }
 
     function About(userOnline){
@@ -212,6 +218,10 @@ function Profile(props) {
     const setFriendsDisplay=()=>{
         setUserInfoDisplay('friends')
     }
+    const setFollowingDisplay=()=>{
+        setUserInfoDisplay('following')
+    }
+
 
    const debugFriendRepr=()=> {
     if( userContext.user == null || user == null || friendsData == null ) {
@@ -346,7 +356,7 @@ function Profile(props) {
 
     return (
         <div>
-        { (user == null ) && 
+        { (user == null && userFetchFail ) && 
           <div className={style.badUser}>
             <h1>Sorry, there appears to be a problem displaying this user</h1>
          </div>
@@ -401,8 +411,9 @@ function Profile(props) {
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
                 { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
-                            {<button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
+                            <button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>
+                            <button className={style.tabListBtn} onClick={setFollowingDisplay}>Following</button>
                 <div className={style.displayContainer}>
                     {showDisplay()}
                 </div>
@@ -510,6 +521,42 @@ function ProfileFollowersDisplay(props) {
         <div className={style.followersOuterDisplayContainer}>
             <div className={style.followersInnerDisplayContainer}>
                 {mapFollowers()}
+            </div>
+        </div>
+    )
+
+}
+//-------------------------------------------------------------------
+
+// ----------------------  Following display ---------------------------
+
+function ProfileFollowingDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowing(){
+        if( !user )
+            return
+
+        if( user.followData.followingList.length == 0 ) {
+            return "No followings"
+        }
+
+        return((user.followData.followingList).map((following, index)=>{
+            return(
+                    <UserPreview key={index} user={ {_id: following.userId, username: following.userName, image: following.userImage } } />
+            )
+        })) ;
+    }
+
+    return (
+        <div className={style.followersOuterDisplayContainer}>
+            <div className={style.followersInnerDisplayContainer}>
+                {mapFollowing()}
             </div>
         </div>
     )
