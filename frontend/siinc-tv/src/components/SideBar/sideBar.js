@@ -51,6 +51,7 @@ function SideBar(props) {
                         <div className={style.friend}
                         onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
                             {following.userName}
+                            {/*<div className={style.online}></div>*/}
                         </div>
                     </div>
             )

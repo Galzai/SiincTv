@@ -107,6 +107,7 @@
     cursor:pointer;
 }
 
+
 .reportMail
 {
     color: white;
@@ -124,4 +125,16 @@
 {
     color: white;
     opacity: 0.7;
+}
+
+.online {
+    display: inline-block;
+    position: relative;
+    left: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: #2aa72c;
+    margin: 0px 10px;
+
 }

@@ -87,8 +87,10 @@ function UserPreview(props){
 
             </div>
             <div className={style.UserButtons}>
-                { userContext.user && <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button> }
-                { userContext.user && <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button> }
+                { (userContext.user && String(userContext.user._id) !== String(user._id)) && 
+                  <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button> }
+                { (userContext.user && String(userContext.user._id) !== String(user._id)) &&
+                  <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button> }
              </div>
              
         </div>

@@ -23,13 +23,13 @@ import TwitchLogo from "../../assets/TwitchIcon.ico"
 
 
 function Profile(props) {
-    
+
     const [display, setUserInfoDisplay] = useState('friends');
     const userContext = useContext(UserContext);
     const userid = props.match.params.userid;
     const initTab = props.initTab;
     const [user, setUser] = useState(null);
-    const userOnline = 'true';  //todo
+    const [userOnline, setUserOnline] = useState('false');  //todo
     const userRating  = 3 ;  //todo
     const [labels, setLabels] = useState([]) //todo
     const [aboutInfo, setAboutInfo] = useState('') 
@@ -39,6 +39,7 @@ function Profile(props) {
     const [userName, setUserName] = useState("")
     const socketContext = useContext(SocketContext);
     const maxTagLength = 15;
+    const [userFetchFail, setUserFetchFail] = useState(false);
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -122,15 +123,18 @@ function Profile(props) {
 
 
     useEffect(()=>{
+        console.log("mounted1")
         let isMounted = true;
         userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
                 if( data.length === 0 ) {
                     console.log("Couldnt get user!!");
+                    setUserFetchFail(true)
                     setUser(null)
                     return;
                 }
+                setUserFetchFail(false)
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
@@ -145,19 +149,37 @@ function Profile(props) {
                     setUserInfoDisplay('followers')
                 if( initTab == "FRIENDS")
                     setUserInfoDisplay('friends')
+
+                userActions.isUserOnline(data._id)
+                .then((data) => {
+                    if( isMounted ) {
+                        setUserOnline(String(data))
+                    }
+                })
             }
         })
-        return (() => {isMounted = false})
+        return (() => {isMounted = false ; console.log("unmounted1")})
     }, [props.match])
 
     useEffect(()=>{ 
+        console.log("mounted2")
+        let isMounted = true;
         if( user ) { 
             setAboutInfo(user.shortDescription);
             setLabels(user.interests);
-        }}, [user])
+
+            const id = user._id;
+            userActions.isUserOnline(id)
+            .then((data) => {
+                if( isMounted ) {
+                    setUserOnline(String(data))
+                }
+            })
+        }
+        return (() => {isMounted = false ; console.log("unmounted2")})
+    }, [user])
 
     const showDisplay = () => {
-        console.log(editAboutInfo)
         if( !user )
             return 
         if( display === 'live' ) {
@@ -171,7 +193,9 @@ function Profile(props) {
         if( display === 'followers') {
             return <ProfileFollowersDisplay user={user} routerHistory={props.history}></ProfileFollowersDisplay>
         }
-
+        if( display === 'following') {
+            return <ProfileFollowingDisplay user={user} routerHistory={props.history}></ProfileFollowingDisplay>
+        }
     }
 
     function About(userOnline){
@@ -194,6 +218,10 @@ function Profile(props) {
     const setFriendsDisplay=()=>{
         setUserInfoDisplay('friends')
     }
+    const setFollowingDisplay=()=>{
+        setUserInfoDisplay('following')
+    }
+
 
    const debugFriendRepr=()=> {
     if( userContext.user == null || user == null || friendsData == null ) {
@@ -207,7 +235,6 @@ function Profile(props) {
     }
     if(userContext.user.friendsData)
     {
-        console.log(userContext.user.friendsData)
         console.log(String(user._id))
         if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) {     
             return "Unfriend";
@@ -273,8 +300,6 @@ function Profile(props) {
     const numOfFriends=()=>{
         if( !user )
             return 0;
-        console.log("Print user from numOffriends")
-        console.log(user)
         return user.friendsData.friendsList.length;
     }
 
@@ -331,7 +356,7 @@ function Profile(props) {
 
     return (
         <div>
-        { (user == null ) && 
+        { (user == null && userFetchFail ) && 
           <div className={style.badUser}>
             <h1>Sorry, there appears to be a problem displaying this user</h1>
          </div>
@@ -386,8 +411,9 @@ function Profile(props) {
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
                 { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
-                            {<button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
+                            <button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>
+                            <button className={style.tabListBtn} onClick={setFollowingDisplay}>Following</button>
                 <div className={style.displayContainer}>
                     {showDisplay()}
                 </div>
@@ -502,6 +528,42 @@ function ProfileFollowersDisplay(props) {
 }
 //-------------------------------------------------------------------
 
+// ----------------------  Following display ---------------------------
+
+function ProfileFollowingDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowing(){
+        if( !user )
+            return
+
+        if( user.followData.followingList.length == 0 ) {
+            return "No followings"
+        }
+
+        return((user.followData.followingList).map((following, index)=>{
+            return(
+                    <UserPreview key={index} user={ {_id: following.userId, username: following.userName, image: following.userImage } } />
+            )
+        })) ;
+    }
+
+    return (
+        <div className={style.followersOuterDisplayContainer}>
+            <div className={style.followersInnerDisplayContainer}>
+                {mapFollowing()}
+            </div>
+        </div>
+    )
+
+}
+//-------------------------------------------------------------------
+
 // ---------------------   Short description  ---------------------
 
 function AboutContainerEdit(props) {
@@ -553,10 +615,8 @@ function TwitchLogoLink(props) {
             !user.twitchId ||
             user.twitchId === "")
         {
-            console.log("No twitch")
             return false;
         }
-        console.log("Yes twitch")
         return true;
     }
 
@@ -586,10 +646,8 @@ function YoutubeLogoLink(props) {
             !user.googleId ||
             user.googleId === "")
         {
-            console.log("Not youtube")
             return false;
         }
-        console.log("Yes youtube")
         return true;
     }
 
