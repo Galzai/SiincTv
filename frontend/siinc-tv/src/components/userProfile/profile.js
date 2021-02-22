@@ -19,7 +19,7 @@ import streamActions from '../../stream/streamActions';
 import CreateableInputOnly from "../selectors/createableInputOnly";
 
 import YoutubeLogo from "../../assets/YoutubeIcon.ico"
-import TwitchLogo from "../../assets/TwitchIcon.ico"
+import TwitchLogo from "../../assets/TwitchGlitchPurple.svg"
 
 
 function Profile(props) {
