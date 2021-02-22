@@ -319,6 +319,19 @@ const userActions = {
     });
     return result.data;
   },
+
+  isUserOnline: async function (userId) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        _id: userId
+      },
+      url: "http://localhost:4000/user/is_user_online",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+
 };
 
 export default userActions;

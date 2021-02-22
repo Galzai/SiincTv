@@ -266,4 +266,6 @@ router.post('/user/update_field', userController.updateUserShortDescription)
 
 router.post('/user/update_interests', userController.updateUserInterests)
 
+router.post('/user/is_user_online', userController.isUserOnline)
+
 module.exports = router;

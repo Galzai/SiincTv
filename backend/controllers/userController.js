@@ -11,6 +11,7 @@ var notificationController = require("./notificationController");
 const e = require("express");
 const NodeCache = require("node-cache");
 const myCache = new NodeCache({ stdTTL: 60 * 60, checkperiod: 120 });
+const {isUserOnlineRoom} = require("../sockets/sockets")
 
 /**
  * Tries to sign in a user with a given username and password
@@ -269,3 +270,9 @@ exports.updateUserInterests = function (req, res, next) {
       console.log("error updating interests")
     });
 };
+
+exports.isUserOnline = function (req, res, next) {
+  const data = req.body;
+  const isOnline = isUserOnlineRoom(data._id);
+  res.send(isOnline);
+}

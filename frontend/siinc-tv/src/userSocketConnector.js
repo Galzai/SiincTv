@@ -10,6 +10,7 @@ function UserSocketConnector()
     useEffect(() => {
         if(userContext.user && userContext.user._id)
         {
+            console.log("Connecting user with id :  " + String(userContext.user._id))
             socketContext.socket.emit('userConnection', userContext.user._id);
         }
     },[userContext, socketContext]);

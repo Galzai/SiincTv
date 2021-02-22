@@ -29,7 +29,7 @@ function Profile(props) {
     const userid = props.match.params.userid;
     const initTab = props.initTab;
     const [user, setUser] = useState(null);
-    const userOnline = 'true';  //todo
+    const [userOnline, setUserOnline] = useState('false');  //todo
     const userRating  = 3 ;  //todo
     const [labels, setLabels] = useState([]) //todo
     const [aboutInfo, setAboutInfo] = useState('') 
@@ -122,12 +122,12 @@ function Profile(props) {
 
 
     useEffect(()=>{
+        console.log("mounted1")
         let isMounted = true;
         userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
                 if( data.length === 0 ) {
-                    console.log("Couldnt get user!!");
                     setUser(null)
                     return;
                 }
@@ -145,19 +145,37 @@ function Profile(props) {
                     setUserInfoDisplay('followers')
                 if( initTab == "FRIENDS")
                     setUserInfoDisplay('friends')
+
+                userActions.isUserOnline(data._id)
+                .then((data) => {
+                    if( isMounted ) {
+                        setUserOnline(String(data))
+                    }
+                })
             }
         })
-        return (() => {isMounted = false})
+        return (() => {isMounted = false ; console.log("unmounted1")})
     }, [props.match])
 
     useEffect(()=>{ 
+        console.log("mounted2")
+        let isMounted = true;
         if( user ) { 
             setAboutInfo(user.shortDescription);
             setLabels(user.interests);
-        }}, [user])
+
+            const id = user._id;
+            userActions.isUserOnline(id)
+            .then((data) => {
+                if( isMounted ) {
+                    setUserOnline(String(data))
+                }
+            })
+        }
+        return (() => {isMounted = false ; console.log("unmounted2")})
+    }, [user])
 
     const showDisplay = () => {
-        console.log(editAboutInfo)
         if( !user )
             return 
         if( display === 'live' ) {
@@ -207,7 +225,6 @@ function Profile(props) {
     }
     if(userContext.user.friendsData)
     {
-        console.log(userContext.user.friendsData)
         console.log(String(user._id))
         if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) {     
             return "Unfriend";
@@ -273,8 +290,6 @@ function Profile(props) {
     const numOfFriends=()=>{
         if( !user )
             return 0;
-        console.log("Print user from numOffriends")
-        console.log(user)
         return user.friendsData.friendsList.length;
     }
 
@@ -553,10 +568,8 @@ function TwitchLogoLink(props) {
             !user.twitchId ||
             user.twitchId === "")
         {
-            console.log("No twitch")
             return false;
         }
-        console.log("Yes twitch")
         return true;
     }
 
@@ -586,10 +599,8 @@ function YoutubeLogoLink(props) {
             !user.googleId ||
             user.googleId === "")
         {
-            console.log("Not youtube")
             return false;
         }
-        console.log("Yes youtube")
         return true;
     }
 

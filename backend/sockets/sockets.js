@@ -130,7 +130,13 @@ module.exports.initializeSocket = function (io) {
     });
 
     socket.on("userConnection", (userId) => {
+      //console.log("-------------------")
+      //console.log(global_io.sockets.adapter.rooms['6031be65fa88091374d214bf'])
+      console.log("@@@@@@@@@@@")
+      //console.log(global_io.sockets.adapter.rooms)
+      global_io.sockets.adapter.rooms.forEach((v,k,m)=>{console.log(String(k) + String(String(k) === '6031be65fa88091374d214bf'))})
       socket.join(userId);
+      
     });
     socket.on("userDisconnect", (userId) => {
       const streams = userToStreams.get(userId);
@@ -144,6 +150,7 @@ module.exports.initializeSocket = function (io) {
         userToStreams.delete(userId);
       }
       socket.leave(userId);
+      
     });
   });
 };
@@ -173,3 +180,12 @@ module.exports.emitReloadNotifications = function (userId, popUpText) {
 module.exports.emitNewStreamerJoined = function (streamId) {
   global_io.in(String(streamId)).emit(NEW_STREAMER);
 };
+
+module.exports.isUserOnlineRoom = function (userId) {
+  let isOnline = false;
+  global_io.sockets.adapter.rooms.forEach((value, key, map) => {
+    isOnline = isOnline || (String(userId) === String(key))
+  })
+  return isOnline;
+};
+

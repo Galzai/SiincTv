@@ -81,6 +81,7 @@ function UserSigning(props) {
             console.log("Got user : ");
             console.log(userDataResponse);
             setUser(userDataResponse);
+            window.location.reload(false);
         }
         userFetcher();
     }
