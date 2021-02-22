@@ -9,7 +9,7 @@ import userActions from "../../user/userActions";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
- * Side bar component
+ * @brief Side bar component
  * 
  * @component
  * @category Frontend
@@ -105,12 +105,11 @@ function SideBar(props) {
 }
 
 /**
- * Display green circle for online users
+ * @brief Online green circle for users in side bar
  * 
- * @prop {userId} userId id of user
  * @component
  * @category Frontend
- * @subcategory SideBar
+ * @subcategory Sidebar
  */
 function OnlineStatus(props) {
     const userId = props.userId;

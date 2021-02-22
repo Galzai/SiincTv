@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import UserContext from "../../userContext";
 import SocketContext from "../../socketContext"
 import style from './navprofilemenu.module.css';
@@ -12,13 +12,13 @@ import FriendsIcon from "../../assets/NavBar/NavProfileFriends.svg"
 import FavoritesIcon from "../../assets/NavBar/NavProfileFavorites.svg"
 import SettingsIcon from "../../assets/NavBar/NavProfileSettings.svg"
 import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.svg"
-import NoProfilePic from "../../assets/NoProfilePic.svg"
 /*-----------------------------------------------------------------------*/
-/**
- * @brief This file contains components for the profile menu in the navigation bar
- * @category Frontend
- */
 
+/**
+ * @brief Header for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuHeader(props) {
     const userContext = useContext(UserContext);
 
@@ -61,6 +61,11 @@ export function NavProfileMenuBreaker(props) {
     return(<div className={style.navProfileMenuBreak} style={props.style}></div>);
 }
 
+/**
+ * @brief My channel link for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuMyChannelLink() {
     const userContext = useContext(UserContext);
     const mychannel = "/users/" + userContext.user._id;
@@ -82,6 +87,11 @@ export function NavProfileMenuMyChannelLink() {
     
 }
 
+/**
+ * @brief My friends link for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuFriendsLink() {
     const userContext = useContext(UserContext);
     const friends = "/users/" + userContext.user._id + "/friends";
@@ -102,6 +112,11 @@ export function NavProfileMenuFriendsLink() {
     );   
 }
 
+/**
+ * @brief My followings link for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuFavoritesLink() {
     const userContext = useContext(UserContext);
     const followers = "/users/" + userContext.user._id + "/following";
@@ -122,6 +137,11 @@ export function NavProfileMenuFavoritesLink() {
     );   
 }
 
+/**
+ * @brief Edit Channel link for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuMySettingsLink() {
     const userContext = useContext(UserContext);
     const edit = "/users/" + userContext.user._id + "/edit";
@@ -142,6 +162,11 @@ export function NavProfileMenuMySettingsLink() {
     );   
 }
 
+/**
+ * @brief Logout button for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 export function NavProfileMenuLogout() {
     const userContext = useContext(UserContext)
     const socketContext = useContext(SocketContext)

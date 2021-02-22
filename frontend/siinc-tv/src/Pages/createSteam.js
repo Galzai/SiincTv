@@ -1,6 +1,6 @@
 import UserContext from "../userContext";
 import { useContext } from "react";
-import NewScheduledStream from "../components/streamCreation/newScheduledStream";
+//import NewScheduledStream from "../components/streamCreation/newScheduledStream";
 import NewLiveStream from "../components/streamCreation/newLiveStream";
 import style from "./searchPage.module.css";
 

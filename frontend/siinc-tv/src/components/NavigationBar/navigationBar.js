@@ -28,6 +28,13 @@ function NavigationBar() {
     );
 }
 
+/**
+ * @brief Homepage button for navigation bar
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory NavBar
+ */
 function NavSiincHome(props) {
     return(
         <Link to="/">         
@@ -36,6 +43,13 @@ function NavSiincHome(props) {
     )
 }
 
+/**
+ * @brief create stream button for navigation bar
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory NavBar
+ */
 function NavCreateStreamButton(props) {
     return(
          <Link to="/create_stream">         
