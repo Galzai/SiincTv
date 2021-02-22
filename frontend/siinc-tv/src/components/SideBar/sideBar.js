@@ -87,9 +87,10 @@ function SideBar(props) {
                 {mapFollowings()}
                 {(followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
                 </div>}
-
-
-        </div>
+                <div className={style.reportMail}>
+                    For suggestions and bug reports send us an email at <a className = {style.emailDesign} href="mailto:report@siinc.tv">report@siinc.tv</a>
+                </div>
+            </div>
         </div>
     );
 }
