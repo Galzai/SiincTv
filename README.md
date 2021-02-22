@@ -1,7 +1,8 @@
 # SiincTv
 ## www.siinc.tv
-### Stream together
+## You can access the full documentation (created using jsdoc) at our github pages page https://galzai.github.io/SiincTv/index.html   
 
+### Stream together
 SiincTv is a web application designed to allow live streamers to schedule and syncronize group-streams from the selected platform together with other streamers - without platform dependency.
 It also allows viewers to tune in to their favorite streamers group streams and be able to watch the action from all the group members perspective.
 
@@ -14,14 +15,11 @@ It also allows viewers to tune in to their favorite streamers group streams and 
 * Data caching and quick DB updates.
 * All requests are handled by server -> credentials required for certain actions.
 * Immediate shared stream creation (friend invite only).
-
-### TO-DO:
-* Notifications (High priority).
-* Make stream creation invitation based (i.e can invite friends).
-* Enable "Join stream" requests.
-* Followers/ Following.
-* Finalize profile page implementation.
-* Make UI auto-scaleable.
+* Notifications.
+* Invitation based stream creation
+* Requests to join stream
+* Followers/Following
+* Auto scaleable UI
 * Full/Split screen mode.
 
 ### Backend:
@@ -35,6 +33,7 @@ It also allows viewers to tune in to their favorite streamers group streams and 
 * Twitch API.
 * Google API.
 * Youtube Data V3 API.
+* NodeCache
 
 ### Frontend:
 * React.
@@ -43,4 +42,12 @@ It also allows viewers to tune in to their favorite streamers group streams and 
 * Twitch API.
 * Google API.
 * Youtube Data V3 API.
+* Material-Ui
+
+### Deployment
+* AWS EC2
+* NameCheap domain + premiumDNS
+* Nginx for reverse proxy
+* PM2 for running the server
+* Certbot for SSL 
 

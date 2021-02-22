@@ -9,8 +9,12 @@ import UserContext from "../../userContext";
 import streamActions from '../../stream/streamActions.js'
 
 /**
- * @brief This holds all our streamers
- * @param {*} props 
+ * This Componenet is in charge of the notification received upon joinstream request
+ * 
+ * @prop {notificationData} notification the data of the notification
+ * @component
+ * @category Frontend
+ * @subcategory Notifications
  */
 function JoinStreamRequestNotification(props){
 

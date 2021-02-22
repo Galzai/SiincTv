@@ -1,16 +1,16 @@
-import userActions from "../user/userActions";
+import userActions from "./userActions";
 
 
 
 
-const handleAddFriends=(myUser, otherUserName)=>{
+const handleAddFriends=(myUser, otherUserData)=>{
     const fun = async() => {
         console.log("Adding friend")
-        if( otherUserName == myUser.username ) {
+        if( String(otherUserData.userId) === String(myUser._id) ) {
             console.log("Cant add yourself")
             return;
         }
-        let status = await userActions.sendFriendRequest( myUser.username, otherUserName );
+        let status = await userActions.sendFriendRequest( myUser._id, otherUserData.userId );
         if( !status ) {
             console.log("An error occured while adding friend")
             return false;
@@ -27,14 +27,14 @@ const handleAddFriends=(myUser, otherUserName)=>{
     })
 }
 
-const handleUnfriend = (myUser, otherUserName) => {
+const handleUnfriend = (myUser, otherUserData) => {
     const fun = async() => {
         console.log("Unfriending friend")
-        if( otherUserName == myUser.username ) {
+        if( String(otherUserData.userId) === String(myUser._id) ) {
             console.log("Cant unfriend yourself")
             return;
         }
-        let status = await userActions.unfriendFriendRequest( myUser.username, otherUserName );
+        let status = await userActions.unfriendFriendRequest( myUser._id, otherUserData.userId );
         if( !status ) {
             console.log("An error occured while unfriending")
             return false;
@@ -50,14 +50,14 @@ const handleUnfriend = (myUser, otherUserName) => {
     })       
 }
 
-const handleAcceptFriend = (myUser, otherUserName) => {
+const handleAcceptFriend = (myUser, otherUserData) => {
     const fun = async() => {
         console.log("Accepting friend")
-        if( otherUserName == myUser.username ) {
+        if( String(otherUserData.userId) === String(myUser._id) ) {
             console.log("Cant accpet yourself")
             return;
         }
-        let status = await userActions.answerFriendRequest( otherUserName, myUser.username, true );
+        let status = await userActions.answerFriendRequest( otherUserData.userId, myUser._id, true );
         if( !status ) {
             console.log("An error occured while accepting friend")
             return false;
@@ -73,44 +73,72 @@ const handleAcceptFriend = (myUser, otherUserName) => {
     })       
 }
 
-export const handleFriendAction=(myUser, otherUserName)=>{
-    if( myUser == null ) {
+const handleRejectFriend = (myUser, otherUserData) => {
+    const fun = async() => {
+        console.log("Rejecting friend")
+        if( String(otherUserData.userId) === String(myUser._id) ) {
+            console.log("Cant reject yourself")
+            return;
+        }
+        let status = await userActions.answerFriendRequest( otherUserData.userId, myUser._id, false );
+        if( !status ) {
+            console.log("An error occured while rejecting friend")
+            return false;
+        }
+
+        // update user context
+        //await userContext.refreshUserData();
+
+        return true;
+    }
+    fun().then(ret => {
+        console.log("Finished running accept friend funciton")
+    })       
+}
+
+export const handleFriendAction=(myUser, otherUserData)=>{
+    if( myUser == null || otherUserData == null ) {
         console.log("usercontext or provided user is null <handleFriendAction>");
         return;
     }
-    if( myUser.username === otherUserName ) {
-        console.log("Its you man" + myUser.username + ", " + otherUserName);
+    if( String(myUser._id) === String(otherUserData.userId) ) {
+        console.log("It's you man" + myUser.username + ", " + otherUserData.username);
         return;
     }
-    if( myUser.friendsData.friendsList.find(x=>x.displayName==otherUserName) != undefined ) {
-        handleUnfriend(myUser, otherUserName);                                         
+    if( myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) != undefined ) {
+        handleUnfriend(myUser, otherUserData);                                         
         return;
     }
-    if( myUser.friendsData.sentRequests.find(x=>x.username==otherUserName) != undefined ) {
+    if( myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) != undefined ) {
         console.log("unimplemented - maybe cancell request");
         return;
     }
-    if( myUser.friendsData.receivedRequests.find(x=>x.username==otherUserName) != undefined ) {
-        handleAcceptFriend(myUser, otherUserName);
+    if( myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) != undefined ) {
+        handleAcceptFriend(myUser, otherUserData);
         return;
     }
-    handleAddFriends(myUser, otherUserName)
+    handleAddFriends(myUser, otherUserData)
 }
 
-export const getFriendState = (myUser, otherUserName) => {
-    if( myUser == null || otherUserName == null ) 
+export const handleFriendActionRejectTemp=(myUser, otherUserData)=>{
+    handleRejectFriend(myUser, otherUserData);
+    return;
+}
+
+export const getFriendState = (myUser, otherUserData) => {
+    if( myUser == null || otherUserData == null ) 
         return "NONE";
 
-    if( myUser.username == otherUserName ) 
+    if( String(myUser._id) === String(otherUserData.userId) ) 
         return "NONE";
     
-    if( myUser.friendsData.friendsList.find(x=>x.displayName==otherUserName) != undefined ) 
+    if( myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) != undefined ) 
         return "UNFRIEND";
 
-    if( myUser.friendsData.sentRequests.find(x=>x.username==otherUserName) != undefined ) 
+    if( myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) != undefined ) 
         return "PENDING";    
     
-    if( myUser.friendsData.receivedRequests.find(x=>x.username==otherUserName) != undefined ) 
+    if( myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) != undefined ) 
         return "ACCEPT";
         
      

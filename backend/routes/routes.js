@@ -1,3 +1,11 @@
+/**
+ * This modules defines all the routes in our backend API
+ * 
+ * @module Routes
+ * @category Backend
+ * @subcategory Routes
+ */
+
 var express = require('express')
 const passport = require("passport");
 var router = express.Router()
@@ -11,67 +19,184 @@ var youtubeController = require('../controllers/youtubeController')
 var notificationController = require('../controllers/notificationController')
 var followController = require('../controllers/followController')
 
-// POST request to sign in
+
+/**
+ * Login using a local strategy.
+ *
+ * @name User Login
+ * @route {POST} /api/signin
+ * @bodyparam {String} username to login with
+ * @bodyparam {String} password to login with
+ */
 router.post('/signin',userController.user_login);
 
-// POST request to log out
+/**
+ * Logout from currently logged in user, uses session data.
+ *
+ * @name User Logout
+ * @route {POST} /api/signout
+ */
 router.post('/signout',userController.logout); 
 
-// POST request to sign up
+/**
+ * Sign up using a local strategy.
+ *
+ * @name User Login
+ * @route {POST} /api/signup
+ * @bodyparam {String} username to signup with
+ * @bodyparam {String} password to signup with
+* @bodyparam {String} email to signup with
+ */
 router.post('/signup',userController.user_signup);
 
-// GET request to get currently signed in user
+/**
+ * Returns up-to-date data of the user logged in to the session.
+ *
+ * @name Get User
+ * @route {GET} /api/user
+ */
 router.get('/user',userController.get_user);
 
-// POST request to get user data
+/**
+ * Get data regarding a specific user
+ *
+ * @name Get User Data
+ * @route {POST} /api/userdata
+ * @bodyparam {String} username to get data of
+ */
 router.post('/userdata',userController.get_user_data);
 
-// POST request to check if given username exists
+/**
+ * Checks if a user with a given user name already exists.
+ *
+ * @name Check Username
+ * @route {POST} /api/userdata
+ * @bodyparam {String} username to get data of
+ */
 router.post('/check_username',userController.check_username_exists);
 
-// GET request to authenticate twitch user
+/**
+ * Authenticates user using Twitch API
+ *
+ * @name Twitch Auth
+ * @route {GET} /api/auth/twitch
+ */
 router.get('/auth/twitch', userController.setRedirectURL, userController.twitch_auth);
 
-// GET request Twitch callback
+/**
+ * Callback for Twitch auth
+ *
+ * @name Twitch Auth callback
+ * @route {GET} /api/auth/twitch/callback
+ */
 router.get('/auth/twitch/callback', userController.twitch_auth_callback, userController.successRedirect);
 
-// GET request to authenticate google user
+/**
+ * Authenticates user using Google API
+ *
+ * @name Google Auth
+ * @route {GET} /api/auth/google
+ */
 router.get('/auth/google', userController.setRedirectURL, userController.google_auth);
 
-// GET request google callback
+/**
+ * Callback for Google auth
+ *
+ * @name Google Auth callback
+ * @route {GET} /api/auth/google/callback
+ */
 router.get('/auth/google/callback', userController.google_auth_callback, userController.successRedirect);
 
-// GET request to authenticate google user
+/**
+ * Authenticates user using Facebook API
+ *
+ * @name Facebook Auth
+ * @route {GET} /api/auth/facebook
+ */
 router.get('/auth/facebook', userController.setRedirectURL, userController.facebook_auth);
 
-// GET request google callback
+/**
+ * Callback for Facebook auth
+ *
+ * @name Facebook Auth callback
+ * @route {GET} /api/auth/facebook/callback
+ */
 router.get('/auth/facebook/callback', userController.facebook_auth_callback, userController.successRedirect);
 
-// POST request create stream
+/**
+ * Creates a stream with given details, user data must be valid.
+ *
+ * @name Create stream
+ * @route {POST} /api/user/createstream
+ * @bodyparam {StreamData} Data of the stream to create
+ */
 router.post('/user/createstream', streamController.createStream);
 
-// POST request getStreamById
+/**
+ * Creates a stream with given details, user data must be valid.
+ *
+ * @name Get Stream By Id
+ * @route {POST} /api/user/find_stream_data
+ * @bodyparam {String} streamId id of the stream to get data of
+ */
 router.post('/user/find_stream_data', streamController.getStreamById);
 
-// GET request getUsernameList
-router.get('/user/getusernamelist', userController.getUsernameList);
-
-// POST request searchStreams
+/**
+ * Searches for streams by search string, return the page of results by page
+ *
+ * @name Search streams
+ * @route {POST} /api/search/streams
+ * @bodyparam {String} searchString string to search streams by
+ * @bodyparam {String} page to return
+ * @bodyparam {String} status stream status
+ */
 router.post('/search/streams', streamController.searchStreams);
 
-// POST request getStreamsByStatus
+/**
+ * Returns page of all streams with status
+ *
+ * @name Search streams by status
+ * @route {POST} /api/feed/streams
+ * @bodyparam {String} page to return
+ * @bodyparam {String} status stream status
+ */
 router.post('/feed/streams', streamController.getStreamsByStatus);
 
-// POST request getAllStreamGroupsStreams
+/**
+ * Returns all the data from twitch regarding the streams given
+ *
+ * @name Get twitch streams
+ * @route {POST} /api/twitch/get_streams
+ * @bodyparam {streamGroup[]} streamGroups List of all the groups of streamers to search data for
+ */
 router.post('/twitch/get_streams', twitchController.getAllStreamGroupsStreams);
 
-// POST request getLiveVideoId
+/**
+ * Returns all the data from twitch regarding the streams given
+ *
+ * @name Get YouTube Live video id by channel id
+ * @route {POST} /api/youtube/getLiveVideoId
+ * @bodyparam {String} ChannelId of all the groups of streamers to search data for
+ */
 router.post('/youtube/getLiveVideoId', youtubeController.getLiveVideoId);
 
-// POST request searchStreams
+/**
+ * Searches for users by search string, return the page of results by page
+ *
+ * @name Search users
+ * @route {POST} /api/search/users
+ * @bodyparam {String} searchString string to search users by
+ * @bodyparam {String} page to return
+ */
 router.post('/search/users', userController.searchUsers);
 
-// POST request redirectBack
+/**
+ * Sets redirect URL in order to keep users logout/login on same page
+ *
+ * @name Set Redirect Url
+ * @route {POST} /api/auth/setRedirectUrl
+ * @headerparam {String} referer URL to redirect to
+ */
 router.post('/auth/setRedirectUrl', userController.setRedirectURL);
  
 // POST request handle friends
@@ -80,22 +205,57 @@ router.post('/user/friends', friendsController.handleFriendsRequest);
 // POST request handle follows
 router.post('/user/follow', followController.handleFollowRequest);
 
-// POST request closeStream
+/**
+ * Closes the user's current stream if it exists
+ *
+ * @name Close stream
+ * @route {POST} /api/streams/closeStream
+ */
 router.post('/streams/closeStream', streamController.closeStream);
 
-// POST request closeStream
+/**
+ * Deletes a given notification from the logged in user
+ *
+ * @name Delete notification
+ * @route {POST} /api/notifications/deleteNotification
+ * @bodyparam {String} notificationId Id of the notification to delete
+ */
 router.post('/notifications/deleteNotification', notificationController.deleteNotificationFromCurrentUser);
 
-// POST request clearNotifications
+/**
+ * Deletess all clearable notifications from current users
+ *
+ * @name Delete notification
+ * @route {POST} /api/notifications/clearNotifications
+ */
 router.post('/notifications/clearNotifications', notificationController.clearAllClearableNotifications);
 
-// POST request requestToJoinStream
+/**
+ * Requests to join a stream of a given stream creator
+ *
+ * @name Request to join stream
+ * @route {POST} /api/streams/requestToJoinStream
+ * @bodyparam {String} creatorId Id of the creator of the stream to request to join
+ * @bodyparam {streamerData} data streamerData of the user requesting to join
+ */
 router.post('/streams/requestToJoinStream', streamController.requestToJoinStream);
 
-// POST request requestToJoinStream
+/**
+ * Rejects a request to join stream
+ *
+ * @name Reject request to join stream
+ * @route {POST} /api/streams/rejectRequestToJoin
+ * @bodyparam {streamerData} data streamerData of the user to reject
+ */
 router.post('/streams/rejectRequestToJoin', streamController.rejectRequestToJoin);
 
-// POST request requestToJoinStream
+/**
+ * Accepts a request to join stream
+ *
+ * @name Accept request to join stream
+ * @route {POST} /api/streams/acceptRequestToJoin
+ * @bodyparam {streamerData} data streamerData of the user to accept
+ */
 router.post('/streams/acceptRequestToJoin', streamController.acceptRequestToJoin);
 
 //TODO: Delete this
@@ -103,5 +263,9 @@ router.post('/streams/acceptRequestToJoin', streamController.acceptRequestToJoin
 router.post('/test/selfPoke', notificationController.pokeYourself);
 
 router.post('/user/update_field', userController.updateUserShortDescription)
+
+router.post('/user/update_interests', userController.updateUserInterests)
+
+router.post('/user/is_user_online', userController.isUserOnline)
 
 module.exports = router;

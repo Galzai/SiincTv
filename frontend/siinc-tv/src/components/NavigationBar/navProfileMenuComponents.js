@@ -62,7 +62,7 @@ export function NavProfileMenuBreaker(props) {
 
 export function NavProfileMenuMyChannelLink() {
     const userContext = useContext(UserContext);
-    const mychannel = "/users/" + userContext.user.username;
+    const mychannel = "/users/" + userContext.user._id;
 
     return(
         <Link to={mychannel} className={style.link} underline="none">
@@ -82,7 +82,11 @@ export function NavProfileMenuMyChannelLink() {
 }
 
 export function NavProfileMenuFriendsLink() {
+    const userContext = useContext(UserContext);
+    const friends = "/users/" + userContext.user._id + "/friends";
+
     return(
+        <Link to={friends} className={style.link} underline="none">
         <div className={style.navProfileMenuFriendsDiv}>
             <div className={style.navProfileMenuFriendsIcon}>
                 <img src={FriendsIcon}
@@ -93,11 +97,16 @@ export function NavProfileMenuFriendsLink() {
             Friends
             </div>
         </div>
+        </Link>
     );   
 }
 
 export function NavProfileMenuFavoritesLink() {
+    const userContext = useContext(UserContext);
+    const followers = "/users/" + userContext.user._id + "/following";
+
     return(
+        <Link to={followers} className={style.link} underline="none">
         <div className={style.navProfileMenuFavoritesDiv}>
             <div className={style.navProfileMenuFavoritesIcon}>
                 <img src={FavoritesIcon}
@@ -105,14 +114,19 @@ export function NavProfileMenuFavoritesLink() {
                 </img>
             </div>
             <div className={style.navProfileMenuFavoritesText}>
-                Favorites
+                Followers
             </div>
         </div>
+        </Link>
     );   
 }
 
 export function NavProfileMenuMySettingsLink() {
+    const userContext = useContext(UserContext);
+    const edit = "/users/" + userContext.user._id + "/edit";
+
     return(
+        <Link to={edit} className={style.link} underline="none">
         <div className={style.navProfileMenuSettingsDiv}>
             <div className={style.navProfileMenuSettingsIcon}>
                 <img src={SettingsIcon}
@@ -120,9 +134,10 @@ export function NavProfileMenuMySettingsLink() {
                 </img>
             </div>
             <div className={style.navProfileMenuSettingsText}>
-                Settings
+                Edit Channel
             </div>
         </div>
+        </Link>
     );   
 }
 
@@ -132,8 +147,9 @@ export function NavProfileMenuLogout() {
 
     function signOut(){
         userActions.signOut();
-        socketContext.socket.emit('userDisconnect', userContext.user._id)
+        socketContext.socket.emit('userDisconnect', userContext.user._id);
         userContext.setUser(null);
+        window.location.reload(false);
     }
 
     return(

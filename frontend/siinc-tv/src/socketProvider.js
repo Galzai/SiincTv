@@ -1,8 +1,12 @@
-/*
- * Socket provider for an always active socket
+/**
+ * Socket provider for an always active socket, provides a socket for every client
+ * 
+ * @module UserProvider
+ * @category Frontend
+ * @subcategory Provider
  */
-import React from 'react'
-import SocketContext from './socketContext';
+import React from "react";
+import SocketContext from "./socketContext";
 import socketIOClient from "socket.io-client";
 
 const SOCKET_SERVER_URL = "siinc.tv";
@@ -23,28 +27,27 @@ class SocketProvider extends React.Component {
         // Bindings go here
     }
 
-    componentDidMount() {
-    }
+  componentDidMount() {}
 
-
-    componentWillUnmount() {
-        if(this.state.socket != null) {
-            this.state.socket.disconnect();
-        }
+  componentWillUnmount() {
+    if (this.state.socket != null) {
+      this.state.socket.disconnect();
     }
+  }
 
-    render() {
-        return (
-            <SocketContext.Provider
-                value={{
-                    socket: this.state.socket,
-                    streamRoomId: this.state.streamRoomId,
-                    setStreamRoomId: id =>this.setState({streamRoomId: id})
-                }}
-            >
-                {this.props.children}
-            </SocketContext.Provider>);
-    }
+  render() {
+    return (
+      <SocketContext.Provider
+        value={{
+          socket: this.state.socket,
+          streamRoomId: this.state.streamRoomId,
+          setStreamRoomId: (id) => this.setState({ streamRoomId: id }),
+        }}
+      >
+        {this.props.children}
+      </SocketContext.Provider>
+    );
+  }
 }
 
 export default SocketProvider;

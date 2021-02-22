@@ -7,36 +7,37 @@ import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
 
 /**
- * @brief displays a preview of a user
+ * displays a preview of a user
  * 
- * @param {*user} props 
+ * @prop {userData} user  the data of the user to display
+ * @component
+ * @category Frontend
+ * @subcategory Previews
  */
 function UserPreview(props){
     const user = props.user;
-    const username = user.username;
     const image = userUtils.assignImage(user);
     const numFollowers = user.numFollowers ? user.numFollowers +  " Followers" : "No Followers";
     const description = user.shortDescription ? user.shortDescription :" No Description";
     const currentstream = user.currentstream;
     const userContext = useContext(UserContext);
-    console.log(user);
 
     function handleRedirect() {
-        props.history.push(`/users/${username}`);
+        props.history.push(`/users/${user._id}`);
       }
 
       const debugFriendRepr=()=> {
-        if(  userContext.user == null ) 
+        if(  userContext.user == null || user == null ) 
             return "";
-        if( userContext.user.username == username ) 
-            return "Its you!";
+        if( String(userContext.user._id) === String(user._id) ) 
+            return "It's you!";
         if(userContext.user.friendsData)
         {
-            if( userContext.user.friendsData.friendsList.find(x=>x.displayName===username) != undefined ) 
+            if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) 
                 return "Unfriend";
-            if( userContext.user.friendsData.sentRequests.find(x=>x.username===username) != undefined ) 
+            if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) 
                 return "Pending";
-            if( userContext.user.friendsData.receivedRequests.find(x=>x.username===username) != undefined ) 
+            if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) 
                 return "Accept";
         }
 
@@ -44,23 +45,33 @@ function UserPreview(props){
     }
 
     const onClickFriendAction=()=>{
-        handleFriendAction(userContext.user, username);
+        handleFriendAction(userContext.user, {username: user.username, userId: user._id});
         userContext.refreshUserData();
     }
 
     const debugFollowRepr=()=> {
-        if( userContext.user == null )
+        if( userContext.user == null || user == null )
             return "";
-        if( userContext.user.username == username )
+        if( String(userContext.user._id) === String(user._id) )
             return "you!";
-        if(userContext.user.followData && userContext.user.followData.followingList.find(x=>x.userName===username) != undefined )
+        if(userContext.user.followData &&
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) != undefined )
             return "Unfollow"
         return "Follow"
     }
 
     const onClickFollowAction=()=>{
-        handleFollowAction(userContext.user, username);
+        if( user )
+            handleFollowAction(userContext.user, user);
         userContext.refreshUserData();
+    }
+
+    function shortenText(text){
+        const maxLen = 61;
+        if(text.length > maxLen){
+          return text.slice(0, maxLen)+"...";
+        }
+        return text;
     }
 
     return(
@@ -70,14 +81,16 @@ function UserPreview(props){
             > 
             </img>}
             <div className={style.UserTitle}>
-                <h2 className={style.userName} onClick={handleRedirect}>{username}</h2>
-                <h3 className={style.NumFollowers}>{numFollowers}</h3>
-                <span className={style.shortDescription}>{description}</span>
+                <h2 className={style.userName} onClick={handleRedirect}>{user.username}</h2>
+                { (user.numFollowers != undefined)     && <h3 className={style.NumFollowers}>{numFollowers}</h3>}
+                { (user.shortDescription != undefined) && <span className={style.shortDescription}>{shortenText(description)}</span>}
 
             </div>
             <div className={style.UserButtons}>
-                { userContext.user && <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button> }
-                { userContext.user && <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button> }
+                { (userContext.user && String(userContext.user._id) !== String(user._id)) && 
+                  <button onClick={onClickFollowAction} className={style.favoriteFriendsButtons}>{debugFollowRepr()}</button> }
+                { (userContext.user && String(userContext.user._id) !== String(user._id)) &&
+                  <button onClick={onClickFriendAction} className={style.favoriteFriendsButtons}>{debugFriendRepr()}</button> }
              </div>
              
         </div>

@@ -8,55 +8,56 @@ const JOIN_ROOM = "joinRoom"; // Name of the event
 const LEAVE_ROOM = "leaveRoom"; // Name of the event
 const NEW_STREAMER = "newStreamer"; // Name of the event
 
+/**
+ * This component is in charge of the socket handler for stream related emits
+ * 
+ * @category Frontend
+ * @component
+ * @subcategory Live stream
+ */
 const StreamSocket = (roomId, setStreamData) => {
   const [endStream, setEndStream] = useState(false); // Sent and received messages
   const [numOfViews, setNumViewers] = useState(0);
   const socketContext = useContext(SocketContext);
 
-
   useEffect(() => {
-    if(roomId !== null){
+    if (roomId !== null) {
       // If not already in room join room
-      if(socketContext.streamRoomId == null)
-      {
+      if (socketContext.streamRoomId == null) {
         socketContext.socket.emit(JOIN_ROOM, roomId);
         socketContext.setStreamRoomId(roomId);
       }
-        // Listens for incoming messages
-        socketContext.socket.on(END_STREAM, () => {
-            window.location.assign(`https://siinc.tv/stream_pages/ended/`);
+      // Listens for incoming messages
+      socketContext.socket.on(END_STREAM, () => {
+        window.location.assign("https://siinc.tv/stream_pages/ended");
+      });
+
+      // Listen for new viewers
+      socketContext.socket.on(VIEWERS_CHANGED, (numViewers) => {
+        setNumViewers(numViewers);
+      });
+
+      // Reload the stream data on join
+      socketContext.socket.on(NEW_STREAMER, () => {
+        console.log("new streamer");
+        streamActions.getStreamById(roomId).then((result) => {
+          setStreamData(result);
         });
-
-        // Listen for new viewers
-        socketContext.socket.on(VIEWERS_CHANGED, (numViewers) => {
-          setNumViewers(numViewers);
-        });
-
-        // Reload the stream data on join
-        socketContext.socket.on(NEW_STREAMER, () => {
-          console.log("new streamer");
-          streamActions.getStreamById(roomId).then((result)=>{
-            setStreamData(result);
-          }
-
-          )
-
-        });
-        
-        // leaves the room
-        // when the connection is closed
-        return () => {
-          if(socketContext.streamRoomId != null)
-          {
-            socketContext.socket.emit(LEAVE_ROOM,roomId);
-            socketContext.setStreamRoomId(null);
-          }
-        };
-    }
+      });
+    }  
+    // leaves the room
+    // when the connection is closed
+    return () => {
+      console.log("Leaving", socketContext.streamRoomId);
+        socketContext.socket.emit(LEAVE_ROOM, roomId);
+        socketContext.setStreamRoomId(null);
+    };
   }, []);
 
-  // Sends a message to the server that
-  // forwards it to all users in the same room
+  /**
+   *Sends a message to the server that
+   * forwards it to all users in the same room
+   */
   const sendEndStream = () => {
     socketContext.socket.emit(END_STREAM, roomId);
   };

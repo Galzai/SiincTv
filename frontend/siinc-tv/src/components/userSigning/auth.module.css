@@ -382,3 +382,19 @@
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
 }
+
+.placeCircularProgressLogin
+{
+    position:absolute;
+    display:grid;
+    top: 33%;
+    left: 280px;
+}
+
+.placeCircularProgressSignUp
+{
+    position:absolute;
+    display:grid;
+    top: 80%;
+    left: 280px;
+}

@@ -2,7 +2,15 @@ const mongoose = require("mongoose");
 
 
 /**
- * @brief Streamer data for streamers in stream
+ * Streamer data for streamers in stream
+ * @class
+ * @category Backend
+ * @subcategory Stream Models
+ * @param  {mongoose.Schema.Types.ObjectId} memberId
+ * @param  {String} youtubeId
+ * @param  {String} twitchId
+ * @param  {String} displayName
+ * @param  {String} userImage
  */
 const streamerData = new mongoose.Schema({
     memberId: mongoose.Schema.Types.ObjectId,
@@ -14,7 +22,12 @@ const streamerData = new mongoose.Schema({
 const StreamerData =  mongoose.model("StreamerData", streamerData );
 
 /**
- * @brief information regarding registered viewers
+ *information regarding registered viewers
+ * @class
+ * @category Backend
+ * @subcategory Stream Models
+ * @param  {mongoose.Schema.Types.ObjectId} memberId
+ * @param  {String} displayName
  */
 const registeredViewerData = new mongoose.Schema({
     memberId: mongoose.Schema.Types.ObjectId,
@@ -23,7 +36,12 @@ const registeredViewerData = new mongoose.Schema({
 const RegisteredViewerData =  mongoose.model("RegisteredViewerData", registeredViewerData );
 
 /**
- * @brief describes a group of streamers that can hold up to maxNumOfMembers
+ * describes a group of streamers that can hold up to maxNumOfMembers
+ * @class
+ * @category Backend
+ * @subcategory Stream Models
+ * @param  {Number} maxNumOfMembers
+ * @param  {streamerData} members
  */
 const streamGroup = new mongoose.Schema({
     maxNumOfMembers: Number,
@@ -32,7 +50,21 @@ const streamGroup = new mongoose.Schema({
 const StreamGroup =  mongoose.model("StreamGroup", streamGroup );
 
 /**
- * @brief describes a siinc stream
+ * describes a siinc stream
+ * @class
+ * @category Backend
+ * @subcategory Stream Models
+ * @param  {streamerData} creator
+ * @param  {String} name
+ * @param  {String} status
+ * @param  {Boolean} privateStream
+ * @param  {Boolean} joinOnly
+ * @param  {String[]} tags
+ * @param  {Date} date
+ * @param  {String} description
+ * @param  {streamGroup[]} streamGroups
+ * @param  {type:mongoose.Schema.Types.ObjectId[]} registeredViewers
+ * @param  {Number} numOfViewers
  */
 const streamData = new mongoose.Schema({
     creator : {type: mongoose.Schema.Types.Mixed, ref: 'StreamerData'},
@@ -49,7 +81,7 @@ const streamData = new mongoose.Schema({
   });
   // This is necessery for quick text search
   streamData.index({name: 'text', tags: 'text', description: 'text'}, 
-  {name: 'Search index', weights: {name: 10, tags: 8, description: 5}});
+  {name: 'Search index', weights: {name: 3, tags: 2, description: 1}});
 
   const StreamData =  mongoose.model("StreamData", streamData );
 

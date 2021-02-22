@@ -9,10 +9,10 @@ function NavSearchComponent(props) {
     const [search, setSearch] = useState('');
 
     // ---------------- broken dynamically changing search field ---------------
-    const window = useWindowDimensions();
+    const windoDims = useWindowDimensions();
     const [width, setWidth] = useState(400); 
-    if(window.width < 900) {
-        const newWidth = (window.width > 600) ? (window.width - 500) : 100 ;
+    if(windoDims.width < 900) {
+        const newWidth = (windoDims.width > 600) ? (windoDims.width - 500) : 100 ;
         if( newWidth != width ) {
             setWidth(newWidth);
         }
@@ -22,15 +22,17 @@ function NavSearchComponent(props) {
 
     function handleClick(){
         props.history.push(`/search/${search}`);
+        window.location.reload();
 
     }
 
     function handleKeypress(e) {
         //it triggers by pressing the enter key
             if (e.keyCode === 13) {
+                e.preventDefault(); 
                 props.history.push(`/search/${search}`);
-                e.preventDefault();
-            }
+                window.location.reload();
+          }
         };
 
     return(

@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useState,useEffect } from "react";
 import style from "./searchPage.module.css";
 import StreamSearchResults from "../components/search/streamSearchResults";
-import UserSearchResults from "../components/search/userSearchResults";
+import UserSearchResults from "../components/search/userSearchResults"; 
+import CombinedSearch from "../components/search/combinedSearch";
 import Hidden from "@material-ui/core/Hidden";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,18 +12,33 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import Divider from "@material-ui/core/Divider";
 import VideoLabelIcon from "@material-ui/icons/VideoLabel";
 import PersonIcon from "@material-ui/icons/Person";
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import { createMuiTheme, ThemeProvider, withStyles } from "@material-ui/core/styles";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import {
+  createMuiTheme,
+  ThemeProvider,
+  withStyles,
+} from "@material-ui/core/styles";
 import MuiListItem from "@material-ui/core/ListItem";
 
+/**
+ * This class is in charge of handling the search page
+ * 
+ * @prop {String} match.params.searchString the string that of the search phrase that redirected to this page
+ * @component
+ * @category Frontend
+ * @subcategory Pages
+ */
 function SearchPage(props) {
   const searchString = props.match.params.searchString;
-  const [resultType, setResultType] = useState("liveStream");
+  const [resultType, setResultType] = useState("combined");
   const [joinableOnly, setjoinAbleOnly] = useState(false);
   const [liveOnly, setLiveOnly] = useState(false);
 
+  useEffect(()=>{
 
+  }, [props.match.params.searchString])
+  
   const theme = createMuiTheme({
     breakpoints: {
       values: {
@@ -39,61 +55,89 @@ function SearchPage(props) {
     root: {
       "&$selected": {
         backgroundColor: "red",
-        color: "white"
+        color: "white",
       },
       "&$selected:hover": {
         backgroundColor: "purple",
-        color: "white"
+        color: "white",
       },
       "&:hover": {
         backgroundColor: "#30165B",
-        color: "white"
-      }
+        color: "white",
+      },
     },
-    selected: {}
+    selected: {},
   })(MuiListItem);
 
-
-    function setCurrentFilters()
-    {
-        if(resultType==="liveStream"){
-            return(
-                <div>
-                                  <ListItem style={{opacity: "0.7"}}>
-                <FormControlLabel
-                    control={<Checkbox checked={joinableOnly} onClick={(event=>{setjoinAbleOnly(event.target.checked)})} name="checkedA" 
-                    style={{color: "#FFFFFF", opacity: "0.7"}}/>}
-                    label="Joinable streams only" 
+  function setCurrentFilters() {
+    if (resultType === "liveStream") {
+      return (
+        <div>
+          <ListItem style={{ opacity: "0.7" }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={joinableOnly}
+                  onClick={(event) => {
+                    setjoinAbleOnly(event.target.checked);
+                  }}
+                  name="checkedA"
+                  style={{ color: "#FFFFFF", opacity: "0.7" }}
                 />
-                </ListItem>
-                </div>
-            )
-        }
-        if(resultType==="users"){
-            return(
-                <div>
-                                  <ListItem style={{opacity: "0.7"}}>
-                <FormControlLabel
-                    control={<Checkbox checked={liveOnly} onClick={(event=>{setLiveOnly(event.target.checked)})} name="checkedA" 
-                    style={{color: "#FFFFFF", opacity: "0.7"}}/>}
-                    label="Live users only"
-                />
-                </ListItem>
-                </div>
-            )
-        }
-
-
+              }
+              label="Joinable streams only"
+            />
+          </ListItem>
+        </div>
+      );
     }
+    if (resultType === "users") {
+      return (
+        <div>
+          <ListItem style={{ opacity: "0.7" }}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={liveOnly}
+                  onClick={(event) => {
+                    setLiveOnly(event.target.checked);
+                  }}
+                  name="checkedA"
+                  style={{ color: "#FFFFFF", opacity: "0.7" }}
+                />
+              }
+              label="Live users only"
+            />
+          </ListItem>
+        </div>
+      );
+    }
+  }
+
+  function shortenText(text){
+    const maxLen = 35;
+    if(text.length > maxLen){
+      return text.slice(0, maxLen)+"...";
+    }
+    return text;
+  }
 
   return (
     <div className={style.searchPage}>
+        {resultType === "combined" && (
+        <CombinedSearch
+          searchString={searchString}
+        />
+      )}
       {resultType === "liveStream" && (
-        <StreamSearchResults searchString={searchString} status={"Live"}
-        joinableOnly={joinableOnly} />
+        <StreamSearchResults
+          searchString={searchString}
+          status={"Live"}
+          joinableOnly={joinableOnly}
+        />
       )}
       {resultType === "users" && (
-        <UserSearchResults searchString={searchString} liveOnly={liveOnly}/>
+        <UserSearchResults searchString={searchString} liveOnly={liveOnly} />
       )}
       <ThemeProvider theme={theme}>
         <Hidden implementation="css" initialWidth="sm" smDown>
@@ -113,7 +157,7 @@ function SearchPage(props) {
                       Search results for
                     </label>
                     <label className={style.searchingForTitle}>
-                      {searchString}
+                      {shortenText(searchString)}
                     </label>
                   </div>
                 </ListSubheader>
@@ -128,9 +172,14 @@ function SearchPage(props) {
                 }}
               >
                 <ListItemIcon>
-                  <VideoLabelIcon style={{color: "#FFFFFF", opacity: "0.7"}} />
+                  <VideoLabelIcon
+                    style={{ color: "#FFFFFF", opacity: "0.7" }}
+                  />
                 </ListItemIcon>
-                <ListItemText primary="Live Streams" style={{opacity: "0.7"}} />
+                <ListItemText
+                  primary="Live Streams"
+                  style={{ opacity: "0.7" }}
+                />
               </ListItem>
               <ListItem
                 button
@@ -139,9 +188,9 @@ function SearchPage(props) {
                 }}
               >
                 <ListItemIcon>
-                  <PersonIcon style={{color: "#FFFFFF", opacity: "0.7"}} />
+                  <PersonIcon style={{ color: "#FFFFFF", opacity: "0.7" }} />
                 </ListItemIcon>
-                <ListItemText primary="Users" style={{opacity: "0.7"}}/>
+                <ListItemText primary="Users" style={{ opacity: "0.7" }} />
               </ListItem>
               <hr className={style.filterBreak}></hr>
               <h2 className={style.optionTitle}>Filters</h2>

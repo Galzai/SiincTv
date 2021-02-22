@@ -1,10 +1,9 @@
 // temporary
 // ======================
 
-const {User} = require("../models/user");
+const {User, Notification} = require("../models/user");
 var notification = require('../Notification/notification')
 var notificationController = require('../controllers/notificationController')
-const {Notification} = require("../models/user");
 const {emitReloadNotifications} = require("../sockets/sockets")
 
 
@@ -71,41 +70,28 @@ async function handleSendFriendRequest( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling sendFriendRequest from users : " + fromUser.username + ", " + toUser.username)
-    //console.log(fromUser)
-    //console.log(toUser)
 
     // now check if fromUser already has toUser as friends or has pending request - verified only one side
-    /*if( fromUser.friendsData.friendsList.find(el=>toString(el.memberId)===toString(toUser._id)) != undefined || 
-           fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)) != undefined ) */
       if( cmpIdsInList( fromUser.friendsData.friendsList, toUser ) || 
           cmpIdsInList( fromUser.friendsData.friendsList, toUser ) ) {
-       /* console.log("Cannot send request to this user, you already sent a request or he is your friend");
-        console.log(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)===toString(toUser._id)))
-        console.log(fromUser.friendsData.sentRequests.find(el=>toString(el.memberId)===toString(toUser._id)))
-        console.log(fromUser.friendsData.friendsList)
-        console.log(fromUser.friendsData.sentRequests)
-        console.log(toUser._id)
-        console.log("Printing users : ")
-        console.log(fromUser)
-        console.log(toUser)
-        console.log("Print friends list")*/
+       /* console.log("Cannot send request to this user, you already sent a request or he is your friend");*/
         return false;
     }
 
     // now update fromUser and toUser data
     try {
         await User.updateOne( 
-            { username: fromUser.username },
+            { _id: fromUser._id },
             { $push: { "friendsData.sentRequests": {
-                id: toUser._id,
+                userId: toUser._id,
                 username: toUser.username,
             } } }
         ).exec();
 
         await User.updateOne( 
-            { username: toUser.username },
+            { _id: toUser._id },
             { $push: { "friendsData.receivedRequests": {
-                id: fromUser._id,
+                userId: fromUser._id,
                 username: fromUser.username 
             } } }
         ).exec();
@@ -129,7 +115,7 @@ async function handleSendFriendRequest( req )
             userImage: assignImage(fromUser)
         }
     })
-    notificationController.addNotificationToUser(toUser._id, notificationData, `Received friend request from ${toUser.username}.` )    
+    notificationController.addNotificationToUser(toUser._id, notificationData, `Received friend request from ${fromUser.username}.` )    
     emitReloadNotifications(toUser._id, "");
     emitReloadNotifications(fromUser._id, "")
 
@@ -156,8 +142,8 @@ async function handleAnswerFriendRequest2( req )
     if( req.body.accepted ) {
         try {
            await User.updateOne( 
-                { username: fromUser.username },
-                { $pull: { "friendsData.sentRequests": { id: toUser._id } }, 
+                { _id: fromUser._id },
+                { $pull: { "friendsData.sentRequests": { userId: toUser._id } }, 
                   $push: { "friendsData.friendsList": {
                     value: toUser.username,
                     memberId: toUser._id,
@@ -173,8 +159,8 @@ async function handleAnswerFriendRequest2( req )
             ).exec();
             
             await User.updateOne( 
-                { username: toUser.username },
-                { $pull: { "friendsData.receivedRequests": { id: fromUser._id } },  
+                { _id: toUser._id },
+                { $pull: { "friendsData.receivedRequests": { userId: fromUser._id } },  
                   $push: { "friendsData.friendsList": {
                     value: fromUser.username,
                     memberId: fromUser._id,
@@ -213,17 +199,18 @@ async function handleAnswerFriendRequest2( req )
     else {
         try {
             await User.updateOne( 
-                { username: fromUser },
-                { $pull: { "friendsData.sentRequests": { id: toUser._id } } }
+                { _id: fromUser._id },
+                { $pull: { "friendsData.sentRequests": { userId: toUser._id } } }
             ).exec();
     
             await User.updateOne( 
-                { username: toUser },
-                { $pull: { "friendsData.receivedRequests": { id: fromUser._id } } }
+                { _id: toUser._id },
+                { $pull: { "friendsData.receivedRequests": { userId: fromUser._id } } }
             ).exec();
         }
         catch (error) {
             console.log("error occured in : <handleAnswerFriendRequest>")
+            console.log(error)
             return false;
         }
 
@@ -255,12 +242,12 @@ async function handleUnfriendRequest( req )
     // update fromUser and toUser
     try {
         await User.updateOne( 
-            { username: fromUser.username },
+            { _id: fromUser._id },
             { $pull: { "friendsData.friendsList": { memberId: toUser._id } } }
         ).exec();
 
         await User.updateOne( 
-            { username: toUser.username },
+            { _id: toUser._id },
             { $pull: { "friendsData.friendsList": { memberId: fromUser._id } } }
         ).exec();
     }
@@ -285,7 +272,7 @@ async function getUsersFromRequest( req )
         let fromUser = null;
         let toUser = null;
         try {
-            fromUser = await User.findOne({username: req.body.fromUser}).exec();
+            fromUser = await User.findOne({_id: req.body.fromUser}).exec();
         }
         catch (error) {
             console.log("error occured in : <handleUnfriendRequest>")
@@ -299,7 +286,7 @@ async function getUsersFromRequest( req )
     
         // get receiver user
         try {
-            toUser = await User.findOne({username: req.body.toUser}).exec();
+            toUser = await User.findOne({_id: req.body.toUser}).exec();
         }
         catch (error) {
             console.log("error occured in : <handleSendFriendRequest>")

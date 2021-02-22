@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 
 /**
- * @brief Schema for twitch data   
- */ 
+ * Schema for twitch data   
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} login
+ * @param  {String} display_name
+ * @param  {String} description
+ * @param  {String} profile_image_url
+ * @param  {Number} view_count
+ */
 const twitchData = new mongoose.Schema({
   login: String,
   display_name: String,
@@ -13,8 +21,17 @@ const twitchData = new mongoose.Schema({
 const TwitchData = mongoose.model("TwitchData", twitchData );
 
 /**
- * @brief Schema for google
- */ 
+ * Schema for google
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} displayName
+ * @param  {String} youtubeId
+ * @param  {String} youtubeName
+ * @param  {Object} name
+ * @param  {Object[]} emails
+ * @param  {String[]} photos
+ */
 const googleData = new mongoose.Schema({
   displayName: String,
   youtubeId: String,
@@ -26,7 +43,14 @@ const googleData = new mongoose.Schema({
 const GoogleData =  mongoose.model("GoogleData", googleData );
 
 /**
- * @brief Schema for facebook
+ * Schema for facebook
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} displayName
+ * @param  {String} profileUrl
+ * @param  {Object} name
+ * @param  {String} photos
  */
 const facebookData = new mongoose.Schema({
   displayName: String,
@@ -37,7 +61,13 @@ const facebookData = new mongoose.Schema({
 const FacebookData =  mongoose.model("FacebookData", facebookData );
 
 /**
- * @brief holds information regarding the user's upcoming events
+ * holds information regarding the user's upcoming events
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} name
+ * @param  {Date} date
+ * @param  {mongoose.Schema.Types.ObjectId} eventId
  */
 const upComingEventData = new mongoose.Schema({
   name : String,
@@ -47,7 +77,10 @@ const upComingEventData = new mongoose.Schema({
 const UpComingEventData = mongoose.model("UpComingEventData", upComingEventData );
 
 /**
- * @brief holds information regarding the user's friends and friend requests
+ * holds information regarding the user's friends and friend requests
+ * @class
+ * @category Backend
+ * @subcategory User Models
  */
 const friendsData = new mongoose.Schema({
   friendsList: [{
@@ -67,7 +100,10 @@ const friendsData = new mongoose.Schema({
 const FriendsData = mongoose.model("FriendsData", friendsData);
 
 /**
- * @brief holds information regarding the user's followers
+ * holds information regarding the user's followers
+ * @class
+ * @category Backend
+ * @subcategory User Models
  */
 const followData = new mongoose.Schema({
   followersList: [{
@@ -88,7 +124,10 @@ const followData = new mongoose.Schema({
 const FollowData = mongoose.model("FollowData", followData);
 
 /**
- * @brief Schema for Notification data/fields ( each type of notification has different fields )
+ * Schema for Notification data/fields ( each type of notification has different fields )
+ * @class
+ * @category Backend
+ * @subcategory User Models
  */ 
 var notificationData = new mongoose.Schema({
   type: Map,
@@ -97,8 +136,15 @@ var notificationData = new mongoose.Schema({
 const NotificationData = mongoose.model("NotificationData", notificationData );
 
 /**
-* @brief Schema for notifications
-*/ 
+* Schema for notifications
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} type
+ * @param  {Boolean} clearable
+ * @param  {Date} date
+ * @param  {mongoose.Schema.Types.Mixed} data
+ */
 const notification = new mongoose.Schema({
   type: String,
   clearable: Boolean,
@@ -108,7 +154,27 @@ const notification = new mongoose.Schema({
 const Notification = mongoose.model("Notification", notification );
 
 /**
- * @brief Schema for user account
+ * Schema for user account
+ * @class
+ * @category Backend
+ * @subcategory User Models
+ * @param  {String} username
+ * @param  {String} email
+ * @param  {String} password
+ * @param  {String} twitchId
+ * @param  {String} googleId
+ * @param  {String} facebookId
+ * @param  {String} image
+ * @param  {String} shortDescription
+ * @param  {String} description
+ * @param  {upComingEventData} currentStream
+ * @param  {twitchData} twitchData
+ * @param  {googleData} googleData
+ * @param  {facebookData} facebookData
+ * @param  {upComingEventData[]} upcomingEvents
+ * @param  {friendsData[]} friendsData
+ * @param  {notification[]} notifications
+ * @param  {followData} followData
  */
 const user = new mongoose.Schema({
   username: String,
@@ -128,11 +194,12 @@ const user = new mongoose.Schema({
   friendsData:{type: mongoose.Schema.Types.Mixed, ref: 'FriendsData'},
   notifications:[{type: mongoose.Schema.Types.Mixed, ref: 'Notification'}],
   followData:{type: mongoose.Schema.Types.Mixed, ref: 'FollowData'},
+  interests:[{label: String, value: String}]
 });
 
 // This is necessery for quick text search
 user.index({username: 'text', shortDescription: 'text', description: 'text'}, 
-{name: 'Search index', weights: {username: 10, shortDescription: 8, description: 5}});
+{name: 'Search index', weights: {username: 3, shortDescription: 2, description: 1, interest: 2}});
 const User = mongoose.model("User", user);
 
 module.exports = {

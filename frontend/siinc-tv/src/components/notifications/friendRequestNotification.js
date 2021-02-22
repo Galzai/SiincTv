@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import style from './notifications.module.css';
 import UserContext from "../../userContext";
-import {getFriendState, handleFriendAction} from "../../user/friends";
+import {getFriendState, handleFriendAction, handleFriendActionRejectTemp} from "../../user/friends";
 import userActions from "../../user/userActions"
 
 /**
@@ -26,6 +26,7 @@ export function FriendRequestReceived(props){
 
     function rejectFriendRequest()
     {
+        handleFriendActionRejectTemp(userContext.user, data);
         removeFriendNotification();
     }
 
@@ -34,12 +35,12 @@ export function FriendRequestReceived(props){
      */
     function acceptFriendRequest()
     {
-        handleFriendAction(userContext.user, data.username);
+        handleFriendAction(userContext.user, data);
         userContext.refreshUserData();
     }
 
     function acceptButton() {
-        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+        if( getFriendState(userContext.user, data) === "ACCEPT" ) 
             return (<Button onClick={acceptFriendRequest} size="small" variant="outlined" color="primary">Accept</Button>)
         else {
             removeFriendNotification(); // bad solution 
@@ -48,7 +49,7 @@ export function FriendRequestReceived(props){
     }
 
     function rejectButton() {
-        if( getFriendState(userContext.user, data.username) == "ACCEPT" ) 
+        if( getFriendState(userContext.user, data) === "ACCEPT" ) 
             return (<Button onClick={rejectFriendRequest} size="small" variant="outlined" color="primary">Reject</Button>)
     else     
         return (<Button size="small" variant="outlined" color="primary">----</Button>)       

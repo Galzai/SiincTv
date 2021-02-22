@@ -1,33 +1,30 @@
-import style from './liveStream.module.css'
+import style from "./liveStream.module.css";
 import StreamerCircle from "./streamerCircle";
-import React, {useState} from "react";
-
+import React, { useState } from "react";
 
 function flatten(arr) {
-    return arr.reduce(function (flat, toFlatten) {
-      return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
-    }, []);
+  return arr.reduce(function (flat, toFlatten) {
+    return flat.concat(
+      Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten
+    );
+  }, []);
 }
 
 /**
- * @brief This holds all our streamers
- * @param {*} props 
+ * This holds all our streamers
+ * 
+ * @prop {streamGroup[]} streamGroups all the groups of streamers in the stream
+ * @category Frontend
+ * @subcategory Live stream
+ * @component
  */
-function Streamers(props){
+function Streamers(props) {
+  const streamGroups = props.streamGroups;
+  const flatGroups = flatten(streamGroups);
+  const streamCircles = flatGroups.map((streamer) => {
+    return <StreamerCircle key={streamer.displayName} streamer={streamer} />;
+  });
 
-    const streamGroups = props.streamGroups;
-    const flatGroups = flatten(streamGroups);
-    const streamCircles = flatGroups.map(streamer=>{
-            return <StreamerCircle
-            key={streamer.displayName}
-            streamer={streamer}
-            />         
-    } )
-
-    return(
-        <div className={style.streamers}>
-        {streamCircles}
-        </div>
-    );
+  return <div className={style.streamers}>{streamCircles}</div>;
 }
 export default Streamers;

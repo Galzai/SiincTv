@@ -6,6 +6,13 @@ import {toast } from 'react-toastify';
 
 const NEW_NOTIFICATON = "newNotification";
 
+/**
+ * This componenet handles the web socket functions from notifications
+ * 
+ * @component 
+ * @category Frontend
+ * @subcategory Notifications
+ */
 const NotificationHandler = () => {
   const [newNotification, setNewNotifications] = useState(false);
   const socketContext = useContext(SocketContext);
@@ -16,7 +23,7 @@ const NotificationHandler = () => {
         // Triggers a refresh when a new notifications occurs
         socketContext.socket.on(NEW_NOTIFICATON, (popUpText) => {
           userContext.refreshUserData();
-          if(popUpText && popUpText != "")
+          if(popUpText && popUpText !== "")
           {
             toast.dark(popUpText, {
               position: "bottom-right",

@@ -115,6 +115,14 @@ label {
     margin: 0px 10px;
 }
 
+.offline {
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: gray;
+    margin: 0px 10px;
+}
+
 .live {
     color: white;
     padding: 2px 11px;
@@ -243,40 +251,6 @@ label {
     padding: 3px 12px;
     border: none;
     outline:none;
-}
-
-.friendDiv
-{
-    margin-top:10px;
-    height: 30px;  
-}
-
-.streamerCircle
-{
-    display:relative;
-    margin-top: 2px;
-    width: 24x;
-    height: 24px;  
-    float: left;
-    border-radius: 12px;
-}
-
-.friend
-{
-    margin-top:5px;
-    margin-left: 15px;
-    width:180px;
-    overflow: hidden;
-    margin-bottom:2px;
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 16px;
-    cursor:pointer;
-    float:left;
 }
 
 .descriptionTextEditor{
@@ -443,9 +417,12 @@ label {
 
 .responsiveButtons
 {
-    position: absolute;;
-    right: 12px;
-    top: 188px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+    top: 16px;
+    right: 6px;
 }
 
 .userPageSelector
@@ -485,4 +462,88 @@ label {
     text-align: center;
     align-items: center;
     align-content: center;
+}
+
+.youtubeLogoLink
+{
+    position: relative;   
+    height: 30px;
+    width: 30px;
+    top: 10px;   
+    left: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.twitchLogoLink
+{
+    position: relative;   
+    height: 30px;
+    width: 30px;
+    top: 10px;   
+    left: 10px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.testMyUl
+{
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.testMyLi
+{
+    display: inline;
+}
+
+.friendsOuterDisplayContainer
+{
+    position:relative;
+    width: 1200px;
+    height: 500px;
+    border-width: 5px;
+    overflow: scroll;
+    margin: auto;
+}
+
+.friendsInnerDisplayContainer
+{
+    position: relative;
+    top: 28px;
+    float:left;
+    height:100%;
+    margin: auto;
+}
+
+.followersOuterDisplayContainer
+{
+    position:relative;
+    width: 1200px;
+    height: 500px;
+    border-width: 5px;
+    overflow: scroll;
+    margin: auto;
+}
+
+.followersInnerDisplayContainer
+{
+    position: relative;
+    top: 28px;
+    float:left;
+    height:100%;
+    margin: auto;
+}
+
+.badUser
+{
+    position: relative;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    opacity: 0.7;
 }

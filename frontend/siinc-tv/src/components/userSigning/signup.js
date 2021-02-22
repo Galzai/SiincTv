@@ -1,7 +1,28 @@
 import React, {useState, useRef} from "react";
 import userActions from "../../user/userActions"
 import style from './auth.module.css'
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+/**
+ * This componenet is in charge of custom user sign up
+ * 
+ * @prop  {String} userName
+ * @prop  {Function} setUserName
+ * @prop  {String} userNameError
+ * @prop  {Function} setUserNameError
+ * @prop  {String} email
+ * @prop  {Function} setEmailError
+ * @prop  {String} emailError
+ * @prop  {Function} setEmail
+ * @prop  {String} password
+ * @prop  {Function} setPassword
+ * @prop  {String} passwordError
+ * @prop  {Function} setPasswordError
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory User Signing
+ */
 function Signup(props) {
 
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -23,6 +44,9 @@ function Signup(props) {
 
     const [availableUserName,setAvailableUserName]=useState(false);
     const [firstRender, setFirstRender]=useState(true);
+    const [loading, setLoading] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
+    const timer = React.useRef();
 
     // Used for getting errors after clicking signup
     let prevEmail = useRef('');
@@ -121,9 +145,19 @@ function Signup(props) {
         }
         setFirstRender(false);
         return false;
-
-
     }
+
+    const handleButtonClick = () => {
+        if (!loading) {
+          setSuccess(false);
+          setLoading(true);
+          timer.current = window.setTimeout(() => {
+            setSuccess(true);
+            setLoading(false);
+          }, 2000);
+        }
+      };
+
     return (
         <section className={style.signInDiv}>
             <div className="signupContainer">
@@ -167,8 +201,9 @@ function Signup(props) {
                     </div>
                 </div>
 
-                <div className={style.signInButtonDiv}>
+                <div className={style.signInButtonDiv} onClick={handleButtonClick}>
                     <button className={style.signUpButton} disabled={!formValid()} onClick={handleSignup}>Sign Up</button>
+                    {(loading) && <CircularProgress className={style.placeCircularProgressSignUp}/>}
                 </div>
             </div>
         </section>

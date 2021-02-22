@@ -8,46 +8,176 @@ import Schedule from './schedule'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
+import UserPreview from "../previews/userPreview";
+
 import {getFriendState, handleFriendAction} from "../../user/friends";
 import {isFollowing, handleFollowAction} from "../../user/follows";
 import { withRouter } from 'react-router-dom';
 import LiveStreamPreview from "../previews/liveStreamPreview";
 import SocketContext from "../../socketContext"
 import streamActions from '../../stream/streamActions';
+import CreateableInputOnly from "../selectors/createableInputOnly";
+
+import YoutubeLogo from "../../assets/YoutubeIcon.ico"
+import TwitchLogo from "../../assets/TwitchGlitchPurple.svg"
+
 
 function Profile(props) {
-    
-    const [display, setUserInfoDisplay] = useState('about');
+
+    const [display, setUserInfoDisplay] = useState('friends');
     const userContext = useContext(UserContext);
-    const userName = props.match.params.username;
+    const userid = props.match.params.userid;
+    const initTab = props.initTab;
     const [user, setUser] = useState(null);
-    const userOnline = 'true';  //todo
+    const [userOnline, setUserOnline] = useState('false');  //todo
     const userRating  = 3 ;  //todo
-    const lables = ['LabelOne','LabelTwo','LabelThree', 'LabelFour'] //todo
+    const [labels, setLabels] = useState([]) //todo
     const [aboutInfo, setAboutInfo] = useState('') 
     const [editAboutInfo, setEditAboutInfo] = useState(false);
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
+    const [userName, setUserName] = useState("")
     const socketContext = useContext(SocketContext);
+    const maxTagLength = 15;
+    const [userFetchFail, setUserFetchFail] = useState(false);
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  // We use this to style our selector
+  const customTagStyle = {
+    control: (styles, state) => ({
+      ...styles,
+      width: 613,
+      marginTop: 10,
+      backgroundColor: "#251A37",
+      borderRadius: state.isFocused ? 3 : 3,
+      height: 40,
+      minHeight: 40,
+      lineHeight: "150%",
+      border: state.isFocused ? "1px solid rgb(153, 153, 153)" : "none",
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      ":hover": {
+        borderRadius: 3,
+        cursor: "text",
+        border: "1px solid rgb(153, 153, 153)",
+      },
+    }),
+    valueContainer: (styles) => ({ ...styles, height: 40, minHeight: 40 }),
+    indicatorContainer: (styles) => ({
+      ...styles,
+      height: 40,
+      minHeight: 40,
+      paddingTop: 0,
+      paddingBottom: 0,
+    }),
+    input: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamilt: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    placeholder: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamily: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    multiValue: (styles) => ({
+      ...styles,
+      textAlign: "center",
+      bottom: 20,
+      height: 30,
+      backgroundColor: "#12343B",
+      borderRadius: 5,
+    }),
+    multiValueLabel: (styles) => ({
+      ...styles,
+      height: 30,
+      textAlign: "center",
+      fontSize: 16,
+      top: 15,
+      color: "#FFFFFF",
+      fontFamily: "Roboto",
+    }),
+    multiValueRemove: (styles) => ({
+      ...styles,
+      ":hover": {
+        backgroundColor: "#071416",
+        color: "#AFAFAF",
+        cursor: "pointer",
+      },
+    }),
+  };
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 
     useEffect(()=>{
-        console.log("MyReder1")
+        console.log("mounted1")
         let isMounted = true;
-        userActions.getUserData( userName )
+        userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
+                if( data.length === 0 ) {
+                    console.log("Couldnt get user!!");
+                    setUserFetchFail(true)
+                    setUser(null)
+                    return;
+                }
+                setUserFetchFail(false)
                 setFriendsData(data.friendsData);
                 setProfilePhoto(userUtils.assignImage(data))
                 setUser(data);
                 setAboutInfo(data.shortDescription)
+                setLabels(data.interests)
+                setUserName(data.username)
+                setUserInfoDisplay('friends')
+                setEditAboutInfo( (props.editMode != undefined) ? props.editMode : false );
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
+                if( initTab == "FOLLOWING")
+                    setUserInfoDisplay('followers')
+                if( initTab == "FRIENDS")
+                    setUserInfoDisplay('friends')
+
+                userActions.isUserOnline(data._id)
+                .then((data) => {
+                    if( isMounted ) {
+                        setUserOnline(String(data))
+                    }
+                })
             }
-        });
-        return (() => {isMounted = false})
+        })
+        return (() => {isMounted = false ; console.log("unmounted1")})
     }, [props.match])
 
-    useEffect(()=>{if( user ) setAboutInfo(user.shortDescription)}, [user])
+    useEffect(()=>{ 
+        console.log("mounted2")
+        let isMounted = true;
+        if( user ) { 
+            setAboutInfo(user.shortDescription);
+            setLabels(user.interests);
+
+            const id = user._id;
+            userActions.isUserOnline(id)
+            .then((data) => {
+                if( isMounted ) {
+                    setUserOnline(String(data))
+                }
+            })
+        }
+        return (() => {isMounted = false ; console.log("unmounted2")})
+    }, [user])
 
     const showDisplay = () => {
         if( !user )
@@ -63,7 +193,9 @@ function Profile(props) {
         if( display === 'followers') {
             return <ProfileFollowersDisplay user={user} routerHistory={props.history}></ProfileFollowersDisplay>
         }
-
+        if( display === 'following') {
+            return <ProfileFollowingDisplay user={user} routerHistory={props.history}></ProfileFollowingDisplay>
+        }
     }
 
     function About(userOnline){
@@ -86,26 +218,31 @@ function Profile(props) {
     const setFriendsDisplay=()=>{
         setUserInfoDisplay('friends')
     }
+    const setFollowingDisplay=()=>{
+        setUserInfoDisplay('following')
+    }
+
 
    const debugFriendRepr=()=> {
-    if( userContext.user == null || friendsData == null ) {
+    if( userContext.user == null || user == null || friendsData == null ) {
         return "Loading";
     }
     if( !userContext.user ) {
         return "Not logged";
     }
-    if( userContext.user.username == userName ) {
-        return "Its you!";
+    if( String(userContext.user._id) === String(user._id) ) {
+        return "It's you!";
     }
     if(userContext.user.friendsData)
     {
-        if( userContext.user.friendsData.friendsList.find(x=>x.displayName===userName) != undefined ) {     
+        console.log(String(user._id))
+        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) {     
             return "Unfriend";
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>x.username===userName) != undefined ) {
+        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
             return "Pending";
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>x.username===userName) != undefined ) {
+        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
             return "Accept";
         }
     }
@@ -118,7 +255,7 @@ function Profile(props) {
     }
 
     const onClickFriendAction=()=>{
-        handleFriendAction(userContext.user, userName);
+        handleFriendAction(userContext.user, {username: user.username, userId: user._id});
         userContext.refreshUserData();
     }
 
@@ -127,22 +264,24 @@ function Profile(props) {
     }
 
     const onClickFollowAction=()=>{
-        handleFollowAction(userContext.user, userName);
+        if( user )
+            handleFollowAction(userContext.user, user);
         userContext.refreshUserData();
     }
 
     const debugFollowRepr=()=> {
-        if( userContext.user == null )
+        if( userContext.user == null || user == null )
             return "";
-        if( userContext.user.username == userName )
+        if( String(userContext.user._id) === String(user._id) )
             return "you!";
-        if(userContext.user.followData && userContext.user.followData.followingList.find(x=>x.userName===userName) != undefined )
+        if(userContext.user.followData && 
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) != undefined )
             return "Unfollow"
         return "Follow"
     }
     
     const isMe=()=>{
-        if( !userContext.user || userContext.user.username !== userName )
+        if( !userContext.user || !user || String(userContext.user._id) !== String(user._id) )
             return false
         return true;
         
@@ -151,7 +290,7 @@ function Profile(props) {
     const isUserStreaming=()=>{
         if( !user || 
             !user.currentStream || 
-            user.currentStream == "" )
+            user.currentStream === "" )
         {
             return false;
         }
@@ -161,8 +300,6 @@ function Profile(props) {
     const numOfFriends=()=>{
         if( !user )
             return 0;
-        console.log("Print user from numOffriends")
-        console.log(user)
         return user.friendsData.friendsList.length;
     }
 
@@ -186,31 +323,69 @@ function Profile(props) {
         setEditAboutInfo(true);
     }
 
+    const onYoutubeClick=()=>{
+        console.log("redirect to youtube channel : " + String(user.googleId))
+    }
+
+    const onTwitchClick=()=>{
+        console.log("redirect to twitch channel : " + String(user.twitchId))
+    }
+
     const onClickDoneEditDesc=()=>{
+        /*Promise.all([userActions.updateUserShortDescription(user._id, aboutInfo),
+                     userActions.updateUserInterests(user._id, labels)])*/
         userActions.updateUserShortDescription(user._id, aboutInfo)
-        .then(() => {
-            userActions.getUserData( user.username )
+        .then((res) => {
+            console.log("res = ")
+            console.log(res)
+            userActions.updateUserInterests(user._id, labels)
+        .then((res) => {        
+            console.log("Finished doing both actions")
+            userActions.getUserData( user._id )
         .then(data => {
             setUser(data)
-        })})
+            props.history.replace("/users/"+user._id);
+        })})})
         .catch(error => {
-            console.log("Error editing desc")
+            console.log("Error editing channel")
             console.log(error)
         })
         setEditAboutInfo(false);
+        
     }
 
     return (
-        <div>  
-            <hr className={style.seperatorTitle}></hr>      
+        <div>
+            { (user == null && userFetchFail ) && 
+            <div className={style.badUser}>
+                <h1>Sorry, there appears to be a problem displaying this user</h1>
+            </div>
+            }
+        { (user != null ) &&
+         <div>
+            <hr className={style.seperatorTitle}></hr>    
             <div>
                 <img className={style.profilePhoto} src={profilePhoto}/>
             </div>
             <div className={style.userInfo}>
                 <div className={style.userTitle}>
-                    <span className={style.name}>{userName}</span>
-                    {userOnline==='true' && <span className={style.online}/>}
-                    { isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}
+                    <ul className={style.testMyUl}>
+                    <li className={style.testMyLi}><span className={style.name}>{userName}</span></li>
+                    <li className={style.testMyLi}>{
+                        (userOnline==='true' && <span className={style.online}/>) ||
+                        (userOnline==='false'&& <span className={style.offline}/>)}</li>
+                    <li className={style.testMyLi}>{ isUserStreaming() && <span className={style.live} onClick={handleLive}>Live</span>}</li>
+                    <li className={style.testMyLi}><TwitchLogoLink  user={user} onClick={onTwitchClick}></TwitchLogoLink>
+                                                   <YoutubeLogoLink user={user} onClick={onYoutubeClick}></YoutubeLogoLink></li>
+                    { userContext.user && <div className={style.responsiveButtons}>
+                        { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
+                        { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
+                        { ( isMe() && (!editAboutInfo) ) &&
+                                            <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
+                        { ( isMe() && (editAboutInfo) ) &&
+                                            <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
+                    </div> }  
+                    </ul>
                 </div>
                 <div className={style.userSocial}>
                     <span className={style.number}>
@@ -223,28 +398,27 @@ function Profile(props) {
                 <div className={style.aboutContent}>
                     <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
                 </div>
-                <div className={style.pointsSpan}>Points of Interest: </div>
-                        {lables.map((value, index) => {
-                            return <label className={style.pointsLabel} key={index}>{value}</label>
+                <div className={style.pointsSpan}>Interests: </div>
+                        { labels && !editAboutInfo && 
+                          labels.map((value, index) => {
+                            return <label className={style.pointsLabel} key={index}>{value.value}</label>
                         })}
+                        {!editAboutInfo && (!labels || labels.length === 0) && <label>No Interests found!</label>}
+                        { editAboutInfo && 
+                          <CreateableInputOnly style={customTagStyle} value={labels} updateTags={setLabels} maxLen={maxTagLength} /> }
             </div>
-            { userContext.user && <div className={style.responsiveButtons}>
-                { !isMe() && <button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}</button>}
-                { !isMe() && <button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}</button>}
-                { ( isMe() && (!editAboutInfo) ) &&
-                                    <a><button className={style.editButton} onClick={onClickEditDesc} > Edit </button></a> }
-                                { ( isMe() && (editAboutInfo) ) &&
-                                    <a><button className={style.editButton} onClick={onClickDoneEditDesc} > Done </button></a> }
-            </div> }
+            
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
                 { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
-                            {<button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>}
                             <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
+                            <button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>
+                            <button className={style.tabListBtn} onClick={setFollowingDisplay}>Following</button>
                 <div className={style.displayContainer}>
                     {showDisplay()}
                 </div>
             </div>
+        </div>}
         </div>
     );
 }
@@ -282,24 +456,6 @@ function ProfileLiveDisplay(props) {
 
 // ------------------------------- Friends display -----------------------------
 
-function FriendDisplayPreview(props) {
-    const friend = props.friend
-    const routerHistory = props.routerHistory
-
-    return (
-        <div>
-                <div className={style.friendDiv}>
-                    <img className={style.streamerCircle}
-                        src={friend.userImage}/>
-                    <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${friend.displayName}`))}> 
-                        {friend.displayName}
-                    </div>
-                </div>            
-        </div>
-    )
-}
-
 function ProfileFriendsDisplay(props) {
 
     const [user, setUser] = useState(props.user);
@@ -318,43 +474,25 @@ function ProfileFriendsDisplay(props) {
 
         return((user.friendsData.friendsList).map((friend, index)=>{
             return(
-                    <FriendDisplayPreview friend={friend} routerHistory={props.routerHistory}></FriendDisplayPreview>
+                    <UserPreview key={index} user={ {_id: friend.memberId, username: friend.displayName, image: friend.userImage } } />
             )
             
         })) ;
     }
 
     return (
-        <div className={style.relevantContentText}>
-            <br />
-            <div className={style.aboutContent}>
+        <div className={style.friendsOuterDisplayContainer}>
+            <div className={style.friendsInnerDisplayContainer}>
                 {mapFriends()}
             </div>
         </div>
+
     )
 }
 
 // ----------------------------------------------------------------------
 
 // ----------------------  Follower display ---------------------------
-
-function FollowerDisplayPreview(props) {
-    const follower = props.follower
-    const routerHistory = props.routerHistory
-
-    return (
-        <div>
-                <div className={style.friendDiv}>
-                    <img className={style.streamerCircle}
-                        src={follower.userImage}/>
-                    <div className={style.friend}
-                    onClick={()=>(routerHistory.push(`/users/${follower.userName}`))}> 
-                        {follower.userName}
-                    </div>
-                </div>            
-        </div>
-    )
-}
 
 function ProfileFollowersDisplay(props) {
 
@@ -374,16 +512,51 @@ function ProfileFollowersDisplay(props) {
 
         return((user.followData.followersList).map((follower, index)=>{
             return(
-                    <FollowerDisplayPreview follower={follower} routerHistory={props.routerHistory}></FollowerDisplayPreview>
+                    <UserPreview key={index} user={ {_id: follower.userId, username: follower.userName, image: follower.userImage } } />
             )
         })) ;
     }
 
     return (
-        <div className={style.relevantContentText}>
-            <br />
-            <div className={style.aboutContent}>
+        <div className={style.followersOuterDisplayContainer}>
+            <div className={style.followersInnerDisplayContainer}>
                 {mapFollowers()}
+            </div>
+        </div>
+    )
+
+}
+//-------------------------------------------------------------------
+
+// ----------------------  Following display ---------------------------
+
+function ProfileFollowingDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowing(){
+        if( !user )
+            return
+
+        if( user.followData.followingList.length == 0 ) {
+            return "No followings"
+        }
+
+        return((user.followData.followingList).map((following, index)=>{
+            return(
+                    <UserPreview key={index} user={ {_id: following.userId, username: following.userName, image: following.userImage } } />
+            )
+        })) ;
+    }
+
+    return (
+        <div className={style.followersOuterDisplayContainer}>
+            <div className={style.followersInnerDisplayContainer}>
+                {mapFollowing()}
             </div>
         </div>
     )
@@ -430,6 +603,69 @@ function AboutContainer(props) {
     }
 }
 
+// ---------------------------------------------------------
+
+// ------------ Twitch and Youtube logos -------------------
+
+function TwitchLogoLink(props) {
+    const user = props.user;
+
+    const isTwitchUser=()=>{
+        if( !user ||
+            !user.twitchId ||
+            user.twitchId === "")
+        {
+            return false;
+        }
+        return true;
+    }
+
+    return(
+        <div style={{display: "inline"}}>
+        {isTwitchUser() && <div className={style.twitchLogoLink} >
+        {
+            <a href={String("https://www.twitch.tv/" + user.username)} target="_blank">
+                <img Style="width:100%;height:100%;"
+                   src={TwitchLogo}
+                   onClick={props.onClick}
+                >
+                </img>
+            </a>
+        }
+        </div>}
+        </div>
+    )
+
+}
+
+function YoutubeLogoLink(props) {
+    const user = props.user;
+    
+    const isYoutubeUser=()=>{
+        if( !user ||
+            !user.googleId ||
+            user.googleId === "")
+        {
+            return false;
+        }
+        return true;
+    }
+
+    return(
+        <div style={{display: "inline"}}>
+        {   
+            isYoutubeUser() && 
+            <a href={String("https://www.youtube.com/channel/" + user.googleData.youtubeId)} target="_blank">
+                <img className={style.youtubeLogoLink} 
+                   src={YoutubeLogo}
+                   onClick={props.onClick}
+                >
+                </img>
+            </a>
+        }     
+        </div>
+    )
+}
 // ---------------------------------------------------------
 
 export default withRouter(Profile)
