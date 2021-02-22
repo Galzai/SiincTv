@@ -130,11 +130,6 @@ module.exports.initializeSocket = function (io) {
     });
 
     socket.on("userConnection", (userId) => {
-      //console.log("-------------------")
-      //console.log(global_io.sockets.adapter.rooms['6031be65fa88091374d214bf'])
-      console.log("@@@@@@@@@@@")
-      //console.log(global_io.sockets.adapter.rooms)
-      global_io.sockets.adapter.rooms.forEach((v,k,m)=>{console.log(String(k) + String(String(k) === '6031be65fa88091374d214bf'))})
       socket.join(userId);
       
     });
