@@ -1,0 +1,796 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> frontend/siinc-tv/src/components/userProfile/profile.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">SiincTv</h1>
+                </a>
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    API Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Classes</h3><ul><li><a href="module-UserProvider-SocketProvider.html">SocketProvider</a></li><li><a href="module-UserProvider-UserProvider.html">UserProvider</a></li></ul><h3>Global</h3><ul><li><a href="global.html#FriendRequestAccepted">FriendRequestAccepted</a></li><li><a href="global.html#FriendRequestReceived">FriendRequestReceived</a></li><li><a href="global.html#generateKey">generateKey</a></li><li><a href="global.html#getFriendState">getFriendState</a></li><li><a href="global.html#handleFollowAction">handleFollowAction</a></li><li><a href="global.html#handleFriendAction">handleFriendAction</a></li><li><a href="global.html#handleFriendActionRejectTemp">handleFriendActionRejectTemp</a></li><li><a href="global.html#handleFriendsRequest">handleFriendsRequest</a></li><li><a href="global.html#isFollowing">isFollowing</a></li><li><a href="global.html#NewFollowerNotification">NewFollowerNotification</a></li><li><a href="global.html#NewStreamFollowNotification">NewStreamFollowNotification</a></li></ul></div><div class="category"><h2>Backend</h2><h3>Modules / Controllers</h3><ul><li><a href="module-FollowController.html">FollowController</a></li><li><a href="module-NotificationController.html">NotificationController</a></li><li><a href="module-StreamController.html">StreamController</a></li><li><a href="module-TwitchController.html">TwitchController</a></li><li><a href="module-UserController.html">UserController</a></li><li><a href="module-YoutubeController.html">YoutubeController</a></li></ul><h3>Modules</h3><ul><li><a href="module-FriendNotification.html">FriendNotification</a></li><li><a href="module-PassportSetup.html">PassportSetup</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-Sockets.html">Sockets</a></li></ul><h3>Modules / Routes</h3><ul><li><a href="module-Routes.html">Routes</a></li></ul><h3>Classes / User Models</h3><ul><li><a href="facebookData.html">facebookData</a></li><li><a href="followData.html">followData</a></li><li><a href="friendsData.html">friendsData</a></li><li><a href="googleData.html">googleData</a></li><li><a href="notification.html">notification</a></li><li><a href="notificationData.html">notificationData</a></li><li><a href="twitchData.html">twitchData</a></li><li><a href="upComingEventData.html">upComingEventData</a></li><li><a href="user.html">user</a></li></ul><h3>Classes / Stream Models</h3><ul><li><a href="registeredViewerData.html">registeredViewerData</a></li><li><a href="streamData.html">streamData</a></li><li><a href="streamerData.html">streamerData</a></li><li><a href="streamGroup.html">streamGroup</a></li></ul></div><div class="category"><h2>Frontend</h2><h3>Modules</h3><ul><li><a href="module-App.html">App</a></li></ul><h3>Modules / Provider</h3><ul><li><a href="module-UserProvider.html">UserProvider</a></li></ul><h3>Classes / Actions</h3><ul><li><a href="streamActions.html">streamActions</a></li><li><a href="userActions.html">userActions</a></li></ul><h3>Classes</h3><ul><li><a href="userUtils.html">userUtils</a></li></ul><h3>Components</h3><ul><li><a href="Chat.html">Chat</a></li><li><a href="ChatHandler.html">ChatHandler</a></li><li><a href="LiveStreamFeed.html">LiveStreamFeed</a></li><li><a href="LoggedViewers.html">LoggedViewers</a></li><li><a href="ReccomendedFeed.html">ReccomendedFeed</a></li></ul><h3>Components / Search</h3><ul><li><a href="CombinedSearch.html">CombinedSearch</a></li><li><a href="StreamSearchResults.html">StreamSearchResults</a></li><li><a href="UserSearchResults.html">UserSearchResults</a></li></ul><h3>Components / Pages</h3><ul><li><a href="CreateStreamPage.html">CreateStreamPage</a></li><li><a href="HomePage.html">HomePage</a></li><li><a href="LivetreamPage.html">LivetreamPage</a></li><li><a href="Profile.html">Profile</a></li><li><a href="SearchPage.html">SearchPage</a></li><li><a href="Stream.html">Stream</a></li></ul><h3>Components / Selectors</h3><ul><li><a href="FriendFinder.html">FriendFinder</a></li><li><a href="module.html#.exports">exports</a></li></ul><h3>Components / Notifications</h3><ul><li><a href="JoinStreamRequestNotification.html">JoinStreamRequestNotification</a></li><li><a href="JoinStreamRequestResponse.html">JoinStreamRequestResponse</a></li><li><a href="NotificationHandler.html">NotificationHandler</a></li><li><a href="NotificationMenu.html">NotificationMenu</a></li><li><a href="NoYoutubeAccount.html">NoYoutubeAccount</a></li><li><a href="WelcomeNotification.html">WelcomeNotification</a></li></ul><h3>Components / Live stream</h3><ul><li><a href="LiveStream.html">LiveStream</a></li><li><a href="SingleStreamViewBox.html">SingleStreamViewBox</a></li><li><a href="SplitScreenViewBox.html">SplitScreenViewBox</a></li><li><a href="StreamDetails.html">StreamDetails</a></li><li><a href="StreamerCircle.html">StreamerCircle</a></li><li><a href="Streamers.html">Streamers</a></li><li><a href="StreamSelector.html">StreamSelector</a></li><li><a href="StreamSelectorBar.html">StreamSelectorBar</a></li><li><a href="StreamSocket.html">StreamSocket</a></li><li><a href="YoutubeLiveStream.html">YoutubeLiveStream</a></li></ul><h3>Components / Previews</h3><ul><li><a href="LiveStreamPreview.html">LiveStreamPreview</a></li><li><a href="UserPreview.html">UserPreview</a></li></ul><h3>Components / Menu</h3><ul><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="NavProfileMenu.html">NavProfileMenu</a></li><li><a href="SideBar.html">SideBar</a></li></ul><h3>Components / Stream Creation</h3><ul><li><a href="NewLiveStream.html">NewLiveStream</a></li><li><a href="NewScheduledStream.html">NewScheduledStream</a></li><li><a href="StreamDatePicker.html">StreamDatePicker</a></li><li><a href="TeamBlock.html">TeamBlock</a></li></ul><h3>Components / SideBar</h3><ul><li><a href="OnlineStatus.html">OnlineStatus</a></li></ul><h3>Components / User Signing</h3><ul><li><a href="SignIn.html">SignIn</a></li><li><a href="SigningModal.html">SigningModal</a></li><li><a href="Signup.html">Signup</a></li><li><a href="UserSigning.html">UserSigning</a></li></ul><h3>Global</h3><ul><li><a href="global.html#NavProfileMenuHeader">NavProfileMenuHeader</a></li><li><a href="global.html#timeSince">timeSince</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>frontend/siinc-tv/src/components/userProfile/profile.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useContext, useEffect} from 'react';
+import style from './profile.module.css'
+
+import AboutOffline from './aboutOffline'
+import AboutOnline from './aboutOnline'
+import UserContext from "../../userContext";
+import userActions from "../../user/userActions";
+import userUtils from "../../user/userUtils";
+import UserPreview from "../previews/userPreview";
+
+import {handleFriendAction} from "../../user/friends";
+import {handleFollowAction} from "../../user/follows";
+import { withRouter } from 'react-router-dom';
+import LiveStreamPreview from "../previews/liveStreamPreview";
+import streamActions from '../../stream/streamActions';
+import CreateableInputOnly from "../selectors/createableInputOnly";
+
+import YoutubeLogo from "../../assets/YoutubeIcon.ico"
+import TwitchLogo from "../../assets/TwitchGlitchPurple.svg"
+
+
+/**
+ * This component represents a user page
+ * 
+ * @prop {String} match.params.userid The id of the displayed user
+ * @prop {String} initTab intial display tab
+ * @prop {Boolean} editMode whether this page will start in edit mode
+ * @component
+ * @category Frontend
+ * @subcategory Pages
+ */
+function Profile(props) {
+
+    const [display, setUserInfoDisplay] = useState('friends');
+    const userContext = useContext(UserContext);
+    const userid = props.match.params.userid;
+    const initTab = props.initTab;
+    const [user, setUser] = useState(null);
+    const [userOnline, setUserOnline] = useState('false');  
+    const [labels, setLabels] = useState([]) 
+    const [aboutInfo, setAboutInfo] = useState('') 
+    const [editAboutInfo, setEditAboutInfo] = useState(false);
+    const [friendsData, setFriendsData] = useState(null)
+    const [profilePhoto, setProfilePhoto] = useState("")
+    const [userName, setUserName] = useState("")
+    const maxTagLength = 15;
+    const [userFetchFail, setUserFetchFail] = useState(false);
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+  // We use this to style our selector
+  const customTagStyle = {
+    control: (styles, state) => ({
+      ...styles,
+      width: 613,
+      marginTop: 10,
+      backgroundColor: "#251A37",
+      borderRadius: state.isFocused ? 3 : 3,
+      height: 40,
+      minHeight: 40,
+      lineHeight: "150%",
+      border: state.isFocused ? "1px solid rgb(153, 153, 153)" : "none",
+      boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+      ":hover": {
+        borderRadius: 3,
+        cursor: "text",
+        border: "1px solid rgb(153, 153, 153)",
+      },
+    }),
+    valueContainer: (styles) => ({ ...styles, height: 40, minHeight: 40 }),
+    indicatorContainer: (styles) => ({
+      ...styles,
+      height: 40,
+      minHeight: 40,
+      paddingTop: 0,
+      paddingBottom: 0,
+    }),
+    input: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamilt: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    placeholder: (styles) => ({
+      ...styles,
+      top: 20,
+      lineHeight: 0,
+      fontFamily: "Roboto",
+      textAlign: "center",
+      fontWeight: "normal",
+      color: "#AFAFAF",
+    }),
+    multiValue: (styles) => ({
+      ...styles,
+      textAlign: "center",
+      bottom: 20,
+      height: 30,
+      backgroundColor: "#12343B",
+      borderRadius: 5,
+    }),
+    multiValueLabel: (styles) => ({
+      ...styles,
+      height: 30,
+      textAlign: "center",
+      fontSize: 16,
+      top: 15,
+      color: "#FFFFFF",
+      fontFamily: "Roboto",
+    }),
+    multiValueRemove: (styles) => ({
+      ...styles,
+      ":hover": {
+        backgroundColor: "#071416",
+        color: "#AFAFAF",
+        cursor: "pointer",
+      },
+    }),
+  };
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+    useEffect(()=>{
+        console.log("mounted1")
+        let isMounted = true;
+        userActions.getUserData( userid )
+        .then(data=>{
+            if( isMounted ) { 
+                if( data.length === 0 ) {
+                    console.log("Couldnt get user!!");
+                    setUserFetchFail(true)
+                    setUser(null)
+                    return;
+                }
+                setUserFetchFail(false)
+                setFriendsData(data.friendsData);
+                setProfilePhoto(userUtils.assignImage(data))
+                setUser(data);
+                setAboutInfo(data.shortDescription)
+                setLabels(data.interests)
+                setUserName(data.username)
+                setUserInfoDisplay('friends')
+                setEditAboutInfo( (props.editMode !== undefined) ? props.editMode : false );
+                if( data.currentStream &amp;&amp; data.currentStream !== "" )
+                    setUserInfoDisplay("live")
+                if( initTab === "FOLLOWING")
+                    setUserInfoDisplay('followers')
+                if( initTab === "FRIENDS")
+                    setUserInfoDisplay('friends')
+
+                userActions.isUserOnline(data._id)
+                .then((data) => {
+                    if( isMounted ) {
+                        setUserOnline(String(data))
+                    }
+                })
+            }
+        })
+        return (() => {isMounted = false ; console.log("unmounted1")})
+    }, [props.match])
+
+    useEffect(()=>{ 
+        console.log("mounted2")
+        let isMounted = true;
+        if( user ) { 
+            setAboutInfo(user.shortDescription);
+            setLabels(user.interests);
+
+            const id = user._id;
+            userActions.isUserOnline(id)
+            .then((data) => {
+                if( isMounted ) {
+                    setUserOnline(String(data))
+                }
+            })
+        }
+        return (() => {isMounted = false ; console.log("unmounted2")})
+    }, [user])
+
+    const showDisplay = () => {
+        if( !user )
+            return 
+        if( display === 'live' ) {
+            if( !user.currentStream )
+                return
+            return &lt;ProfileLiveDisplay streamId={user.currentStream.eventId}>&lt;/ProfileLiveDisplay>
+        }
+        if( display === 'friends') {
+            return &lt;ProfileFriendsDisplay user={user} routerHistory={props.history}>&lt;/ProfileFriendsDisplay>
+        }
+        if( display === 'followers') {
+            return &lt;ProfileFollowersDisplay user={user} routerHistory={props.history}>&lt;/ProfileFollowersDisplay>
+        }
+        if( display === 'following') {
+            return &lt;ProfileFollowingDisplay user={user} routerHistory={props.history}>&lt;/ProfileFollowingDisplay>
+        }
+    }
+
+    function About(userOnline){
+        if (userOnline=true){
+            return &lt;AboutOnline
+            userName = {userName} />
+        } else {
+            return &lt;AboutOffline
+            userName = {userName}/>
+        }
+    }
+
+    // Sets type of form to display
+    const setLiveDisplay=()=>{
+        setUserInfoDisplay('live')
+    }
+    const setFollowersDisplay=()=>{
+        setUserInfoDisplay('followers')
+    }
+    const setFriendsDisplay=()=>{
+        setUserInfoDisplay('friends')
+    }
+    const setFollowingDisplay=()=>{
+        setUserInfoDisplay('following')
+    }
+
+
+   const debugFriendRepr=()=> {
+    if( userContext.user === null || user === null || friendsData === null ) {
+        return "Loading";
+    }
+    if( !userContext.user ) {
+        return "Not logged";
+    }
+    if( String(userContext.user._id) === String(user._id) ) {
+        return "It's you!";
+    }
+    if(userContext.user.friendsData)
+    {
+        console.log(String(user._id))
+        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) {     
+            return "Unfriend";
+        }
+        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
+            return "Pending";
+        }
+        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
+            return "Accept";
+        }
+    }
+
+    return "Add Friend";
+}
+
+    const handleLive=()=>{
+        props.history.push(`/stream_pages/${user.currentStream.eventId}`);
+    }
+
+    const onClickFriendAction=()=>{
+        handleFriendAction(userContext.user, {username: user.username, userId: user._id});
+        userContext.refreshUserData();
+    }
+
+    const handleSubscribe=()=>{
+        //todo
+    }
+
+    const onClickFollowAction=()=>{
+        if( user )
+            handleFollowAction(userContext.user, user);
+        userContext.refreshUserData();
+    }
+
+    const debugFollowRepr=()=> {
+        if( userContext.user === null || user === null )
+            return "";
+        if( String(userContext.user._id) === String(user._id) )
+            return "you!";
+        if(userContext.user.followData &amp;&amp; 
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) !== undefined )
+            return "Unfollow"
+        return "Follow"
+    }
+    
+    const isMe=()=>{
+        if( !userContext.user || !user || String(userContext.user._id) !== String(user._id) )
+            return false
+        return true;
+        
+    }
+
+    const isUserStreaming=()=>{
+        if( !user || 
+            !user.currentStream || 
+            user.currentStream === "" )
+        {
+            return false;
+        }
+        return true;
+    }
+
+    const numOfFriends=()=>{
+        if( !user )
+            return 0;
+        return user.friendsData.friendsList.length;
+    }
+
+    const numOfFollowers=()=>{
+        if( !user )
+            return 0;
+        return user.followData.followersList.length;
+    }
+
+    const shortDescription=()=>{
+        if( !user )
+            return ""
+        return user.shortDescription
+    }
+
+    const isUserOnline=()=>{
+        
+    }
+
+    const onClickEditDesc=()=>{
+        setEditAboutInfo(true);
+    }
+
+    const onYoutubeClick=()=>{
+        console.log("redirect to youtube channel : " + String(user.googleId))
+    }
+
+    const onTwitchClick=()=>{
+        console.log("redirect to twitch channel : " + String(user.twitchId))
+    }
+
+    const onClickDoneEditDesc=()=>{
+        /*Promise.all([userActions.updateUserShortDescription(user._id, aboutInfo),
+                     userActions.updateUserInterests(user._id, labels)])*/
+        userActions.updateUserShortDescription(user._id, aboutInfo)
+        .then((res) => {
+            console.log("res = ")
+            console.log(res)
+            userActions.updateUserInterests(user._id, labels)
+        .then((res) => {        
+            console.log("Finished doing both actions")
+            userActions.getUserData( user._id )
+        .then(data => {
+            setUser(data)
+            props.history.replace("/users/"+user._id);
+        })})})
+        .catch(error => {
+            console.log("Error editing channel")
+            console.log(error)
+        })
+        setEditAboutInfo(false);
+        
+    }
+
+    return (
+        &lt;div>
+            { (user == null &amp;&amp; userFetchFail ) &amp;&amp; 
+            &lt;div className={style.badUser}>
+                &lt;h1>Sorry, there appears to be a problem displaying this user&lt;/h1>
+            &lt;/div>
+            }
+        { (user != null ) &amp;&amp;
+         &lt;div>
+            &lt;hr className={style.seperatorTitle}>&lt;/hr>    
+            &lt;div>
+                &lt;img className={style.profilePhoto} src={profilePhoto}/>
+            &lt;/div>
+            &lt;div className={style.userInfo}>
+                &lt;div className={style.userTitle}>
+                    &lt;ul className={style.testMyUl}>
+                    &lt;li className={style.testMyLi}>&lt;span className={style.name}>{userName}&lt;/span>&lt;/li>
+                    &lt;li className={style.testMyLi}>{
+                        (userOnline==='true' &amp;&amp; &lt;span className={style.online}/>) ||
+                        (userOnline==='false'&amp;&amp; &lt;span className={style.offline}/>)}&lt;/li>
+                    &lt;li className={style.testMyLi}>{ isUserStreaming() &amp;&amp; &lt;span className={style.live} onClick={handleLive}>Live&lt;/span>}&lt;/li>
+                    &lt;li className={style.testMyLi}>&lt;TwitchLogoLink  user={user} onClick={onTwitchClick}>&lt;/TwitchLogoLink>
+                                                   &lt;YoutubeLogoLink user={user} onClick={onYoutubeClick}>&lt;/YoutubeLogoLink>&lt;/li>
+                    { userContext.user &amp;&amp; &lt;div className={style.responsiveButtons}>
+                        { !isMe() &amp;&amp; &lt;button className={style.addFriendsButton} onClick={onClickFriendAction}>{debugFriendRepr()}&lt;/button>}
+                        { !isMe() &amp;&amp; &lt;button className={style.addFavoritesButton} onClick={onClickFollowAction}>{debugFollowRepr()}&lt;/button>}
+                        { ( isMe() &amp;&amp; (!editAboutInfo) ) &amp;&amp;
+                                            &lt;a>&lt;button className={style.editButton} onClick={onClickEditDesc} > Edit &lt;/button>&lt;/a> }
+                        { ( isMe() &amp;&amp; (editAboutInfo) ) &amp;&amp;
+                                            &lt;a>&lt;button className={style.editButton} onClick={onClickDoneEditDesc} > Done &lt;/button>&lt;/a> }
+                    &lt;/div> }  
+                    &lt;/ul>
+                &lt;/div>
+                &lt;div className={style.userSocial}>
+                    &lt;span className={style.number}>
+                                {numOfFriends()} Friends
+                                &lt;br />
+                                {numOfFollowers()} Followers
+                    &lt;/span>
+                &lt;/div>
+                &lt;br />
+                &lt;div className={style.aboutContent}>
+                    &lt;AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}>&lt;/AboutContainer>
+                &lt;/div>
+                &lt;div className={style.pointsSpan}>Interests: &lt;/div>
+                        { labels &amp;&amp; !editAboutInfo &amp;&amp; 
+                          labels.map((value, index) => {
+                            return &lt;label className={style.pointsLabel} key={index}>{value.value}&lt;/label>
+                        })}
+                        {!editAboutInfo &amp;&amp; (!labels || labels.length === 0) &amp;&amp; &lt;label>No Interests found!&lt;/label>}
+                        { editAboutInfo &amp;&amp; 
+                          &lt;CreateableInputOnly style={customTagStyle} value={labels} updateTags={setLabels} maxLen={maxTagLength} /> }
+            &lt;/div>
+            
+            &lt;div className={style.userPageSelector}>
+                &lt;hr className={style.seperatorSelector}>&lt;/hr>
+                { isUserStreaming() &amp;&amp; &lt;button className={style.tabListBtn} onClick={setLiveDisplay}>Live&lt;/button>}
+                            &lt;button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends&lt;/button>
+                            &lt;button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers&lt;/button>
+                            &lt;button className={style.tabListBtn} onClick={setFollowingDisplay}>Following&lt;/button>
+                &lt;div className={style.displayContainer}>
+                    {showDisplay()}
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>}
+        &lt;/div>
+    );
+}
+
+//---------------------- Live stream preview display -----------------------------
+
+function ProfileLiveDisplay(props) {
+    const streamId = props.streamId;
+    const [streamData, setStreamData] = useState(null)
+
+    useEffect(() => {
+        streamActions.getStreamById(streamId)
+        .then(data => {
+            setStreamData(data);
+        })
+        .catch(error => {
+            console.log("Error in ProfileLiveDisplay")
+            console.log(error);
+        })
+    }, [props.streamId]) 
+
+
+    return (
+        &lt;div className={style.relevantContent}>
+            &lt;br />
+            { streamData &amp;&amp; 
+              &lt;LiveStreamPreview key={streamData._id} 
+                streamData={streamData} 
+              /> }
+        &lt;/div>
+    )
+}
+
+//------------------------------------------------------------------------------
+
+// ------------------------------- Friends display -----------------------------
+
+function ProfileFriendsDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFriends(){
+        if( !user )
+            return
+
+        if( user.friendsData.friendsList.length === 0 ) {
+            return "Friends list is empty"
+        }
+
+        return((user.friendsData.friendsList).map((friend, index)=>{
+            return(
+                    &lt;UserPreview key={index} user={ {_id: friend.memberId, username: friend.displayName, image: friend.userImage } } />
+            )
+            
+        })) ;
+    }
+
+    return (
+        &lt;div className={style.friendsOuterDisplayContainer}>
+            &lt;div className={style.friendsInnerDisplayContainer}>
+                {mapFriends()}
+            &lt;/div>
+        &lt;/div>
+
+    )
+}
+
+// ----------------------------------------------------------------------
+
+// ----------------------  Follower display ---------------------------
+
+function ProfileFollowersDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowers(){
+        if( !user )
+            return
+
+        if( user.followData.followersList.length === 0 ) {
+            return "No followers"
+        }
+
+        return((user.followData.followersList).map((follower, index)=>{
+            return(
+                    &lt;UserPreview key={index} user={ {_id: follower.userId, username: follower.userName, image: follower.userImage } } />
+            )
+        })) ;
+    }
+
+    return (
+        &lt;div className={style.followersOuterDisplayContainer}>
+            &lt;div className={style.followersInnerDisplayContainer}>
+                {mapFollowers()}
+            &lt;/div>
+        &lt;/div>
+    )
+
+}
+//-------------------------------------------------------------------
+
+// ----------------------  Following display ---------------------------
+
+function ProfileFollowingDisplay(props) {
+
+    const [user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user)
+    }, [props.user])
+
+    function mapFollowing(){
+        if( !user )
+            return
+
+        if( user.followData.followingList.length === 0 ) {
+            return "No followings"
+        }
+
+        return((user.followData.followingList).map((following, index)=>{
+            return(
+                    &lt;UserPreview key={index} user={ {_id: following.userId, username: following.userName, image: following.userImage } } />
+            )
+        })) ;
+    }
+
+    return (
+        &lt;div className={style.followersOuterDisplayContainer}>
+            &lt;div className={style.followersInnerDisplayContainer}>
+                {mapFollowing()}
+            &lt;/div>
+        &lt;/div>
+    )
+
+}
+//-------------------------------------------------------------------
+
+// ---------------------   Short description  ---------------------
+
+function AboutContainerEdit(props) {
+    const setDescription = props.setDescription;
+
+    return (
+        &lt;div>
+            &lt;textarea className={style.descriptionTextEditor}  
+                onChange={e => setDescription(e.target.value)} 
+                type="text" value={props.desc}/>
+        &lt;/div>
+    )
+}
+
+function AboutContainerView(props) {
+
+    return (
+        &lt;p>
+            {props.desc}
+        &lt;/p>
+    )
+}
+
+function AboutContainer(props) {
+    const description = props.desc;
+    const setDescription = props.setDescription;
+
+    if(props.editShortDesc) {
+        return (
+            &lt;AboutContainerEdit desc={description} setDescription={setDescription}>&lt;/AboutContainerEdit>
+        )
+    }
+    else {
+        return (
+            &lt;AboutContainerView desc={description}>&lt;/AboutContainerView>
+        )
+    }
+}
+
+// ---------------------------------------------------------
+
+// ------------ Twitch and Youtube logos -------------------
+
+function TwitchLogoLink(props) {
+    const user = props.user;
+
+    const isTwitchUser=()=>{
+        if( !user ||
+            !user.twitchId ||
+            user.twitchId === "")
+        {
+            return false;
+        }
+        return true;
+    }
+
+    return(
+        &lt;div style={{display: "inline"}}>
+        {isTwitchUser() &amp;&amp; &lt;div className={style.twitchLogoLink} >
+        {
+            &lt;a href={String("https://www.twitch.tv/" + user.username)} target="_blank">
+                &lt;img Style="width:100%;height:100%;"
+                   src={TwitchLogo}
+                   onClick={props.onClick}
+                >
+                &lt;/img>
+            &lt;/a>
+        }
+        &lt;/div>}
+        &lt;/div>
+    )
+
+}
+
+function YoutubeLogoLink(props) {
+    const user = props.user;
+    
+    const isYoutubeUser=()=>{
+        if( !user ||
+            !user.googleId ||
+            user.googleId === "")
+        {
+            return false;
+        }
+        return true;
+    }
+
+    return(
+        &lt;div style={{display: "inline"}}>
+        {   
+            isYoutubeUser() &amp;&amp; 
+            &lt;a href={String("https://www.youtube.com/channel/" + user.googleData.youtubeId)} target="_blank">
+                &lt;img className={style.youtubeLogoLink} 
+                   src={YoutubeLogo}
+                   onClick={props.onClick}
+                >
+                &lt;/img>
+            &lt;/a>
+        }     
+        &lt;/div>
+    )
+}
+// ---------------------------------------------------------
+
+export default withRouter(Profile)
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by 
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+</body>
+</html>

@@ -1,20 +1,17 @@
 import React, {useState, useContext, useEffect} from 'react';
 import style from './profile.module.css'
 
-import Friends from './friends'
 import AboutOffline from './aboutOffline'
 import AboutOnline from './aboutOnline'
-import Schedule from './schedule'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
 import UserPreview from "../previews/userPreview";
 
-import {getFriendState, handleFriendAction} from "../../user/friends";
-import {isFollowing, handleFollowAction} from "../../user/follows";
+import {handleFriendAction} from "../../user/friends";
+import {handleFollowAction} from "../../user/follows";
 import { withRouter } from 'react-router-dom';
 import LiveStreamPreview from "../previews/liveStreamPreview";
-import SocketContext from "../../socketContext"
 import streamActions from '../../stream/streamActions';
 import CreateableInputOnly from "../selectors/createableInputOnly";
 
@@ -22,6 +19,16 @@ import YoutubeLogo from "../../assets/YoutubeIcon.ico"
 import TwitchLogo from "../../assets/TwitchGlitchPurple.svg"
 
 
+/**
+ * This component represents a user page
+ * 
+ * @prop {String} match.params.userid The id of the displayed user
+ * @prop {String} initTab intial display tab
+ * @prop {Boolean} editMode whether this page will start in edit mode
+ * @component
+ * @category Frontend
+ * @subcategory Pages
+ */
 function Profile(props) {
 
     const [display, setUserInfoDisplay] = useState('friends');
@@ -29,15 +36,13 @@ function Profile(props) {
     const userid = props.match.params.userid;
     const initTab = props.initTab;
     const [user, setUser] = useState(null);
-    const [userOnline, setUserOnline] = useState('false');  //todo
-    const userRating  = 3 ;  //todo
-    const [labels, setLabels] = useState([]) //todo
+    const [userOnline, setUserOnline] = useState('false');  
+    const [labels, setLabels] = useState([]) 
     const [aboutInfo, setAboutInfo] = useState('') 
     const [editAboutInfo, setEditAboutInfo] = useState(false);
     const [friendsData, setFriendsData] = useState(null)
     const [profilePhoto, setProfilePhoto] = useState("")
     const [userName, setUserName] = useState("")
-    const socketContext = useContext(SocketContext);
     const maxTagLength = 15;
     const [userFetchFail, setUserFetchFail] = useState(false);
 
@@ -142,12 +147,12 @@ function Profile(props) {
                 setLabels(data.interests)
                 setUserName(data.username)
                 setUserInfoDisplay('friends')
-                setEditAboutInfo( (props.editMode != undefined) ? props.editMode : false );
+                setEditAboutInfo( (props.editMode !== undefined) ? props.editMode : false );
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
-                if( initTab == "FOLLOWING")
+                if( initTab === "FOLLOWING")
                     setUserInfoDisplay('followers')
-                if( initTab == "FRIENDS")
+                if( initTab === "FRIENDS")
                     setUserInfoDisplay('friends')
 
                 userActions.isUserOnline(data._id)
@@ -224,7 +229,7 @@ function Profile(props) {
 
 
    const debugFriendRepr=()=> {
-    if( userContext.user == null || user == null || friendsData == null ) {
+    if( userContext.user === null || user === null || friendsData === null ) {
         return "Loading";
     }
     if( !userContext.user ) {
@@ -236,13 +241,13 @@ function Profile(props) {
     if(userContext.user.friendsData)
     {
         console.log(String(user._id))
-        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) {     
+        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) {     
             return "Unfriend";
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
+        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
             return "Pending";
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) {
+        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
             return "Accept";
         }
     }
@@ -270,12 +275,12 @@ function Profile(props) {
     }
 
     const debugFollowRepr=()=> {
-        if( userContext.user == null || user == null )
+        if( userContext.user === null || user === null )
             return "";
         if( String(userContext.user._id) === String(user._id) )
             return "you!";
         if(userContext.user.followData && 
-           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) != undefined )
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) !== undefined )
             return "Unfollow"
         return "Follow"
     }
@@ -468,7 +473,7 @@ function ProfileFriendsDisplay(props) {
         if( !user )
             return
 
-        if( user.friendsData.friendsList.length == 0 ) {
+        if( user.friendsData.friendsList.length === 0 ) {
             return "Friends list is empty"
         }
 
@@ -506,7 +511,7 @@ function ProfileFollowersDisplay(props) {
         if( !user )
             return
 
-        if( user.followData.followersList.length == 0 ) {
+        if( user.followData.followersList.length === 0 ) {
             return "No followers"
         }
 
@@ -542,7 +547,7 @@ function ProfileFollowingDisplay(props) {
         if( !user )
             return
 
-        if( user.followData.followingList.length == 0 ) {
+        if( user.followData.followingList.length === 0 ) {
             return "No followings"
         }
 

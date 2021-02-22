@@ -2,13 +2,19 @@
 import style from './sidebar.module.css';
 import { withRouter } from 'react-router-dom';
 import React, {useContext, useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
 import StreamSocket from "../liveStream/streamSocket";
 import userActions from "../../user/userActions";
 
 const { default: streamActions } = require("../../stream/streamActions");
 
+/**
+ * Side bar component
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory Menu
+ */
 function SideBar(props) {
     const userContext = useContext(UserContext);
     const currentStream = userContext.user ? userContext.user.currentStream : null;
@@ -98,6 +104,14 @@ function SideBar(props) {
     );
 }
 
+/**
+ * Display green circle for online users
+ * 
+ * @prop {userId} userId id of user
+ * @component
+ * @category Frontend
+ * @subcategory SideBar
+ */
 function OnlineStatus(props) {
     const userId = props.userId;
     const [userOnline, setUserOnline] = useState(false);

@@ -11,6 +11,9 @@ import socketIOClient from "socket.io-client";
 
 const SOCKET_SERVER_URL = "siinc.tv";
 
+/**
+ * @brief A Socket provider for socket context
+ */
 class SocketProvider extends React.Component {
     constructor(props){
         super(props);

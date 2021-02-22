@@ -131,8 +131,8 @@ module.exports.initializeSocket = function (io) {
 
     socket.on("userConnection", (userId) => {
       socket.join(userId);
-      
     });
+
     socket.on("userDisconnect", (userId) => {
       const streams = userToStreams.get(userId);
       if(streams){
@@ -170,12 +170,16 @@ module.exports.emitReloadNotifications = function (userId, popUpText) {
 
 /**
  * Emites a newStreamerJoined event
- * @param {*} userId
+ * @param {*} streamId
  */
 module.exports.emitNewStreamerJoined = function (streamId) {
   global_io.in(String(streamId)).emit(NEW_STREAMER);
 };
 
+/**
+ * Checks if user is online
+ * @param {*} userId
+ */
 module.exports.isUserOnlineRoom = function (userId) {
   let isOnline = false;
   global_io.sockets.adapter.rooms.forEach((value, key, map) => {

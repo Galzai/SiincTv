@@ -1,10 +1,10 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import { withRouter } from 'react-router-dom';
 import style from './previews.module.css'
 import userUtils from "../../user/userUtils" 
 import UserContext from "../../userContext"
-import {getFriendState, handleFriendAction} from "../../user/friends";
-import {isFollowing, handleFollowAction} from "../../user/follows";
+import {handleFriendAction} from "../../user/friends";
+import {handleFollowAction} from "../../user/follows";
 
 /**
  * displays a preview of a user
@@ -19,7 +19,6 @@ function UserPreview(props){
     const image = userUtils.assignImage(user);
     const numFollowers = user.numFollowers ? user.numFollowers +  " Followers" : "No Followers";
     const description = user.shortDescription ? user.shortDescription :" No Description";
-    const currentstream = user.currentstream;
     const userContext = useContext(UserContext);
 
     function handleRedirect() {
@@ -27,17 +26,17 @@ function UserPreview(props){
       }
 
       const debugFriendRepr=()=> {
-        if(  userContext.user == null || user == null ) 
+        if(  userContext.user === null || user === null ) 
             return "";
         if( String(userContext.user._id) === String(user._id) ) 
             return "It's you!";
         if(userContext.user.friendsData)
         {
-            if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) 
+            if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) 
                 return "Unfriend";
-            if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) 
+            if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
                 return "Pending";
-            if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) != undefined ) 
+            if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
                 return "Accept";
         }
 
@@ -50,12 +49,12 @@ function UserPreview(props){
     }
 
     const debugFollowRepr=()=> {
-        if( userContext.user == null || user == null )
+        if( userContext.user === null || user === null )
             return "";
         if( String(userContext.user._id) === String(user._id) )
             return "you!";
         if(userContext.user.followData &&
-           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) != undefined )
+           userContext.user.followData.followingList.find(x=>String(x.userId)===String(user._id)) !== undefined )
             return "Unfollow"
         return "Follow"
     }
@@ -82,8 +81,8 @@ function UserPreview(props){
             </img>}
             <div className={style.UserTitle}>
                 <h2 className={style.userName} onClick={handleRedirect}>{user.username}</h2>
-                { (user.numFollowers != undefined)     && <h3 className={style.NumFollowers}>{numFollowers}</h3>}
-                { (user.shortDescription != undefined) && <span className={style.shortDescription}>{shortenText(description)}</span>}
+                { (user.numFollowers !== undefined)     && <h3 className={style.NumFollowers}>{numFollowers}</h3>}
+                { (user.shortDescription !== undefined) && <span className={style.shortDescription}>{shortenText(description)}</span>}
 
             </div>
             <div className={style.UserButtons}>

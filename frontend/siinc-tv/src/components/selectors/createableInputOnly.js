@@ -26,10 +26,10 @@ export default class CreatableInputOnly extends Component {
     super(props);
     this.state = {
       inputValue: "",
-      value: (props.value!=undefined)?props.value:[],
+      value: (props.value!==undefined)?props.value:[],
       style: props.style,
       updateTags: props.updateTags,
-      maxLen: (props.maxLen!=undefined)?props.maxLen:1000,
+      maxLen: (props.maxLen!==undefined)?props.maxLen:1000,
     };
   }
 
@@ -39,7 +39,7 @@ export default class CreatableInputOnly extends Component {
    * @param {*} actionMeta
    */
   handleChange = (value, actionMeta) => {
-    if(value == null || value == undefined)
+    if(value === null || value === undefined)
       value = []
     this.setState({ value });
     this.state.updateTags(value);

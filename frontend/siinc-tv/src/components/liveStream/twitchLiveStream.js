@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const srcPre = "https://player.twitch.tv/?channel=";
 
-const srcPost = "&parent=siinc.tv" 
+const srcPost = "&parent=siinc.tv&muted=true" 
 /**
  * This component is in charge of displaying twitch streams
  * 

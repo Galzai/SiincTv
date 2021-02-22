@@ -221,7 +221,7 @@ function NotificationMenu() {
       >
         <div className={style.notificationTitleDiv}>
           <label className={style.menuTitle}>Notifications</label>
-          {numNotifications != 0 && (
+          {numNotifications !== 0 && (
             <Button
               className={style.clearNotificationsButton}
               onClick={clearAllNotifications}

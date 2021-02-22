@@ -111,7 +111,8 @@ exports.get_user = function (req, res) {
 
 /**
  * Returns data regarding a specific requested user by username
- * @param {*} req.body.username username of the user to search for
+ * @param {*} req.body.userId username of the user to search for
+ * @param {*} req
  */
 exports.get_user_data = function (req, res) {
   User.findOne({ _id: req.body.userId }, async function (err, doc) {
@@ -242,7 +243,12 @@ exports.facebook_auth_callback = function (req, res, next) {
   })(req, res, next);
 };
 
-
+/**
+ * Update user's profile description
+ * @param {*} req.body.userId - id of user
+ * @param {*} req.body.shortDescription - new description text
+ * @param {*} res
+ */
 exports.updateUserShortDescription = function (req, res, next) {
   const data = req.body;
   User.updateOne(
@@ -257,6 +263,12 @@ exports.updateUserShortDescription = function (req, res, next) {
     });
 };
 
+/**
+ * Update user's points of interest
+ * @param {*} req.body.userId - id of user
+ * @param {*} req.body.interests - list of interests
+ * @param {*} res
+ */
 exports.updateUserInterests = function (req, res, next) {
   const data = req.body;
   User.updateOne(
@@ -271,6 +283,11 @@ exports.updateUserInterests = function (req, res, next) {
     });
 };
 
+/**
+ * Check if user is online
+ * @param {*} req.body._id users id
+ * @param {*} res contains true or false
+ */
 exports.isUserOnline = function (req, res, next) {
   const data = req.body;
   const isOnline = isUserOnlineRoom(data._id);
