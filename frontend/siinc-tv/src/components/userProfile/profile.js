@@ -366,11 +366,12 @@ function Profile(props) {
                 <div className={style.aboutContent}>
                     <AboutContainer desc={aboutInfo} setDescription={setAboutInfo} editShortDesc={editAboutInfo}></AboutContainer>
                 </div>
-                <div className={style.pointsSpan}>Points of Interest: </div>
-                        { !editAboutInfo && 
+                <div className={style.pointsSpan}>Interests: </div>
+                        { labels && !editAboutInfo && 
                           labels.map((value, index) => {
                             return <label className={style.pointsLabel} key={index}>{value.value}</label>
                         })}
+                        {!editAboutInfo && (!labels || labels.length === 0) && <label>No Interests found!</label>}
                         { editAboutInfo && 
                           <CreateableInputOnly style={customTagStyle} value={labels} updateTags={setLabels} maxLen={maxTagLength} /> }
             </div>

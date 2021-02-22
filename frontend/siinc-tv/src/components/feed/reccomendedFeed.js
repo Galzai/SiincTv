@@ -47,7 +47,6 @@ function ReccomendedFeed(props) {
   });
 
   React.useEffect(() => {
-    if (streamDatas.length === 0) {
       if(userContext.user && userContext.user.interests){
         let searchString = "";
         userContext.user.interests.forEach((interest)=>{
@@ -59,9 +58,7 @@ function ReccomendedFeed(props) {
           setStreamDatas(result);
         });
       }
-
-    }
-  }, [streamDatas, userContext]);
+  }, [userContext.user]);
 
   return (
     <div>

@@ -16,7 +16,8 @@ function HomePage(props) {
   const userContext = useContext(UserContext);
 
   React.useEffect(() => {
-  }, [userContext]);
+    userContext.refreshUserData().then();
+  }, []);
   return (
     <div className={style.homePage}>
       <LiveFeed />

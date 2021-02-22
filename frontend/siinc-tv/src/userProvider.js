@@ -24,7 +24,6 @@ class UserProvider extends React.Component {
     }
 
     let userdata = await userActions.getUser();
-    console.log("userData",userdata)
     this.setState({ user: userdata });
   }
 
