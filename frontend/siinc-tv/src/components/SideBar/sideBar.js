@@ -1,10 +1,11 @@
 
 import style from './sidebar.module.css';
 import { withRouter } from 'react-router-dom';
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 import UserContext from "../../userContext";
 import StreamSocket from "../liveStream/streamSocket";
+import userActions from "../../user/userActions";
 
 const { default: streamActions } = require("../../stream/streamActions");
 
@@ -35,6 +36,7 @@ function SideBar(props) {
                         <div className={style.friend}
                         onClick={()=>(props.history.push(`/users/${friend.memberId}`))}> 
                             {friend.displayName}
+                            <OnlineStatus userId={friend.memberId}></OnlineStatus>
                         </div>
                     </div>
             )
@@ -51,7 +53,7 @@ function SideBar(props) {
                         <div className={style.friend}
                         onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
                             {following.userName}
-                            {/*<div className={style.online}></div>*/}
+                            <OnlineStatus userId={following.userId}></OnlineStatus>
                         </div>
                     </div>
             )
@@ -94,6 +96,28 @@ function SideBar(props) {
             </div>
         </div>
     );
+}
+
+function OnlineStatus(props) {
+    const userId = props.userId;
+    const [userOnline, setUserOnline] = useState(false);
+
+    useEffect(()=>{ 
+        let isMounted = true;
+        userActions.isUserOnline(userId)
+        .then((data) => {
+            if( isMounted ) {
+                setUserOnline(data)
+            }
+        })
+        return (() => {isMounted = false})
+    })
+
+    return(
+        <div style={{display:"inline-block"}}>
+            { userOnline && <div className={style.online}></div>}
+        </div>
+    )
 }
 
 export default withRouter(SideBar);
