@@ -155,10 +155,10 @@
 
 
 .UserButtons{
-    top:0px;
-    display:inline-block;
-    vertical-align: top;
-    margin-right: 30px;
+    position: relative;
+    display:flex;
+    justify-content: flex-end;
+    bottom: 124px;
 }
 
 .streamerCircle
@@ -177,15 +177,14 @@
 
 .favoriteFriendsButtons
 {
+    position: relative;
     margin-top: 18px;
-    margin-right: 16px;
     border: none;
     background: #3C096C;
     padding-top: 6px;
     padding-bottom: 6px;
     margin-right: 10px;
     padding-right: 10px;
-    padding-left: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
     font-family: 'Roboto', sans-serif;

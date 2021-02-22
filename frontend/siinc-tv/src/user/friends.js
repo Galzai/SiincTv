@@ -102,7 +102,7 @@ export const handleFriendAction=(myUser, otherUserData)=>{
         return;
     }
     if( String(myUser._id) === String(otherUserData.userId) ) {
-        console.log("Its you man" + myUser.username + ", " + otherUserData.username);
+        console.log("It's you man" + myUser.username + ", " + otherUserData.username);
         return;
     }
     if( myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) != undefined ) {

@@ -203,7 +203,7 @@ function Profile(props) {
         return "Not logged";
     }
     if( String(userContext.user._id) === String(user._id) ) {
-        return "Its you!";
+        return "It's you!";
     }
     if(userContext.user.friendsData)
     {
