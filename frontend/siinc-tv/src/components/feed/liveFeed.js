@@ -56,7 +56,7 @@ function LiveStreamFeed(props) {
   return (
     <div>
       <div className={style.liveFeedBar}>
-        <h1>Live Now</h1>
+        <h1 className={style.titleOpacity}>Live Now</h1>
         <Carousel responsive={responsive} infinite={true}>
           {streamPreviews}
         </Carousel>
