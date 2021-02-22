@@ -4,7 +4,7 @@
 import React, { useState, useRef } from "react";
 
 const srcPre = "https://www.youtube.com/embed/live_stream?channel=";
-const srcPost = "&autoplay=1";
+const srcPost = "&autoplay=1&mute=1";
 
 /**
  * This component is in charge of displaying youtube streams
