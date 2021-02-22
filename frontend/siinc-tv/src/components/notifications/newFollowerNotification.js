@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 
 /**
  * @brief Notification representing new follower
+ * @component
  * @prop {notificationData} notification notification data
  * @category Frontend
  * @subcategory Notifications

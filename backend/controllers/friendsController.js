@@ -1,5 +1,9 @@
-// temporary
-// ======================
+/**
+ *T his controller is in charge of handling requests relating to users friend system
+ * @module FriendsControler
+ * @category Backend
+ * @subcategory Controllers
+ */
 
 const {User, Notification} = require("../models/user");
 var notification = require('../Notification/notification')

@@ -9,13 +9,6 @@ import UserContext from "../../userContext";
 import {getFriendState, handleFriendAction, handleFriendActionRejectTemp} from "../../user/friends";
 import userActions from "../../user/userActions"
 
-/**
- * @brief Notification representing received friend request
- * @component
- * @param {notificationData} props.notification - notification data
- * @category Frontend
- * @subcategory Notifications
- */
 export function FriendRequestReceived(props){
 
     const data = props.notification.data;
@@ -87,13 +80,6 @@ export function FriendRequestReceived(props){
     );
 }
 
-/**
- * @brief Notification representing accepted friend request
- * @component
- * @param {notificationData} props.notification - notification data
- * @category Frontend
- * @subcategory Notifications
- */
 export function FriendRequestAccepted(props){
 
     const data = props.notification.data;

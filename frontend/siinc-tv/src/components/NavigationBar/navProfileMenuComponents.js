@@ -1,3 +1,9 @@
+/**
+ * This contains comonenets for navigation bar
+ * @module NavComponenets
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
 import React, {useContext} from 'react';
 import UserContext from "../../userContext";
 import SocketContext from "../../socketContext"

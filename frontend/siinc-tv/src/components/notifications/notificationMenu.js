@@ -28,6 +28,7 @@ const { default: userActions } = require("../../user/userActions");
 /**
  * Returns string describing time since date
  * @param {Date} date
+ * @component
  * @category Frontend
  * @subcategory Notifications
  */

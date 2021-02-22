@@ -8,8 +8,9 @@ import { withRouter } from "react-router-dom";
 
 
 /**
- * @brief notification sent to all followers when starting a stream
- * @param {notificationData} notification notification data
+ * notification sent to all followers when starting a stream
+ * @component
+ * @prop {notificationData} notification notification data
  * @category Frontend
  * @subcategory Notifications
  */
