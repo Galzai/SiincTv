@@ -18,10 +18,11 @@
 
 .messagesContainer
 {
-    display:flex;
+    position: relative;
+    display: inline-block;
     padding-left: 0px;
     text-align: left;
-    top: 8px;
+    bottom: 0px;
     right: 0px;
     height: 80%;
     overflow-y: auto;
