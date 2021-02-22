@@ -71,10 +71,9 @@ function UserSearchResults(props) {
 
       var resultComponenets = [];
       results.streamers.forEach((result, index) => {
-        if (!userContext.user || result._id !== userContext.user._id) {
-          if (!liveOnly || result.currentStream)
+      if (!liveOnly || result.currentStream)
           resultComponenets.push(<UserPreview key={index} user={result} />);
-        }
+        
       });
       if(resultComponenets.length !== 0) return resultComponenets;
       return <h1 className={style.noResults}>0 Results found.</h1>;
