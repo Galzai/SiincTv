@@ -11,6 +11,9 @@ import socketIOClient from "socket.io-client";
 
 const SOCKET_SERVER_URL = "http://localhost:4000";
 
+/**
+ * @brief A Socket provider for socket context
+ */
 class SocketProvider extends React.Component {
   constructor(props) {
     super(props);

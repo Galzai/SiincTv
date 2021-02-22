@@ -13,7 +13,7 @@ function NavSearchComponent(props) {
     const [width, setWidth] = useState(400); 
     if(windoDims.width < 900) {
         const newWidth = (windoDims.width > 600) ? (windoDims.width - 500) : 100 ;
-        if( newWidth != width ) {
+        if( newWidth !== width ) {
             setWidth(newWidth);
         }
     }

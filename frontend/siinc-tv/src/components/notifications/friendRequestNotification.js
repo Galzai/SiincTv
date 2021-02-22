@@ -11,7 +11,7 @@ import userActions from "../../user/userActions"
 
 /**
  * @brief Notification representing received friend request
- * @param {*} props 
+ * @param {*} props.notification - notification data
  */
 export function FriendRequestReceived(props){
 
@@ -85,7 +85,8 @@ export function FriendRequestReceived(props){
 }
 
 /**
- * @param {*} props 
+ * @brief Notification representing accepted friend request
+ * @param {*} props.notification - notification data
  */
 export function FriendRequestAccepted(props){
 

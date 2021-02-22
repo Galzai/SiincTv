@@ -262,10 +262,33 @@ router.post('/streams/acceptRequestToJoin', streamController.acceptRequestToJoin
 // POST request poke yourself
 router.post('/test/selfPoke', notificationController.pokeYourself);
 
+/**
+ * Update users profile description
+ *
+ * @name UpdateDescription
+ * @route {POST} /api/user/update_field
+ * @bodyparam {userId} id of user
+ * @bodyparam {shortDescription} new description text
+ */
 router.post('/user/update_field', userController.updateUserShortDescription)
 
+/**
+ * Update users interests
+ *
+ * @name UpdateInterests
+ * @route {POST} /api/user/update_interests
+ * @bodyparam {userId} id of user
+ * @bodyparam {interests} interests list
+ */
 router.post('/user/update_interests', userController.updateUserInterests)
 
+/**
+ * Check if user is online
+ *
+ * @name IsUserOnline
+ * @route {POST} api/user/is_user_online
+ * @bodyparam {userId} users id
+ */
 router.post('/user/is_user_online', userController.isUserOnline)
 
 module.exports = router;

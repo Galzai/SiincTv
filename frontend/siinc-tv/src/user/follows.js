@@ -32,9 +32,13 @@ const handleUnfollow = (myUser, otherUser) => {
     })       
 }
 
-// receive 2 user objects
+/**
+ * @brief execute follow action based current follow relationship between both users
+ * @param {*} myUser - action initiator ( follow / unfollow )
+ * @param {*} otherUser - other user
+ */
 export const handleFollowAction=(myUser, otherUser)=>{
-    if( myUser == null || otherUser == null ) {
+    if( myUser === null || otherUser === null ) {
         console.log("usercontext or provided user is null <handleFollowAction>");
         return;
     }
@@ -43,19 +47,25 @@ export const handleFollowAction=(myUser, otherUser)=>{
         console.log("cant follow/unfollow yourself! " + myUser.username + ", " + otherUser.username);
         return;
     }
-    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) != undefined ) {
+    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) {
         handleUnfollow(myUser, otherUser);                                         
         return;
     }
     handleFollow(myUser, otherUser)
 }
 
+/**
+ * @brief follow status between myUser and otherUser
+ * @param {*} myUser - following / not following user
+ * @param {*} otherUser - follower / not followed user
+ * @return {Boolean} true if myUser follows otherUser, otherwise false
+ */
 export const isFollowing = (myUser, otherUser) => {
-    if( myUser == null || otherUser == null ) 
+    if( myUser === null || otherUser === null ) 
         return false;
     if( String(myUser._id) === String(otherUser._id) ) 
         return false;
-    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) != undefined ) 
+    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) 
         return true;
     return false;
 }

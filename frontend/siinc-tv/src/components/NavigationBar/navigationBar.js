@@ -6,6 +6,28 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import UserContext from "../../userContext";
 import {useContext} from 'react';
 
+/**
+ * This component represents the navigation bar
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory Menu
+ */
+function NavigationBar() {
+    const userContext = useContext(UserContext);
+    return(
+        <div>
+            <div className={style.navigationBar}>
+                <NavSiincHome></NavSiincHome>
+                {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
+                <UserNavComponent></UserNavComponent>
+                <NavSearchComponent></NavSearchComponent>
+                
+            </div>
+        </div>
+    );
+}
+
 function NavSiincHome(props) {
     return(
         <Link to="/">         
@@ -22,19 +44,5 @@ function NavCreateStreamButton(props) {
     );  
 }
 
-function NavigationBar() {
-    const userContext = useContext(UserContext);
-    return(
-        <div>
-            <div className={style.navigationBar}>
-                <NavSiincHome></NavSiincHome>
-                {userContext.user && <NavCreateStreamButton></NavCreateStreamButton>}
-                <UserNavComponent></UserNavComponent>
-                <NavSearchComponent></NavSearchComponent>
-                
-            </div>
-        </div>
-    );
-}
 
 export default withRouter(NavigationBar);

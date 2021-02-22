@@ -17,6 +17,15 @@ import {
        } 
        from "./navProfileMenuComponents.js"
 
+/**
+ * This component represents the user menu in the navigation bar
+ * 
+ * @prop {Boolean} open Menu is open or not
+ * @prop {Function} onProfileClick action upon clicking on profile menu button
+ * @component
+ * @category Frontend
+ * @subcategory Menu
+ */
 function NavProfileMenu(props) {
     const userContext = useContext(UserContext);
 

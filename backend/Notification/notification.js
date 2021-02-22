@@ -1,95 +1,50 @@
+/**
+ * This module is used to provide friend related notifications
+ * @module FriendNotification
+ * @category Backend
+ */
+
 const {User, NotificationData, Notification} = require("../models/user");
 const {emitToUser} = require("../sockets/sockets")
 const mongoose = require("mongoose");
 
-
 // Use this as a real time updater rather than a notification system 
-// TODO: rename stuff here later if got time
 
-/*
-async function insertReceivedFriendRequestNotification(fromUser, toUser) {
-    try {
-        console.log("Attempting to add notification to user : " + toUser.username + " notification is : ")
-        await User.updateOne( 
-            { username: toUser.username },
-            { $push: { "notifications": {
-                _id: new mongoose.Types.ObjectId(),
-                type: "friendRequest",
-                data: {
-                    username: fromUser.username,
-                    id: toString(fromUser.id),
-                }
-            }}}
-        ).exec();
-        return true;
-    }
-    catch(error) {
-        console.log("Could not insert new friend req notif");
-        console.log(error);
-        return false;
-    }
-}
-
-async function insertAcceptedFriendRequestNotification(fromUser, toUser) {
-    try {
-        console.log("Attempting to add notification to user : " + fromUser.username + " notification is : ")
-        await User.updateOne( 
-            { username: fromUser.username },
-            { $push: { "notifications": {
-                _id: new mongoose.Types.ObjectId(),
-                type: "friendRequestAccepted",
-                data: {
-                    username: fromUser.username,
-                    id: toString(fromUser.id),
-                    
-                }
-            }}}
-        ).exec();
-        return true;
-    }
-    catch(error) {
-        console.log("Could not insert new friend req notif");
-        console.log(error);
-        return false;
-    }
-}
-*/
-
-// send notification to the receiver of the request with id and username info of the sender
+/**
+ * send notification indicating a user received a friend request
+ * @param {*} fromUser notification sender
+ * @param {*} toUser notification receiver 
+ */
 exports.notifyReceivedFriendRequest = function(fromUser, toUser) {
-    /*
-    insertReceivedFriendRequestNotification(fromUser, toUser)
-    .then((res) => 
-    {
-        emitToUser(toUser._id, "receivedFriendRequest", {id: fromUser._id,
-            name: fromUser.username})
-    });
-    */
    emitToUser(toUser._id, "receivedFriendRequest", {id: fromUser._id,
     name: fromUser.username})
 }
 
-// send notification to the sender of the request with id and username of the accepter
+/**
+ * send notification indicating a user accepted a friend request
+ * @param {*} fromUser notification sender ( accepted user )
+ * @param {*} toUser notification receiver ( accepter user )
+ */
 exports.notifyFriendRequestAccepted = function(fromUser, toUser) {
-    /*
-    insertAcceptedFriendRequestNotification(fromUser, toUser)
-    .then((res) => 
-    {
-        emitToUser(fromUser._id, "friendRequestAccepted", {id: toUser._id,
-            name: toUser.username})
-    })
-    */
    emitToUser(fromUser._id, "friendRequestAccepted", {id: toUser._id,
     name: toUser.username})
 }
 
-// send notification to the sender of the request with id and username of decliner
+/**
+ * send notification indicating a user declined a friend request
+ * @param {*} fromUser notification sender ( declined used )
+ * @param {*} toUser notification receiver ( declining user )
+ */
 exports.notifyFriendRequestDeclined = function(fromUser, toUser) {
     emitToUser(fromUser._id, "friendRequestDeclined", {id: toUser._id,
                                                        name: toUser.username})    
 }
 
-// send notification to the unfriended with id and username of the unfriending user
+/**
+ * send notification indicating a user unfriended a friend
+ * @param {*} fromUser unfriending user
+ * @param {*} toUser unfriended user
+ */
 exports.notifyUnfriendFriend = function(fromUser, toUser) {
     emitToUser(fromUser._id, "receivedUnfriend", {id: toUser._id,
         name: toUser.username})   

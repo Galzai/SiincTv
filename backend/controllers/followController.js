@@ -1,3 +1,10 @@
+/**
+ *T his controller is in charge of handling requests relating to users follow system
+ * @module FollowController
+ * @category Backend
+ * @subcategory Controllers
+ */
+
 const {User} = require("../models/user");
 var notification = require('../Notification/notification')
 var notificationController = require('../controllers/notificationController')
@@ -28,7 +35,7 @@ function cmpIdsInList(list, user) {
  * @brief handles follow related requests by delegating to appropriate methods/
  *        This function sends true if request was successfully processed, otherwise false.
  * 
- * @param {*} req 
+ * @param {*} req contains follow action type and data for that action
  * @param {*} res 
  */
 exports.handleFollowRequest = function(req, res){   
@@ -185,8 +192,9 @@ async function getUsersFromRequest( req )
 
 /**
  * @brief post notifications to all followers
- * @param {*} userId 
- * @param {*} notification 
+ * @param {*} userId - Posting user
+ * @param {*} notification - notification data to post
+ * @param {*} popupText - Text content of popup notification
  */
 exports.addNotificationToFollowersOf = function(userId, notification, popupText){
     User.findById(userId)

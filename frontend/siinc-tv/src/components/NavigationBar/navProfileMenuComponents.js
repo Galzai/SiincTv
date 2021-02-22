@@ -14,12 +14,13 @@ import SettingsIcon from "../../assets/NavBar/NavProfileSettings.svg"
 import LogOutIcon from "../../assets/NavBar/NavProfileLogOut.svg"
 import NoProfilePic from "../../assets/NoProfilePic.svg"
 /*-----------------------------------------------------------------------*/
-
+/**
+ * @brief This file contains components for the profile menu in the navigation bar
+ * @category Frontend
+ */
 
 export function NavProfileMenuHeader(props) {
     const userContext = useContext(UserContext);
-
-
 
     function checkUserName(temp){
         if(temp.length < 12){

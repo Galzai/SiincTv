@@ -11,7 +11,8 @@ import { withRouter } from "react-router-dom";
 
 
 /**
- * @param {*} props 
+ * @brief Notification representing new follower
+ * @param {*} props.notification - notification data
  */
 function NewFollowerNotification(props){
 

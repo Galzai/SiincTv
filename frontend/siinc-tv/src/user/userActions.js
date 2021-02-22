@@ -167,8 +167,11 @@ const userActions = {
 
   // ------------------------- FRIENDS -----------------------------
 
-  // String:fromUser(id) - friend request sender
-  // String:toUser(id)   - friend request receiver
+  /**
+   * @brief send friend request
+   * @param {String} fromUser - id of request sender
+   * @param {String} toUser - id of request receiver
+   */
   sendFriendRequest: async function (fromUser, toUser) {
     const result = await axios({
       method: "POST",
@@ -183,8 +186,12 @@ const userActions = {
     return result.data;
   },
 
-  // String:fromUser - the sender of the request which is now being responded to (id)
-  // String:toUser   - the one who responds to the requests (id)
+  /**
+   * @brief respond to friend request
+   * @param {String} fromUser - id of request sender
+   * @param {String} toUser  - id of request responder
+   * @param {Boolean} accepted - responder accepted or rejected
+   */
   answerFriendRequest: async function (fromUser, toUser, accepted) {
     const result = await axios({
       method: "POST",
@@ -200,8 +207,11 @@ const userActions = {
     return result.data;
   },
 
-  // String:fromUser(id) - the one who unfriends
-  // String:toUser(id)   - the one being unfriended
+  /**
+   * @brief unfriend user
+   * @param {*} fromUser - id of unfriending user
+   * @param {*} toUser - id of unfriended user
+   */
   unfriendFriendRequest: async function (fromUser, toUser) {
     const result = await axios({
       method: "POST",
@@ -220,8 +230,11 @@ const userActions = {
 
   // ------------------------- FOLLOW -----------------------------
 
-  // String:fromUser - the follower
-  // String:toUser   - who the follower follows
+  /**
+   * @brief follow user
+   * @param {String} fromUser - id of follower 
+   * @param {String} toUser - id of followed user
+   */
   sendFollowRequest: async function (fromUser, toUser) {
     console.log(
       "sending follow request from " + fromUser.username + " to user " + toUser.username
@@ -239,8 +252,11 @@ const userActions = {
     return result.data;
   },
 
-  // String:fromUser - the follower
-  // String:toUser   - who the follower follows
+  /**
+   * @brief unfollow user
+   * @param {String} fromUser - id of the unfollower
+   * @param {String} toUser - id of the unfollowed
+   */
   sendUnfollowRequest: async function (fromUser, toUser) {
     const result = await axios({
       method: "POST",
@@ -294,6 +310,11 @@ const userActions = {
     return result.data;
   },
 
+  /**
+   * @brief update users profile description
+   * @param {*} userId - id of user
+   * @param {*} data - new description text
+   */
   updateUserShortDescription: async function (userId, data) {  
     const result = await axios({
       method: "POST",
@@ -307,6 +328,11 @@ const userActions = {
     return result.data;
   },
 
+  /**
+   * @brief update users interests
+   * @param {String} userId - id of user
+   * @param {String} data - list of interests
+   */
   updateUserInterests: async function (userId, data) {
     const result = await axios({
       method: "POST",
@@ -320,6 +346,11 @@ const userActions = {
     return result.data;
   },
 
+  /**
+   * @brief check if user is online
+   * @param {String} userId - id of user
+   * @return {Boolean} true if user online, otherwise false
+   */
   isUserOnline: async function (userId) {
     const result = await axios({
       method: "POST",
