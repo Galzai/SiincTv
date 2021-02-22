@@ -96,15 +96,6 @@ function Chat(props) {
           isOwner={isOwner}
         />
       )}
-      <Textarea
-        className={style.messageTextArea}
-        value={newMessage}
-        onChange={handleNewMessageChange}
-        placeholder="Click enter to send message..."
-        maxLength="200"
-        onKeyDown={handleKeypress}
-      />
-      {emojiSelector()}
       <ScrollToBottom className={style.messagesContainer}>
         <ol className={style.messageList}>
           {messages.map((message, i) => (
@@ -121,6 +112,17 @@ function Chat(props) {
           ))}
         </ol>
       </ScrollToBottom>
+      <div>
+        <Textarea
+          className={style.messageTextArea}
+          value={newMessage}
+          onChange={handleNewMessageChange}
+          placeholder="Click enter to send message..."
+          maxLength="200"
+          onKeyDown={handleKeypress}
+        />
+        {emojiSelector()}
+      </div>
     </div>
   );
 }

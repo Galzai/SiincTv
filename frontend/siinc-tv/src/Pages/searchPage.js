@@ -114,6 +114,14 @@ function SearchPage(props) {
     }
   }
 
+  function shortenText(text){
+    let maxLen = 35;
+    if(text.length > maxLen){
+      return text.slice(0, maxLen)+"...";
+    }
+    return text.length;
+  }
+
   return (
     <div className={style.searchPage}>
         {resultType === "combined" && (
@@ -149,7 +157,7 @@ function SearchPage(props) {
                       Search results for
                     </label>
                     <label className={style.searchingForTitle}>
-                      {searchString}
+                      {shortenText(searchString)}
                     </label>
                   </div>
                 </ListSubheader>
