@@ -503,14 +503,16 @@ label {
     height: 500px;
     border-width: 5px;
     overflow: scroll;
+    margin: auto;
 }
 
 .friendsInnerDisplayContainer
 {
     position: relative;
+    top: 28px;
     float:left;
     height:100%;
-    margin: 20px;
+    margin: auto;
 }
 
 .followersOuterDisplayContainer
@@ -520,14 +522,16 @@ label {
     height: 500px;
     border-width: 5px;
     overflow: scroll;
+    margin: auto;
 }
 
 .followersInnerDisplayContainer
 {
     position: relative;
+    top: 28px;
     float:left;
     height:100%;
-    margin: 20px;
+    margin: auto;
 }
 
 .badUser

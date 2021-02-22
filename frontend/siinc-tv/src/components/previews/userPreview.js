@@ -30,7 +30,7 @@ function UserPreview(props){
         if(  userContext.user == null || user == null ) 
             return "";
         if( String(userContext.user._id) === String(user._id) ) 
-            return "Its you!";
+            return "It's you!";
         if(userContext.user.friendsData)
         {
             if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) != undefined ) 
@@ -66,6 +66,14 @@ function UserPreview(props){
         userContext.refreshUserData();
     }
 
+    function shortenText(text){
+        const maxLen = 61;
+        if(text.length > maxLen){
+          return text.slice(0, maxLen)+"...";
+        }
+        return text;
+    }
+
     return(
         <div className={style.UserPreviewBox}>
             {image &&<img className={style.streamerCircle}
@@ -75,7 +83,7 @@ function UserPreview(props){
             <div className={style.UserTitle}>
                 <h2 className={style.userName} onClick={handleRedirect}>{user.username}</h2>
                 { (user.numFollowers != undefined)     && <h3 className={style.NumFollowers}>{numFollowers}</h3>}
-                { (user.shortDescription != undefined) && <span className={style.shortDescription}>{description}</span>}
+                { (user.shortDescription != undefined) && <span className={style.shortDescription}>{shortenText(description)}</span>}
 
             </div>
             <div className={style.UserButtons}>
