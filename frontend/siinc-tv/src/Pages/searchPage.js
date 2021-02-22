@@ -115,11 +115,11 @@ function SearchPage(props) {
   }
 
   function shortenText(text){
-    let maxLen = 35;
+    const maxLen = 35;
     if(text.length > maxLen){
       return text.slice(0, maxLen)+"...";
     }
-    return text.length;
+    return text;
   }
 
   return (
