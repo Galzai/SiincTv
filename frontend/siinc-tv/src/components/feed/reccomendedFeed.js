@@ -63,7 +63,7 @@ function ReccomendedFeed(props) {
   return (
     <div>
       <div className={style.liveFeedBar}>
-        <h1>Reccomendations</h1>
+        <h1>Recommendations</h1>
         {(userContext.user.interests && userContext.user.interests.length > 0) && <Carousel responsive={responsive} infinite={true}>
           {streamPreviews}
         </Carousel>}
