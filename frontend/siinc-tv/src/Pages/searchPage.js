@@ -119,11 +119,6 @@ function SearchPage(props) {
     if(text.length > maxLen){
       return text.slice(0, maxLen)+"...";
     }
-    else{
-      if (text.length <= 2){
-        return text+"  ";
-      }
-    }
     return text;
   }
 
