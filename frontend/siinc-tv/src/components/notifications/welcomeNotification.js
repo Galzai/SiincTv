@@ -26,7 +26,7 @@ function WelcomeNotification(){
             <label>{`Click the `}<VideoCallIcon fontSize='medium'/>{` button to create a page for shared streams.`}</label>
             </Grid>}
             <Grid item>
-            <label>{`To help us reccomend streams you may like please add some interests to your profile`}</label>
+            <label>{`To help us recommend streams you may like please add some interests to your profile`}</label>
             </Grid>
             <Grid item>
             <Link
