@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import SigningModal from "../userSigning/signingModal";
 import NotificationMenu from '../notifications/notificationMenu.js'
 import UserContext from "../../userContext";
@@ -27,9 +27,6 @@ import {
  * @subcategory Menu
  */
 function NavProfileMenu(props) {
-    const userContext = useContext(UserContext);
-
-    const styles = (props.open) ? {visibility: "visible"} : {visibility: "hidden"};
 
     return(
         <Fade in={props.open}>
@@ -66,20 +63,10 @@ function NavProfileButton(props) {
 function UserNavComponent(props) {
     const userContext = useContext(UserContext);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-    const [messageOpen, setMessageOpen] = useState(false);
-    const [notificationOpen, setNotificationOpen] = useState(false);
 
-    function doNothing(){
-        console.log("nothing");
-    }
 
     function handleProfileClick() {
         setProfileMenuOpen(!profileMenuOpen);
-    }
-
-    function handleNotificationClick() {
-        setNotificationOpen(!notificationOpen);
-        console.log("notif = " + notificationOpen);
     }
 
     return(

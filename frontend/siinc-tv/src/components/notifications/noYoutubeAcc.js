@@ -17,14 +17,14 @@ function NoYoutubeAccount(){
         <ListItem alignItems="flex-start">
             <Grid>
             <Grid item>
-            <label>{`No youtube channel was detected for this google account`}</label>
+            <label>{`No YouTube channel was detected for this Google account`}</label>
             </Grid>
             <Grid item>
-            <label>{`Please create a youtube account than logout and login to siinc.tv to link it`}</label>
+            <label>{`Please create a YouTube account then logout and login to siinc.tv to link it`}</label>
             </Grid>
             <Grid item>
             <Link
-            href="https://www.youtube.com/create_channel" >{`Click here to create a youtube channel`}</Link>
+            href="https://www.youtube.com/create_channel" >{`Click here to create a YouTube channel`}</Link>
             </Grid>
             </Grid>
 

@@ -2,7 +2,7 @@ import LiveFeed from "../components/feed/liveFeed.js";
 import ReccomendedFeed from "../components/feed/reccomendedFeed.js";
 import style from "./homepage.module.css";
 import UserContext from "./../userContext";
-import React, {useContext,useState } from "react";
+import React, {useContext } from "react";
 
 /**
  * Thie page is in charge of the default home page

@@ -291,4 +291,13 @@ router.post('/user/update_interests', userController.updateUserInterests)
  */
 router.post('/user/is_user_online', userController.isUserOnline)
 
+/**
+ * Get user stream by user id 
+ *
+ * @name GetStreamByUserId get stream from user
+ * @route {POST} /api/streams/getUserStream
+ * @bodyparam {userId} id of user
+ */
+router.post('/streams/getUserStream', streamController.getUserCurrentStream);
+
 module.exports = router;

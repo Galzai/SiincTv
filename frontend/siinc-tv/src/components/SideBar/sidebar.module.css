@@ -91,8 +91,15 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 16px;
-    cursor:pointer;
     float:left;
+}
+
+.friendName {cursor:pointer;}
+
+.followName 
+{
+    cursor:pointer;
+    margin-right: 10px;
 }
 
 .friendDiv
@@ -127,6 +134,13 @@
     opacity: 0.7;
 }
 
+.statusContainer
+{
+    display: inline-block;
+    position: relative;    
+    margin: 0px 10px;
+}
+
 .online {
     display: inline-block;
     position: relative;
@@ -135,6 +149,19 @@
     height: 10px;
     border-radius: 100px;
     background: #2aa72c;
-    margin: 0px 10px;
+    
 
+}
+
+.live {
+    position: relative;
+    padding: 1px 6px 0px 5px;
+    margin: 0px;
+    font-size: 12px;
+    top: -1px;
+    left: 18px;
+    background: #d63729;
+    border-radius: 12px;
+    font-family: Roboto;
+    cursor: pointer;
 }

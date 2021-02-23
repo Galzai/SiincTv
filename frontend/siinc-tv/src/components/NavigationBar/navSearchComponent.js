@@ -5,6 +5,13 @@ import { withRouter } from 'react-router-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 
+/**
+ * @brief search component for navigation bar
+ * 
+ * @component
+ * @category Frontend
+ * @subcategory NavBar
+ */
 function NavSearchComponent(props) {
     const [search, setSearch] = useState('');
 
@@ -17,7 +24,6 @@ function NavSearchComponent(props) {
             setWidth(newWidth);
         }
     }
-    const fieldStyle = { constainer: {width: width} };
     // --------------------------------------------------------------------------
 
     function handleClick(){

@@ -1,3 +1,11 @@
+/**
+ * This module provides the ability to follow other users
+ * 
+ * @module Follow
+ * @category Frontend
+ * @subcategory Social
+ */
+
 import userActions from "./userActions";
 
 const handleFollow=(myUser, otherUser)=>{
@@ -36,6 +44,8 @@ const handleUnfollow = (myUser, otherUser) => {
  * @brief execute follow action based current follow relationship between both users
  * @param {*} myUser - action initiator ( follow / unfollow )
  * @param {*} otherUser - other user
+ * @category Frontend
+ * @subcategory Social
  */
 export const handleFollowAction=(myUser, otherUser)=>{
     if( myUser === null || otherUser === null ) {
@@ -59,6 +69,8 @@ export const handleFollowAction=(myUser, otherUser)=>{
  * @param {*} myUser - following / not following user
  * @param {*} otherUser - follower / not followed user
  * @return {Boolean} true if myUser follows otherUser, otherwise false
+ * @category Frontend
+ * @subcategory Social
  */
 export const isFollowing = (myUser, otherUser) => {
     if( myUser === null || otherUser === null ) 

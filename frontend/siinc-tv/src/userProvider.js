@@ -9,9 +9,6 @@ import React from "react";
 import UserContext from "./userContext";
 import userActions from "./user/userActions";
 
-/**
- * @brief A User provider for user context
- */
 class UserProvider extends React.Component {
   constructor(props) {
     super(props);

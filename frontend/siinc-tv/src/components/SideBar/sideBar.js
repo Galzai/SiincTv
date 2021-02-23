@@ -9,7 +9,7 @@ import userActions from "../../user/userActions";
 const { default: streamActions } = require("../../stream/streamActions");
 
 /**
- * Side bar component
+ * @brief Side bar component
  * 
  * @component
  * @category Frontend
@@ -39,10 +39,14 @@ function SideBar(props) {
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
                             src={friend.userImage}/>
-                        <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${friend.memberId}`))}> 
-                            {friend.displayName}
-                            <OnlineStatus userId={friend.memberId}></OnlineStatus>
+                        <div className={style.friend}> 
+                            <label className = {style.friendName} onClick={()=>(props.history.push(`/users/${friend.memberId}`))}>
+                                {friend.displayName}
+                            </label>
+                            <div className={style.statusContainer}>
+                                <OnlineStatus userId={friend.memberId}></OnlineStatus>
+                                <LiveStatus userId={friend.memberId} history={props.history}></LiveStatus>
+                            </div>
                         </div>
                     </div>
             )
@@ -56,10 +60,12 @@ function SideBar(props) {
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
                             src={following.userImage}/>
-                        <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
-                            {following.userName}
+                        <div className={style.friend}>
+                            <label className = {style.followName} onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
+                                {following.userName}
+                            </label>
                             <OnlineStatus userId={following.userId}></OnlineStatus>
+                            <LiveStatus userId={following.userId} history={props.history}></LiveStatus>
                         </div>
                     </div>
             )
@@ -86,15 +92,15 @@ function SideBar(props) {
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
                 </div>}
-                {(friends.length !== 0) && <div>
+                {(friends && friends.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
-                {(friends.length >= 10 ) && <label className={style.seeAllStyle} onClick={redirectToFriends}>See all friends...</label>}
+                {(friends && friends.length >= 10 ) && <label className={style.seeAllStyle} onClick={redirectToFriends}>See all friends...</label>}
                 </div>}
-                {(followings.length !== 0) && <div>
+                {(friends && followings.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Following</h3> 
                 {mapFollowings()}
-                {(followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
+                {(followings && followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
                 </div>}
                 <div className={style.reportMail}>
                     For suggestions and bug reports send us an email at <a className = {style.emailDesign} href="mailto:report@siinc.tv">report@siinc.tv</a>
@@ -105,12 +111,11 @@ function SideBar(props) {
 }
 
 /**
- * Display green circle for online users
+ * @brief Online green circle for users in side bar
  * 
- * @prop {userId} userId id of user
  * @component
  * @category Frontend
- * @subcategory SideBar
+ * @subcategory Sidebar
  */
 function OnlineStatus(props) {
     const userId = props.userId;
@@ -130,6 +135,33 @@ function OnlineStatus(props) {
     return(
         <div style={{display:"inline-block"}}>
             { userOnline && <div className={style.online}></div>}
+        </div>
+    )
+}
+
+function LiveStatus(props) {
+    const userId = props.userId;
+    const [streamId, setStreamId] = useState(undefined)
+
+    useEffect(()=>{ 
+        let isMounted = true;
+        userActions.getUserStreamId(userId)
+        .then((data) => {
+            if( isMounted ) {
+                setStreamId(data)
+            }
+        })
+        return (() => {isMounted = false})
+    })
+
+    const redicrectToStream = function (){
+        props.history.push(`/stream_pages/${streamId}`);
+    }
+
+    return(
+        <div style={{display:"inline-block"}}>
+            { (streamId !== undefined && streamId !== null && streamId !== "") && 
+              <div className={style.live} onClick={redicrectToStream}>live</div>}
         </div>
     )
 }

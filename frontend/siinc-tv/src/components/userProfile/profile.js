@@ -1,8 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import style from './profile.module.css'
 
-import AboutOffline from './aboutOffline'
-import AboutOnline from './aboutOnline'
 import UserContext from "../../userContext";
 import userActions from "../../user/userActions";
 import userUtils from "../../user/userUtils";
@@ -203,16 +201,6 @@ function Profile(props) {
         }
     }
 
-    function About(userOnline){
-        if (userOnline=true){
-            return <AboutOnline
-            userName = {userName} />
-        } else {
-            return <AboutOffline
-            userName = {userName}/>
-        }
-    }
-
     // Sets type of form to display
     const setLiveDisplay=()=>{
         setUserInfoDisplay('live')
@@ -264,10 +252,6 @@ function Profile(props) {
         userContext.refreshUserData();
     }
 
-    const handleSubscribe=()=>{
-        //todo
-    }
-
     const onClickFollowAction=()=>{
         if( user )
             handleFollowAction(userContext.user, user);
@@ -312,16 +296,6 @@ function Profile(props) {
         if( !user )
             return 0;
         return user.followData.followersList.length;
-    }
-
-    const shortDescription=()=>{
-        if( !user )
-            return ""
-        return user.shortDescription
-    }
-
-    const isUserOnline=()=>{
-        
     }
 
     const onClickEditDesc=()=>{

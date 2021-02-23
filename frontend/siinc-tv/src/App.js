@@ -64,8 +64,6 @@ function App() {
           <SocketProvider>
             <UserSocketConnector />;
             <Router history={history}>
-              <SideBar></SideBar>
-              <NavigationBar></NavigationBar>
               <div style={{ paddingLeft: "256px", paddingTop: "64px" }}>
                 <Switch>
                   <Route exact path="/">
@@ -97,7 +95,7 @@ function App() {
                   <Route path="/users/:userid" component={Profile}></Route>
                 </Switch>
                 <SideBar></SideBar>
-                <NavigationBar></NavigationBar>
+              <NavigationBar></NavigationBar>
               </div>
             </Router>
           </SocketProvider>

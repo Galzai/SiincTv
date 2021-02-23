@@ -1,7 +1,12 @@
+/**
+ * This module provides ability to send / receive / respond to friend requests
+ * between users
+ * @module Friends
+ * @category Frontend
+ * @subcategory Social
+ */
+
 import userActions from "./userActions";
-
-
-
 
 const handleAddFriends=(myUser, otherUserData)=>{
     const fun = async() => {
@@ -98,8 +103,10 @@ const handleRejectFriend = (myUser, otherUserData) => {
 
 /**
  * @brief execute friend action based on current friend relationship of myUser and otherUser
- * @param {*} myUser - user object of first user
- * @param {*} otherUserData  - user object of second user
+ * @param {userData} myUser - user object of first user
+ * @param {userData} otherUserData  - user object of second user
+ * @category Frontend
+ * @subcategory Social
  */
 export const handleFriendAction=(myUser, otherUserData)=>{
     if( myUser === null || otherUserData === null ) {
@@ -127,8 +134,10 @@ export const handleFriendAction=(myUser, otherUserData)=>{
 
 /**
  * @brief reject friend request
- * @param {*} myUser - rejected user 
- * @param {*} otherUserData  - rejecting user
+ * @param {userData} myUser - rejected user 
+ * @param {userData} otherUserData  - rejecting user
+ * @category Frontend
+ * @subcategory Social
  */
 export const handleFriendActionRejectTemp=(myUser, otherUserData)=>{
     handleRejectFriend(myUser, otherUserData);
@@ -137,8 +146,10 @@ export const handleFriendActionRejectTemp=(myUser, otherUserData)=>{
 
 /**
  * @brief get current friendship status between two users
- * @param {*} myUser - first user object
- * @param {*} otherUserData  - second user object
+ * @param {userData} myUser - first user object
+ * @param {userData} otherUserData  - second user object
+ * @category Frontend
+ * @subcategory Social
  */
 export const getFriendState = (myUser, otherUserData) => {
     if( myUser === null || otherUserData === null ) 

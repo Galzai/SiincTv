@@ -3,11 +3,8 @@ import style from "./newStream.module.css";
 import update from "immutability-helper";
 import FriendFinder from "../selectors/friendFinder";
 
-/**
- * This is a utility function for generating keys
- *
- * @param {*} pre
- */
+
+ //This is a utility function for generating keys
 const generateKey = (pre) => {
   return `${pre}_${new Date().getTime()}`;
 };

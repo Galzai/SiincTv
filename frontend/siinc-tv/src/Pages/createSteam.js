@@ -1,6 +1,6 @@
 import UserContext from "../userContext";
 import { useContext } from "react";
-import NewScheduledStream from "../components/streamCreation/newScheduledStream";
+//import NewScheduledStream from "../components/streamCreation/newScheduledStream";
 import NewLiveStream from "../components/streamCreation/newLiveStream";
 import style from "./searchPage.module.css";
 
@@ -27,7 +27,7 @@ function CreateStreamPage(props) {
         (!userContext.user.twitchData && !(userContext.user.googleData && 
           userContext.user.googleData.youtubeId))) && (
         <h1 className={style.endStream}>
-          Must have a twitch account or youtube channel in order to create a stream!{" "}
+          Login with a twitch account or a Google account with a YouTube channel in order to create a stream!{" "}
         </h1>
       )}
       {userContext.user && userContext.user.currentStream && (

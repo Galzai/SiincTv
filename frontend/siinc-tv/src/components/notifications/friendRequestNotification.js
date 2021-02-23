@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, {useContext} from "react";
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -9,10 +9,6 @@ import UserContext from "../../userContext";
 import {getFriendState, handleFriendAction, handleFriendActionRejectTemp} from "../../user/friends";
 import userActions from "../../user/userActions"
 
-/**
- * @brief Notification representing received friend request
- * @param {*} props.notification - notification data
- */
 export function FriendRequestReceived(props){
 
     const data = props.notification.data;
@@ -84,10 +80,6 @@ export function FriendRequestReceived(props){
     );
 }
 
-/**
- * @brief Notification representing accepted friend request
- * @param {*} props.notification - notification data
- */
 export function FriendRequestAccepted(props){
 
     const data = props.notification.data;
