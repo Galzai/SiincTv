@@ -316,7 +316,8 @@ function addStreamer(streamId, streamerData) {
   if (!streamId || !streamerData) {
     return;
   }
-  const newGroup = [streamerData];
+  const newGroup = new Array();
+  newGroup.push(streamerData);
   StreamData.updateOne(
     { _id: new ObjectID(streamId) },
     { $push: { streamGroups: newGroup } }
