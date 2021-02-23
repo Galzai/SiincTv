@@ -89,6 +89,9 @@ function App() {
                   <Route path="/users/:userid/friends" render={(props) => (
                       <Profile initTab={"FRIENDS"} />
                   )} ></Route>
+                  <Route path="/users/:userid/followers" render={(props) => (
+                      <Profile initTab={"FOLLOWERS"} />
+                  )} ></Route>
                   <Route path="/users/:userid/edit" render={(props) => (
                       <Profile editMode={true} />
                   )} ></Route>                  

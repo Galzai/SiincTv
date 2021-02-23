@@ -72,13 +72,13 @@ export function NavProfileMenuBreaker(props) {
  * @category Frontend
  * @subcategory NavProfileMenu
  */
-export function NavProfileMenuMyChannelLink() {
+export function NavProfileMenuMyChannelLink(props) {
     const userContext = useContext(UserContext);
     const mychannel = "/users/" + userContext.user._id;
 
     return(
         <Link to={mychannel} className={style.link} underline="none">
-        <div className={style.navProfileMenuMyChannelDiv}>
+        <div className={style.navProfileMenuMyChannelDiv} onClick={props.onClickMenuClose}>
             <div className={style.navProfileMenuMyChannelIcon}>
                 <img src={MyChannelIcon}
                      style={{width:"100%", height:"100%"}}>
@@ -98,13 +98,13 @@ export function NavProfileMenuMyChannelLink() {
  * @category Frontend
  * @subcategory NavProfileMenu
  */
-export function NavProfileMenuFriendsLink() {
+export function NavProfileMenuFriendsLink(props) {
     const userContext = useContext(UserContext);
     const friends = "/users/" + userContext.user._id + "/friends";
 
     return(
         <Link to={friends} className={style.link} underline="none">
-        <div className={style.navProfileMenuFriendsDiv}>
+        <div className={style.navProfileMenuFriendsDiv} onClick={props.onClickMenuClose}>
             <div className={style.navProfileMenuFriendsIcon}>
                 <img src={FriendsIcon}
                      style={{width:"100%", height:"100%"}}>
@@ -123,19 +123,44 @@ export function NavProfileMenuFriendsLink() {
  * @category Frontend
  * @subcategory NavProfileMenu
  */
-export function NavProfileMenuFavoritesLink() {
+export function NavProfileMenuFavoritesLink(props) {
     const userContext = useContext(UserContext);
     const followers = "/users/" + userContext.user._id + "/following";
 
     return(
         <Link to={followers} className={style.link} underline="none">
-        <div className={style.navProfileMenuFavoritesDiv}>
+        <div className={style.navProfileMenuFavoritesDiv} onClick={props.onClickMenuClose}>
             <div className={style.navProfileMenuFavoritesIcon}>
                 <img src={FavoritesIcon}
                      style={{width:"100%", height:"100%"}}>
                 </img>
             </div>
             <div className={style.navProfileMenuFavoritesText}>
+                Following
+            </div>
+        </div>
+        </Link>
+    );   
+}
+
+/**
+ * @brief My followings link for navigation bar profile menu
+ * @category Frontend
+ * @subcategory NavProfileMenu
+ */
+export function NavProfileMenuFollowersLink(props) {
+    const userContext = useContext(UserContext);
+    const followers = "/users/" + userContext.user._id + "/followers";
+
+    return(
+        <Link to={followers} className={style.link} underline="none">
+        <div className={style.navProfileMenuFollowersDiv} onClick={props.onClickMenuClose}>
+            <div className={style.navProfileMenuFollowersIcon}>
+                <img src={FavoritesIcon}
+                     style={{width:"100%", height:"100%"}}>
+                </img>
+            </div>
+            <div className={style.navProfileMenuFollowersText}>
                 Followers
             </div>
         </div>
@@ -148,13 +173,13 @@ export function NavProfileMenuFavoritesLink() {
  * @category Frontend
  * @subcategory NavProfileMenu
  */
-export function NavProfileMenuMySettingsLink() {
+export function NavProfileMenuMySettingsLink(props) {
     const userContext = useContext(UserContext);
     const edit = "/users/" + userContext.user._id + "/edit";
 
     return(
         <Link to={edit} className={style.link} underline="none">
-        <div className={style.navProfileMenuSettingsDiv}>
+        <div className={style.navProfileMenuSettingsDiv} onClick={props.onClickMenuClose}>
             <div className={style.navProfileMenuSettingsIcon}>
                 <img src={SettingsIcon}
                      style={{width:"100%", height:"100%"}}>
@@ -173,7 +198,7 @@ export function NavProfileMenuMySettingsLink() {
  * @category Frontend
  * @subcategory NavProfileMenu
  */
-export function NavProfileMenuLogout() {
+export function NavProfileMenuLogout(props) {
     const userContext = useContext(UserContext)
     const socketContext = useContext(SocketContext)
 
@@ -181,6 +206,7 @@ export function NavProfileMenuLogout() {
         userActions.signOut();
         socketContext.socket.emit('userDisconnect', userContext.user._id);
         userContext.setUser(null);
+        props.onClickMenuClose();
         //window.location.reload(false);
     }
 

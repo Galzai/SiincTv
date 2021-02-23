@@ -152,6 +152,8 @@ function Profile(props) {
                     setUserInfoDisplay('following')
                 if( initTab === "FRIENDS")
                     setUserInfoDisplay('friends')
+                if( initTab === "FOLLOWERS")
+                    setUserInfoDisplay('followers')
 
                 userActions.isUserOnline(data._id)
                 .then((data) => {
