@@ -136,19 +136,22 @@
     opacity: 0.7;
 }
 
-.navProfileMenuMyChannelDiv, .navProfileMenuFriendsDiv, .navProfileMenuFavoritesDiv, .navProfileMenuSubscribedDiv, .navProfileMenuSettingsDiv, .navProfileMenuLogoutDiv
+.navProfileMenuMyChannelDiv, .navProfileMenuFriendsDiv, .navProfileMenuFavoritesDiv, .navProfileMenuSubscribedDiv, 
+.navProfileMenuSettingsDiv, .navProfileMenuLogoutDiv, .navProfileMenuFollowersDiv
 {
     position: absolute;
     width: 83%;
-    height: 9%;
+    height: 8%;
     border-radius: 5px;
 }
-.navProfileMenuMyChannelDiv:hover, .navProfileMenuFriendsDiv:hover, .navProfileMenuFavoritesDiv:hover, .navProfileMenuSubscribedDiv:hover, .navProfileMenuSettingsDiv:hover, .navProfileMenuLogoutDiv:hover
+.navProfileMenuMyChannelDiv:hover, .navProfileMenuFriendsDiv:hover, .navProfileMenuFavoritesDiv:hover, 
+.navProfileMenuSubscribedDiv:hover, .navProfileMenuSettingsDiv:hover, .navProfileMenuLogoutDiv:hover, .navProfileMenuFollowersDiv:hover
 {
     background: rgba(120, 120, 120, 0.20);
     cursor: pointer;
 }
-.navProfileMenuMyChannelText, .navProfileMenuFriendsText, .navProfileMenuFavoritesText, .navProfileMenuSubscribedText, .navProfileMenuSettingsText, .navProfileMenuLogoutText
+.navProfileMenuMyChannelText, .navProfileMenuFriendsText, .navProfileMenuFavoritesText, .navProfileMenuSubscribedText, 
+.navProfileMenuSettingsText, .navProfileMenuLogoutText, .navProfileMenuFollowersText
 {
     font-family: Roboto;
     font-style: normal;
@@ -178,7 +181,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 32%;   
+    top: 28%;   
 }
 
 .navProfileMenuFriendsIcon
@@ -202,7 +205,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 44%;   
+    top: 39%;   
 }
 
 .navProfileMenuFavoritesIcon
@@ -212,6 +215,15 @@
     height: 22px;
     top: 2px;
 }
+
+.navProfileMenuFollowersIcon
+{
+    position: absolute;
+    width: 24px;
+    height: 22px;
+    top: 2px;
+}
+
 .navProfileMenuFavoritesText
 {
     position: absolute;
@@ -222,11 +234,29 @@
     color: #FFFFFF;
     opacity: 0.8;
 }
+
+.navProfileMenuFollowersText
+{
+    position: absolute;
+    width: 65px;
+    height: 14px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+    opacity: 0.8;    
+}
+
 .navProfileMenuFavoritesDiv
 {
     position: absolute;
     left: 7.5%;
-    top: 55%
+    top: 50%
+}
+.navProfileMenuFollowersDiv
+{
+    position: absolute;
+    left: 7.5%;
+    top: 61%    
 }
 
 .navProfileMenuSettingsIcon
@@ -251,7 +281,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 68%;
+    top: 72%;
 }
 
 
@@ -276,7 +306,7 @@
 {
     position: absolute;
     left: 7.5%;
-    top: 87%;
+    top: 88%;
 }
 
 .link
