@@ -92,15 +92,15 @@ function SideBar(props) {
                     </div>
                     <button className={style.closeCurrentStreamBtn} onClick={closeStream}></button>
                 </div>}
-                {(friends.length !== 0) && <div>
+                {(friends && friends.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Friends</h3> 
                 {mapFriends()}
-                {(friends.length >= 10 ) && <label className={style.seeAllStyle} onClick={redirectToFriends}>See all friends...</label>}
+                {(friends && friends.length >= 10 ) && <label className={style.seeAllStyle} onClick={redirectToFriends}>See all friends...</label>}
                 </div>}
-                {(followings.length !== 0) && <div>
+                {(friends && followings.length !== 0) && <div>
                 <h3 className={style.sidebarTitle}>Following</h3> 
                 {mapFollowings()}
-                {(followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
+                {(followings && followings.length >= 10) && <label className={style.seeAllStyle} onClick={redirectoToFollowing}>See all following...</label>}
                 </div>}
                 <div className={style.reportMail}>
                     For suggestions and bug reports send us an email at <a className = {style.emailDesign} href="mailto:report@siinc.tv">report@siinc.tv</a>
