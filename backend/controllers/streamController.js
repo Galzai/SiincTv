@@ -23,6 +23,15 @@ const myCache = new NodeCache({ stdTTL: 120, checkperiod: 60 });
 
 var userToStream = new Map() // userId -> stream id if streaming
 
+function assignImage(user){
+  if(!user) return "";
+  if(user.image) return user.image;
+  if(user.twitchData && user.twitchData.profile_image_url) return user.twitchData.profile_image_url;
+  if(user.facebookData && user.facebookData.photos) return user.facebookData.photos[0].value;
+  if(user.googleData && user.googleData.photos) return user.googleData.photos[0].value;
+  return "";
+}
+
 /**
  * Tries to create a new stream using the streamData and redirects to newly created page upon success
  * Note: This will fail if now user is signed in/ or the user already has a current stream
@@ -294,10 +303,18 @@ exports.rejectRequestToJoin = function (req, res) {
     twitchId: data.twitchId,
   });
 
+  newData = new StreamerData({
+    memberId: user._id,
+    displayName: user.username,
+    userImage: assignImage(user),
+    youtubeId: "",
+    twitchId: "",
+});
+
   notificationData = new Notification({
     type: "rejectJoinStreamRequest",
     clearable: true,
-    data: streamerData,
+    data: newData,
   });
   // Notify the requester the his request has been rejected
   notificationController.addNotificationToUser(
@@ -352,10 +369,18 @@ exports.acceptRequestToJoin = function (req, res) {
     twitchId: data.twitchId,
   });
 
+  newData = new StreamerData({
+    memberId: user._id,
+    displayName: user.username,
+    userImage: assignImage(user),
+    youtubeId: "",
+    twitchId: "",
+});
+
   notificationData = new Notification({
     type: "acceptJoinStreamRequest",
     clearable: true,
-    data: streamerData,
+    data: newData,
   });
   // Notify the requester the his request has been rejected
 
