@@ -24,7 +24,7 @@ function NoYoutubeAccount(){
             </Grid>
             <Grid item>
             <Link
-            href="https://www.youtube.com/create_channel" >{`Click here to create a youtube channel`}</Link>
+            href="https://www.youtube.com/create_channel" >{`Click here to create a YouTube channel`}</Link>
             </Grid>
             </Grid>
 
