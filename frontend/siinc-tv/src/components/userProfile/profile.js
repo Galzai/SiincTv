@@ -149,7 +149,7 @@ function Profile(props) {
                 if( data.currentStream && data.currentStream !== "" )
                     setUserInfoDisplay("live")
                 if( initTab === "FOLLOWING")
-                    setUserInfoDisplay('followers')
+                    setUserInfoDisplay('following')
                 if( initTab === "FRIENDS")
                     setUserInfoDisplay('friends')
 
