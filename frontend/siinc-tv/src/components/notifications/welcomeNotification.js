@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import Link from '@material-ui/core/Link';
 import UserContext from "../../userContext";
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 
 /**
  * This Componenet is in the notification for when a google user has no youtube account
@@ -20,6 +21,10 @@ function WelcomeNotification(){
             <Grid item>
             <label>{`Welcome to SiincTv!`}</label>
             </Grid>
+            {/* {(userContext.user && (userContext.user.googleData || userContext.user.youtubeData)) &&  */}
+            {<Grid item>
+            <label>{`Click the `}<VideoCallIcon fontSize='medium'/>{` button to create a page for shared streams.`}</label>
+            </Grid>}
             <Grid item>
             <label>{`To help us reccomend streams you may like please add some interests to your profile`}</label>
             </Grid>
