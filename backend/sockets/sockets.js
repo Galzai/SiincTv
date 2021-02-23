@@ -39,7 +39,7 @@ module.exports.initializeSocket = function (io) {
       // Join a conversation
       socket.join(roomId);
       // If this is the first time creating a room we initialize it
-      if(streamMap.get(roomId) ===  undefined){
+      if(streamMap.get(roomId) === undefined){
         streamMap.set(roomId, new Map());
       }
       if(user !== null){
@@ -67,7 +67,7 @@ module.exports.initializeSocket = function (io) {
 
     // Leave a stream room
     socket.on(LEAVE_ROOM, async (roomId) => {
-      if(user != null && streamMap.get(roomId).get(user._id.toString())){
+      if(user != null && streamMap.get(roomId) && streamMap.get(roomId).get(user._id.toString())){
         streamMap.get(roomId).delete(user._id.toString());
         io.in(roomId).emit(LOGGED_VIEWERS_CHANGED, Array.from(streamMap.get(roomId))); 
         if(userToStreams.get(user._id.toString())){
