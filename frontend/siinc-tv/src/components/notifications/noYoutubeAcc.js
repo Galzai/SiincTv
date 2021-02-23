@@ -20,7 +20,7 @@ function NoYoutubeAccount(){
             <label>{`No youtube channel was detected for this google account`}</label>
             </Grid>
             <Grid item>
-            <label>{`Please create a youtube account than logout and login to siinc.tv to link it`}</label>
+            <label>{`Please create a YouTube account then logout and login to siinc.tv to link it`}</label>
             </Grid>
             <Grid item>
             <Link
