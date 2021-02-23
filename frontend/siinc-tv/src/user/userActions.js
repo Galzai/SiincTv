@@ -374,7 +374,7 @@ const userActions = {
       data: {
         _id: userId
       },
-      url: "http://localhost:4000/streams/getUserStream",
+      url: "/api/streams/getUserStream",
       withCredentials: true,
     });
     return result.data;
