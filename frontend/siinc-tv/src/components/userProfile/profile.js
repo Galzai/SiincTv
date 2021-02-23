@@ -131,7 +131,7 @@ function Profile(props) {
         userActions.getUserData( userid )
         .then(data=>{
             if( isMounted ) { 
-                if( data.length === 0 ) {
+                if( !data || data === null || data.length === 0 ) {
                     console.log("Couldnt get user!!");
                     setUserFetchFail(true)
                     setUser(null)
@@ -229,13 +229,16 @@ function Profile(props) {
     if(userContext.user.friendsData)
     {
         console.log(String(user._id))
-        if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) {     
+        if( userContext.user.friendsData.friendsList &&
+            userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) {     
             return "Unfriend";
         }
-        if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
+        if( userContext.user.friendsData.sentRequests &&
+            userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
             return "Pending";
         }
-        if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
+        if( userContext.user.friendsData.receivedRequests&&
+            userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) {
             return "Accept";
         }
     }
@@ -287,13 +290,13 @@ function Profile(props) {
     }
 
     const numOfFriends=()=>{
-        if( !user )
+        if( !user || !user.friendsData || !user.friendsData.friendsList )
             return 0;
         return user.friendsData.friendsList.length;
     }
 
     const numOfFollowers=()=>{
-        if( !user )
+        if( !user || !user.followData || !user.followData.followersList )
             return 0;
         return user.followData.followersList.length;
     }
@@ -444,7 +447,7 @@ function ProfileFriendsDisplay(props) {
     }, [props.user])
 
     function mapFriends(){
-        if( !user )
+        if( !user || !user.friendsData || !user.friendsData.friendsList )
             return
 
         if( user.friendsData.friendsList.length === 0 ) {
@@ -482,7 +485,7 @@ function ProfileFollowersDisplay(props) {
     }, [props.user])
 
     function mapFollowers(){
-        if( !user )
+        if( !user || !user.followData || !user.followData.followersList )
             return
 
         if( user.followData.followersList.length === 0 ) {
@@ -518,7 +521,7 @@ function ProfileFollowingDisplay(props) {
     }, [props.user])
 
     function mapFollowing(){
-        if( !user )
+        if( !user || !user.followData || !user.followData.followingList)
             return
 
         if( user.followData.followingList.length === 0 ) {

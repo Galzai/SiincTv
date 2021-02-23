@@ -32,11 +32,14 @@ function UserPreview(props){
             return "It's you!";
         if(userContext.user.friendsData)
         {
-            if( userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) 
+            if( userContext.user.friendsData.friendsList &&
+                userContext.user.friendsData.friendsList.find(x=>String(x.memberId)===String(user._id)) !== undefined ) 
                 return "Unfriend";
-            if( userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
+            if( userContext.user.friendsData.sentRequests &&
+                userContext.user.friendsData.sentRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
                 return "Pending";
-            if( userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
+            if( userContext.user.friendsData.receivedRequests &&
+                userContext.user.friendsData.receivedRequests.find(x=>String(x.userId)===String(user._id)) !== undefined ) 
                 return "Accept";
         }
 

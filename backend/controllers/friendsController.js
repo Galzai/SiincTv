@@ -22,6 +22,14 @@ function cmpIdsInList(list, user) {
     return false;
 }
 
+function verifyUserFriendData(user) {
+    if(!user || !user.friendsData || !user.friendsData.sentRequests ||
+        !user.friendsData.receivedRequests || !user.friendsData.friendsList) {
+            return false;
+        }
+    return true;
+}
+
 // temporary function - delete later.
 function assignImage(user){
     if(!user) return "";
@@ -74,6 +82,10 @@ async function handleSendFriendRequest( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling sendFriendRequest from users : " + fromUser.username + ", " + toUser.username)
+
+    if(!verifyUserFriendData(fromUser) || !verifyUserFriendData(toUser)) {
+        console.log("Could not properly fetch fromUser or toUser from database")
+    }
 
     // now check if fromUser already has toUser as friends or has pending request - verified only one side
       if( cmpIdsInList( fromUser.friendsData.friendsList, toUser ) || 
@@ -132,11 +144,11 @@ async function handleAnswerFriendRequest2( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling handleAnswerFriendRequest from users : " + fromUser.username + ", " + toUser.username)
-    //console.log(fromUser)
-    //console.log(toUser)
 
-    // verify that toUser has a friend request from fromUser - verified only one side
-    //if( !(toUser.friendsData.receivedRequests.find(el=>toString(el.id)==toString(fromUser._id)) != undefined) ) {
+    if(!verifyUserFriendData(fromUser) || !verifyUserFriendData(toUser)) {
+        console.log("Could not properly fetch fromUser or toUser from database")
+    }
+
     if( cmpIdsInList( toUser.friendsData.friendsList, fromUser) ) {
         console.log("Cant accept/reject someone who is not in received requests list");
         return false;
@@ -236,6 +248,10 @@ async function handleUnfriendRequest( req )
     console.log("Handling handleUnfriendRequest from users : " + fromUser.username + ", " + toUser.username)
     //console.log(fromUser)
     //console.log(toUser)
+
+    if(!verifyUserFriendData(fromUser) || !verifyUserFriendData(toUser)) {
+        console.log("Could not properly fetch fromUser or toUser from database")
+    }
 
     // verify that fromUser has toUser as a friend - verified only one side
     if( !(fromUser.friendsData.friendsList.find(el=>toString(el.memberId)==toString(toUser._id)) != undefined) ) {

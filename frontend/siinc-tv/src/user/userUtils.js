@@ -12,6 +12,7 @@ const userUtils = {
   assignImage: function (user) {
     if (!user) return NoProfilePic;
     if (user.image) return user.image;
+    if (user.userImage) return user.userImage;
     if (user.twitchData && user.twitchData.profile_image_url)
       return user.twitchData.profile_image_url;
     if (user.facebookData && user.facebookData.photos)

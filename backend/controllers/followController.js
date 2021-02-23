@@ -24,6 +24,13 @@ function assignImage(user){
     return "";
 }
 
+function verifyUserFollowData(user) {
+    if( !user || !user.followData || !user.followData.followersList || !user.followData.followingList ) {
+        return false;
+    }
+    return true;
+}
+
 function cmpIdsInList(list, user) {
     if (list.filter(function(e) { return String(e.userId) === String(user._id); }).length > 0) {
         return true;
@@ -68,6 +75,11 @@ async function handleFollowRequest( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling handleAnswerFriendRequest from users : " + fromUser.username + ", " + toUser.username)
+
+    if( !verifyUserFollowData(fromUser) || !verifyUserFollowData(toUser) ) {
+        console.log("Could not properly fetch toUser or fromUser from database")
+        return false;
+    }
 
     if( cmpIdsInList( toUser.followData.followersList, fromUser) ) {
         console.log("Cant follow someone you already follow");
@@ -127,6 +139,11 @@ async function handleUnfollowRequest( req )
     let [fromUser, toUser] = await getUsersFromRequest( req );
 
     console.log("Handling handleUnfollowRequest from users : " + fromUser.username + ", " + toUser.username)
+
+    if( !verifyUserFollowData(fromUser) || !verifyUserFollowData(toUser) ) {
+        console.log("Could not properly fetch toUser or fromUser from database")
+        return false;
+    }
 
     if( !cmpIdsInList( toUser.followData.followersList, fromUser) ) {
         console.log("cant unfollow someone who you do not follow");
