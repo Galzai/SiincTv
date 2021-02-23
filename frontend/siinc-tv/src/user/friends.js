@@ -117,15 +117,18 @@ export const handleFriendAction=(myUser, otherUserData)=>{
         console.log("It's you man" + myUser.username + ", " + otherUserData.username);
         return;
     }
-    if( myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) !== undefined ) {
+    if( myUser.friendsData.friendsList &&
+        myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) !== undefined ) {
         handleUnfriend(myUser, otherUserData);                                         
         return;
     }
-    if( myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) {
+    if( myUser.friendsData.sentRequests &&
+        myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) {
         console.log("unimplemented - maybe cancell request");
         return;
     }
-    if( myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) {
+    if( myUser.friendsData.receivedRequests &&
+        myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) {
         handleAcceptFriend(myUser, otherUserData);
         return;
     }
@@ -158,14 +161,17 @@ export const getFriendState = (myUser, otherUserData) => {
     if( String(myUser._id) === String(otherUserData.userId) ) 
         return "NONE";
     
-    if( myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) !== undefined ) 
+    if( myUser.friendsData.friendsList &&
+        myUser.friendsData.friendsList.find(x=>String(x.memberId)===String(otherUserData.userId)) !== undefined ) 
         return "UNFRIEND";
 
-    if( myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) 
+    if( myUser.friendsData.sentRequests &&
+        myUser.friendsData.sentRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) 
         return "PENDING";    
     
-    if( myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) 
+    if( myUser.friendsData.receivedRequests &&
+        myUser.friendsData.receivedRequests.find(x=>String(x.userId)===String(otherUserData.userId)) !== undefined ) 
         return "ACCEPT";
         
-     
+     return "NONE"
 }

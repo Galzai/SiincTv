@@ -57,7 +57,8 @@ export const handleFollowAction=(myUser, otherUser)=>{
         console.log("cant follow/unfollow yourself! " + myUser.username + ", " + otherUser.username);
         return;
     }
-    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) {
+    if( myUser.followData.followingList &&
+        myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) {
         handleUnfollow(myUser, otherUser);                                         
         return;
     }
@@ -77,7 +78,8 @@ export const isFollowing = (myUser, otherUser) => {
         return false;
     if( String(myUser._id) === String(otherUser._id) ) 
         return false;
-    if( myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) 
+    if( myUser.followData.followingList &&
+        myUser.followData.followingList.find(x=>String(x.userId)===String(otherUser._id)) !== undefined ) 
         return true;
     return false;
 }

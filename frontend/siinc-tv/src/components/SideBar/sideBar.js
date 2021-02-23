@@ -5,6 +5,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import UserContext from "../../userContext";
 import StreamSocket from "../liveStream/streamSocket";
 import userActions from "../../user/userActions";
+import userUtils from "../../user/userUtils" 
 
 const { default: streamActions } = require("../../stream/streamActions");
 
@@ -38,7 +39,7 @@ function SideBar(props) {
             return(
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
-                            src={friend.userImage}/>
+                            src={/*friend.userImage*/userUtils.assignImage(friend)}/>
                         <div className={style.friend}> 
                             <label className = {style.friendName} onClick={()=>(props.history.push(`/users/${friend.memberId}`))}>
                                 {friend.displayName}
@@ -59,7 +60,7 @@ function SideBar(props) {
             return(
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
-                            src={following.userImage}/>
+                            src={/*following.userImage*/userUtils.assignImage(following)}/>
                         <div className={style.friend}>
                             <label className = {style.followName} onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
                                 {following.userName}
