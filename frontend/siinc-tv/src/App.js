@@ -96,8 +96,6 @@ function App() {
                   )} ></Route>                  
                   <Route path="/users/:userid" component={Profile}></Route>
                 </Switch>
-                <SideBar></SideBar>
-                <NavigationBar></NavigationBar>
               </div>
             </Router>
           </SocketProvider>
