@@ -394,10 +394,14 @@ function Profile(props) {
             
             <div className={style.userPageSelector}>
                 <hr className={style.seperatorSelector}></hr>
-                { isUserStreaming() && <button className={style.tabListBtn} onClick={setLiveDisplay}>Live</button>}
-                            <button className={style.tabListBtn} onClick={setFriendsDisplay}>Friends</button>
-                            <button className={style.tabListBtn} onClick={setFollowersDisplay}>Followers</button>
-                            <button className={style.tabListBtn} onClick={setFollowingDisplay}>Following</button>
+                { isUserStreaming() && <button className={ (display === 'live') ? style.tabListBtnHighlight : style.tabListBtn } 
+                                            onClick={setLiveDisplay}>Live</button>}
+                            <button className={ (display === 'friends') ? style.tabListBtnHighlight : style.tabListBtn } 
+                                onClick={setFriendsDisplay}>Friends</button>
+                            <button className={ (display === 'followers') ? style.tabListBtnHighlight : style.tabListBtn } 
+                                onClick={setFollowersDisplay}>Followers</button>
+                            <button className={ (display === 'following') ? style.tabListBtnHighlight : style.tabListBtn } 
+                                onClick={setFollowingDisplay}>Following</button>
                 <div className={style.displayContainer}>
                     {showDisplay()}
                 </div>
