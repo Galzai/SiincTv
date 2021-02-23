@@ -363,6 +363,23 @@ const userActions = {
     return result.data;
   },
 
+  /**
+   * @brief get stream id of user
+   * @param {String} userId - id of user
+   * @return {streamId} stream id if user is streaming, otherwise undefined
+   */
+  getUserStreamId: async function (userId) {
+    const result = await axios({
+      method: "POST",
+      data: {
+        _id: userId
+      },
+      url: "http://localhost:4000/streams/getUserStream",
+      withCredentials: true,
+    });
+    return result.data;
+  },
+
 };
 
 export default userActions;

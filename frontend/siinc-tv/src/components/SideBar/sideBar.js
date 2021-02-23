@@ -39,10 +39,14 @@ function SideBar(props) {
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
                             src={friend.userImage}/>
-                        <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${friend.memberId}`))}> 
-                            {friend.displayName}
-                            <OnlineStatus userId={friend.memberId}></OnlineStatus>
+                        <div className={style.friend}> 
+                            <label className = {style.friendName} onClick={()=>(props.history.push(`/users/${friend.memberId}`))}>
+                                {friend.displayName}
+                            </label>
+                            <div className={style.statusContainer}>
+                                <OnlineStatus userId={friend.memberId}></OnlineStatus>
+                                <LiveStatus userId={friend.memberId} history={props.history}></LiveStatus>
+                            </div>
                         </div>
                     </div>
             )
@@ -56,10 +60,12 @@ function SideBar(props) {
                     <div className={style.friendDiv}>
                         <img alt="" className={style.streamerCircle}
                             src={following.userImage}/>
-                        <div className={style.friend}
-                        onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
-                            {following.userName}
+                        <div className={style.friend}>
+                            <label className = {style.followName} onClick={()=>(props.history.push(`/users/${following.userId}`))}> 
+                                {following.userName}
+                            </label>
                             <OnlineStatus userId={following.userId}></OnlineStatus>
+                            <LiveStatus userId={following.userId} history={props.history}></LiveStatus>
                         </div>
                     </div>
             )
@@ -129,6 +135,33 @@ function OnlineStatus(props) {
     return(
         <div style={{display:"inline-block"}}>
             { userOnline && <div className={style.online}></div>}
+        </div>
+    )
+}
+
+function LiveStatus(props) {
+    const userId = props.userId;
+    const [streamId, setStreamId] = useState(undefined)
+
+    useEffect(()=>{ 
+        let isMounted = true;
+        userActions.getUserStreamId(userId)
+        .then((data) => {
+            if( isMounted ) {
+                setStreamId(data)
+            }
+        })
+        return (() => {isMounted = false})
+    })
+
+    const redicrectToStream = function (){
+        props.history.push(`/stream_pages/${streamId}`);
+    }
+
+    return(
+        <div style={{display:"inline-block"}}>
+            { (streamId !== undefined && streamId !== null && streamId !== "") && 
+              <div className={style.live} onClick={redicrectToStream}>live</div>}
         </div>
     )
 }

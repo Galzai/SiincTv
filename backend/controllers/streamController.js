@@ -21,6 +21,8 @@ const {
 const NodeCache = require("node-cache");
 const myCache = new NodeCache({ stdTTL: 120, checkperiod: 60 });
 
+var userToStream = new Map() // userId -> stream id if streaming
+
 /**
  * Tries to create a new stream using the streamData and redirects to newly created page upon success
  * Note: This will fail if now user is signed in/ or the user already has a current stream
@@ -100,7 +102,9 @@ exports.createStream = function (req, res) {
           },
         },
       }
-    ).then((obj) => {;
+    ).then((obj) => {
+      console.log("Adding the following user To streams : " + String(req.user._id))
+      userToStream.set(String(req.user._id), streamData._id)
     });
   }
 
@@ -212,6 +216,8 @@ exports.closeStream = function (req, res) {
 
   User.updateOne({ _id: req.user._id }, { $unset: { currentStream: "" } }).then(
     (obj) => {
+      console.log("Removing the following user from streams : " + String(req.user._id))
+      userToStream.delete(String(req.user._id))
     }
   );
 };
@@ -360,3 +366,14 @@ exports.acceptRequestToJoin = function (req, res) {
   // Add the streamer to the stream
   addStreamer(streamId, streamerData);
 };
+
+/**
+ * Get the stream id created by provided user
+ * @param {String} req.data.userId user id of the user
+ * @param {*} res hold stream id if user is live, otherwise undefined
+ */
+exports.getUserCurrentStream = function (req, res) {
+  const userId = req.body._id;
+  const streamId = userToStream.get(String(userId));
+  res.send(streamId);
+}
