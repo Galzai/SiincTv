@@ -320,7 +320,7 @@ function addStreamer(streamId, streamerData) {
   newGroup.push(streamerData);
   StreamData.updateOne(
     { _id: new ObjectID(streamId) },
-    { $push: { streamGroups: newGroup } }
+    { $push: { "streamGroups.0": streamerData } }
   ).then((obj) => {
     emitNewStreamerJoined(streamId);
   });
