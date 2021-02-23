@@ -181,7 +181,7 @@ export function NavProfileMenuLogout() {
         userActions.signOut();
         socketContext.socket.emit('userDisconnect', userContext.user._id);
         userContext.setUser(null);
-        window.location.reload(false);
+        //window.location.reload(false);
     }
 
     return(
