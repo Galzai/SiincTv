@@ -67,7 +67,7 @@ function SignIn(props) {
                 <div className={style.passwordDiv}>
                     <div className={style.formText}></div>
                     <div className={style.inputDiv}>
-                        <input className={style.secretInputBox}type="text" autoFocus required value={password}
+                        <input className={style.secretInputBox} type="password" autoFocus required value={password}
                             placeholder={"Password"} onChange={e => setPassword(e.target.value)}
                         />
                             <p className={style.errorMessage}>{passwordError}</p>
