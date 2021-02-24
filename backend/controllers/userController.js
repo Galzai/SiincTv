@@ -58,19 +58,17 @@ exports.logout = function (req, res) {
 exports.user_signup = function (req, res) {
   // If either the email or the username exists we do not allow registration
   User.findOne(
-    { $or: [{ username: req.body.username }, { email: req.body.email }] },
+    {username: req.body.username },
     async function (err, doc) {
       if (err) {
         throw err;
       }
       if (doc) {
-        if (doc.email === req.body.email) {
-          res.send("auth/email_exists");
-        } else {
+        // if (doc.email === req.body.email) {
+        //   res.send("auth/email_exists");
+        // } else {
           res.send("auth/username_exists");
         }
-      }
-
       if (!doc) {
         const hashedPassword = await bcrypt.hash(req.body.password, 10); // encrypt the password
 
