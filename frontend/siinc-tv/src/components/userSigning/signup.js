@@ -137,7 +137,8 @@ function Signup(props) {
         // Changing states of another object while rendering causes an error, so we wait on the first render
         if(!firstRender){
             checkUsername();
-            let emailValid = checkFormEmail();
+            // let emailValid = checkFormEmail();
+            let emailValid = true;
             prevEmailState.current = emailValid;
             let passwordConfirmed = isPasswordConfirmed();
             // Note this is bitwise on purpose, we want all the functions to be called
@@ -171,7 +172,7 @@ function Signup(props) {
                     </div>
                 </div>
                
-                <div className={style.emailDiv}>
+                {/* <div className={style.emailDiv}>
                     <label className={style.formText}></label>
                         <div className={style.inputDiv}>
                         <input className={style.inputBox} type="text" autoFocus required value={email}
@@ -179,12 +180,12 @@ function Signup(props) {
                         />
                         <p className={style.errorMessage}>{emailError}</p>
                     </div>
-                </div>
+                </div> */}
 
                 <div className={style.signUpPasswordDiv}>
                     <label className={style.formText} ></label>
                     <div className={style.inputDiv}>
-                    <input className={style.secretInputBox} type="text" autoFocus required value={password}
+                    <input className={style.secretInputBox} type="password" autoFocus required value={password}
                         Placeholder={"Password"} onChange={e => setPassword(e.target.value)}
                     />
                     <p className={style.errorMessage}>{passwordError}</p>
@@ -194,7 +195,7 @@ function Signup(props) {
                 <div className={style.confirmPasswordDiv}>
                     <label className={style.formText} ></label>
                     <div className={style.inputDiv}>
-                        <input className={style.secretInputBox} type="text" autoFocus required value={passwordConfirmation}
+                        <input className={style.secretInputBox} type="password" autoFocus required value={passwordConfirmation}
                             Placeholder={"Confirm Password"} onChange={e => setPasswordConfirmation(e.target.value)}
                         />
                         {<p className={style.errorMessage}>{passwordError}</p>}
