@@ -1,4 +1,5 @@
 # SiincTv
+This is a project for Tel-Aviv university's Google web technologies workshop.
 ## You can access the full documentation (created using jsdoc) at our github pages page https://galzai.github.io/SiincTv/index.html   
 ## All API Keys and database access credentials have been invalidated.
 ### Stream together
