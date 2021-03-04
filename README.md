@@ -1,7 +1,6 @@
 # SiincTv
-## www.siinc.tv
 ## You can access the full documentation (created using jsdoc) at our github pages page https://galzai.github.io/SiincTv/index.html   
-
+## All API Keys and database access credentials have been invalidated.
 ### Stream together
 SiincTv is a web application designed to allow live streamers to schedule and syncronize group-streams from the selected platform together with other streamers - without platform dependency.
 It also allows viewers to tune in to their favorite streamers group streams and be able to watch the action from all the group members perspective.
